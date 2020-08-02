@@ -1,4 +1,4 @@
-package lk.customs.processManagement.util.interfaces;
+package lk.rupavahini.PPUManagement.util.interfaces;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package lk.customs.processManagement.util.interfaces;
+package lk.rupavahini.PPUManagement.util.interfaces;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
