@@ -1,7 +1,7 @@
 Need to do
 ===========
 
-1. Chandler = > supplier
+1. Chandler = > chandler
 2. Ship Agent
 3. Ship(vezzal) = > customer
 4. item
