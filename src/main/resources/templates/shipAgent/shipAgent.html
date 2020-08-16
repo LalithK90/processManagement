@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>vezzal</title>
+    <title>shipAgent</title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
 <div class="container-fluid  form-Border">
     <div class="row text-center formManagement border-info">
-        <!--New Vezzal Button-->
+        <!--New shipAgent Button-->
         <div class="col">
-            <a class="btn btn-success" href="/vezzal/add" tabindex="1">
+            <a class="btn btn-success" href="/shipAgent/add" tabindex="1">
                 <i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New
             </a>
         </div>
@@ -19,7 +19,7 @@
         <div class="col">
             <h2 class="text-white text-center">
                 <strong>
-                    Vezzal List
+                    Ship Agent List
                 </strong>
             </h2>
         </div>
@@ -36,35 +36,33 @@
 <div class="container-fluid bg-primary text-center">
     <!--Table view-->
     <div class="col">
-        <div class="col" id="customerListPresent" data-th-if="${not #lists.isEmpty(vezzals)}">
+        <div class="col"  data-th-if="${not #lists.isEmpty(shipAgents)}">
             <table class="table table-hover table-striped" id="myTable">
                 <thead>
                 <tr>
                     <th> Index</th>
                     <th> Name</th>
                     <th> Code</th>
-                    <th> IMO Number</th>
-                    <th> MMSI Number</th>
-                    <th> Country</th>
+                    <th> NIC Number</th>
+                    <th> Mobile Number</th>
                     <th> Modify</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-th-each="vezzal, rowCount : ${vezzals}">
+                <tr data-th-each="shipAgent, rowCount : ${shipAgents}">
                     <th data-th-text="${rowCount.count}"></th>
-                    <th data-th-text="${vezzal.name}"></th>
-                    <th data-th-text="${vezzal.code}"></th>
-                    <th data-th-text="${vezzal.imoNumber}"></th>
-                    <th data-th-text="${vezzal.mmsiNumber}"></th>
-                    <th data-th-text="${vezzal.country}"></th>
+                    <th data-th-text="${shipAgent.name}"></th>
+                    <th data-th-text="${shipAgent.code}"></th>
+                    <th data-th-text="${shipAgent.nic}"></th>
+                    <th data-th-text="${shipAgent.mobileOne}"></th>
                     <th>
-                        <a id="customerView" data-th-href="${'/vezzal/view/' + vezzal.id}"
+                        <a id="customerView" data-th-href="${'/shipAgent/view/' + shipAgent.id}"
                            class="btn btn-primary btn-sm"><i
                                 class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                        <a id="customerEdit" data-th-href="${'/vezzal/edit/' + vezzal.id}"
+                        <a id="customerEdit" data-th-href="${'/shipAgent/edit/' + shipAgent.id}"
                            class="btn btn-success btn-sm"><i class="fa fa-edit"
                                                              style="font-size: 15px"></i>&nbsp;Edit</a>
-                        <a id="customerRemove" data-th-href="${'/vezzal/delete/' + vezzal.id}"
+                        <a id="customerRemove" data-th-href="${'/shipAgent/delete/' + shipAgent.id}"
                            class="btn btn-danger btn-sm">
                             <!--data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" --> <i
                                 class="fa fa-trash" style="font-size: 15px"></i>
@@ -76,14 +74,14 @@
         </div>
     </div>
     <!--Error-->
-    <div class="row" data-th-if="${ #lists.isEmpty(vezzals)}">
+    <div class="row" data-th-if="${ #lists.isEmpty(shipAgents)}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h3 class="text-center text-danger">
-                    <strong>There is no vezzal upto now please add vezzal to the system
+                    <strong>There is no shipAgent upto now please add shipAgent to the system
                         using "New" button.
                     </strong>
                 </h3>
@@ -95,15 +93,15 @@
             /*active boostrap alert - end*/
         </script>
     </div>
-    <!--Save vezzal-->
-    <div class="row" data-th-if="${vezzalDetail != null}">
+    <!--Save shipAgent-->
+    <div class="row" data-th-if="${shipAgentDetail != null}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <!--save vezzal include-->
-                <div data-th-replace="~{vezzal/vezzal-detail :: vezzalDetailsFragment}"></div>
+                <!--save shipAgent include-->
+                <div data-th-replace="~{shipAgent/shipAgent-detail :: shipAgentDetailsFragment}"></div>
             </div>
         </div>
         <script>

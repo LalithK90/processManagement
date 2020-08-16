@@ -62,14 +62,14 @@ public class VezzalController implements AbstractController< Vezzal, Integer> {
 //if vezzal has id that vezzal is not a new vezzal
         if (vezzal.getId() == null) {
             //if there is not vezzal in db
-            if (vezzalService.lastCustomer() == null) {
+            if (vezzalService.lastVezzal() == null) {
                 System.out.println("last vezzal null");
                 //need to generate new onecustomer
                 vezzal.setCode("LKC"+makeAutoGenerateNumberService.numberAutoGen(null).toString());
             } else {
                 System.out.println("last vezzal not null");
                 //if there is vezzal in db need to get that vezzal's code and increase its value
-                String previousCode = vezzalService.lastCustomer().getCode().substring(3);
+                String previousCode = vezzalService.lastVezzal().getCode().substring(3);
                 vezzal.setCode("LKC"+makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
             }
 
@@ -90,7 +90,7 @@ public class VezzalController implements AbstractController< Vezzal, Integer> {
         return "redirect:/vezzal";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view/{id}")
     public String view(@PathVariable Integer id, Model model) {
         model.addAttribute("vezzalDetail", vezzalService.findById(id));
         return "vezzal/vezzal-detail";

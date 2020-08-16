@@ -45,7 +45,8 @@ private final VezzalDao vezzalDao;
         return vezzalDao.findAll(vezzalExample);
     }
 
-    public Vezzal lastCustomer(){
+    public Vezzal lastVezzal(){
         return vezzalDao.findFirstByOrderByIdDesc();
     }
+
 }

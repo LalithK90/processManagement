@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonFilter( "Customer" )
+@JsonFilter( "Vezzal" )
 public class Vezzal extends AuditEntity {
 
     @Size( min = 5, message = "Your name cannot be accepted" )
