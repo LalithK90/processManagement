@@ -1,14 +1,28 @@
 Need to do
 ===========
-
-1. Chandler = > chandler
-2. Ship Agent
-3. Ship(vezzal) = > customer
-4. item
-5. quotation
-6. warehouse blocks
-7.
+1. quotation
+2. chandler license
+3. vezzal history
+        Vezzal History
+        ===============
+        1. Captain's name
+        2. Cargo tonnage
+        3. Anchorage Date and Time
+        4. Sailing date
+        5. Anchorage Terminal
+        6. Purpose of visit
+        7. Number of crew members
+        8. Number of passengers
+        9. Three Previous Harbours
+        10.Next Harbour
+        11.Service Coordination Agency
 
 
 Completed
 ==========
+1. Chandler = > chandler
+2. Ship Agent
+3. Ship(vezzal) = > customer
+4. item
+5. category
+6. warehouse blocks
