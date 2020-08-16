@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>vezzal-detail</title>
@@ -20,7 +20,7 @@
         <div class="col">
             <h2 class="text-light text-center">
                 <strong>
-                    <p data-th-text="${vezzalDetail.title.title} +${' '} +${vezzalDetail.name}"></p>
+                    <p data-th-text="${vezzalDetail.name}"></p>
                 </strong>
             </h2>
         </div>
@@ -61,49 +61,40 @@
                         <label class="control-label" for="name">Name :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="name" data-th-text="${vezzalDetail.title.title} +${' '} +${vezzalDetail.name}"
+                        <p id="name" data-th-text="${vezzalDetail.name}"
                            class="display_detail"></p>
                     </div>
                 </div>
-                <!--NIC-->
+                <!--imoNumber-->
                 <div class="form-row text-right">
                     <div class="col-md-4">
-                        <label class="control-label" for="nic">NIC No :</label>
+                        <label class="control-label" for="nic">IMO Number :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="nic" data-th-text="${vezzalDetail.nic}" class="display_detail"></p>
+                        <p id="nic" data-th-text="${vezzalDetail.imoNumber}" class="display_detail"></p>
                     </div>
                 </div>
-                <!--Address-->
+                <!--mmsiNumber-->
                 <div class="form-row text-right">
                     <div class="col-md-4">
-                        <label class="control-label" for="address">Address :</label>
+                        <label class="control-label" for="address">MMSI Number :</label>
                     </div>
                     <div class="col-md-8 text-left">
-                        <p id="address" class="display_detail " data-th-utext="${vezzalDetail.address}"></p>
+                        <p id="address" class="display_detail " data-th-text="${vezzalDetail.mmsiNumber}"></p>
                     </div>
                 </div>
-                <!--Mobile-->
+                <!--Country-->
                 <div class="form-row text-right">
                     <div class="col-md-4">
-                        <label class="control-label" for="mobile">Mobile No :</label>
+                        <label class="control-label" for="mobile">Country :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="mobile" data-th-text="${vezzalDetail.mobile}" class="display_detail"></p>
+                        <p id="mobile" data-th-text="${vezzalDetail.country}" class="display_detail"></p>
                     </div>
                 </div>
             </div>
             <!--Right Side-->
             <div class="form-group col-md-6 col-sm-6 text-right flex-column">
-                <!--Email-->
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" for="email">Email :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p id="email" data-th-text="${vezzalDetail.email}" class="display_detail"></p>
-                    </div>
-                </div>
                 <!--Created By-->
                 <div class="form-row text-right">
                     <div class="col-md-4">

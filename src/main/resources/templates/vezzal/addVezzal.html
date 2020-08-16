@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>addCustomer</title>
@@ -54,21 +54,6 @@
                             <input id="code" data-th-field="*{code}" class="form-control" type="text" readonly/>
                         </div>
                     </div>
-                    <!--Tittle -->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="title">Title :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="title" data-th-field="*{title}" class="form-control" tabindex="3" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="titles : ${title}"
-                                        data-th-text="${titles.title}"
-                                        data-th-value="${titles}"
-                                        data-th-selected="${titles==vezzal.title?'selected':'unselected'}"></option>
-                            </select>
-                        </div>
-                    </div>
                     <!--Name-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
@@ -81,58 +66,45 @@
                                   data-th-if="${#fields.hasErrors('name')}" class="error">Error Name</span>
                         </div>
                     </div>
-                    <!--Nic-->
+                    <!--IMO Number-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="nic">NIC No :</label>
+                            <label class="control-label" for="nic">IMO Number :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="nic" data-th-field="*{nic}" class="form-control" tabindex="5" type="text"
-                                   minlength="10" maxlength="12"/>
-                            <span class="error" id="nicError" data-th-errors="*{nic}"
-                                  data-th-if="${#fields.hasErrors('nic')}">Error
+                            <input data-th-field="*{imoNumber}" class="form-control" tabindex="5" type="text"
+                                  />
+                            <span class="error" id="nicError" data-th-errors="*{imoNumber}"
+                                  data-th-if="${#fields.hasErrors('imoNumber')}">Error
                                                                NIC Number</span>
+                        </div>
+                    </div>
+                    <!--MMSI Number-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="mobile">MMSI Number :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="mobile" data-th-field="*{mmsiNumber}" class="form-control mobile" tabindex="6"
+                                   type="text" required/>
+                            <span class="error" data-th-errors="*{mmsiNumber}"
+                                  data-th-if="${#fields.hasErrors('mmsiNumber')}" id="mobileError">Error Mobile
+                                                                                               Number</span>
                         </div>
                     </div>
                 </div>
                 <!--Right Side-->
                 <div class="form-group col-md-6 col-sm-6 text-right flex-column">
-                    <!--Mobile Number-->
+                    <!--Country-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="mobile">Mobile :</label>
+                            <label class="control-label" for="country">Country :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="mobile" data-th-field="*{mobile}" class="form-control mobile" tabindex="6"
-                                   type="text" minlength="9" maxlength="10" required/>
-                            <span class="error" data-th-errors="*{mobile}"
-                                  data-th-if="${#fields.hasErrors('mobile')}" id="mobileError">Error Mobile
-                                                                                               Number</span>
-                        </div>
-                    </div>
-                    <!--Email-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="email">Email :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="email" data-th-field="*{email}" class="form-control" tabindex="6" type="email"/>
-                            <span class="error" data-th-errors="*{email}"
-                                  data-th-if="${#fields.hasErrors('email')}" id="emailError">Error Mobile Number</span>
-                        </div>
-                    </div>
-                    <!--Address-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="address">Address :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea id="address" data-th-field="*{address}" class="form-control" tabindex="7"
-                                      rows="3"
-                                      style="font-size: medium"></textarea>
-                            <span class="error" data-th-errors="*{address}"
-                                  data-th-if="${#fields.hasErrors('address')}" id="addressError">Error Address</span>
-                        </div>
+                        <select data-th-field="*{country}" class="form-control">
+
+                        </select>
+                           </div>
                     </div>
                     <!--Created by and created at-->
                     <div id="updateStatus" data-th-if="${addStatus==false}">
@@ -161,7 +133,7 @@
                 <!--Button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
                     <!--Back Button-->
-                    <a class="btn btn-dark"  tabindex="10" href="/vezzal">
+                    <a class="btn btn-dark" tabindex="10" href="/vezzal">
                         <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
                     </a>
                     <!--Save Button-->
@@ -191,6 +163,23 @@
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
 <!--script include-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<script >
+    /*Country -> list
+    REST COUNTRIES
+Get information about countries via a RESTful API
+https://restcountries.eu/#api-endpoints-all
+    * */
+    $(document).ready(function () {
+        let url = "https://restcountries.eu/rest/v2/all?fields=name;cioc";
+        $.getJSON(url, function (val) {
+            $.each(val, function () {
+                $("#country").append(`<option value="${this.cioc}">${this.name}</option>`);
+            });
+        });
+        }
+    );
+
+</script>
 
 </body>
 </html>

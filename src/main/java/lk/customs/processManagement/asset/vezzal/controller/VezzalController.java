@@ -44,7 +44,7 @@ public class VezzalController implements AbstractController< Vezzal, Integer> {
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("customers", vezzalService.findAll());
+        model.addAttribute("vezzals", vezzalService.findAll());
         return "vezzal/vezzal";
     }
 

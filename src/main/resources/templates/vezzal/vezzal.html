@@ -43,18 +43,20 @@
                     <th> Index</th>
                     <th> Name</th>
                     <th> Code</th>
-                    <th> Mobile</th>
-                    <th> Address</th>
+                    <th> IMO Number</th>
+                    <th> MMSI Number</th>
+                    <th> Country</th>
                     <th> Modify</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr data-th-each="vezzal, rowCount : ${vezzals}">
                     <th data-th-text="${rowCount.count}"></th>
-                    <th data-th-text="${vezzal.title}+${'. '}+${vezzal.name}"></th>
+                    <th data-th-text="${vezzal.name}"></th>
                     <th data-th-text="${vezzal.code}"></th>
-                    <th data-th-text="${vezzal.mobile}"></th>
-                    <th data-th-text="${vezzal.address}"></th>
+                    <th data-th-text="${vezzal.imoNumber}"></th>
+                    <th data-th-text="${vezzal.mmsiNumber}"></th>
+                    <th data-th-text="${vezzal.country}"></th>
                     <th>
                         <a id="customerView" data-th-href="${'/vezzal/' + vezzal.id}"
                            class="btn btn-primary btn-sm"><i
