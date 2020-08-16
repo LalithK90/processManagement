@@ -62,41 +62,16 @@
                                   data-th-if="${#fields.hasErrors('name')}" class="error">Error Name</span>
                         </div>
                     </div>
-                    <!--Land Number-->
+                    <!--Area-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="land">Land No :</label>
+                            <label class="control-label" for="land">Area (sqft) :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="land" data-th-field="*{land}" class="form-control land" tabindex="5" type="text"
+                            <input data-th-field="*{area}" class="form-control" tabindex="5" type="text"
                                    maxlength="10" min="9" required/>
-                            <span class="error" data-th-errors="*{land}"
-                                  data-th-if="${#fields.hasErrors('land')}" id="mobileError">Error Land Number</span>
-                        </div>
-                    </div>
-                    <!--Address-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="address">Address :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea id="address" data-th-field="*{address}" class="form-control" tabindex="6"
-                                      rows="4"
-                                      style="font-size: medium"></textarea>
-                            <span class="error" data-th-errors="*{address}"
-                                  data-th-if="${#fields.hasErrors('address')}" id="addressError">Error Address</span>
-                        </div>
-                    </div>
-                    <!--Email-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="email">Email :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="email" data-th-field="*{email}" class="form-control" tabindex="7" type="email"
-                                   required/>
-                            <span id="emailError" data-th-errors="*{email}"
-                                  data-th-if="${#fields.hasErrors('email')}" class="error">Error Email</span>
+                            <span class="error" data-th-errors="*{area}"
+                                  data-th-if="${#fields.hasErrors('area')}" >Error Land Number</span>
                         </div>
                     </div>
                 </div>

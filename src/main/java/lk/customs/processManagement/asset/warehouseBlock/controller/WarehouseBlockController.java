@@ -63,7 +63,7 @@ import javax.validation.Valid;
 
     @GetMapping( "/{id}" )
     public String view(@PathVariable Integer id, Model model) {
-        model.addAttribute("warehouseDetail", warehouseBlockService.findById(id));
+        model.addAttribute("warehouseBlockDetail", warehouseBlockService.findById(id));
         return "warehouseBlock/warehouseBlock-detail";
     }
 }

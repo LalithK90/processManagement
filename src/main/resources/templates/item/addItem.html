@@ -95,31 +95,6 @@
                                   data-th-if="${#fields.hasErrors('name')}" id="nameError">Error Name</span>
                         </div>
                     </div>
-                    <!--ReOrder Point-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="rop">Reorder Point :</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input class="form-control" data-th-field="*{rop}" id="rop" step="0.01" required
-                                   tabindex="8"
-                                   type="number"/>
-                            <span class="error"
-                                  data-th-errors="*{rop}" data-th-if="${#fields.hasErrors('rop')}">Error ROP</span>
-                        </div>
-                    </div>
-                    <!--Sell Price-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="sellPrice">Sell Price :</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input class="form-control" data-th-field="*{sellPrice}" id="sellPrice" required tabindex="8"
-                                   type="number" step="0.01"/>
-                            <span class="error"
-                                  data-th-errors="*{sellPrice}" data-th-if="${#fields.hasErrors('sellPrice')}">Error ROP</span>
-                        </div>
-                    </div>
                     <!--Item Status -->
                     <div class="form-row text-right" data-th-if="${addStatus==false}">
                         <div class="col-md-4">

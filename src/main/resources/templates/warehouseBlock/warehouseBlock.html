@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+<head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>warehouseBlocks</title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
 <div class="container-fluid bg-dark form-Border">
     <div class="row text-center formManagement border-info">
         <!--New Branch Button-->
         <div class="col">
-            <a class="btn btn-success" href="/warehouseBlocks/add" tabindex="1">
+            <a class="btn btn-success" href="/warehouseBlock/add" tabindex="1">
                 <i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New
             </a>
         </div>
@@ -36,35 +36,31 @@
 <div class="container-fluid bg-dark formBorder text-center">
     <!--Table view-->
     <div class="col">
-        <div class="col" id="branchListPresent" th:if="${not #lists.isEmpty(warehouseBlocks)}">
+        <div class="col" id="branchListPresent" data-th-if="${not #lists.isEmpty(warehouseBlocks)}">
             <table class="table table-hover table-striped" id="myTable">
                 <thead>
                 <tr>
                     <th> Index</th>
                     <th> Name</th>
-                    <th> Land</th>
-                    <th> Address</th>
-                    <th> Email</th>
+                    <th> Area</th>
                     <th> Modify</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="warehouseBlocks, rowCount : ${warehouseBlocks}">
-                    <th th:text="${rowCount.count}"></th>
-                    <th th:text="${warehouseBlocks.name}"></th>
-                    <th th:text="${warehouseBlocks.land}"></th>
-                    <th th:text="${warehouseBlocks.address}"></th>
-                    <th th:text="${warehouseBlocks.email}"></th>
+                <tr data-th-each="warehouseBlock, rowCount : ${warehouseBlocks}">
+                    <th data-th-text="${rowCount.count}"></th>
+                    <th data-th-text="${warehouseBlock.name}"></th>
+                    <th data-th-text="${warehouseBlock.area}"></th>
                     <th>
-                        <a id="branchView" th:href="${'/warehouseBlocks/' + warehouseBlocks.id}"
+                        <a  data-th-href="${'/warehouseBlock/' + warehouseBlock.id}"
                            class="btn btn-primary btn-sm"><i
                                 class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                        <a id="branchEdit" th:href="${'/warehouseBlocks/edit/' + warehouseBlocks.id}"
+                        <a  data-th-href="${'/warehouseBlock/edit/' + warehouseBlock.id}"
                            class="btn btn-success btn-sm"><i
                                 class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit</a>
-                        <a id="branchRemove" th:href="${'/warehouseBlocks/delete/' + warehouseBlocks.id}"
+                        <a  data-th-href="${'/warehouseBlock/delete/' + warehouseBlock.id}"
                            class="btn btn-danger btn-sm">
-                            <!--th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" --> <i
+                            <!--data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" --> <i
                                 class="fa fa-trash" style="font-size: 15px"></i>
                             Delete</a>
                     </th>
@@ -74,7 +70,7 @@
         </div>
     </div>
     <!--Error-->
-    <div class="row" th:if="${ #lists.isEmpty(warehouseBlocks)}">
+    <div class="row" data-th-if="${ #lists.isEmpty(warehouseBlocks)}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -94,13 +90,13 @@
         </script>
     </div>
     <!--Save Message-->
-    <div class="row" th:if="${warehouseBlockDetail != null}">
+    <div class="row" data-th-if="${warehouseBlockDetail != null}">
         <div class="col-sm-12">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <div th:replace="~{warehouseBlock/warehouseBlocks-detail :: warehouseDetailsFragment}"></div>
+                <div data-th-replace="~{warehouseBlock/warehouseBlocks-detail :: warehouseDetailsFragment}"></div>
             </div>
         </div>
         <script>
@@ -111,9 +107,9 @@
     </div>
 </div>
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
 </body>
 </html>

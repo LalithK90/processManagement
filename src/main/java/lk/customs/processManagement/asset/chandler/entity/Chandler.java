@@ -2,11 +2,13 @@ package lk.customs.processManagement.asset.chandler.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.customs.processManagement.asset.chandlerLicense.entity.ChandlerLicense;
 import lk.customs.processManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -17,7 +19,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonFilter( "Supplier" )
+@JsonFilter( "Chandler" )
 public class Chandler extends AuditEntity {
 
     @Size( min = 5, message = "Your Company name cannot be accepted" )
@@ -39,6 +41,10 @@ public class Chandler extends AuditEntity {
 
     @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255 )
     private String address;
+
+    @OneToMany(mappedBy = "chandler", cascade = CascadeType.PERSIST )
+    private List< ChandlerLicense > chandlerLicenses;
+
 
    /* @Enumerated( EnumType.STRING )
     private ItemSupplierStatus itemSupplierStatus;

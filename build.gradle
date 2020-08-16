@@ -19,7 +19,7 @@ repositories {
 springBoot {
 	buildInfo {
 		properties {
-			group = 'lk.jnSusper'
+			group = 'lk.processManagement'
 			version = '0.0.1-SNAPSHOT'
 			sourceCompatibility = '11'
 		}

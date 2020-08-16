@@ -28,14 +28,8 @@ public class Item extends AuditEntity {
     @Size( min = 5, message = "Your name cannot be accepted" )
     private String name;
 
-    @NotEmpty
-    private String rop;
-
     @Column( unique = true )
     private String code;
-
-    @Column( nullable = false, precision = 10, scale = 2 )
-    private BigDecimal sellPrice;
 
     @Enumerated( EnumType.STRING )
     private ItemStatus itemStatus;
