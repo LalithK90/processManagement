@@ -1,13 +1,11 @@
 package lk.customs.processManagement.asset.item.entity;
 
 
-import J_N_Super_Pvt_Ltd.asset.PurchaseOrder.entity.PurchaseOrderItem;
-import J_N_Super_Pvt_Ltd.asset.category.entity.Category;
-import J_N_Super_Pvt_Ltd.asset.item.entity.Enum.ItemStatus;
-import J_N_Super_Pvt_Ltd.asset.ledger.entity.Ledger;
-import J_N_Super_Pvt_Ltd.asset.supplierItem.entity.SupplierItem;
-import J_N_Super_Pvt_Ltd.util.audit.AuditEntity;
+
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.customs.processManagement.asset.category.entity.Category;
+import lk.customs.processManagement.asset.item.entity.Enum.ItemStatus;
+import lk.customs.processManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,12 +43,12 @@ public class Item extends AuditEntity {
     @ManyToOne
     private Category category;
 
-    @OneToMany( mappedBy = "item" )
+    /*@OneToMany( mappedBy = "item" )
     private List< SupplierItem > supplierItems;
 
     @OneToMany( mappedBy = "item" )
     private List< Ledger > ledgers;
 
     @OneToMany( mappedBy = "item" )
-    private List< PurchaseOrderItem > purchaseOrderItems;
+    private List< PurchaseOrderItem > purchaseOrderItems;*/
 }

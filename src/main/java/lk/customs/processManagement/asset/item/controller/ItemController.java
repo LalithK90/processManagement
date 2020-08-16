@@ -1,13 +1,14 @@
 package lk.customs.processManagement.asset.item.controller;
 
 
-import J_N_Super_Pvt_Ltd.asset.category.controller.CategoryController;
-import J_N_Super_Pvt_Ltd.asset.item.entity.Enum.ItemStatus;
-import J_N_Super_Pvt_Ltd.asset.item.entity.Enum.MainCategory;
-import J_N_Super_Pvt_Ltd.asset.item.entity.Item;
-import J_N_Super_Pvt_Ltd.asset.item.service.ItemService;
-import J_N_Super_Pvt_Ltd.util.interfaces.AbstractController;
-import J_N_Super_Pvt_Ltd.util.service.MakeAutoGenerateNumberService;
+
+import lk.customs.processManagement.asset.category.controller.CategoryController;
+import lk.customs.processManagement.asset.item.entity.Enum.ItemStatus;
+import lk.customs.processManagement.asset.item.entity.Enum.MainCategory;
+import lk.customs.processManagement.asset.item.entity.Item;
+import lk.customs.processManagement.asset.item.service.ItemService;
+import lk.customs.processManagement.util.interfaces.AbstractController;
+import lk.customs.processManagement.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/item")
-public class ItemController implements AbstractController<Item, Integer> {
+public class ItemController implements AbstractController< Item, Integer> {
     private final ItemService itemService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 

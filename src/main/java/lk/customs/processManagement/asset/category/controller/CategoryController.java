@@ -1,13 +1,14 @@
 package lk.customs.processManagement.asset.category.controller;
 
 
-import J_N_Super_Pvt_Ltd.asset.category.entity.Category;
-import J_N_Super_Pvt_Ltd.asset.category.service.CategoryService;
-import J_N_Super_Pvt_Ltd.asset.item.entity.Enum.MainCategory;
-import J_N_Super_Pvt_Ltd.util.interfaces.AbstractController;
+
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import lk.customs.processManagement.asset.category.entity.Category;
+import lk.customs.processManagement.asset.category.service.CategoryService;
+import lk.customs.processManagement.asset.item.entity.Enum.MainCategory;
+import lk.customs.processManagement.util.interfaces.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/category")
-public class CategoryController implements AbstractController<Category, Integer> {
+public class CategoryController implements AbstractController< Category, Integer> {
     private final CategoryService categoryService;
 
     @Autowired

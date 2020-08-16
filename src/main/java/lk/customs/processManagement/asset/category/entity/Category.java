@@ -1,9 +1,10 @@
 package lk.customs.processManagement.asset.category.entity;
 
 
-import J_N_Super_Pvt_Ltd.asset.item.entity.Enum.MainCategory;
-import J_N_Super_Pvt_Ltd.asset.item.entity.Item;
+
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.customs.processManagement.asset.item.entity.Enum.MainCategory;
+import lk.customs.processManagement.asset.item.entity.Item;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +33,5 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Item> items;
+    private List< Item > items;
 }

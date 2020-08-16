@@ -1,12 +1,10 @@
 package lk.customs.processManagement.asset.item.service;
 
 
-import J_N_Super_Pvt_Ltd.asset.item.dao.ItemDao;
-import J_N_Super_Pvt_Ltd.asset.item.entity.Enum.ItemStatus;
-import J_N_Super_Pvt_Ltd.asset.item.entity.Item;
-import J_N_Super_Pvt_Ltd.asset.ledger.dao.LedgerDao;
-import J_N_Super_Pvt_Ltd.asset.ledger.entity.Ledger;
-import J_N_Super_Pvt_Ltd.util.interfaces.AbstractService;
+import lk.customs.processManagement.asset.item.dao.ItemDao;
+import lk.customs.processManagement.asset.item.entity.Enum.ItemStatus;
+import lk.customs.processManagement.asset.item.entity.Item;
+import lk.customs.processManagement.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.domain.Example;
@@ -17,14 +15,12 @@ import java.util.List;
 
 @Service
 @CacheConfig(cacheNames = "item")
-public class ItemService implements AbstractService<Item, Integer> {
+public class ItemService implements AbstractService< Item, Integer> {
     private final ItemDao itemDao;
-    private final LedgerDao ledgerDao;
 
     @Autowired
-    public ItemService(ItemDao itemDao, LedgerDao ledgerDao) {
+    public ItemService(ItemDao itemDao) {
         this.itemDao = itemDao;
-        this.ledgerDao = ledgerDao;
     }
 
     public List<Item> findAll() {

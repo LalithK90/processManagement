@@ -1,9 +1,10 @@
 package lk.customs.processManagement.asset.category.service;
 
 
-import J_N_Super_Pvt_Ltd.asset.category.dao.CategoryDao;
-import J_N_Super_Pvt_Ltd.asset.category.entity.Category;
-import J_N_Super_Pvt_Ltd.util.interfaces.AbstractService;
+
+import lk.customs.processManagement.asset.category.dao.CategoryDao;
+import lk.customs.processManagement.asset.category.entity.Category;
+import lk.customs.processManagement.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.domain.Example;
@@ -13,7 +14,7 @@ import java.util.*;
 
 @Service
 @CacheConfig(cacheNames = "category")
-public class CategoryService implements AbstractService<Category, Integer> {
+public class CategoryService implements AbstractService< Category, Integer> {
     private final CategoryDao categoryDao;
 
     @Autowired
