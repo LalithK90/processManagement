@@ -1,0 +1,14 @@
+Need to do
+===========
+
+1. Chandler = > supplier
+2. Ship Agent
+3. Ship(vezzal) = > customer
+4. item
+5. quotation
+6. warehouse blocks
+7.
+
+
+Completed
+==========

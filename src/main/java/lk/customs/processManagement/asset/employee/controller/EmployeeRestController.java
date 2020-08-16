@@ -1,19 +1,10 @@
 package lk.customs.processManagement.asset.employee.controller;
 
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import lk.customs.processManagement.asset.employee.entity.Employee;
-import lk.customs.processManagement.asset.employee.entity.Enum.Designation;
+
 import lk.customs.processManagement.asset.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.MappingJacksonValue;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping( "/employee" )
@@ -25,7 +16,7 @@ public class EmployeeRestController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping( value = "/getEmployee" )
+   /* @GetMapping( value = "/getEmployee" )
     public MappingJacksonValue getEmployeeByWorkingPlace(@RequestParam( "designation" ) String designation,
                                                          @RequestParam( "id" ) Integer id) {
         Employee employee = new Employee();
@@ -51,5 +42,5 @@ public class EmployeeRestController {
 
         return mappingJacksonValue;
     }
-
+*/
 }

@@ -1,5 +1,10 @@
 package lk.customs.processManagement.asset.employee.entity.Enum;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum EmployeeStatus {
     WORKING("Working"),
     LEAVE("Leave"),
@@ -12,12 +17,5 @@ public enum EmployeeStatus {
 
     private final String employeeStatus;
 
-    EmployeeStatus(String employeeStatus) {
 
-        this.employeeStatus = employeeStatus;
-    }
-
-    public String getEmployeeStatus() {
-        return employeeStatus;
-    }
 }
