@@ -62,16 +62,19 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
     @PostMapping( value = {"save", "update"} )
     public String persist(@Valid @ModelAttribute ChandlerLicense chandlerLicense, BindingResult bindingResult,
                           RedirectAttributes redirectAttributes, Model model) {
-        //todo=> all thing
-        if(bindingResult.hasErrors()){
+        if ( bindingResult.hasErrors() ) {
             return commonLicenseAdd(model, chandlerLicense, true);
         }
-         return "redirect:/chandlerLicense";
+        //todo=> all thing
+        // -> need to create license number before save
+
+        chandlerLicenseService.persist(chandlerLicense);
+        return "redirect:/chandlerLicense";
     }
 
     @GetMapping( "/edit/{id}" )
     public String edit(@PathVariable Integer id, Model model) {
-        return commonLicenseAdd(model, chandlerLicenseService.findById(id), true);
+        return commonLicenseAdd(model, chandlerLicenseService.findById(id), false);
     }
 
     @GetMapping( "/delete/{id}" )
@@ -82,6 +85,6 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
     @GetMapping( "/view/{id}" )
     public String view(@PathVariable Integer id, Model model) {
         model.addAttribute("chandlerLicenseDetail", chandlerLicenseService.findById(id));
-       return "chandlerLicense/chandlerLicense-detail";
+        return "chandlerLicense/chandlerLicense-detail";
     }
 }
