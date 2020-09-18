@@ -1,19 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--/* Styles, meta data, and title are included */-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
+    <title>addCustomer</title>
 </head>
 <body>
-<!--/* Nav bar is included */-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<!--todo-->
-
-<!--/* footer is */-->
+<!--Heading Area-->
+<div class="container-fluid bg-dark form-Border">
+    <div class="row text-center formManagement border-info">
+        <!--ViewList Button-->
+        <div class="col">
+            <a href="/shipAgent" class="btn btn-primary" tabindex="1">
+                <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
+            </a>
+        </div>
+        <!--Form Name-->
+        <div class="col">
+            <h2 class="text-light text-center">
+                <strong>
+                    <span data-th-text="${addStatus==true?'Add New shipAgent':'Update shipAgent Details'}"></span>
+                </strong>
+            </h2>
+        </div>
+        <!--Home Button-->
+        <div class="col">
+            <a class="btn btn-primary" href="/home" tabindex="2">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
+            </a>
+        </div>
+    </div>
+</div>
+<!--Form Content-->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form id="form" class="form-horizontal"
+              data-th-action="${addStatus==true?'/shipAgent/save':'/shipAgent/update'}"
+              data-th-object="${shipAgent}" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-12 col-sm-12 text-left flex-column">
+                    <!--Id-->
+                    <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">ID :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly/>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label" for="number">Number :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="number" data-th-field="*{number}" class="form-control" type="text" readonly/>
+                        </div>
+                    </div>
+                    <!--Chandlers -->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="chandler">Chandler :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="chandler" data-th-field="*{chandler}" required>
+                                <option value="" disabled selected>Please Select</option>
+                                <option data-th-each="chandler : ${chandlers}"
+                                        data-th-value="${chandler.id}"
+                                        data-th-text="${chandler.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Start date-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="startDate">Start Date :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="startDate" data-th-field="*{startDate}" class="form-control" tabindex="4"
+                                   type="date"
+                                   required/>
+                        </div>
+                    </div>
+                    <!--Start date-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="endDate">End Date :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="endDate" data-th-field="*{endDate}" class="form-control" tabindex="4"
+                                   type="date"
+                                   required/>
+                        </div>
+                    </div>
+                </div>
+                <!--Button-->
+                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                    <!--Back Button-->
+                    <a class="btn btn-dark" tabindex="10" href="/chandlerLicense">
+                        <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
+                    </a>
+                    <!--Save Button-->
+                    <button class="btn btn-success ml-5" type="submit" tabindex="8">
+                        <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;<span id="submit"
+                                                                                             data-th-text="${addStatus==true?'Save': 'Update'}"></span>
+                    </button>
+                    <!--Cancel Button-->
+                    <button class="btn btn-warning ml-5" type="reset" tabindex="9">
+                        <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
+                    </button>
+                </div>
+                <!--Error-->
+                <div class="form-row">
+                    <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors:
+                    </label>
+                    <ul>
+                        <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+                            class="error"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--footer include-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--/* script is included */-->
+<!--script include-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+
 </body>
 </html>
