@@ -35,7 +35,7 @@ public  class ChandlerController implements AbstractController< Chandler, Intege
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("suppliers", chandlerService.findAll());
+        model.addAttribute("chandlers", chandlerService.findAll());
         return "chandler/chandler";
     }
 

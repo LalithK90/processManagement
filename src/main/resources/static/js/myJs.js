@@ -29,9 +29,9 @@ $(document).ready(function () {
     });
     /* Patient and employee Nic Validation - end*/
     //input type date can not be selected future date
-    $('[type="date"]').prop('max', function () {
-        return new Date().toJSON().split('T')[0];
-    });
+    // $('[type="date"]').prop('max', function () {
+    //     return new Date().toJSON().split('T')[0];
+    // });
 
 });
 

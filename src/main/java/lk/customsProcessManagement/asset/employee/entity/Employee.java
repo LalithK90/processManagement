@@ -11,7 +11,6 @@ import lk.customsProcessManagement.asset.commonAsset.model.Enum.Gender;
 import lk.customsProcessManagement.asset.commonAsset.model.Enum.Title;
 import lk.customsProcessManagement.asset.employee.entity.Enum.Designation;
 import lk.customsProcessManagement.asset.employee.entity.Enum.EmployeeStatus;
-import lk.customsProcessManagement.asset.message.entity.EmailMessage;
 import lk.customsProcessManagement.util.audit.AuditEntity;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter
@@ -87,9 +85,6 @@ public class Employee extends AuditEntity {
 
     @Enumerated(EnumType.STRING)
     private Designation designation;
-
-    @ManyToMany(mappedBy = "employees")
-    private List< EmailMessage > emailMessages;
 
     @Transient
     private MultipartFile file;

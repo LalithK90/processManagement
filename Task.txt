@@ -1,7 +1,6 @@
 Need to do
 ===========
 1. quotation
-2. chandler license
 3. vezzal history
         Vezzal History
         ===============
@@ -26,3 +25,4 @@ Completed
 4. item
 5. category
 6. warehouse blocks
+7. chandler license
