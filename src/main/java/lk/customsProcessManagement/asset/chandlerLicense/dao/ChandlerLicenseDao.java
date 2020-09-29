@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface ChandlerLicenseDao extends JpaRepository< ChandlerLicense, Integer > {
     List< ChandlerLicense> findByLicenseStatus(LicenseStatus licenseStatus);
+
+    ChandlerLicense findFirstByOrderByIdDesc();
 }
