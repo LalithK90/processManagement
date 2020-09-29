@@ -46,4 +46,8 @@ public class ChandlerLicenseService implements AbstractService< ChandlerLicense,
     public List< ChandlerLicense> findByLicenseStatus(LicenseStatus licenseStatus) {
         return chandlerLicenseDao.findByLicenseStatus(licenseStatus);
     }
+
+    public ChandlerLicense findLastChandlerLicense(){
+        return chandlerLicenseDao.findFirstByOrderByIdDesc();
+    }
 }
