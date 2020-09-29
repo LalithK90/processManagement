@@ -12,7 +12,7 @@ public class MakeAutoGenerateNumberService {
     }
 
     public Integer numberAutoGen(String lastNumber) {
-        System.out.println("last number "+lastNumber);
+        System.out.println("last number " + lastNumber);
         int newNumber;
         int previousNumber;
         int newNumberFirstTwoCharacters;
@@ -20,7 +20,7 @@ public class MakeAutoGenerateNumberService {
         int currentYearLastTwoNumber =
                 Integer.parseInt(String.valueOf(dateTimeAgeService.getCurrentDate().getYear()).substring(2, 4));
 
-        if ( lastNumber != null) {
+        if ( lastNumber != null ) {
             previousNumber = Integer.parseInt(lastNumber.substring(0, 6));
             newNumberFirstTwoCharacters = Integer.parseInt(lastNumber.substring(0, 2));
 
@@ -41,6 +41,26 @@ public class MakeAutoGenerateNumberService {
             number = "0".concat(number);
         }
         return number;
+    }
+
+    public String makeUniqueNumber(String receivingCode, String lastCode) {
+        String receivingLastCode = lastCode.substring(0, 2);
+
+        int newCodeValue = Integer.parseInt(receivingLastCode) + 1;
+
+        String newCode = receivingCode;
+        if ( newCodeValue < 10 ) {
+            newCode = newCode.concat("0000").concat(String.valueOf(newCodeValue));
+        } else if ( newCodeValue < 100 ) {
+            newCode = newCode.concat("000").concat(String.valueOf(newCodeValue));
+        } else if ( newCodeValue < 1000 ) {
+            newCode = newCode.concat("00").concat(String.valueOf(newCodeValue));
+        } else if ( newCodeValue < 10000 ) {
+            newCode = newCode.concat("0").concat(String.valueOf(newCodeValue));
+        } else if ( newCodeValue < 100000 ) {
+            newCode = newCode.concat(String.valueOf(newCodeValue));
+        }
+        return newCode;
     }
 
 }
