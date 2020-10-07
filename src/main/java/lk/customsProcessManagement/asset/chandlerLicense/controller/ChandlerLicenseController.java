@@ -26,8 +26,9 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
         this.chandlerService = chandlerService;
     }
 
-    private String commonLicense(Model model, List< ChandlerLicense > chandlerLicenses) {
+    private String commonLicense(Model model, List< ChandlerLicense > chandlerLicenses, String message) {
         model.addAttribute("chandlerLicense", chandlerLicenses);
+        model.addAttribute("message", message);
         return "chandlerLicense/chandlerLicense";
     }
 
@@ -41,22 +42,22 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
 
     @GetMapping
     public String findAll(Model model) {
-        return commonLicense(model, chandlerLicenseService.findAll());
+        return commonLicense(model, chandlerLicenseService.findAll(), "All Register Chandler License");
     }
 
     @GetMapping( "/valid" )
     public String validLicense(Model model) {
-        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.VALID));
+        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.VALID),"Valid Chandler List");
     }
 
     @GetMapping( "/process" )
     public String processingLicense(Model model) {
-        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.PROCEED));
+        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.PROCEED),"On Processing License List");
     }
 
     @GetMapping( "/invalid" )
     public String invalidLicense(Model model) {
-        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.INVALID));
+        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.INVALID),"Expired Licenses");
     }
 
     @GetMapping( "/add" )
@@ -71,7 +72,7 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
         return commonLicenseAdd(model,chandlerLicense , true, true);
     }
 
-    @PostMapping( value = {"save", "update"} )
+    @PostMapping( value = {"/save", "/update"} )
     public String persist(@Valid @ModelAttribute ChandlerLicense chandlerLicense, BindingResult bindingResult,
                           RedirectAttributes redirectAttributes, Model model) {
         if ( bindingResult.hasErrors() ) {
