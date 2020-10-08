@@ -94,11 +94,11 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
             if ( lastLicense == null ) {
                 chandlerLicense.setNumber(code.concat(String.valueOf(makeAutoGenerateNumberService.numberAutoGen(null))));
             } else {
-               String lastNumber =  lastLicense.getNumber().substring(4);
+                String lastNumber = lastLicense.getNumber().substring(4);
                 chandlerLicense.setNumber(code.concat(String.valueOf(makeAutoGenerateNumberService.numberAutoGen(lastNumber))));
             }
             // license status
-
+            chandlerLicense.setLicenseStatus(LicenseStatus.PROCEED);
         }
         chandlerLicenseService.persist(chandlerLicense);
         return "redirect:/chandlerLicense";
