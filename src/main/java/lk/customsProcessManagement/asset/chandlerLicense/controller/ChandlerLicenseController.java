@@ -5,6 +5,7 @@ import lk.customsProcessManagement.asset.chandlerLicense.entity.ChandlerLicense;
 import lk.customsProcessManagement.asset.chandlerLicense.entity.Enum.LicenseStatus;
 import lk.customsProcessManagement.asset.chandlerLicense.service.ChandlerLicenseService;
 import lk.customsProcessManagement.util.interfaces.AbstractController;
+import lk.customsProcessManagement.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +21,13 @@ import java.util.List;
 public class ChandlerLicenseController implements AbstractController< ChandlerLicense, Integer > {
     private final ChandlerLicenseService chandlerLicenseService;
     private final ChandlerService chandlerService;
+    private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
-    public ChandlerLicenseController(ChandlerLicenseService chandlerLicenseService, ChandlerService chandlerService) {
+    public ChandlerLicenseController(ChandlerLicenseService chandlerLicenseService, ChandlerService chandlerService,
+                                     MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
         this.chandlerLicenseService = chandlerLicenseService;
         this.chandlerService = chandlerService;
+        this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     }
 
     private String commonLicense(Model model, List< ChandlerLicense > chandlerLicenses, String message) {
@@ -32,8 +36,9 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
         return "chandlerLicense/chandlerLicense";
     }
 
-    private String commonLicenseAdd(Model model, ChandlerLicense chandlerLicense, boolean addStatus, boolean customLicense ) {
-        model.addAttribute("chandlers",chandlerService.findAll());
+    private String commonLicenseAdd(Model model, ChandlerLicense chandlerLicense, boolean addStatus,
+                                    boolean customLicense) {
+        model.addAttribute("chandlers", chandlerService.findAll());
         model.addAttribute("chandlerLicense", chandlerLicense);
         model.addAttribute("customLicense", customLicense);
         model.addAttribute("addStatus", addStatus);
@@ -47,17 +52,20 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
 
     @GetMapping( "/valid" )
     public String validLicense(Model model) {
-        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.VALID),"Valid Chandler List");
+        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.VALID), "Valid Chandler " +
+                "List");
     }
 
     @GetMapping( "/process" )
     public String processingLicense(Model model) {
-        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.PROCEED),"On Processing License List");
+        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.PROCEED), "On Processing" +
+                " License List");
     }
 
     @GetMapping( "/invalid" )
     public String invalidLicense(Model model) {
-        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.INVALID),"Expired Licenses");
+        return commonLicense(model, chandlerLicenseService.findByLicenseStatus(LicenseStatus.INVALID), "Expired " +
+                "Licenses");
     }
 
     @GetMapping( "/add" )
@@ -65,11 +73,11 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
         return commonLicenseAdd(model, new ChandlerLicense(), true, false);
     }
 
-    @GetMapping("/add/{id}")
-    public String customLicense(@PathVariable("id")Integer id, Model model){
+    @GetMapping( "/add/{id}" )
+    public String customLicense(@PathVariable( "id" ) Integer id, Model model) {
         ChandlerLicense chandlerLicense = new ChandlerLicense();
         chandlerLicense.setChandler(chandlerService.findById(id));
-        return commonLicenseAdd(model,chandlerLicense , true, true);
+        return commonLicenseAdd(model, chandlerLicense, true, true);
     }
 
     @PostMapping( value = {"/save", "/update"} )
@@ -78,16 +86,27 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
         if ( bindingResult.hasErrors() ) {
             return commonLicenseAdd(model, chandlerLicense, true, false);
         }
-        //todo=> all thing
-        // -> need to create license number before save
 
+        if ( chandlerLicense.getId() == null ) {
+            //Manage license number
+            ChandlerLicense lastLicense = chandlerLicenseService.findLastChandlerLicense();
+            String code = "SLCC";
+            if ( lastLicense == null ) {
+                chandlerLicense.setNumber(code.concat(String.valueOf(makeAutoGenerateNumberService.numberAutoGen(null))));
+            } else {
+               String lastNumber =  lastLicense.getNumber().substring(4);
+                chandlerLicense.setNumber(code.concat(String.valueOf(makeAutoGenerateNumberService.numberAutoGen(lastNumber))));
+            }
+            // license status
+
+        }
         chandlerLicenseService.persist(chandlerLicense);
         return "redirect:/chandlerLicense";
     }
 
     @GetMapping( "/edit/{id}" )
     public String edit(@PathVariable Integer id, Model model) {
-        return commonLicenseAdd(model, chandlerLicenseService.findById(id), false,false);
+        return commonLicenseAdd(model, chandlerLicenseService.findById(id), false, false);
     }
 
     @GetMapping( "/delete/{id}" )
