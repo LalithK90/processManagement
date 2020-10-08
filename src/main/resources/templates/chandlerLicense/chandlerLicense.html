@@ -8,9 +8,95 @@
 <body>
 <!--/* Nav bar is included */-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-[[${message}]]
-[[${message}]]
-<!--todo-->
+<!--heading Area-->
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col">
+            <a class="btn btn-success" href="/chandlerLicense" tabindex="1">
+                <i class="fa fa-plus"></i>&nbsp;&nbsp;New</a>&nbsp;
+        </div>
+        <!--List Name-->
+        <div class="col">
+            <h2 class="text-center">
+                <strong>
+                    [[${message}]]
+                </strong>
+            </h2>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+    <!--    Button group for all license according to license type-->
+    <div class="row">
+        <div class="col text-center">
+            <div class="btn-group" data-toggle="buttons">
+                <a href="/chandler" class="btn btn-info btn-lg m-2 pr-5 pl-5"> Chandlers </a>
+                 <a href="/chandlerLicense" class="btn btn-primary btn-lg m-2 pr-5 pl-5"> All </a>
+                <a href="/chandlerLicense/process" class="btn btn-warning btn-lg m-2 pr-5 pl-5"> Process </a>
+                <a href="/chandlerLicense/valid" class="btn btn-success btn-lg m-2 pr-5 pl-5"> Valid </a>
+                <a href="/chandlerLicense/invalid" class="btn btn-danger btn-lg m-2 pr-5 pl-5"> Invalid </a>
+            </div>
+        </div>
+    </div>
+    <!--Chandler License List-->
+    <div class="row">
+        <div class="col" id="supplierListPresent" data-th-fragment="supplierFragment"
+             data-th-if="${not #lists.isEmpty(chandlerLicenses)}">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> License Number</th>
+                    <th> Chandler Name</th>
+                    <th> License Start date</th>
+                    <th> License Expired date</th>
+                    <th> License Status</th>
+                    <th> Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="chandlerLicense, rowCount : ${chandlerLicenses}">
+                    <th data-th-text="${rowCount.count}"></th>
+                    <th data-th-text="${chandlerLicense.number}"></th>
+                    <th data-th-text="${chandlerLicense.chandler.name}"></th>
+                    <th data-th-text="${chandlerLicense.startDate}"></th>
+                    <th data-th-text="${chandlerLicense.endDate}"></th>
+                    <th data-th-text="${chandlerLicense.licenseStatus.licenseStatus}"></th>
+                    <th>
+                        <a class="btn btn-primary btn-sm"
+                           data-th-href="${'/chandlerLicense/' + chandlerLicense.id}"><i
+                                class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
+                        <a class="btn btn-success btn-sm"
+                           data-th-href="${'/chandlerLicense/edit/' + chandlerLicense.id}"><i
+                                class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit</a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--Error-->
+    <div class="row" data-th-if="${ #lists.isEmpty(chandlerLicenses)}">
+        <div class="col-sm-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center text-danger">
+                    <strong>There is no chandler License upto now please add chandlerLicense to the system using add
+                            user
+                            button.</strong>
+                </h3>
+            </div>
+        </div>
+        <script>
+            /*active boostrap alert - start*/
+            $(".alert").alert();
+            /*active boostrap alert - end*/
+        </script>
+    </div>
+</div>
 
 <!--/* footer is */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>

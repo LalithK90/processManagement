@@ -42,13 +42,15 @@
                 <!--Left Side-->
                 <div class="form-group col-md-12 col-sm-12 text-left flex-column">
                     <!--Id-->
-                    <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right">
+                    <div data-th-if="${addStatus==false}" class="form-row text-right">
                         <div class="col-md-4">
                             <label class="control-label" for="id">ID :</label>
                         </div>
                         <div class="col-md-8">
                             <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly/>
                         </div>
+                    </div>
+                    <div data-th-if="${addStatus==false}" class="form-row text-right">
                         <div class="col-md-4">
                             <label class="control-label" for="number">Number :</label>
                         </div>
@@ -62,11 +64,30 @@
                             <label class="control-label" for="chandler">Chandler :</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="chandler" class="form-control" data-th-field="*{chandler}" required data-th-readonly="${customLicense}">
+                            <select data-th-if="${addStatus==true}" id="chandler" class="form-control"
+                                    data-th-field="*{chandler}" required
+                                    data-th-readonly="${readonlyStatus}">
                                 <option value="" disabled selected>Please Select</option>
                                 <option data-th-each="chandler : ${chandlers}"
                                         data-th-value="${chandler.id}"
                                         data-th-text="${chandler.name}"></option>
+                            </select>
+                            <input type="text" data-th-if="${addStatus==false}" class="form-control"
+                                   data-th-value="${chandlerLicense.chandler.name}" readonly>
+                        </div>
+                    </div>
+                    <!--License Status-->
+                    <div data-th-if="${addStatus==false}" class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="startDateE">Licence Status :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="licenseStatus" class="form-control" data-th-field="*{licenseStatus}" required
+                                    data-th-readonly="${readonlyStatus}">
+                                <option value="" disabled selected>Please Select</option>
+                                <option data-th-each="licenseStatus : ${licenseStatuss}"
+                                        data-th-value="${licenseStatus}"
+                                        data-th-text="${licenseStatus.licenseStatus}"></option>
                             </select>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
     }
 
     private String commonLicense(Model model, List< ChandlerLicense > chandlerLicenses, String message) {
-        model.addAttribute("chandlerLicense", chandlerLicenses);
+        model.addAttribute("chandlerLicenses", chandlerLicenses);
         model.addAttribute("message", message);
         return "chandlerLicense/chandlerLicense";
     }
@@ -39,6 +39,7 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
     private String commonLicenseAdd(Model model, ChandlerLicense chandlerLicense, boolean addStatus,
                                     boolean customLicense) {
         model.addAttribute("chandlers", chandlerService.findAll());
+        model.addAttribute("licenseStatuss", LicenseStatus.values());
         model.addAttribute("chandlerLicense", chandlerLicense);
         model.addAttribute("customLicense", customLicense);
         model.addAttribute("addStatus", addStatus);
@@ -106,6 +107,7 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
 
     @GetMapping( "/edit/{id}" )
     public String edit(@PathVariable Integer id, Model model) {
+        model.addAttribute("readonlyStatus", true);
         return commonLicenseAdd(model, chandlerLicenseService.findById(id), false, false);
     }
 
