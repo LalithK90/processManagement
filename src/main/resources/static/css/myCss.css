@@ -7,17 +7,17 @@
     --error-color: #fa370d;
 }
 
-#loginBack {
-    background-image: url('../img/loginBackground.jpg');
-}
+/*#loginBack {*/
+/*    background-image: url('../img/loginBackground.jpg');*/
+/*}*/
 
 
 /*html Background - start*/
-body {
-    background-image: url('../img/loginBackground.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+/*body {*/
+/*    background-image: url('../img/loginBackground.jpg');*/
+/*    background-size: cover;*/
+/*    background-repeat: no-repeat;*/
+/*}*/
 
 /*html Background - end*/
 
@@ -244,13 +244,13 @@ button .btn {
 /*remove lab test from selected table - end*/
 
 /*form  - start*/
-label {
-   font-size: 18px !important;
-    font-max-size: 22px;
-    font-min-size: 12px;
-    font-weight: bold;
-    color: white;
-}
+/*label {*/
+/*   font-size: 18px !important;*/
+/*    font-max-size: 22px;*/
+/*    font-min-size: 12px;*/
+/*    font-weight: bold;*/
+/*    color: white;*/
+/*}*/
 
 input {
     font-size: 18px !important;
