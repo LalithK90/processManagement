@@ -5,6 +5,7 @@ package lk.customsProcessManagement.asset.item.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.customsProcessManagement.asset.category.entity.Category;
 import lk.customsProcessManagement.asset.item.entity.Enum.ItemStatus;
+import lk.customsProcessManagement.asset.vezzalOrderItem.entity.VezzalOrderItem;
 import lk.customsProcessManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,10 +36,10 @@ public class Item extends AuditEntity {
     @ManyToOne
     private Category category;
 
-    /*@OneToMany( mappedBy = "item" )
-    private List< SupplierItem > supplierItems;
-
     @OneToMany( mappedBy = "item" )
+    private List< VezzalOrderItem > vezzalOrderItems;
+
+ /*   @OneToMany( mappedBy = "item" )
     private List< Ledger > ledgers;
 
     @OneToMany( mappedBy = "item" )
