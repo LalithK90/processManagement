@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum WarehouseBlockStatus {
-    //1.available,  2. unavailable,  3. Processing, 4. fill
+
     AVAILABLE("Available"),
     PROCESSING("Processing"),
     FILL("Fill"),
