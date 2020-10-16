@@ -2,6 +2,7 @@ package lk.customsProcessManagement.asset.vezzal.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.customsProcessManagement.asset.vezzalOrder.entity.VezzalOrder;
 import lk.customsProcessManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,9 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Getter
@@ -36,4 +39,7 @@ public class Vezzal extends AuditEntity {
     private String mmsiNumber;
 
     private String country;
+
+    @OneToMany(mappedBy = "vezzal")
+    private List< VezzalOrder > vezzalOrders;
 }
