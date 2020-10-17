@@ -1,4 +1,4 @@
-package lk.customsProcessManagement.asset.employee.entity;
+package lk.customsProcessManagement.asset.userDetails.entity;
 
 
 
@@ -9,8 +9,8 @@ import lk.customsProcessManagement.asset.commonAsset.model.Enum.BloodGroup;
 import lk.customsProcessManagement.asset.commonAsset.model.Enum.CivilStatus;
 import lk.customsProcessManagement.asset.commonAsset.model.Enum.Gender;
 import lk.customsProcessManagement.asset.commonAsset.model.Enum.Title;
-import lk.customsProcessManagement.asset.employee.entity.Enum.Designation;
-import lk.customsProcessManagement.asset.employee.entity.Enum.EmployeeStatus;
+import lk.customsProcessManagement.asset.userDetails.entity.Enum.Designation;
+import lk.customsProcessManagement.asset.userDetails.entity.Enum.EmployeeStatus;
 import lk.customsProcessManagement.util.audit.AuditEntity;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;

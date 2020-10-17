@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum VezzalOrderStatus {
-VALID("Valid"),
+  VALID("Valid"),
   SUSPEND("Suspend"),
   INVALID("Invalid");
 
-private final String vezzalOrderStatus;
+  private final String vezzalOrderStatus;
 }

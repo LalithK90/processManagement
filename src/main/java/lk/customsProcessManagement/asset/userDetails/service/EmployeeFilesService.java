@@ -1,11 +1,11 @@
-package lk.customsProcessManagement.asset.employee.service;
+package lk.customsProcessManagement.asset.userDetails.service;
 
 
 import lk.customsProcessManagement.asset.commonAsset.model.FileInfo;
-import lk.customsProcessManagement.asset.employee.controller.EmployeeController;
-import lk.customsProcessManagement.asset.employee.dao.EmployeeFilesDao;
-import lk.customsProcessManagement.asset.employee.entity.Employee;
-import lk.customsProcessManagement.asset.employee.entity.EmployeeFiles;
+import lk.customsProcessManagement.asset.userDetails.controller.EmployeeController;
+import lk.customsProcessManagement.asset.userDetails.dao.EmployeeFilesDao;
+import lk.customsProcessManagement.asset.userDetails.entity.Employee;
+import lk.customsProcessManagement.asset.userDetails.entity.EmployeeFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;

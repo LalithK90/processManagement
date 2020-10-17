@@ -1,8 +1,8 @@
-package lk.customsProcessManagement.asset.employee.service;
+package lk.customsProcessManagement.asset.userDetails.service;
 
 
-import lk.customsProcessManagement.asset.employee.dao.EmployeeDao;
-import lk.customsProcessManagement.asset.employee.entity.Employee;
+import lk.customsProcessManagement.asset.userDetails.dao.EmployeeDao;
+import lk.customsProcessManagement.asset.userDetails.entity.Employee;
 import lk.customsProcessManagement.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;

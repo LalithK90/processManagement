@@ -1,4 +1,4 @@
-package lk.customsProcessManagement.asset.employee.entity;
+package lk.customsProcessManagement.asset.userDetails.entity;
 
 import lk.customsProcessManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;

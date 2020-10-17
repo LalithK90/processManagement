@@ -1,9 +1,9 @@
 package lk.customsProcessManagement.asset.userManagement.controller;
 
-import lk.customsProcessManagement.asset.employee.entity.Employee;
-import lk.customsProcessManagement.asset.employee.entity.Enum.Designation;
-import lk.customsProcessManagement.asset.employee.entity.Enum.EmployeeStatus;
-import lk.customsProcessManagement.asset.employee.service.EmployeeService;
+import lk.customsProcessManagement.asset.userDetails.entity.Employee;
+import lk.customsProcessManagement.asset.userDetails.entity.Enum.Designation;
+import lk.customsProcessManagement.asset.userDetails.entity.Enum.EmployeeStatus;
+import lk.customsProcessManagement.asset.userDetails.service.EmployeeService;
 import lk.customsProcessManagement.asset.userManagement.entity.User;
 import lk.customsProcessManagement.asset.userManagement.service.RoleService;
 import lk.customsProcessManagement.asset.userManagement.service.UserService;

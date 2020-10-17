@@ -1,7 +1,7 @@
-package lk.customsProcessManagement.asset.employee.controller;
+package lk.customsProcessManagement.asset.userDetails.controller;
 
 
-import lk.customsProcessManagement.asset.employee.service.EmployeeService;
+import lk.customsProcessManagement.asset.userDetails.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

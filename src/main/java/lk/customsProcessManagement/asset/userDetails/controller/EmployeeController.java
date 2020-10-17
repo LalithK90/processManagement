@@ -1,4 +1,4 @@
-package lk.customsProcessManagement.asset.employee.controller;
+package lk.customsProcessManagement.asset.userDetails.controller;
 
 
 import lk.customsProcessManagement.asset.commonAsset.model.Enum.BloodGroup;
@@ -6,11 +6,11 @@ import lk.customsProcessManagement.asset.commonAsset.model.Enum.CivilStatus;
 import lk.customsProcessManagement.asset.commonAsset.model.Enum.Gender;
 import lk.customsProcessManagement.asset.commonAsset.model.Enum.Title;
 import lk.customsProcessManagement.asset.commonAsset.service.CommonService;
-import lk.customsProcessManagement.asset.employee.entity.Employee;
-import lk.customsProcessManagement.asset.employee.entity.EmployeeFiles;
-import lk.customsProcessManagement.asset.employee.entity.Enum.EmployeeStatus;
-import lk.customsProcessManagement.asset.employee.service.EmployeeFilesService;
-import lk.customsProcessManagement.asset.employee.service.EmployeeService;
+import lk.customsProcessManagement.asset.userDetails.entity.Employee;
+import lk.customsProcessManagement.asset.userDetails.entity.EmployeeFiles;
+import lk.customsProcessManagement.asset.userDetails.entity.Enum.EmployeeStatus;
+import lk.customsProcessManagement.asset.userDetails.service.EmployeeFilesService;
+import lk.customsProcessManagement.asset.userDetails.service.EmployeeService;
 import lk.customsProcessManagement.asset.userManagement.entity.User;
 import lk.customsProcessManagement.asset.userManagement.service.UserService;
 import lk.customsProcessManagement.util.service.DateTimeAgeService;

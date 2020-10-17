@@ -1,6 +1,6 @@
 package lk.customsProcessManagement.asset.userManagement.service;
 
-import lk.customsProcessManagement.asset.employee.entity.Employee;
+import lk.customsProcessManagement.asset.userDetails.entity.Employee;
 import lk.customsProcessManagement.asset.userManagement.dao.UserDao;
 import lk.customsProcessManagement.asset.userManagement.entity.User;
 import lk.customsProcessManagement.util.interfaces.AbstractService;

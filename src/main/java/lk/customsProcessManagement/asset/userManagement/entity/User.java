@@ -1,7 +1,7 @@
 package lk.customsProcessManagement.asset.userManagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lk.customsProcessManagement.asset.employee.entity.Employee;
+import lk.customsProcessManagement.asset.userDetails.entity.Employee;
 import lk.customsProcessManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

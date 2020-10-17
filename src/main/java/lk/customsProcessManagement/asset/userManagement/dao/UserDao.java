@@ -1,6 +1,6 @@
 package lk.customsProcessManagement.asset.userManagement.dao;
 
-import lk.customsProcessManagement.asset.employee.entity.Employee;
+import lk.customsProcessManagement.asset.userDetails.entity.Employee;
 import lk.customsProcessManagement.asset.userManagement.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
