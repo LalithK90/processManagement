@@ -7,8 +7,8 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--Heading Area -->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid">
+    <div class="row text-center border-info">
         <!--View List Button-->
         <div class="col">
             <a href="/chandler" class="btn btn-primary" tabindex="1">
@@ -32,7 +32,7 @@
     </div>
 </div>
 <!--Form Content - start -->
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid ">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/chandler/save':'/chandler/update'}"
               data-th-object="${chandler}" method="POST" enctype="multipart/form-data">

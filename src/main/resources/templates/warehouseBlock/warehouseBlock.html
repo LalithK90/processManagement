@@ -7,8 +7,8 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid">
+    <div class="row text-center border-info">
         <!--New Branch Button-->
         <div class="col">
             <a class="btn btn-success" href="/warehouseBlock/add" tabindex="1">
@@ -33,7 +33,7 @@
     </div>
 </div>
 <!--Branches List-->
-<div class="container-fluid bg-dark formBorder text-center">
+<div class="container-fluid text-center">
     <!--Table view-->
     <div class="col">
         <div class="col" id="branchListPresent" data-th-if="${not #lists.isEmpty(warehouseBlocks)}">
