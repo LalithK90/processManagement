@@ -1,154 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>addCustomer</title>
-</head>
-<body>
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >addCustomer</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 <!--Heading Area-->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
-        <!--ViewList Button-->
-        <div class="col">
-            <a href="/chandlerLicense" class="btn btn-primary" tabindex="1">
-                <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
-            </a>
-        </div>
-        <!--Form Name-->
-        <div class="col">
-            <h2 class="text-light text-center">
-                <strong>
+<div class="container-fluid bg-dark form-Border" >
+  <div class="row text-center formManagement border-info" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/chandlerLicense" class="btn btn-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Form Name-->
+    <div class="col" >
+      <h2 class="text-light text-center" >
+        <strong >
                     <span
-                            data-th-text="${addStatus==true?'Add New Chandler License':'Update Chandler License Details'}"></span>
-                </strong>
-            </h2>
-        </div>
-        <!--Home Button-->
-        <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
-            </a>
-        </div>
-    </div>
-</div>
+                          data-th-text="${addStatus==true?'Add New Chandler License':'Update Chandler License Details'}" ></span >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
 <!--Form Content-->
-<div class="container-fluid bg-dark formBorder">
-    <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal"
-              data-th-action="${addStatus==true?'/chandlerLicense/save':'/chandlerLicense/update'}"
-              data-th-object="${chandlerLicense}" method="POST">
-            <div class="row">
-                <!--Left Side-->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column">
-                    <!--Id-->
-                    <div data-th-if="${addStatus==false}" class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="id">ID :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly/>
-                        </div>
-                    </div>
-                    <div data-th-if="${addStatus==false}" class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="number">Number :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="number" data-th-field="*{number}" class="form-control" type="text" readonly/>
-                        </div>
-                    </div>
-                    <!--Chandlers -->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="chandler">Chandler :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select data-th-if="${addStatus==true}" id="chandler" class="form-control"
-                                    data-th-field="*{chandler}" required
-                                    data-th-readonly="${readonlyStatus}">
-                                <option value="" disabled selected>Please Select</option>
-                                <option data-th-each="chandler : ${chandlers}"
-                                        data-th-value="${chandler.id}"
-                                        data-th-text="${chandler.name}"></option>
-                            </select>
-                            <input type="text" data-th-if="${addStatus==false}" class="form-control"
-                                   data-th-value="${chandlerLicense.chandler.name}" readonly>
-                        </div>
-                    </div>
-                    <!--License Status-->
-                    <div data-th-if="${addStatus==false}" class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="startDateE">Licence Status :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="licenseStatus" class="form-control" data-th-field="*{licenseStatus}" required
-                                    data-th-readonly="${readonlyStatus}">
-                                <option value="" disabled selected>Please Select</option>
-                                <option data-th-each="licenseStatus : ${licenseStatuss}"
-                                        data-th-value="${licenseStatus}"
-                                        data-th-text="${licenseStatus.licenseStatus}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--Start date-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="startDateE">Start Date :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="startDateE" data-th-field="*{startDate}" class="form-control" tabindex="4"
-                                   type="date"
-                                   required/>
-                        </div>
-                    </div>
-                    <!--End date-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="endDateE">End Date :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="endDateE" data-th-field="*{endDate}" class="form-control" tabindex="4"
-                                   type="date"
-                                   required/>
-                        </div>
-                    </div>
-                </div>
-                <!--Button-->
-                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                    <!--Back Button-->
-                    <a class="btn btn-dark" tabindex="10" href="/chandlerLicense">
-                        <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
-                    </a>
-                    <!--Save Button-->
-                    <button class="btn btn-success ml-5" type="submit" tabindex="8">
-                        <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;<span id="submit"
-                                                                                             data-th-text="${addStatus==true?'Save': 'Update'}"></span>
-                    </button>
-                    <!--Cancel Button-->
-                    <button class="btn btn-warning ml-5" type="reset" tabindex="9">
-                        <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
-                    </button>
-                </div>
-                <!--Error-->
-                <div class="form-row">
-                    <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors:
-                    </label>
-                    <ul>
-                        <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
-                            class="error"></li>
-                    </ul>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<div class="container-fluid bg-dark formBorder" >
+  <div class="col-sm-12 flex-column " >
+    <form id="form" class="form-horizontal"
+          data-th-action="${addStatus==true?'/chandlerLicense/save':'/chandlerLicense/update'}"
+          data-th-object="${chandlerLicense}" method="POST" >
+      <div class="row" >
+        <!--Left Side-->
+        <div class="form-group col-md-12 col-sm-12 text-left flex-column" >
+          <!--Id-->
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="id" >ID :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly />
+            </div >
+          </div >
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="number" >Number :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="number" data-th-field="*{number}" class="form-control" type="text" readonly />
+            </div >
+          </div >
+          <!--Chandlers -->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="chandler" >Chandler :</label >
+            </div >
+            <div class="col-md-8" >
+              <select data-th-if="${addStatus==true and customLicense==false}" id="chandler" class="form-control"
+                      data-th-field="*{chandler}" required
+                      data-th-readonly="${readonlyStatus}" >
+                <option value="" disabled selected >Please Select</option >
+                <option data-th-each="chandler : ${chandlers}"
+                        data-th-value="${chandler.id}"
+                        data-th-text="${chandler.name}" ></option >
+              </select >
+              <input type="hidden" data-th-if="${addStatus==false}" data-th-field="*{chandler}" class="form-control"
+                     data-th-value="${chandlerLicense.chandler.id}" readonly >
+              <input type="text" class="form-control" name="" id="1" data-th-if="${addStatus==false}"
+                     data-th-value="${chandlerLicense.chandler.name}" >
+                <!--when license add using chandler -->
+              <input type="hidden" data-th-if="${customLicense}" data-th-field="*{chandler}" class="form-control"
+                     data-th-value="${chandlerLicense.chandler.id}" readonly >
+              <input type="text" name="" id="2" data-th-if="${customLicense}"
+                     data-th-value="${chandlerLicense.chandler.name}"
+                     class="form-control" >
+            </div >
+          </div >
+          <!--License Status-->
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="startDateE" >Licence Status :</label >
+            </div >
+            <div class="col-md-8" >
+              <select id="licenseStatus" class="form-control" data-th-field="*{licenseStatus}" required
+                      data-th-readonly="${readonlyStatus}" >
+                <option value="" disabled selected >Please Select</option >
+                <option data-th-each="licenseStatus : ${licenseStatuss}"
+                        data-th-value="${licenseStatus}"
+                        data-th-text="${licenseStatus.licenseStatus}" ></option >
+              </select >
+            </div >
+          </div >
+          <!--Start date-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="startDateE" >Start Date :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="startDateE" data-th-field="*{startDate}" class="form-control" tabindex="4"
+                     type="date"
+                     required />
+            </div >
+          </div >
+          <!--End date-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="endDateE" >End Date :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="endDateE" data-th-field="*{endDate}" class="form-control" tabindex="4"
+                     type="date"
+                     required />
+            </div >
+          </div >
+        </div >
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+          <!--Back Button-->
+          <a class="btn btn-dark" tabindex="10" href="/chandlerLicense" >
+            <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+          </a >
+          <!--Save Button-->
+          <button class="btn btn-success ml-5" type="submit" tabindex="8" >
+            <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;<span id="submit"
+                                                                                   data-th-text="${addStatus==true?'Save': 'Update'}" ></span >
+          </button >
+          <!--Cancel Button-->
+          <button class="btn btn-warning ml-5" type="reset" tabindex="9" >
+            <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+          </button >
+        </div >
+        <!--Error-->
+        <div class="form-row" >
+          <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors:
+          </label >
+          <ul >
+            <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+                class="error" ></li >
+          </ul >
+        </div >
+      </div >
+    </form >
+  </div >
+</div >
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<footer data-th-replace="~{fragments/footer :: footerFragment}" ></footer >
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<script data-th-replace="~{fragments/script :: scriptFragment}" ></script >
 
-<script>
+<script >
     $("#endDateE, #startDateE").bind('change', () => {
         let manufactureDate = $(`#startDateE`).val();
         let expiredDate = $(`#endDateE`).val();
@@ -166,6 +174,6 @@
     })
 
 
-</script>
-</body>
-</html>
+</script >
+</body >
+</html >

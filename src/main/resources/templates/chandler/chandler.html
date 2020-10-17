@@ -65,14 +65,6 @@
                         <th data-th-text="${chandler.email}"></th>
                         <th data-th-text="${chandler.address}"></th>
                         <th data-th-if="${chandlerDetailShow !=true}">
-                            <a class="btn btn-primary btn-sm" data-th-href="${'/chandlerItem/edit/' + chandler.id}"><i
-                                    class="fa fa-folder-open" style="font-size: 15px"></i>Edit Item </a>
-                            <a class="btn btn-primary btn-sm"
-                               data-th-href="${'/chandlerItem/chandler/' + chandler.id}"><i
-                                    class="fa fa-folder-open" style="font-size: 15px"></i>Add Item </a>
-                            <a class="btn btn-primary btn-sm"
-                               data-th-href="${'/purchaseOrder/chandler/' + chandler.id}"><i
-                                    class="fa fa-folder-open" style="font-size: 15px"></i>Purchase Order</a>
                             <a class="btn btn-primary btn-sm"
                                data-th-href="${'/chandlerLicense/add/' + chandler.id}"><i
                                     class="fa fa-folder-open" style="font-size: 15px"></i>Add License</a>
