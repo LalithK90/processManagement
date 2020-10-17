@@ -107,7 +107,6 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
 
     @GetMapping( "/edit/{id}" )
     public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("readonlyStatus", true);
         return commonLicenseAdd(model, chandlerLicenseService.findById(id), false, false);
     }
 

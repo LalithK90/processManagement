@@ -65,8 +65,7 @@
             </div >
             <div class="col-md-8" >
               <select data-th-if="${addStatus==true and customLicense==false}" id="chandler" class="form-control"
-                      data-th-field="*{chandler}" required
-                      data-th-readonly="${readonlyStatus}" >
+                      data-th-field="*{chandler}" required >
                 <option value="" disabled selected >Please Select</option >
                 <option data-th-each="chandler : ${chandlers}"
                         data-th-value="${chandler.id}"
@@ -76,7 +75,7 @@
                      data-th-value="${chandlerLicense.chandler.id}" readonly >
               <input type="text" class="form-control" name="" id="1" data-th-if="${addStatus==false}"
                      data-th-value="${chandlerLicense.chandler.name}" >
-                <!--when license add using chandler -->
+              <!--when license add using chandler -->
               <input type="hidden" data-th-if="${customLicense}" data-th-field="*{chandler}" class="form-control"
                      data-th-value="${chandlerLicense.chandler.id}" readonly >
               <input type="text" name="" id="2" data-th-if="${customLicense}"
