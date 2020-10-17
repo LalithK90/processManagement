@@ -33,7 +33,6 @@ public class Payment extends AuditEntity {
   @Enumerated( EnumType.STRING)
   private PaymentMethod paymentMethod;
 
-
   @ManyToOne
   private VezzalOrderItemApproved vezzalOrderItemApproved;
 }

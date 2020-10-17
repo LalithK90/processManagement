@@ -3,6 +3,7 @@ package lk.customsProcessManagement.asset.vezzalOrder.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.customsProcessManagement.asset.shipAgent.entity.ShipAgent;
 import lk.customsProcessManagement.asset.vezzal.entity.Vezzal;
+import lk.customsProcessManagement.asset.vezzalArrivalHistory.entity.VezzalArrivalHistory;
 import lk.customsProcessManagement.asset.vezzalOrder.entity.Enum.VezzalOrderStatus;
 import lk.customsProcessManagement.asset.vezzalOrderItem.entity.VezzalOrderItem;
 import lk.customsProcessManagement.asset.warehouseBlock.entity.WarehouseBlock;
@@ -36,10 +37,10 @@ public class VezzalOrder extends AuditEntity {
   private VezzalOrderStatus vezzalOrderStatus;
 
   @ManyToOne
-  private Vezzal vezzal;
+  private VezzalArrivalHistory vezzalArrivalHistory;
 
-  @ManyToOne
-  private ShipAgent shipAgent;
+//  @ManyToOne
+//  private ShipAgent shipAgent;
 
   @ManyToOne
   private WarehouseBlock warehouseBlock;

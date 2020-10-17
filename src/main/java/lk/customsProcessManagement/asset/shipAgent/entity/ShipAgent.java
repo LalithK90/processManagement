@@ -48,7 +48,6 @@ public class ShipAgent extends AuditEntity {
     @Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255)
     private String address;
 
-
-    @OneToMany(mappedBy = "shipAgent")
-    private List< VezzalOrder > vezzalOrders;
+//    @OneToMany(mappedBy = "shipAgent")
+//    private List< VezzalOrder > vezzalOrders;
 }
