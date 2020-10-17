@@ -3,7 +3,7 @@ package lk.customsProcessManagement.asset.vezzalArrivalHistory.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.customsProcessManagement.asset.shipAgent.entity.ShipAgent;
 import lk.customsProcessManagement.asset.vezzal.entity.Vezzal;
-import lk.customsProcessManagement.asset.vezzalArrivalHistory.entity.Enum.VezzalDepartureOrArrivalStatus;
+import lk.customsProcessManagement.asset.vezzalArrivalHistory.entity.Enum.VezzalDepartureArrivalStatus;
 import lk.customsProcessManagement.asset.vezzalOrder.entity.VezzalOrder;
 import lk.customsProcessManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
@@ -46,7 +46,7 @@ public class VezzalArrivalHistory extends AuditEntity {
   private String nextHarbour;
 
   @Enumerated( EnumType.STRING )
-  private VezzalDepartureOrArrivalStatus vezzalDepartureOrArrivalStatus;
+  private VezzalDepartureArrivalStatus vezzalDepartureArrivalStatus;
 
   @DateTimeFormat( pattern = "yyyy-MM-dd hh:mm" )
   private LocalDateTime anchorageDateAndTime;

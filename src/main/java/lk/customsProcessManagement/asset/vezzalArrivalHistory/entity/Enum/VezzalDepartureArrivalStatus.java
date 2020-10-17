@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum VezzalDepartureOrArrivalStatus {
+public enum VezzalDepartureArrivalStatus {
   NOAR("Still Not Arrival"),
   AR("Arrival"),
   DP("Departure");
-  private final String vezzalDepartureOrArrivalStatus;
+  private final String vezzalDepartureArrivalStatus;
 }
