@@ -262,6 +262,7 @@ $("#nic").bind("keyup", function () {
 
 //Name validation
 $("#name").bind("keyup", function () {
+    console.log("sfsdfsd")
     let name = $(this).val();
     if (nameRegex.test(name)) {
         backgroundColourChangeGood($(this));
