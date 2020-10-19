@@ -94,3 +94,7 @@ hr:before {
 }
 /*<hr/> tag style - end */
 
+/*Form-row margin add*/
+.form-row{
+    margin-top: 5px;
+}
