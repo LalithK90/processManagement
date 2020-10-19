@@ -21,7 +21,7 @@
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          <p data-th-text="${vezzalArrivalHistoryDetail.name}" ></p >
+          <p data-th-text="${vezzalArrivalHistoryDetail.vezzal.name}" ></p >
         </strong >
       </h2 >
     </div >
@@ -39,13 +39,15 @@
       <h5 class="mb-0" >
         <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
            aria-controls="section1ContentId" >
-          Vezzal Details
+          <div class="container-fluid text-center" >
+            Vezzal Details
+          </div >
         </a >
       </h5 >
     </div >
     <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
       <div class="card-body" >
-        <div data-th-replace="~{vezzal/vezzal-detail :: vezzalDetailFragment}" ></div >
+        <div data-th-replace="~{vezzal/vezzal-detail :: vezzalDetailsFragment}" ></div >
       </div >
     </div >
   </div >
@@ -54,7 +56,9 @@
       <h5 class="mb-0" >
         <a data-toggle="collapse" data-parent="#accordianId" href="#section2ContentId" aria-expanded="true"
            aria-controls="section2ContentId" >
-          Vezzal History Details
+          <div class="container-fluid text-center" >
+            Vezzal History Details
+          </div >
         </a >
       </h5 >
     </div >
@@ -129,6 +133,24 @@
                     <p data-th-text="${vezzalArrivalHistoryDetail.numberOfPassengers}" class="display_detail" ></p >
                   </div >
                 </div >
+                <!--Created By-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Created By :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.createdBy}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--Created At-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Created At :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.createdAt}" class="display_detail" ></p >
+                  </div >
+                </div >
               </div >
               <!--Right Side-->
               <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
@@ -172,11 +194,11 @@
                 <!--vezzal Departure Arrival Status-->
                 <div class="form-row text-right" >
                   <div class="col-md-4" >
-                    <label class="control-label">Vezzal Departure Arrival Status
-                                                                                     :</label >
+                    <label class="control-label" >Vezzal Departure Arrival Status
+                                                  :</label >
                   </div >
                   <div class="col-md-8" >
-                    <p data-th-text="${vezzalDepartureArrivalStatus.vezzalDepartureArrivalStatus}"
+                    <p data-th-text="${vezzalArrivalHistoryDetail.vezzalDepartureArrivalStatus.vezzalDepartureArrivalStatus}"
                        class="display_detail" ></p >
                   </div >
                 </div >
@@ -196,24 +218,6 @@
                   </div >
                   <div class="col-md-8" >
                     <p data-th-text="${{vezzalArrivalHistoryDetail.sailingDate}}" class="display_detail" ></p >
-                  </div >
-                </div >
-                <!--Created By-->
-                <div class="form-row text-right" >
-                  <div class="col-md-4" >
-                    <label class="control-label" >Created By :</label >
-                  </div >
-                  <div class="col-md-8" >
-                    <p data-th-text="${vezzalArrivalHistoryDetail.createdBy}" class="display_detail" ></p >
-                  </div >
-                </div >
-                <!--Created At-->
-                <div class="form-row text-right" >
-                  <div class="col-md-4" >
-                    <label class="control-label" >Created At :</label >
-                  </div >
-                  <div class="col-md-8" >
-                    <p data-th-text="${vezzalArrivalHistoryDetail.createdAt}" class="display_detail" ></p >
                   </div >
                 </div >
                 <!--Created By-->
