@@ -1,6 +1,7 @@
 package lk.customsProcessManagement.asset.vezzalArrivalHistory.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lk.customsProcessManagement.asset.shipAgent.entity.ShipAgent;
 import lk.customsProcessManagement.asset.vezzal.entity.Vezzal;
 import lk.customsProcessManagement.asset.vezzalArrivalHistory.entity.Enum.VezzalDepartureArrivalStatus;
@@ -13,8 +14,10 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -43,12 +46,13 @@ public class VezzalArrivalHistory extends AuditEntity {
 
   private String threePreviousHarbourName;
 
+  @NotBlank
   private String nextHarbour;
 
   @Enumerated( EnumType.STRING )
   private VezzalDepartureArrivalStatus vezzalDepartureArrivalStatus;
 
-  @DateTimeFormat( pattern = "yyyy-MM-dd hh:mm" )
+  @DateTimeFormat( iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime anchorageDateAndTime;
 
   @DateTimeFormat( pattern = "yyyy-MM-dd" )

@@ -195,7 +195,7 @@
             <label class="control-label" for="startDateE" >Anchorage Date :</label >
           </div >
           <div class="col-md-8" >
-            <input id="startDateE" data-th-field="*{anchorageDateAndTime}" class="form-control" tabindex="4"
+            <input id="startDateE" data-th-field="*{{anchorageDateAndTime}}" class="form-control" tabindex="4"
                    type="datetime-local"
                    required />
           </div >
@@ -206,8 +206,8 @@
             <label class="control-label" for="endDateE" >Sailing Date :</label >
           </div >
           <div class="col-md-8" >
-            <input id="endDateE" data-th-field="*{sailingDate}" class="form-control" tabindex="4"
-                   type="datetime-local"
+            <input id="endDateE" data-th-field="*{{sailingDate}}" class="form-control" tabindex="4"
+                   type="date"
                    required />
           </div >
         </div >
