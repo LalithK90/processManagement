@@ -122,7 +122,7 @@ public class VezzalArrivalHistoryController {
                            vezzalArrivalHistory);
   }
 
-
+//delete is not a applicable
   public String delete(Integer id, Model model) {
     return null;
   }
