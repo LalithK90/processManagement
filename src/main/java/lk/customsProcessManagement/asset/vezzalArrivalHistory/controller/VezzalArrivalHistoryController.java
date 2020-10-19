@@ -129,7 +129,9 @@ public class VezzalArrivalHistoryController {
 
   @GetMapping( "/{id}" )
   public String view(@PathVariable Integer id, Model model) {
-    model.addAttribute("vezzalArrivalHistoryDetail", vezzalArrivalHistoryService.findById(id));
+    VezzalArrivalHistory vezzalArrivalHistory = vezzalArrivalHistoryService.findById(id);
+    model.addAttribute("vezzalArrivalHistoryDetail", vezzalArrivalHistory);
+    model.addAttribute("vezzalDetail", vezzalArrivalHistory.getVezzal());
     return "vezzalArrivalHistory/vezzalArrivalHistory-detail";
   }
 
