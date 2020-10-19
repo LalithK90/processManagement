@@ -122,14 +122,15 @@ public class VezzalArrivalHistoryController {
                            vezzalArrivalHistory);
   }
 
-//delete is not a applicable
+  //delete is not a applicable
   public String delete(Integer id, Model model) {
     return null;
   }
 
-
-  public String view(Integer id, Model model) {
-    return null;
+  @GetMapping( "/{id}" )
+  public String view(@PathVariable Integer id, Model model) {
+    model.addAttribute("vezzalArrivalHistoryDetail", vezzalArrivalHistoryService.findById(id));
+    return "vezzalArrivalHistory/vezzalArrivalHistory-detail";
   }
 
 }
