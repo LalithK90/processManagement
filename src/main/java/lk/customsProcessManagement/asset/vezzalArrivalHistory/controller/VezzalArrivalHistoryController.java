@@ -44,6 +44,7 @@ public class VezzalArrivalHistoryController {
   //NOAR("Still Not Arrival"),
   @GetMapping( "/notArrival" )
   public String findNotArrivalAll(Model model) {
+    model.addAttribute("notArrival", true);
     return commonFindAll("All accepting vezzals",
                          vezzalArrivalHistoryService.findByVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.NOAR), model);
   }
@@ -51,6 +52,7 @@ public class VezzalArrivalHistoryController {
   //AR("Arrival"),
   @GetMapping( "/arrival" )
   public String findArrivalAll(Model model) {
+    model.addAttribute("arrival", true);
     return commonFindAll("All arrival vezzals",
                          vezzalArrivalHistoryService.findByVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.AR), model);
   }
@@ -58,6 +60,7 @@ public class VezzalArrivalHistoryController {
   //DP("Departure");
   @GetMapping( "/departure" )
   public String findDepartureAll(Model model) {
+    model.addAttribute("departure", true);
     return commonFindAll("All departure vezzals",
                          vezzalArrivalHistoryService.findByVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.DP), model);
   }
@@ -87,13 +90,26 @@ public class VezzalArrivalHistoryController {
       return commonAddMethod(model, vezzalService.findById(vezzalArrivalHistory.getVezzal().getId()), true,
                              vezzalArrivalHistory);
     }
-    if(vezzalArrivalHistory.getId() == null){
+    if ( vezzalArrivalHistory.getId() == null ) {
       vezzalArrivalHistory.setVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.NOAR);
     }
     vezzalArrivalHistoryService.persist(vezzalArrivalHistory);
     return "redirect:/vezzalArrivalHistory";
   }
 
+  //not arrival vezzal -> state change to arrival
+  @GetMapping( "/arrival/{id}" )
+  public String findArrivalAll(@PathVariable Integer id, Model model) {
+    model.addAttribute("arrival", true);
+    return "redirect:/";
+  }
+
+  //arrival vezzal -> state change to departure
+  @GetMapping( "/departure/{id}" )
+  public String findDepartureAll(@PathVariable Integer id, Model model) {
+    model.addAttribute("departure", true);
+    return "redirect:/";
+  }
 
   public String edit(Integer id, Model model) {
     return null;
