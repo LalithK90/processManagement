@@ -64,6 +64,12 @@
             <a class="btn btn-success btn-sm"
                data-th-href="${'/vezzalArrivalHistory/edit/' + vezzalArrivalHistory.id}" ><i
                   class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Edit</a >
+            <a class="btn btn-success btn-sm" data-th-if="${notArrival}"
+               data-th-href="${'/vezzalArrivalHistory/arrival/' + vezzalArrivalHistory.id}" ><i
+                  class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Mark Arrival</a >
+            <a class="btn btn-success btn-sm"
+               data-th-href="${'/vezzalArrivalHistory/departure/' + vezzalArrivalHistory.id}" data-th-if="${arrival}"><i
+                  class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Make Departure</a >
           </th >
         </tr >
         </tbody >
