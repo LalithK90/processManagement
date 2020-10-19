@@ -1,6 +1,5 @@
 package lk.customsProcessManagement.asset.vezzalArrivalHistory.controller;
 
-import lk.customsProcessManagement.asset.vezzal.service.VezzalService;
 import lk.customsProcessManagement.asset.vezzalArrivalHistory.entity.Enum.VezzalDepartureArrivalStatus;
 import lk.customsProcessManagement.asset.vezzalArrivalHistory.entity.VezzalArrivalHistory;
 import lk.customsProcessManagement.asset.vezzalArrivalHistory.service.VezzalArrivalHistoryService;
@@ -16,12 +15,10 @@ import java.util.List;
 @Controller
 @RequestMapping( "/vezzalArrivalHistory" )
 public class VezzalArrivalHistoryController {
-  private final VezzalService vezzalService;
   private final VezzalArrivalHistoryService vezzalArrivalHistoryService;
 
-  public VezzalArrivalHistoryController(VezzalService vezzalService,
-                                        VezzalArrivalHistoryService vezzalArrivalHistoryService) {
-    this.vezzalService = vezzalService;
+  public VezzalArrivalHistoryController(VezzalArrivalHistoryService vezzalArrivalHistoryService) {
+
     this.vezzalArrivalHistoryService = vezzalArrivalHistoryService;
   }
 
@@ -33,7 +30,8 @@ public class VezzalArrivalHistoryController {
 
   @GetMapping
   public String findAll(Model model) {
-    return commonFindAll("All vezzals not arrival, arrival and departure ", vezzalArrivalHistoryService.findAll(), model);
+    return commonFindAll("All vezzals not arrival, arrival and departure ", vezzalArrivalHistoryService.findAll(),
+                         model);
   }
 
   //NOAR("Still Not Arrival"),
@@ -56,7 +54,6 @@ public class VezzalArrivalHistoryController {
     return commonFindAll("All departure vezzals",
                          vezzalArrivalHistoryService.findByVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.DP), model);
   }
-
 
 
   public String addForm(Model model) {

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--/* Styles, meta data, and title are included */-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<!--/* Nav bar is included */-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--heading Area-->
+<div class="container-fluid" >
+  <div class="row " >
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          [[${message}]]
+        </strong >
+      </h2 >
+    </div >
+  </div >
+  <!--    Button group for all license according to license type-->
+  <div class="row" >
+    <div class="col text-center" >
+      <div class="btn-group" data-toggle="buttons" >
+        <a href="/vezzal" class="btn btn-info btn-lg m-2 pr-5 pl-5">All Vezzal</a>
+        <a href="/vezzalArrivalHistory" class="btn btn-primary btn-lg m-2 pr-5 pl-5" > All History </a >
+        <a href="/vezzalArrivalHistory/notArrival" class="btn btn-warning btn-lg m-2 pr-5 pl-5" > Not Arrival </a >
+        <a href="/vezzalArrivalHistory/arrival" class="btn btn-success btn-lg m-2 pr-5 pl-5" > Arrival </a >
+        <a href="/vezzalArrivalHistory/departure" class="btn btn-danger btn-lg m-2 pr-5 pl-5" > Departure </a >
+      </div >
+    </div >
+  </div >
+  <!--Chandler License List-->
+  <div class="row" >
+    <div class="col" id="supplierListPresent" data-th-fragment="supplierFragment"
+         data-th-if="${not #lists.isEmpty(vezzalArrivalHistories)}" >
+      <table class="table table-hover table-striped" id="myTable" >
+        <thead >
+        <tr >
+          <th > Index</th >
+          <th > Vezzal Name</th >
+          <th > IMO Number</th >
+          <th > MMSI Number</th >
+          <th > Captain Name</th >
+          <th > Next Harbour</th >
+          <th > Sailing Date</th >
+          <th > Modify</th >
+        </tr >
+        </thead >
+        <tbody >
+        <tr data-th-each="vezzalArrivalHistory, rowCount : ${vezzalArrivalHistories}" >
+          <th data-th-text="${rowCount.count}" ></th >
+          <th data-th-text="${vezzalArrivalHistory.vezzal.name}" ></th >
+          <th data-th-text="${vezzalArrivalHistory.vezzal.imoNumber}" ></th >
+          <th data-th-text="${vezzalArrivalHistory.vezzal.mmsiNumber}" ></th >
+          <th data-th-text="${vezzalArrivalHistory.captainName}" ></th >
+          <th data-th-text="${vezzalArrivalHistory.nextHarbour}" ></th >
+          <th data-th-text="${{vezzalArrivalHistory.sailingDate}}" ></th >
+          <th >
+            <a class="btn btn-primary btn-sm"
+               data-th-href="${'/vezzalArrivalHistory/' + vezzalArrivalHistory.id}" ><i
+                  class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
+            <a class="btn btn-success btn-sm"
+               data-th-href="${'/vezzalArrivalHistory/edit/' + vezzalArrivalHistory.id}" ><i
+                  class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Edit</a >
+          </th >
+        </tr >
+        </tbody >
+      </table >
+    </div >
+  </div >
+  <!--Error-->
+  <div class="row" data-th-if="${ #lists.isEmpty(vezzalArrivalHistories)}" >
+    <div class="col-sm-12" >
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button" >
+          <span aria-hidden="true" >&times;</span >
+        </button >
+        <h3 class="text-center text-danger" >
+          <strong >There is no Vezzal History upto now please add vezzal arrival history to the system using add
+                   user
+                   button.</strong >
+        </h3 >
+      </div >
+    </div >
+    <script >
+        /*active boostrap alert - start*/
+        $(".alert").alert();
+        /*active boostrap alert - end*/
+    </script >
+  </div >
+</div >
+
+<!--/* footer is */-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}" ></footer >
+<!--/* script is included */-->
+<script data-th-replace="~{fragments/script :: scriptFragment}" ></script >
+</body >
+</html >
