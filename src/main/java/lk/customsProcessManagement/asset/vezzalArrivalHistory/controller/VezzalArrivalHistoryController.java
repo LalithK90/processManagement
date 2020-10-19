@@ -99,17 +99,21 @@ public class VezzalArrivalHistoryController {
 
   //not arrival vezzal -> state change to arrival
   @GetMapping( "/arrival/{id}" )
-  public String findArrivalAll(@PathVariable Integer id, Model model) {
-    model.addAttribute("arrival", true);
-    return "redirect:/";
+  public String notArrivalToArrival(@PathVariable Integer id) {
+   VezzalArrivalHistory vezzalArrivalHistory = vezzalArrivalHistoryService.findById(id);
+   vezzalArrivalHistory.setVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.NOAR);
+   vezzalArrivalHistoryService.persist(vezzalArrivalHistory);
+    return "redirect:/vezzalArrivalHistory/notArrival";
   }
 
   //arrival vezzal -> state change to departure
-  @GetMapping( "/departure/{id}" )
-  public String findDepartureAll(@PathVariable Integer id, Model model) {
-    model.addAttribute("departure", true);
-    return "redirect:/";
-  }
+//  @GetMapping( "/departure/{id}" )
+//  public String findDepartureAll(@PathVariable Integer id) {
+//    VezzalArrivalHistory vezzalArrivalHistory = vezzalArrivalHistoryService.findById(id);
+//    vezzalArrivalHistory.setVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.AR);
+//    vezzalArrivalHistoryService.persist(vezzalArrivalHistory);
+//    return "redirect:/vezzalArrivalHistory/arrival";
+//  }
 
   public String edit(Integer id, Model model) {
     return null;
