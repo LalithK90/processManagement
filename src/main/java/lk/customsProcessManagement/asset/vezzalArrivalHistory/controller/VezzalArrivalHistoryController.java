@@ -107,13 +107,13 @@ public class VezzalArrivalHistoryController {
   }
 
   //arrival vezzal -> state change to departure
-//  @GetMapping( "/departure/{id}" )
-//  public String findDepartureAll(@PathVariable Integer id) {
-//    VezzalArrivalHistory vezzalArrivalHistory = vezzalArrivalHistoryService.findById(id);
-//    vezzalArrivalHistory.setVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.AR);
-//    vezzalArrivalHistoryService.persist(vezzalArrivalHistory);
-//    return "redirect:/vezzalArrivalHistory/arrival";
-//  }
+  @GetMapping( "/departure/{id}" )
+  public String arrivalToDeparture(@PathVariable Integer id) {
+    VezzalArrivalHistory vezzalArrivalHistory = vezzalArrivalHistoryService.findById(id);
+    vezzalArrivalHistory.setVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.AR);
+    vezzalArrivalHistoryService.persist(vezzalArrivalHistory);
+    return "redirect:/vezzalArrivalHistory/arrival";
+  }
 
   public String edit(Integer id, Model model) {
     return null;
