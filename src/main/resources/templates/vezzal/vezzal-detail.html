@@ -35,7 +35,7 @@
 <!--details-->
 <div data-th-fragment="vezzalDetailsFragment" class="container-fluid ">
     <div class="col-sm-12 flex-column ">
-        <div class="row">
+        <div class="form-row">
             <!--Left Side-->
             <div class="form-group col-md-6 col-sm-6 text-left flex-column">
                 <!--id-->
@@ -133,6 +133,11 @@
                         <p id="updatedAt" data-th-text="${{vezzalDetail.updatedAt}}" class="display_detail"></p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div data-th-each="vezzalArrivalHistoryDetail : vezzalDetail.vezzalArrivalHistories" class="container-fluid">
+                
             </div>
         </div>
     </div>
