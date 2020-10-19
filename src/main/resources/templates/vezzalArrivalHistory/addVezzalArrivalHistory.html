@@ -61,10 +61,11 @@
         data-th-action="${addStatus==true?'/vezzalArrivalHistory/save':'/vezzalArrivalHistory/update'}"
         data-th-object="${vezzalArrivalHistory}" method="POST" >
     <div class="row" >
-      <div class="form-group col-md-12 col-sm-12 text-left flex-column" >
-        <!--Id-->
-        <input data-th-if="${addStatus==false}" data-th-field="*{id}" type="hidden" />
-        <input data-th-field="*{vezzal}" type="hidden" />
+      <!--Id-->
+      <input data-th-if="${addStatus==false}" data-th-field="*{id}" type="hidden" />
+      <input data-th-field="*{vezzal}" type="hidden" />
+      <!--Left Side-->
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
         <!--ship agent -->
         <div class="form-row text-right" >
           <div class="col-md-4" >
@@ -86,7 +87,7 @@
             <label class="control-label" for="captainName" >Captain name :</label >
           </div >
           <div class="col-md-8" >
-            <input  id="name" class="form-control" data-th-field="*{captainName}" tabindex=""
+            <input id="name" class="form-control" data-th-field="*{captainName}" tabindex=""
                    type="text"
                    required />
           </div >
@@ -97,7 +98,7 @@
             <label class="control-label" for="cargoTonnage" >Cargo Tonnage :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{cargoTonnage}"  class="form-control" tabindex=""
+            <input data-th-field="*{cargoTonnage}" class="form-control" tabindex=""
                    type="text"
                    required />
           </div >
@@ -142,7 +143,7 @@
           </div >
           <div class="col-md-8" >
             <input data-th-field="*{numberOfPassengers}" class="form-control" tabindex=""
-                   type="number"/>
+                   type="number" />
           </div >
         </div >
         <!--numberOfPassengers-->
@@ -156,6 +157,9 @@
                    required />
           </div >
         </div >
+      </div >
+      <!--Right Side-->
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
         <!--twoPreviousHarbourName-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
@@ -209,6 +213,39 @@
             <input id="endDateE" data-th-field="*{{sailingDate}}" class="form-control" tabindex="4"
                    type="date"
                    required />
+          </div >
+        </div >
+        <!--Created by and created at-->
+        <div id="updateStatus" data-th-if="${addStatus==false}" >
+          <!--vezzal Departure Arrival Status-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="vezzalDepartureArrivalStatus" >Vezzal Departure Arrival Status :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="vezzalDepartureArrivalStatus" data-th-value="${vezzalDepartureArrivalStatus.vezzalDepartureArrivalStatus}" class="form-control" type="text"
+                     readonly />
+            </div >
+          </div >
+          <!--Created By-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="createdBy" >Created By :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="createdBy" data-th-field="*{createdBy}" class="form-control" type="text"
+                     readonly />
+            </div >
+          </div >
+          <!--Created At-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="createdAt" >Created At :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="createdAt" data-th-field="*{createdAt}" class="form-control" type="text"
+                     readonly />
+            </div >
           </div >
         </div >
       </div >

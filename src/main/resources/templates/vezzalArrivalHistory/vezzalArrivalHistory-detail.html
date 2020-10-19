@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--/* Styles, meta data, and title are included */-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<!--/* Nav bar is included */-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--heading Area-->
+<div class="container-fluid " >
+  <div class="row text-center border-info" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/vezzalArrivalHistory" class="btn btn-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Customer Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          <p data-th-text="${vezzalArrivalHistoryDetail.name}" ></p >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
+<div id="accordianId" role="tablist" aria-multiselectable="true" >
+  <div class="card" >
+    <div class="card-header" role="tab" id="section1HeaderId" >
+      <h5 class="mb-0" >
+        <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+           aria-controls="section1ContentId" >
+          Vezzal Details
+        </a >
+      </h5 >
+    </div >
+    <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
+      <div class="card-body" >
+        <div data-th-replace="~{vezzal/vezzal-detail :: vezzalDetailFragment}" ></div >
+      </div >
+    </div >
+  </div >
+  <div class="card" >
+    <div class="card-header" role="tab" id="section2HeaderId" >
+      <h5 class="mb-0" >
+        <a data-toggle="collapse" data-parent="#accordianId" href="#section2ContentId" aria-expanded="true"
+           aria-controls="section2ContentId" >
+          Vezzal History Details
+        </a >
+      </h5 >
+    </div >
+    <div id="section2ContentId" class="collapse in" role="tabpanel" aria-labelledby="section2HeaderId" >
+      <div class="card-body" >
+        <!--details-->
+        <div data-th-fragment="vezzalArrivalHistoryDetailsFragment" class="container-fluid " >
+          <div class="col-sm-12 flex-column " >
+            <div class="row" >
+              <!--Left Side-->
+              <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+                <!--ship agent -->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Ship Agent :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.shipAgent.name}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--captain name-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Captain name :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.captainName}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--cargoTonnage-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Cargo Tonnage :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.cargoTonnage}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--anchorageTerminal-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Anchorage Terminal :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.anchorageTerminal}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--purposeOfVisit-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Purpose Of Visit :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.purposeOfVisit}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--numberOfCrewMembers-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Number Of Crew Members :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.numberOfCrewMembers}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--numberOfPassengers-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Number Of Passengers :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.numberOfPassengers}" class="display_detail" ></p >
+                  </div >
+                </div >
+              </div >
+              <!--Right Side-->
+              <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+                <!--numberOfPassengers-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >One Previous Harbour Name :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.onePreviousHarbourName}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--twoPreviousHarbourName-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Two Previous Harbour Name :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.twoPreviousHarbourName}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--threePreviousHarbourName-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Three Previous Harbour Name :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.threePreviousHarbourName}"
+                       class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--nextHarbour-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Next Harbour :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.nextHarbour}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--vezzal Departure Arrival Status-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label">Vezzal Departure Arrival Status
+                                                                                     :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalDepartureArrivalStatus.vezzalDepartureArrivalStatus}"
+                       class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--anchorage Date And Time -->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Anchorage Date :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${{vezzalArrivalHistoryDetail.anchorageDateAndTime}}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--sailing Date -->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Sailing Date :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${{vezzalArrivalHistoryDetail.sailingDate}}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--Created By-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Created By :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.createdBy}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--Created At-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Created At :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.createdAt}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--Created By-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Updated By :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.updatedBy}" class="display_detail" ></p >
+                  </div >
+                </div >
+                <!--Created At-->
+                <div class="form-row text-right" >
+                  <div class="col-md-4" >
+                    <label class="control-label" >Updated At :</label >
+                  </div >
+                  <div class="col-md-8" >
+                    <p data-th-text="${vezzalArrivalHistoryDetail.updatedAt}" class="display_detail" ></p >
+                  </div >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+<!--Back Button-->
+<div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+  <a href="/vezzalArrivalHistory" >
+    <button class="btn btn-dark" type="button" tabindex="3" >
+      <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
+    </button >
+  </a >
+</div >
+
+
+<!--/* footer is */-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}" ></footer >
+<!--/* script is included */-->
+<script data-th-replace="~{fragments/script :: scriptFragment}" ></script >
+</body >
+</html >

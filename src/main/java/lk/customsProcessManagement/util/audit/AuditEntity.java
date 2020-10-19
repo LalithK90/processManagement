@@ -28,23 +28,23 @@ public abstract class AuditEntity {
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Integer id;
 
-    @CreatedDate
-    @Basic( optional = false )
-    @Column( updatable = false, nullable = false )
-    private LocalDateTime createdAt;
-
     @CreatedBy
     @Basic( optional = false )
     @Column( updatable = false, nullable = false )
     private String createdBy;
 
-    @LastModifiedDate
+    @CreatedDate
     @Basic( optional = false )
-    @Column( nullable = false )
-    private LocalDateTime updatedAt;
+    @Column( updatable = false, nullable = false )
+    private LocalDateTime createdAt;
 
     @LastModifiedBy
     @Basic( optional = false )
     @Column( nullable = false )
     private String updatedBy;
+
+    @LastModifiedDate
+    @Basic( optional = false )
+    @Column( nullable = false )
+    private LocalDateTime updatedAt;
 }

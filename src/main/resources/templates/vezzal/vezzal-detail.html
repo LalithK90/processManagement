@@ -44,7 +44,7 @@
                         <label class="control-label" for="id">ID :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="id" data-th-text="${vezzalDetail.id}" class="display_detail"></p>
+                        <p data-th-text="${vezzalDetail.id}" class="display_detail"></p>
                     </div>
                 </div>
                 <!--Code-->
@@ -146,9 +146,9 @@
     </a>
 </div>
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
 </body>
 </html>
