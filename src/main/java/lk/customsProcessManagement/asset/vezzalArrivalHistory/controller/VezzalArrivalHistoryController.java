@@ -87,6 +87,9 @@ public class VezzalArrivalHistoryController {
       return commonAddMethod(model, vezzalService.findById(vezzalArrivalHistory.getVezzal().getId()), true,
                              vezzalArrivalHistory);
     }
+    if(vezzalArrivalHistory.getId() == null){
+      vezzalArrivalHistory.setVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.NOAR);
+    }
     vezzalArrivalHistoryService.persist(vezzalArrivalHistory);
     return "redirect:/vezzalArrivalHistory";
   }
