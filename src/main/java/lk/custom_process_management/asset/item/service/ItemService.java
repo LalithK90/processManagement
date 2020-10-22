@@ -11,6 +11,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import javax.management.loading.MLetContent;
 import java.util.List;
 
 @Service
@@ -84,4 +85,7 @@ public class ItemService implements AbstractService< Item, Integer> {
         return itemDao.findAll(itemExample);
     }
 
+    public Item lastItem() {
+        return itemDao.findFirstByOrderByIdDesc();
+    }
 }
