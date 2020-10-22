@@ -60,7 +60,7 @@ public class VezzalOrderController {
     return "redirect:/vezzalOrder";
   }
 
-  @GetMapping( "/{id}" )
+  @GetMapping( "/edit/{id}" )
   public String edit(@PathVariable Integer id,RedirectAttributes redirectAttributes, Model model) {
     VezzalOrder vezzalOrder = vezzalOrderService.findById(id);
     if ( vezzalOrder.getVezzalOrderStatus().equals(VezzalOrderStatus.PROCESSING) ) {
