@@ -10,10 +10,7 @@ import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -29,7 +26,8 @@ public class VezzalOrderController {
 
   public VezzalOrderController(VezzalOrderService vezzalOrderService,
                                VezzalArrivalHistoryService vezzalArrivalHistoryService, ItemService itemService,
-                               WarehouseBlockService warehouseBlockService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+                               WarehouseBlockService warehouseBlockService,
+                               MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.vezzalOrderService = vezzalOrderService;
     this.vezzalArrivalHistoryService = vezzalArrivalHistoryService;
     this.itemService = itemService;
@@ -59,24 +57,25 @@ public class VezzalOrderController {
     return commonAdd(model, new VezzalOrder(), true);
   }
 
+  @PostMapping( value = {"/save", "/update"} )
   public String persist(@Valid @ModelAttribute VezzalOrder vezzalOrder, BindingResult bindingResult,
                         Model model) {
-    if ( bindingResult.hasErrors() ) {
+    if ( bindingResult.hasErrors() || vezzalOrder.getVezzalOrderItems().isEmpty() ) {
       return commonAdd(model, vezzalOrder, true);
     }
-    if (vezzalOrder.getId() == null) {
+    if ( vezzalOrder.getId() == null ) {
       //if there is not item in db
-      if (itemService.lastItem() == null) {
+      if ( itemService.lastItem() == null ) {
         //need to generate new one
-        vezzalOrder.setNumber("SLCO"+makeAutoGenerateNumberService.numberAutoGen(null).toString());
+        vezzalOrder.setNumber("SLCO" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
       } else {
         //if there is item in db need to get that item's code and increase its value
         String previousCode = itemService.lastItem().getCode().substring(4);
-        vezzalOrder.setNumber("SLCO"+makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
+        vezzalOrder.setNumber("SLCO" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
       }
       vezzalOrder.setVezzalOrderStatus(VezzalOrderStatus.PROCESSING);
     }
-
+    vezzalOrder.getVezzalOrderItems().forEach(vezzalOrderItem -> vezzalOrderItem.setVezzalOrder(vezzalOrder));
     vezzalOrderService.persist(vezzalOrder);
     return "redirect:/vezzalOrder";
   }

@@ -6,11 +6,15 @@ import lk.custom_process_management.asset.vezzalOrder.entity.Enum.VezzalOrderSta
 import lk.custom_process_management.asset.vezzalOrderItem.entity.VezzalOrderItem;
 import lk.custom_process_management.asset.warehouseBlock.entity.WarehouseBlock;
 import lk.custom_process_management.util.audit.AuditEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,11 +26,11 @@ import java.util.List;
 @JsonFilter( "VezzalOrder" )
 public class VezzalOrder extends AuditEntity {
 
-  @NotEmpty
+  @NotEmpty(message = "Number can not be null")
   @Column(unique = true, nullable = false)
   private String number;
 
-  @NotEmpty
+  @NotNull(message = "Need to closing date for this order")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(nullable = false)
   private LocalDate closingDate;
@@ -43,7 +47,7 @@ public class VezzalOrder extends AuditEntity {
   @ManyToOne
   private WarehouseBlock warehouseBlock;
 
-  @OneToMany(mappedBy = "vezzalOrder")
+  @OneToMany(mappedBy = "vezzalOrder", cascade = CascadeType.PERSIST)
   private List< VezzalOrderItem > vezzalOrderItems;
 
 }
