@@ -543,13 +543,13 @@ let deleteAllTableRow = function (tableName) {
 /*jquery - ui function*/
 //$( "input" ).checkboxradio;
 
-$(function () {
-    $("#").resizable({
-        autoHide: true,
-        aspectRatio: true,
-        ghost: true,
-    });
-});
+// $(function () {
+//     $("#").resizable({
+//         autoHide: true,
+//         aspectRatio: true,
+//         ghost: true,
+//     });
+// });
 
 //$( ".login" ).draggable();
 //$( "#dateOfBirth" ).datepicker;

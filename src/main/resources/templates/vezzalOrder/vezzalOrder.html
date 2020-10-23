@@ -84,34 +84,34 @@
         </h3 >
       </div >
     </div >
-    <script >
-        /*active boostrap alert - start*/
-        $(".alert").alert();
-        /*active boostrap alert - end*/
-    </script >
   </div >
-  <!--Save vezzalOrder-->
-  <div class="row" data-th-if="${shipAgentDetail != null}" >
-    <div class="col-sm-12" >
-      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
-          <span aria-hidden="true" >&times;</span >
-        </button >
-        <!--save vezzalOrder include-->
-        <div data-th-replace="~{vezzalOrder/vezzalOrder-detail :: shipAgentDetailsFragment}" ></div >
-      </div >
-    </div >
-    <script >
-        /*active boostrap alert - start*/
-        $(".alert").alert();
-        /*active boostrap alert - end*/
-    </script >
-  </div >
+  <!--Save vezzal OrderItem-->
+  <!--<div class="row" data-th-if="${vezzalOrderItems != null}" >-->
+  <!--  <div class="col-sm-12" >-->
+  <!--    <div class="alert alert-warning alert-dismissible fade show" role="alert" >-->
+  <!--      <button type="button" class="close" data-dismiss="alert" aria-label="Close" >-->
+  <!--        <span aria-hidden="true" >&times;</span >-->
+  <!--      </button >-->
+  <!--      &lt;!&ndash;save vezzalOrder include&ndash;&gt;-->
+  <!--      <div data-th-replace="~{vezzalOrder/vezzalOrder-detail :: shipAgentDetailsFragment}" ></div >-->
+  <!--    </div >-->
+  <!--  </div >-->
+  <!--  <script >-->
+  <!--      /*active boostrap alert - start*/-->
+  <!--      $(".alert").alert();-->
+  <!--      /*active boostrap alert - end*/-->
+  <!--  </script >-->
+  <!--</div >-->
 </div >
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}" ></footer >
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}" ></script >
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 
+<script >
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script >
 </body >
 </html >
