@@ -7,8 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum VezzalOrderItemStatus {
 
-    AVAILABLE("Available"),
     PROCESSING("Processing"),
+    AVAILABLE("Available"),
     FILL("Fill"),
     UNAVAILABLE("Unavailable");
 

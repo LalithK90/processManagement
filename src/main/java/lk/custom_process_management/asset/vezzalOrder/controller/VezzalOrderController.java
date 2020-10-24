@@ -5,6 +5,7 @@ import lk.custom_process_management.asset.vezzalArrivalHistory.service.VezzalArr
 import lk.custom_process_management.asset.vezzalOrder.entity.Enum.VezzalOrderStatus;
 import lk.custom_process_management.asset.vezzalOrder.entity.VezzalOrder;
 import lk.custom_process_management.asset.vezzalOrder.service.VezzalOrderService;
+import lk.custom_process_management.asset.vezzalOrderItem.entity.Enum.VezzalOrderItemStatus;
 import lk.custom_process_management.asset.warehouseBlock.service.WarehouseBlockService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
@@ -65,17 +66,21 @@ public class VezzalOrderController {
     }
     if ( vezzalOrder.getId() == null ) {
       //if there is not item in db
-      if ( itemService.lastItem() == null ) {
+      if ( vezzalOrderService.findLastVezzalOrder() == null ) {
         //need to generate new one
         vezzalOrder.setNumber("SLCO" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
       } else {
         //if there is item in db need to get that item's code and increase its value
-        String previousCode = itemService.lastItem().getCode().substring(4);
+        String previousCode = vezzalOrderService.findLastVezzalOrder().getNumber().substring(4);
         vezzalOrder.setNumber("SLCO" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
       }
       vezzalOrder.setVezzalOrderStatus(VezzalOrderStatus.PROCESSING);
     }
-    vezzalOrder.getVezzalOrderItems().forEach(vezzalOrderItem -> vezzalOrderItem.setVezzalOrder(vezzalOrder));
+    vezzalOrder.getVezzalOrderItems()
+        .forEach(vezzalOrderItem -> {
+          vezzalOrderItem.setVezzalOrder(vezzalOrder);
+          vezzalOrderItem.setVezzalOrderItemStatus(VezzalOrderItemStatus.PROCESSING);
+        });
     vezzalOrderService.persist(vezzalOrder);
     return "redirect:/vezzalOrder";
   }
