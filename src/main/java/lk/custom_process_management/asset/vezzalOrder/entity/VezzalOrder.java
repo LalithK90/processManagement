@@ -26,11 +26,11 @@ import java.util.List;
 @JsonFilter( "VezzalOrder" )
 public class VezzalOrder extends AuditEntity {
 
-  @NotEmpty(message = "Number can not be null")
+
   @Column(unique = true, nullable = false)
   private String number;
 
-  @NotNull(message = "Need to closing date for this order")
+
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(nullable = false)
   private LocalDate closingDate;
