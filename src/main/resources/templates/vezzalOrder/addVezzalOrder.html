@@ -167,17 +167,19 @@
               <th >Request Amount</th >
               <th >Modify</th >
             </tr >
-            <tr data-th-each="vezzalOrderItem, index.index : ${vezzalOrderItems}">
+            <tr data-th-each="vezzalOrderItem, index : ${vezzalOrder.vezzalOrderItems}">
               <td>
-                <span data-th-id="${'nm'+[[${index.index}]]">[[${vezzalOrderItems[index].item.name}]]</span>
-                <input data-th-id="${'id'+[[${index.index}]]" type="hidden" data-th-name="${'vezzalOrderItems[__${index.index}__].item.id'}"
-                       data-th-value="${vezzalOrderItems[__${index.index}__].item.id}" required>
+                <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}"></span>
+                <input data-th-id="${'id'+index.index}" type="hidden" data-th-name="${'vezzalOrderItems[__${index.index}__].item.id'}"
+                       data-th-value="${vezzalOrderItem.item.id}" required>
+                <input type="hidden" data-th-name="${'vezzalOrderItems[__${index.index}__].id'}"
+                       data-th-value="${vezzalOrderItem.id}" required>
               </td >
               <td >
-                <input data-th-id="${'id'+[[${index.index}]]" type="number" data-th-name="${'vezzalOrderItems[__${index.index}__].quantity}"
-                       data-th-value="${vezzalOrderItems[__${index.index}__].quantity}" required></td >
+                <input data-th-id="${'id'+index.index}" type="number" data-th-name="${'vezzalOrderItems[__${index.index}__].quantity'}"
+                       data-th-value="${vezzalOrderItem.quantity}" class="form-control" required></td >
               <td >
-                <button type="button" data-th-id="${'rm'+[[${index.index}]]" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>
+                <button type="button" data-th-id="${'rm'+index.index}" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>
 
               </td >
             </tr >

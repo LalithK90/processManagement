@@ -10,11 +10,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class VezzalOrder extends AuditEntity {
   @ManyToOne
   private WarehouseBlock warehouseBlock;
 
-  @OneToMany(mappedBy = "vezzalOrder", cascade = CascadeType.PERSIST)
+  @OneToMany(mappedBy = "vezzalOrder",cascade = CascadeType.MERGE)
   private List< VezzalOrderItem > vezzalOrderItems;
 
 }

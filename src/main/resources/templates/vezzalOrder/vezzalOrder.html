@@ -56,13 +56,13 @@
           <th data-th-text="${{vezzalOrder.closingDate}}" ></th >
           <th data-th-text="${vezzalOrder.warehouseBlock.name}" ></th >
           <th data-th-text="${vezzalOrder.vezzalOrderStatus.vezzalOrderStatus}" ></th >
-          <th data-th-text="${vezzalOrder.vezzalArrivalHistory.name}" ></th >
+          <th data-th-text="${vezzalOrder.vezzalArrivalHistory.vezzal.name}" ></th >
           <th >
             <a data-th-href="${'/vezzalOrder/view/' + vezzalOrder.id}"
                class="btn btn-primary btn-sm" ><i
                   class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
             <a data-th-href="${'/vezzalOrder/edit/' + vezzalOrder.id}"
-               class="btn btn-primary btn-sm" data-th-if="${vezzalOrder.vezzalOrderStatus == 'PROCESSING'}" ><i
+               class="btn btn-success btn-sm" data-thif="${#strings.equals(vezzalOrder.vezzalOrderStatus, 'PROCESSING')}" ><i
                   class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;Edit</a >
           </th >
         </tr >
@@ -78,7 +78,7 @@
           <span aria-hidden="true" >&times;</span >
         </button >
         <h3 class="text-center text-danger" >
-          <strong >There is no vezzalOrder upto now please add vezzalOrder to the system
+          <strong >There is no vezzal Order upto now please add vezzalOrder to the system
                    using "New" button.
           </strong >
         </h3 >

@@ -1,11 +1,13 @@
 package lk.custom_process_management.asset.vezzalOrder.controller;
 
+import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.asset.item.service.ItemService;
 import lk.custom_process_management.asset.vezzalArrivalHistory.service.VezzalArrivalHistoryService;
 import lk.custom_process_management.asset.vezzalOrder.entity.Enum.VezzalOrderStatus;
 import lk.custom_process_management.asset.vezzalOrder.entity.VezzalOrder;
 import lk.custom_process_management.asset.vezzalOrder.service.VezzalOrderService;
 import lk.custom_process_management.asset.vezzalOrderItem.entity.Enum.VezzalOrderItemStatus;
+import lk.custom_process_management.asset.vezzalOrderItem.entity.VezzalOrderItem;
 import lk.custom_process_management.asset.warehouseBlock.service.WarehouseBlockService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping( "/vezzalOrder" )
@@ -49,7 +53,14 @@ public class VezzalOrderController {
     model.addAttribute("vezzalOderHistories", vezzalArrivalHistoryService.findAll());
     //TODO -> warehouse blocks which is currently available
     model.addAttribute("warehouseBlocks", warehouseBlockService.findAll());
-    model.addAttribute("items", itemService.findAll());
+    List< Item > itemList;
+    itemList = itemService.findAll();
+    if ( vezzalOrder.getVezzalOrderItems() != null ) {
+      for ( VezzalOrderItem vezzalOrderItem : vezzalOrder.getVezzalOrderItems() ) {
+        itemList.remove(vezzalOrderItem.getItem());
+      }
+    }
+    model.addAttribute("items", itemList);
     return "vezzalOrder/addVezzalOrder";
   }
 
