@@ -1,6 +1,6 @@
 package lk.custom_process_management.asset.userManagement.service;
 
-import lk.custom_process_management.asset.userDetails.entity.Employee;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.asset.userManagement.dao.UserDao;
 import lk.custom_process_management.asset.userManagement.entity.User;
 import lk.custom_process_management.util.interfaces.AbstractService;
@@ -77,13 +77,13 @@ public class UserService implements AbstractService<User, Integer > {
     }
 
     @Cacheable
-    public User findUserByEmployee(Employee employee) {
-        return userDao.findByEmployee(employee);
+    public User findUserByEmployee(UserDetails userDetails) {
+        return userDao.findByEmployee(userDetails);
     }
 
     @Cacheable
-    public boolean findByEmployee(Employee employee) {
-        return userDao.findByEmployee(employee) == null;
+    public boolean findByEmployee(UserDetails userDetails) {
+        return userDao.findByEmployee(userDetails) == null;
     }
 
 

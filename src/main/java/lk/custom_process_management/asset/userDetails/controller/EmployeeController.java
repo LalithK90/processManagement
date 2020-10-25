@@ -6,8 +6,8 @@ import lk.custom_process_management.asset.commonAsset.model.Enum.CivilStatus;
 import lk.custom_process_management.asset.commonAsset.model.Enum.Gender;
 import lk.custom_process_management.asset.commonAsset.model.Enum.Title;
 import lk.custom_process_management.asset.commonAsset.service.CommonService;
-import lk.custom_process_management.asset.userDetails.entity.Employee;
-import lk.custom_process_management.asset.userDetails.entity.EmployeeFiles;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
+import lk.custom_process_management.asset.userDetails.entity.UserDetailsFiles;
 import lk.custom_process_management.asset.userDetails.entity.Enum.EmployeeStatus;
 import lk.custom_process_management.asset.userDetails.service.EmployeeFilesService;
 import lk.custom_process_management.asset.userDetails.service.EmployeeService;
@@ -64,7 +64,7 @@ public class EmployeeController {
     //When scr called file will send to
     @GetMapping("/file/{filename}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable("filename") String filename) {
-        EmployeeFiles file = employeeFilesService.findByNewID(filename);
+        UserDetailsFiles file = employeeFilesService.findByNewID(filename);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
                 .body(file.getPic());
@@ -81,21 +81,21 @@ public class EmployeeController {
     //Send on employee details
     @GetMapping(value = "/{id}")
     public String employeeView(@PathVariable("id") Integer id, Model model) {
-        Employee employee = employeeService.findById(id);
-        model.addAttribute("employeeDetail", employee);
+        UserDetails userDetails = employeeService.findById(id);
+        model.addAttribute("employeeDetail", userDetails);
         model.addAttribute("addStatus", false);
-        model.addAttribute("files", employeeFilesService.employeeFileDownloadLinks(employee));
+        model.addAttribute("files", employeeFilesService.employeeFileDownloadLinks(userDetails));
         return "employee/employee-detail";
     }
 
     //Send employee data edit
     @GetMapping(value = "/edit/{id}")
     public String editEmployeeForm(@PathVariable("id") Integer id, Model model) {
-        Employee employee = employeeService.findById(id);
-        model.addAttribute("employee", employee);
-        model.addAttribute("newEmployee", employee.getPayRoleNumber());
+        UserDetails userDetails = employeeService.findById(id);
+        model.addAttribute("employee", userDetails);
+        model.addAttribute("newEmployee", userDetails.getPayRoleNumber());
         model.addAttribute("addStatus", false);
-        model.addAttribute("files", employeeFilesService.employeeFileDownloadLinks(employee));
+        model.addAttribute("files", employeeFilesService.employeeFileDownloadLinks(userDetails));
         return commonThings(model);
     }
 
@@ -103,29 +103,29 @@ public class EmployeeController {
     @GetMapping(value = {"/add"})
     public String employeeAddForm(Model model) {
         model.addAttribute("addStatus", true);
-        model.addAttribute("employee", new Employee());
+        model.addAttribute("employee", new UserDetails());
         return commonThings(model);
     }
 
     //Employee add and update
     @PostMapping(value = {"/save", "/update"})
-    public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model
+    public String addEmployee(@Valid @ModelAttribute UserDetails userDetails, BindingResult result, Model model
     ) {
         if (result.hasErrors()) {
             model.addAttribute("addStatus", true);
-            model.addAttribute("employee", employee);
+            model.addAttribute("employee", userDetails);
             return commonThings(model);
         }
         try {
-            employee.setMobileOne(commonService.commonMobileNumberLengthValidator(employee.getMobileOne()));
-            employee.setMobileTwo(commonService.commonMobileNumberLengthValidator(employee.getMobileTwo()));
-            employee.setLand(commonService.commonMobileNumberLengthValidator(employee.getLand()));
+            userDetails.setMobileOne(commonService.commonMobileNumberLengthValidator(userDetails.getMobileOne()));
+            userDetails.setMobileTwo(commonService.commonMobileNumberLengthValidator(userDetails.getMobileTwo()));
+            userDetails.setLand(commonService.commonMobileNumberLengthValidator(userDetails.getLand()));
             //after save employee files and save employee
-            employeeService.persist(employee);
+            employeeService.persist(userDetails);
 
             //if employee state is not working he or she cannot access to the system
-            if (!employee.getEmployeeStatus().equals(EmployeeStatus.WORKING)) {
-                User user = userService.findUserByEmployee(employeeService.findByNic(employee.getNic()));
+            if (!userDetails.getEmployeeStatus().equals(EmployeeStatus.WORKING)) {
+                User user = userService.findUserByEmployee(employeeService.findByNic(userDetails.getNic()));
                 //if employee not a user
                 if (user != null) {
                     user.setEnabled(false);
@@ -133,21 +133,21 @@ public class EmployeeController {
                 }
             }
             //save employee images file
-                if (employee.getFile().getOriginalFilename() != null) {
-                    EmployeeFiles employeeFiles = employeeFilesService.findByName(employee.getFile().getOriginalFilename());
-                    if (employeeFiles != null) {
+                if ( userDetails.getFile().getOriginalFilename() != null) {
+                    UserDetailsFiles userDetailsFiles = employeeFilesService.findByName(userDetails.getFile().getOriginalFilename());
+                    if ( userDetailsFiles != null) {
                         // update new contents
-                        employeeFiles.setPic(employee.getFile().getBytes());
+                        userDetailsFiles.setPic(userDetails.getFile().getBytes());
                         // Save all to database
                     } else {
-                        employeeFiles = new EmployeeFiles(employee.getFile().getOriginalFilename(),
-                                                          employee.getFile().getContentType(),
-                                                          employee.getFile().getBytes(),
-                                                          employee.getNic().concat("-" + LocalDateTime.now()),
-                                                          UUID.randomUUID().toString().concat("employee"));
-                        employeeFiles.setEmployee(employee);
+                        userDetailsFiles = new UserDetailsFiles(userDetails.getFile().getOriginalFilename(),
+                                                                userDetails.getFile().getContentType(),
+                                                                userDetails.getFile().getBytes(),
+                                                                userDetails.getNic().concat("-" + LocalDateTime.now()),
+                                                                UUID.randomUUID().toString().concat("employee"));
+                        userDetailsFiles.setUserDetails(userDetails);
                     }
-                    employeeFilesService.persist(employeeFiles);
+                    employeeFilesService.persist(userDetailsFiles);
                 }
             return "redirect:/employee";
 
@@ -156,7 +156,7 @@ public class EmployeeController {
                                                 "There is already in the system. <br>System message -->" + e.toString());
             result.addError(error);
             model.addAttribute("addStatus", true);
-            model.addAttribute("employee", employee);
+            model.addAttribute("employee", userDetails);
             return commonThings(model);
         }
     }
@@ -170,8 +170,8 @@ public class EmployeeController {
 
     //To search employee any giving employee parameter
     @GetMapping(value = "/search")
-    public String search(Model model, Employee employee) {
-        model.addAttribute("employeeDetail", employeeService.search(employee));
+    public String search(Model model, UserDetails userDetails) {
+        model.addAttribute("employeeDetail", employeeService.search(userDetails));
         return "employee/employee-detail";
     }
 

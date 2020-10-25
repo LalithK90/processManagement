@@ -4,8 +4,8 @@ package lk.custom_process_management.asset.userDetails.service;
 import lk.custom_process_management.asset.commonAsset.model.FileInfo;
 import lk.custom_process_management.asset.userDetails.controller.EmployeeController;
 import lk.custom_process_management.asset.userDetails.dao.EmployeeFilesDao;
-import lk.custom_process_management.asset.userDetails.entity.Employee;
-import lk.custom_process_management.asset.userDetails.entity.EmployeeFiles;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
+import lk.custom_process_management.asset.userDetails.entity.UserDetailsFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -27,43 +27,43 @@ public class EmployeeFilesService {
         this.employeeFilesDao = employeeFilesDao;
     }
 
-    public EmployeeFiles findByName(String filename) {
+    public UserDetailsFiles findByName(String filename) {
         return employeeFilesDao.findByName(filename);
     }
 
-    public void persist(EmployeeFiles storedFile) {
+    public void persist(UserDetailsFiles storedFile) {
         employeeFilesDao.save(storedFile);
     }
 
 
-    public List< EmployeeFiles > search(EmployeeFiles employeeFiles) {
+    public List< UserDetailsFiles > search(UserDetailsFiles userDetailsFiles) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example< EmployeeFiles > employeeFilesExample = Example.of(employeeFiles, matcher);
+        Example< UserDetailsFiles > employeeFilesExample = Example.of(userDetailsFiles, matcher);
         return employeeFilesDao.findAll(employeeFilesExample);
     }
 
-    public EmployeeFiles findById(Integer id) {
+    public UserDetailsFiles findById(Integer id) {
         return employeeFilesDao.getOne(id);
     }
 
-    public EmployeeFiles findByNewID(String filename) {
+    public UserDetailsFiles findByNewID(String filename) {
         return employeeFilesDao.findByNewId(filename);
     }
 
     @Cacheable
-    public List< FileInfo > employeeFileDownloadLinks(Employee employee) {
-        return employeeFilesDao.findByEmployeeOrderByIdDesc(employee)
+    public List< FileInfo > employeeFileDownloadLinks(UserDetails userDetails) {
+        return employeeFilesDao.findByEmployeeOrderByIdDesc(userDetails)
                 .stream()
-                .map(employeeFiles -> {
-                    String filename = employeeFiles.getName();
+                .map(userDetailsFiles -> {
+                    String filename = userDetailsFiles.getName();
                     String url = MvcUriComponentsBuilder
-                            .fromMethodName(EmployeeController.class, "downloadFile", employeeFiles.getNewId())
+                            .fromMethodName(EmployeeController.class, "downloadFile", userDetailsFiles.getNewId())
                             .build()
                             .toString();
-                    return new FileInfo(filename, employeeFiles.getCreatedAt(), url);
+                    return new FileInfo(filename, userDetailsFiles.getCreatedAt(), url);
                 })
                 .collect(Collectors.toList());
     }

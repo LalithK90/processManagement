@@ -27,7 +27,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @JsonFilter("Employee")
 @ToString
-public class Employee extends AuditEntity {
+public class UserDetails extends AuditEntity {
 
     @Column(unique = true)
     private String payRoleNumber;

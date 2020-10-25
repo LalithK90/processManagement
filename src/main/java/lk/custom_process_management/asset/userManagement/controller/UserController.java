@@ -1,6 +1,6 @@
 package lk.custom_process_management.asset.userManagement.controller;
 
-import lk.custom_process_management.asset.userDetails.entity.Employee;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.asset.userDetails.entity.Enum.Designation;
 import lk.custom_process_management.asset.userDetails.entity.Enum.EmployeeStatus;
 import lk.custom_process_management.asset.userDetails.service.EmployeeService;
@@ -71,27 +71,27 @@ public class UserController {
     public String userAddFrom(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("employeeDetailShow", false);
-        model.addAttribute("employee", new Employee());
+        model.addAttribute("employee", new UserDetails());
         return "user/addUser";
     }
 
     //Send a searched employee to add working place
     @PostMapping( value = "/workingPlace" )
-    public String addUserEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
+    public String addUserEmployeeDetails(@ModelAttribute( "employee" ) UserDetails userDetails, Model model) {
 
-        List< Employee > employees = employeeService.search(employee)
+        List< UserDetails > userDetails = employeeService.search(userDetails)
                 .stream()
                 .filter(userService::findByEmployee)
                 .collect(Collectors.toList());
 
-        if ( employees.size() == 1 ) {
+        if ( userDetails.size() == 1 ) {
             model.addAttribute("user", new User());
-            model.addAttribute("employee", employees.get(0));
+            model.addAttribute("employee", userDetails.get(0));
             model.addAttribute("addStatus", true);
             return commonCode(model);
         }
         model.addAttribute("addStatus", true);
-        model.addAttribute("employee", new Employee());
+        model.addAttribute("employee", new UserDetails());
         model.addAttribute("employeeDetailShow", false);
         model.addAttribute("employeeNotFoundShow", true);
         model.addAttribute("employeeNotFound", "There is not employee in the system according to the provided details" +
@@ -107,7 +107,7 @@ public class UserController {
     @PostMapping( value = {"/add", "/update"} )
     public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
-        if ( userService.findUserByEmployee(user.getEmployee()) != null ) {
+        if ( userService.findUserByEmployee(user.getUserDetails()) != null ) {
             ObjectError error = new ObjectError("employee", "This employee already defined as a user");
             result.addError(error);
         }
@@ -115,7 +115,7 @@ public class UserController {
             User dbUser = userService.findById(user.getId());
             dbUser.setEnabled(true);
             dbUser.setPassword(user.getPassword());
-            dbUser.setEmployee(user.getEmployee());
+            dbUser.setUserDetails(user.getUserDetails());
             dbUser.setRoles(user.getRoles());
             userService.persist(dbUser);
             return "redirect:/user";
@@ -127,11 +127,11 @@ public class UserController {
             return commonCode(model);
         }
         //user is super senior office need to provide all working palace to check
-        Employee employee = employeeService.findById(user.getEmployee().getId());
-        Designation designation = employee.getDesignation();
+        UserDetails userDetails = employeeService.findById(user.getUserDetails().getId());
+        Designation designation = userDetails.getDesignation();
 
         // userService.persist(user);
-        if ( employee.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {
+        if ( userDetails.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {
             user.setEnabled(true);
         } else {
             user.setEnabled(false);

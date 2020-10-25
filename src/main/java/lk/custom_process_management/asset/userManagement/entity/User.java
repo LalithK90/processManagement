@@ -1,7 +1,7 @@
 package lk.custom_process_management.asset.userManagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lk.custom_process_management.asset.userDetails.entity.Employee;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class User extends AuditEntity {
 
     @OneToOne
     @NotNull
-    private Employee employee;
+    private UserDetails userDetails;
 
     @Column(nullable = false,unique = true)
     @Size(min = 5, message = "user name should include at least five characters")

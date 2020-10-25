@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeFiles extends AuditEntity {
+public class UserDetailsFiles extends AuditEntity {
 
     private String name, mimeType,newName;
 
@@ -26,7 +26,7 @@ public class EmployeeFiles extends AuditEntity {
     @Lob
     private byte[] pic;
 
-    public EmployeeFiles(String name, String mimeType, byte[] pic, String newName,String newId) {
+    public UserDetailsFiles(String name, String mimeType, byte[] pic, String newName, String newId) {
         this.name = name;
         this.mimeType = mimeType;
         this.pic = pic;
@@ -35,6 +35,6 @@ public class EmployeeFiles extends AuditEntity {
     }
 
     @ManyToOne
-    private Employee employee;
+    private UserDetails userDetails;
 
 }

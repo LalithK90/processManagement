@@ -19,7 +19,7 @@
                                         <!--<form role="form">-->
                                         <a class="btn btn-primary" href="/home"> <i class="fa fa-home"></i> Home
                                         </a>
-                                        <a href="/employee" class="btn btn-primary"><i class="fa fa-list"></i>&nbsp;
+                                        <a href="/userDetails" class="btn btn-primary"><i class="fa fa-list"></i>&nbsp;
                                             View List </a>
 
                                         <!--
@@ -31,8 +31,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4>Secondary Header </h4>
-                                        <form data-th-action="${addStatus==true?'/employee/save' :'/employee/update'}"
-                                              method="post" data-th-object="${employee}" enctype="multipart/form-data">
+                                        <form data-th-action="${addStatus==true?'/userDetails/save' :'/userDetails/update'}"
+                                              method="post" data-th-object="${userDetails}" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-md-6"><!--Left Side-->
                                                     <!--ID -->
@@ -58,7 +58,7 @@
                                                             <option data-th-each="titles : ${title}"
                                                                     data-th-text="${titles.title}"
                                                                     data-th-value="${titles}"
-                                                                    data-th-selected="${titles==employee.title?'selected':'unselected'}"></option>
+                                                                    data-th-selected="${titles==userDetails.title?'selected':'unselected'}"></option>
                                                         </select>
                                                     </div>
                                                     <!--Name-->
@@ -109,7 +109,7 @@
                                                             <option data-th-each="genders : ${gender}"
                                                                     data-th-text="${genders.gender}"
                                                                     data-th-value="${genders}"
-                                                                    data-th-selected="${genders==employee.gender?'selected':'unselected'}"></option>
+                                                                    data-th-selected="${genders==userDetails.gender?'selected':'unselected'}"></option>
                                                         </select>
 
                                                     </div>
@@ -138,7 +138,7 @@
                                                             <option data-th-each="bloodGroups : ${bloodGroup}"
                                                                     data-th-text="${bloodGroups.bloodGroup}"
                                                                     data-th-value="${bloodGroups}"
-                                                                    data-th-selected="${bloodGroups==employee.bloodGroup?'selected':'unselected'}">
+                                                                    data-th-selected="${bloodGroups==userDetails.bloodGroup?'selected':'unselected'}">
                                                                 Please
                                                                 select
                                                             </option>
@@ -158,7 +158,7 @@
                                                             <option data-th-each="designations : ${designation}"
                                                                     data-th-text="${designations.name}"
                                                                     data-th-value="${designations.id}"
-                                                                    data-th-selected="${designations==employee.designation?'selected':'unselected'}"></option>
+                                                                    data-th-selected="${designations==userDetails.designation?'selected':'unselected'}"></option>
                                                         </select>
 
                                                     </div>
@@ -219,7 +219,7 @@
                                                             <option data-th-each="civilStatu : ${civilStatus}"
                                                                     data-th-text="${civilStatu.CivilStatus}"
                                                                     data-th-value="${civilStatu}"
-                                                                    data-th-selected="${civilStatu==employee.civilStatus?'selected':'unselected'}"></option>
+                                                                    data-th-selected="${civilStatu==userDetails.civilStatus?'selected':'unselected'}"></option>
                                                         </select>
 
                                                     </div>
@@ -333,7 +333,7 @@
                                                             <option data-th-each="employeeStatuss : ${employeeStatus}"
                                                                     data-th-text="${employeeStatuss.employeeStatus}"
                                                                     data-th-value="${employeeStatuss}"
-                                                                    data-th-selected="${employeeStatuss==employee.employeeStatus?'selected':'unselected'}"></option>
+                                                                    data-th-selected="${employeeStatuss==userDetails.employeeStatus?'selected':'unselected'}"></option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group" id="updateStatus"

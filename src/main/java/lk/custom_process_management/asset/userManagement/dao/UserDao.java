@@ -1,6 +1,6 @@
 package lk.custom_process_management.asset.userManagement.dao;
 
-import lk.custom_process_management.asset.userDetails.entity.Employee;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.asset.userManagement.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +18,6 @@ public interface UserDao extends JpaRepository<User, Integer > {
 
     User findByUsername(String name);
 
-    User findByEmployee(Employee employee);
+    User findByEmployee(UserDetails userDetails);
 
    }

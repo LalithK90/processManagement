@@ -4,7 +4,7 @@ import lk.custom_process_management.asset.commonAsset.model.Enum.BloodGroup;
 import lk.custom_process_management.asset.commonAsset.model.Enum.CivilStatus;
 import lk.custom_process_management.asset.commonAsset.model.Enum.Gender;
 import lk.custom_process_management.asset.commonAsset.model.Enum.Title;
-import lk.custom_process_management.asset.userDetails.entity.Employee;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.asset.userDetails.entity.Enum.Designation;
 import lk.custom_process_management.asset.userDetails.entity.Enum.EmployeeStatus;
 import lk.custom_process_management.asset.userDetails.service.EmployeeService;
@@ -45,26 +45,26 @@ public class ApplicationCreateRestController {
         }
 
 //Employee
-        Employee employee = new Employee();
-        employee.setPayRoleNumber("11111111");
-        employee.setName("Admin User");
-        employee.setCallingName("Admin");
-        employee.setName("908670000V");
-        employee.setMobileOne("0750000000");
-        employee.setTitle(Title.DR);
-        employee.setGender(Gender.MALE);
-        employee.setBloodGroup(BloodGroup.AP);
-        employee.setDesignation(Designation.CG);
-        employee.setCivilStatus(CivilStatus.UNMARRIED);
-        employee.setEmployeeStatus(EmployeeStatus.WORKING);
-        employee.setDateOfBirth(LocalDate.now().minusYears(18));
-        employee.setDateOfAssignment(LocalDate.now());
-        Employee employeeDb = employeeService.persist(employee);
+        UserDetails userDetails = new UserDetails();
+        userDetails.setPayRoleNumber("11111111");
+        userDetails.setName("Admin User");
+        userDetails.setCallingName("Admin");
+        userDetails.setName("908670000V");
+        userDetails.setMobileOne("0750000000");
+        userDetails.setTitle(Title.DR);
+        userDetails.setGender(Gender.MALE);
+        userDetails.setBloodGroup(BloodGroup.AP);
+        userDetails.setDesignation(Designation.CG);
+        userDetails.setCivilStatus(CivilStatus.UNMARRIED);
+        userDetails.setEmployeeStatus(EmployeeStatus.WORKING);
+        userDetails.setDateOfBirth(LocalDate.now().minusYears(18));
+        userDetails.setDateOfAssignment(LocalDate.now());
+        UserDetails userDetailsDb = employeeService.persist(userDetails);
 
 
         //admin user one
         User user = new User();
-        user.setEmployee(employeeDb);
+        user.setUserDetails(userDetailsDb);
         user.setUsername("admin");
         user.setPassword("admin");
         String message = "Username:- " + user.getUsername() + "\n Password:- " + user.getPassword();

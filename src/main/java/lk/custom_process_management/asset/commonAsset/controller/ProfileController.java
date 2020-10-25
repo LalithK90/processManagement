@@ -31,7 +31,7 @@ public class ProfileController {
     @GetMapping( value = "/profile" )
     public String userProfile(Model model, Principal principal) {
         model.addAttribute("addStatus", true);
-        model.addAttribute("employeeDetail", userService.findByUserName(principal.getName()).getEmployee());
+        model.addAttribute("employeeDetail", userService.findByUserName(principal.getName()).getUserDetails());
         return "employee/employee-detail";
     }
 

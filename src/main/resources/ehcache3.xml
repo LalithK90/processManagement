@@ -44,8 +44,8 @@
         <heap unit="entries">400</heap>
         <jsr107:mbeans enable-statistics="true"/>
     </cache>
-    <!--6. employee-->
-    <cache alias="employee">
+    <!--6. userDetails-->
+    <cache alias="userDetails">
         <expiry>
             <ttl unit="seconds">6000</ttl>
         </expiry>

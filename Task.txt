@@ -5,7 +5,7 @@ Application process order
 * -> Line -> {hostname}/select/user
     { After login Admin user }
 * -> Line -> Need to register role
-* -> Line -> Need to register employee {system users}
+* -> Line -> Need to register userDetails {system users}
 * -> Line -> Need to register user
 * -> Line -> Need to register ship agent
 * -> Line -> Need to register vezzal

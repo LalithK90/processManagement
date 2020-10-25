@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.userDetails.service;
 
 
 import lk.custom_process_management.asset.userDetails.dao.EmployeeDao;
-import lk.custom_process_management.asset.userDetails.entity.Employee;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 // spring transactional annotation need to tell spring to this method work through the project
 @CacheConfig( cacheNames = "employee" )
-public class EmployeeService implements AbstractService<Employee, Integer > {
+public class EmployeeService implements AbstractService< UserDetails, Integer > {
 
     private final EmployeeDao employeeDao;
 
@@ -26,20 +26,20 @@ public class EmployeeService implements AbstractService<Employee, Integer > {
     }
 
     @Cacheable
-    public List< Employee > findAll() {
+    public List< UserDetails > findAll() {
         return employeeDao.findAll();
     }
 
     @Cacheable
-    public Employee findById(Integer id) {
+    public UserDetails findById(Integer id) {
         return employeeDao.getOne(id);
     }
 
     @Caching( evict = {@CacheEvict( value = "employee", allEntries = true )},
-            put = {@CachePut( value = "employee", key = "#employee.id" )} )
+            put = {@CachePut( value = "employee", key = "#userDetails.id" )} )
     @Transactional
-    public Employee persist(Employee employee) {
-        return employeeDao.save(employee);
+    public UserDetails persist(UserDetails userDetails) {
+        return employeeDao.save(userDetails);
     }
 
     @CacheEvict( allEntries = true )
@@ -49,26 +49,26 @@ public class EmployeeService implements AbstractService<Employee, Integer > {
     }
 
     @Cacheable
-    public List< Employee > search(Employee employee) {
+    public List< UserDetails > search(UserDetails userDetails) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example< Employee > employeeExample = Example.of(employee, matcher);
+        Example< UserDetails > employeeExample = Example.of(userDetails, matcher);
         return employeeDao.findAll(employeeExample);
     }
 
-    public boolean isEmployeePresent(Employee employee) {
-        return employeeDao.equals(employee);
+    public boolean isEmployeePresent(UserDetails userDetails) {
+        return employeeDao.equals(userDetails);
     }
 
 
-    public Employee lastEmployee() {
+    public UserDetails lastEmployee() {
         return employeeDao.findFirstByOrderByIdDesc();
     }
 
     @Cacheable
-    public Employee findByNic(String nic) {
+    public UserDetails findByNic(String nic) {
         return employeeDao.findByNic(nic);
     }
 }

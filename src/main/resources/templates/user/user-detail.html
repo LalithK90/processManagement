@@ -19,7 +19,7 @@
             <h4 class="text-center">
                 <strong>
                     <span id="formHeader"
-                          th:text="${userDetail.employee.title.title}+${' '}+${userDetail.employee.name}"></span>
+                          th:text="${userDetail.userDetails.title.title}+${' '}+${userDetail.userDetails.name}"></span>
                 </strong>
             </h4>
         </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-md-8">
                     <strong><span id="employeeName"
-                                  th:text="${userDetail.employee.name}+ ${' - '}+${userDetail.employee.nic}"></span></strong>
+                                  th:text="${userDetail.userDetails.name}+ ${' - '}+${userDetail.userDetails.nic}"></span></strong>
                 </div>
             </div>
             <!--Created date-->

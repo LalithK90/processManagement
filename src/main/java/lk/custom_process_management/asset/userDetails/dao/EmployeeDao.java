@@ -1,13 +1,13 @@
 package lk.custom_process_management.asset.userDetails.dao;
 
 
-import lk.custom_process_management.asset.userDetails.entity.Employee;
+import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeDao extends JpaRepository< Employee, Integer> {
-    Employee findFirstByOrderByIdDesc();
+public interface EmployeeDao extends JpaRepository< UserDetails, Integer> {
+    UserDetails findFirstByOrderByIdDesc();
 
-    Employee findByNic(String nic);
+    UserDetails findByNic(String nic);
 }
