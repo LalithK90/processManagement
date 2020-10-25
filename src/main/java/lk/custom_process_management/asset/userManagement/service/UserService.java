@@ -78,12 +78,12 @@ public class UserService implements AbstractService<User, Integer > {
 
     @Cacheable
     public User findUserByEmployee(UserDetails userDetails) {
-        return userDao.findByEmployee(userDetails);
+        return userDao.findByUserDetails(userDetails);
     }
 
     @Cacheable
     public boolean findByEmployee(UserDetails userDetails) {
-        return userDao.findByEmployee(userDetails) == null;
+        return userDao.findByUserDetails(userDetails) == null;
     }
 
 
