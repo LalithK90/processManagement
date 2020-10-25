@@ -112,9 +112,12 @@ public class VezzalOrderController {
   }
 
   //delete method is not applicable this part
-  @GetMapping( "/{id}" )
+  @GetMapping( "/view/{id}" )
   public String view(@PathVariable Integer id, Model model) {
-    model.addAttribute("vezzalOrderDetail", vezzalOrderService.findById(id));
+    VezzalOrder vezzalOrder = vezzalOrderService.findById(id);
+    model.addAttribute("vezzalOrderDetail",vezzalOrder );
+    model.addAttribute("vezzalArrivalHistoryDetail", vezzalOrder.getVezzalArrivalHistory());
+    model.addAttribute("vezzalDetail", vezzalOrder.getVezzalArrivalHistory().getVezzal());
     return "vezzalOrder/vezzalOrder-detail";
   }
 }
