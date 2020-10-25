@@ -71,7 +71,7 @@ public class VezzalOrderController {
 
   @PostMapping( value = {"/save", "/update"} )
   public String persist(@Valid @ModelAttribute VezzalOrder vezzalOrder, BindingResult bindingResult,
-                        Model model) {
+                        RedirectAttributes redirectAttributes,Model model) {
     if ( bindingResult.hasErrors() || vezzalOrder.getVezzalOrderItems().isEmpty() ) {
       return commonAdd(model, vezzalOrder, true);
     }
@@ -92,7 +92,12 @@ public class VezzalOrderController {
           vezzalOrderItem.setVezzalOrder(vezzalOrder);
           vezzalOrderItem.setVezzalOrderItemStatus(VezzalOrderItemStatus.PROCESSING);
         });
-    vezzalOrderService.persist(vezzalOrder);
+    VezzalOrder vezzalOrderDb=   vezzalOrderService.persist(vezzalOrder);
+    redirectAttributes.addFlashAttribute("vezzalOrderDetail",vezzalOrderDb );
+    redirectAttributes.addFlashAttribute("vezzalArrivalHistoryDetail", vezzalOrderDb.getVezzalArrivalHistory());
+    redirectAttributes.addFlashAttribute("vezzalDetail", vezzalOrderDb.getVezzalArrivalHistory().getVezzal());
+
+
     return "redirect:/vezzalOrder";
   }
 
