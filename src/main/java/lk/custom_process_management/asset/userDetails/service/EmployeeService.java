@@ -1,7 +1,7 @@
 package lk.custom_process_management.asset.userDetails.service;
 
 
-import lk.custom_process_management.asset.userDetails.dao.EmployeeDao;
+import lk.custom_process_management.asset.userDetails.dao.UserDetailsDao;
 import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,33 +18,33 @@ import java.util.List;
 @CacheConfig( cacheNames = "employee" )
 public class EmployeeService implements AbstractService< UserDetails, Integer > {
 
-    private final EmployeeDao employeeDao;
+    private final UserDetailsDao userDetailsDao;
 
     @Autowired
-    public EmployeeService(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
+    public EmployeeService(UserDetailsDao userDetailsDao) {
+        this.userDetailsDao = userDetailsDao;
     }
 
     @Cacheable
     public List< UserDetails > findAll() {
-        return employeeDao.findAll();
+        return userDetailsDao.findAll();
     }
 
     @Cacheable
     public UserDetails findById(Integer id) {
-        return employeeDao.getOne(id);
+        return userDetailsDao.getOne(id);
     }
 
     @Caching( evict = {@CacheEvict( value = "employee", allEntries = true )},
             put = {@CachePut( value = "employee", key = "#userDetails.id" )} )
     @Transactional
     public UserDetails persist(UserDetails userDetails) {
-        return employeeDao.save(userDetails);
+        return userDetailsDao.save(userDetails);
     }
 
     @CacheEvict( allEntries = true )
     public boolean delete(Integer id) {
-        employeeDao.deleteById(id);
+        userDetailsDao.deleteById(id);
         return false;
     }
 
@@ -55,20 +55,20 @@ public class EmployeeService implements AbstractService< UserDetails, Integer > 
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example< UserDetails > employeeExample = Example.of(userDetails, matcher);
-        return employeeDao.findAll(employeeExample);
+        return userDetailsDao.findAll(employeeExample);
     }
 
     public boolean isEmployeePresent(UserDetails userDetails) {
-        return employeeDao.equals(userDetails);
+        return userDetailsDao.equals(userDetails);
     }
 
 
     public UserDetails lastEmployee() {
-        return employeeDao.findFirstByOrderByIdDesc();
+        return userDetailsDao.findFirstByOrderByIdDesc();
     }
 
     @Cacheable
     public UserDetails findByNic(String nic) {
-        return employeeDao.findByNic(nic);
+        return userDetailsDao.findByNic(nic);
     }
 }

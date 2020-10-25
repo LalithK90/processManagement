@@ -3,7 +3,7 @@ package lk.custom_process_management.asset.userDetails.service;
 
 import lk.custom_process_management.asset.commonAsset.model.FileInfo;
 import lk.custom_process_management.asset.userDetails.controller.EmployeeController;
-import lk.custom_process_management.asset.userDetails.dao.EmployeeFilesDao;
+import lk.custom_process_management.asset.userDetails.dao.UserDetailsFilesDao;
 import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.asset.userDetails.entity.UserDetailsFiles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +20,19 @@ import java.util.stream.Collectors;
 @Service
 @CacheConfig( cacheNames = "employeeFiles" )
 public class EmployeeFilesService {
-    private final EmployeeFilesDao employeeFilesDao;
+    private final UserDetailsFilesDao userDetailsFilesDao;
 
     @Autowired
-    public EmployeeFilesService(EmployeeFilesDao employeeFilesDao) {
-        this.employeeFilesDao = employeeFilesDao;
+    public EmployeeFilesService(UserDetailsFilesDao userDetailsFilesDao) {
+        this.userDetailsFilesDao = userDetailsFilesDao;
     }
 
     public UserDetailsFiles findByName(String filename) {
-        return employeeFilesDao.findByName(filename);
+        return userDetailsFilesDao.findByName(filename);
     }
 
     public void persist(UserDetailsFiles storedFile) {
-        employeeFilesDao.save(storedFile);
+        userDetailsFilesDao.save(storedFile);
     }
 
 
@@ -42,20 +42,20 @@ public class EmployeeFilesService {
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example< UserDetailsFiles > employeeFilesExample = Example.of(userDetailsFiles, matcher);
-        return employeeFilesDao.findAll(employeeFilesExample);
+        return userDetailsFilesDao.findAll(employeeFilesExample);
     }
 
     public UserDetailsFiles findById(Integer id) {
-        return employeeFilesDao.getOne(id);
+        return userDetailsFilesDao.getOne(id);
     }
 
     public UserDetailsFiles findByNewID(String filename) {
-        return employeeFilesDao.findByNewId(filename);
+        return userDetailsFilesDao.findByNewId(filename);
     }
 
     @Cacheable
     public List< FileInfo > employeeFileDownloadLinks(UserDetails userDetails) {
-        return employeeFilesDao.findByEmployeeOrderByIdDesc(userDetails)
+        return userDetailsFilesDao.findByEmployeeOrderByIdDesc(userDetails)
                 .stream()
                 .map(userDetailsFiles -> {
                     String filename = userDetailsFiles.getName();

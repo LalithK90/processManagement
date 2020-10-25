@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EmployeeFilesDao extends JpaRepository< UserDetailsFiles, Integer > {
+public interface UserDetailsFilesDao extends JpaRepository< UserDetailsFiles, Integer > {
     List< UserDetailsFiles > findByEmployeeOrderByIdDesc(UserDetails userDetails);
 
     UserDetailsFiles findByName(String filename);

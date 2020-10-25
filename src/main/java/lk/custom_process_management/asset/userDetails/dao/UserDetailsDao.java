@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeDao extends JpaRepository< UserDetails, Integer> {
+public interface UserDetailsDao extends JpaRepository< UserDetails, Integer> {
     UserDetails findFirstByOrderByIdDesc();
 
     UserDetails findByNic(String nic);
