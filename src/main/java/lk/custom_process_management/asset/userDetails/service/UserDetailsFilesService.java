@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.userDetails.service;
 
 
 import lk.custom_process_management.asset.commonAsset.model.FileInfo;
-import lk.custom_process_management.asset.userDetails.controller.EmployeeController;
+import lk.custom_process_management.asset.userDetails.controller.UserDetailsController;
 import lk.custom_process_management.asset.userDetails.dao.UserDetailsFilesDao;
 import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.asset.userDetails.entity.UserDetailsFiles;
@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 
 @Service
 @CacheConfig( cacheNames = "employeeFiles" )
-public class EmployeeFilesService {
+public class UserDetailsFilesService {
     private final UserDetailsFilesDao userDetailsFilesDao;
 
     @Autowired
-    public EmployeeFilesService(UserDetailsFilesDao userDetailsFilesDao) {
+    public UserDetailsFilesService(UserDetailsFilesDao userDetailsFilesDao) {
         this.userDetailsFilesDao = userDetailsFilesDao;
     }
 
@@ -60,7 +60,7 @@ public class EmployeeFilesService {
                 .map(userDetailsFiles -> {
                     String filename = userDetailsFiles.getName();
                     String url = MvcUriComponentsBuilder
-                            .fromMethodName(EmployeeController.class, "downloadFile", userDetailsFiles.getNewId())
+                            .fromMethodName(UserDetailsController.class, "downloadFile", userDetailsFiles.getNewId())
                             .build()
                             .toString();
                     return new FileInfo(filename, userDetailsFiles.getCreatedAt(), url);

@@ -16,12 +16,12 @@ import java.util.List;
 @Service
 // spring transactional annotation need to tell spring to this method work through the project
 @CacheConfig( cacheNames = "employee" )
-public class EmployeeService implements AbstractService< UserDetails, Integer > {
+public class UserDetailsService implements AbstractService< UserDetails, Integer > {
 
     private final UserDetailsDao userDetailsDao;
 
     @Autowired
-    public EmployeeService(UserDetailsDao userDetailsDao) {
+    public UserDetailsService(UserDetailsDao userDetailsDao) {
         this.userDetailsDao = userDetailsDao;
     }
 

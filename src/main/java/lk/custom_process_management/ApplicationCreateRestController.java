@@ -7,7 +7,7 @@ import lk.custom_process_management.asset.commonAsset.model.Enum.Title;
 import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.asset.userDetails.entity.Enum.Designation;
 import lk.custom_process_management.asset.userDetails.entity.Enum.EmployeeStatus;
-import lk.custom_process_management.asset.userDetails.service.EmployeeService;
+import lk.custom_process_management.asset.userDetails.service.UserDetailsService;
 import lk.custom_process_management.asset.userManagement.entity.Role;
 import lk.custom_process_management.asset.userManagement.entity.User;
 import lk.custom_process_management.asset.userManagement.service.RoleService;
@@ -23,15 +23,15 @@ import java.util.stream.Collectors;
 public class ApplicationCreateRestController {
     private final RoleService roleService;
     private final UserService userService;
-    private final EmployeeService employeeService;
+    private final UserDetailsService userDetailsService;
 
 
     @Autowired
     public ApplicationCreateRestController(RoleService roleService, UserService userService,
-                                           EmployeeService employeeService) {
+                                           UserDetailsService userDetailsService) {
         this.roleService = roleService;
         this.userService = userService;
-        this.employeeService = employeeService;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping( "/select/user" )
@@ -59,7 +59,7 @@ public class ApplicationCreateRestController {
         userDetails.setEmployeeStatus(EmployeeStatus.WORKING);
         userDetails.setDateOfBirth(LocalDate.now().minusYears(18));
         userDetails.setDateOfAssignment(LocalDate.now());
-        UserDetails userDetailsDb = employeeService.persist(userDetails);
+        UserDetails userDetailsDb = userDetailsService.persist(userDetails);
 
 
         //admin user one

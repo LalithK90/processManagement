@@ -3,7 +3,7 @@ package lk.custom_process_management.asset.userManagement.controller;
 import lk.custom_process_management.asset.userDetails.entity.UserDetails;
 import lk.custom_process_management.asset.userDetails.entity.Enum.Designation;
 import lk.custom_process_management.asset.userDetails.entity.Enum.EmployeeStatus;
-import lk.custom_process_management.asset.userDetails.service.EmployeeService;
+import lk.custom_process_management.asset.userDetails.service.UserDetailsService;
 import lk.custom_process_management.asset.userManagement.entity.User;
 import lk.custom_process_management.asset.userManagement.service.RoleService;
 import lk.custom_process_management.asset.userManagement.service.UserService;
@@ -23,13 +23,13 @@ import java.util.stream.Collectors;
 public class UserController {
     private final UserService userService;
     private final RoleService roleService;
-    private final EmployeeService employeeService;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public UserController(UserService userService, EmployeeService employeeService, RoleService roleService
+    public UserController(UserService userService, UserDetailsService userDetailsService, RoleService roleService
                          ) {
         this.userService = userService;
-        this.employeeService = employeeService;
+        this.userDetailsService = userDetailsService;
         this.roleService = roleService;
     }
 
@@ -79,14 +79,14 @@ public class UserController {
     @PostMapping( value = "/workingPlace" )
     public String addUserEmployeeDetails(@ModelAttribute( "employee" ) UserDetails userDetails, Model model) {
 
-        List< UserDetails > userDetails = employeeService.search(userDetails)
+        List< UserDetails > userDetailList = userDetailsService.search(userDetails)
                 .stream()
                 .filter(userService::findByEmployee)
                 .collect(Collectors.toList());
 
-        if ( userDetails.size() == 1 ) {
+        if ( userDetailList.size() == 1 ) {
             model.addAttribute("user", new User());
-            model.addAttribute("employee", userDetails.get(0));
+            model.addAttribute("employee", userDetailList.get(0));
             model.addAttribute("addStatus", true);
             return commonCode(model);
         }
@@ -127,7 +127,7 @@ public class UserController {
             return commonCode(model);
         }
         //user is super senior office need to provide all working palace to check
-        UserDetails userDetails = employeeService.findById(user.getUserDetails().getId());
+        UserDetails userDetails = userDetailsService.findById(user.getUserDetails().getId());
         Designation designation = userDetails.getDesignation();
 
         // userService.persist(user);

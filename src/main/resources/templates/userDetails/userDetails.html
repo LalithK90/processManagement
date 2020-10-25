@@ -43,29 +43,28 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr data-th-each="userDetails, rowCount : ${userDetails}">
+                                            <tr data-th-each="userDetail, rowCount : ${userDetails}">
                                                 <td data-th-text="${rowCount.count}"></td>
-                                                <td data-th-text="${userDetails.payRoleNumber}"></td>
-                                                <td data-th-text="${userDetails.callingName}"></td>
-                                                <td data-th-text="${userDetails.mobileOne}"></td>
-                                                <td data-th-if="${userDetails.designation.name != null}"
-                                                    data-th-text="${userDetails.designation.name}"></td>
-                                                <td data-th-text="${userDetails.employeeStatus.employeeStatus}"></td>
+                                                <td data-th-text="${userDetail.payRoleNumber}"></td>
+                                                <td data-th-text="${userDetail.callingName}"></td>
+                                                <td data-th-text="${userDetail.mobileOne}"></td>
+                                                <td data-th-if="${userDetail.designation.name != null}"
+                                                    data-th-text="${userDetail.designation.name}"></td>
+                                                <td data-th-text="${userDetail.employeeStatus.employeeStatus}"></td>
                                                 <td>
-                                                    <a id="employeeView" data-th-href="${'/userDetails/' + userDetails.id}"
+                                                    <a id="employeeView" data-th-href="${'/userDetails/' + userDetail.id}"
                                                        class="btn btn-success btn-sm"><i
                                                             class="fa fa-folder-open"></i>&nbsp;View</a>
                                                     <a id="employeeEdit"
-                                                       data-th-href="${'/userDetails/edit/' + userDetails.id}"
+                                                       data-th-href="${'/userDetails/edit/' + userDetail.id}"
                                                        class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
                                                     <a id="employeeRemove"
-                                                       data-th-href="${'/userDetails/remove/' + userDetails.id}"
+                                                       data-th-href="${'/userDetails/remove/' + userDetail.id}"
                                                        data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                                                        class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                                                         Delete</a>
                                                 </td>
                                             </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                     <div class="row" data-th-if="${ #lists.isEmpty(userDetails)}">
@@ -75,7 +74,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                             <h3 class="text-center text-danger">
-                                                <strong>There is no userDetails upto now please add userDetails to the system
+                                                <strong>There is no user Details upto now please add userDetails to the system
                                                         using add user button.
                                                 </strong>
                                             </h3>
