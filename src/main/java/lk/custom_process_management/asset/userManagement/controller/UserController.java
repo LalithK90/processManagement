@@ -1,9 +1,7 @@
 package lk.custom_process_management.asset.userManagement.controller;
 
 import lk.custom_process_management.asset.userDetails.entity.UserDetails;
-import lk.custom_process_management.asset.userDetails.entity.Enum.Designation;
-import lk.custom_process_management.asset.userDetails.entity.Enum.EmployeeStatus;
-import lk.custom_process_management.asset.userDetails.service.UserDetailsService;
+import lk.custom_process_management.asset.userDetails.service.UsersDetailsService;
 import lk.custom_process_management.asset.userManagement.entity.User;
 import lk.custom_process_management.asset.userManagement.service.RoleService;
 import lk.custom_process_management.asset.userManagement.service.UserService;
@@ -23,13 +21,13 @@ import java.util.stream.Collectors;
 public class UserController {
     private final UserService userService;
     private final RoleService roleService;
-    private final UserDetailsService userDetailsService;
+    private final UsersDetailsService usersDetailsService;
 
     @Autowired
-    public UserController(UserService userService, UserDetailsService userDetailsService, RoleService roleService
+    public UserController(UserService userService, UsersDetailsService usersDetailsService, RoleService roleService
                          ) {
         this.userService = userService;
-        this.userDetailsService = userDetailsService;
+        this.usersDetailsService = usersDetailsService;
         this.roleService = roleService;
     }
 
@@ -79,7 +77,7 @@ public class UserController {
     @PostMapping( value = "/workingPlace" )
     public String addUserEmployeeDetails(@ModelAttribute( "employee" ) UserDetails userDetails, Model model) {
 
-        List< UserDetails > userDetailList = userDetailsService.search(userDetails)
+        List< UserDetails > userDetailList = usersDetailsService.search(userDetails)
                 .stream()
                 .filter(userService::findByEmployee)
                 .collect(Collectors.toList());
@@ -108,7 +106,7 @@ public class UserController {
     public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
         if ( userService.findUserByEmployee(user.getUserDetails()) != null ) {
-            ObjectError error = new ObjectError("employee", "This employee already defined as a user");
+            ObjectError error = new ObjectError("userDetails", "This user already defined as a user");
             result.addError(error);
         }
         if ( user.getId() != null ) {
@@ -121,21 +119,11 @@ public class UserController {
             return "redirect:/user";
         }
         if ( result.hasErrors() ) {
-            System.out.println("result to string    " + result.toString());
             model.addAttribute("addStatus", false);
             model.addAttribute("user", user);
             return commonCode(model);
         }
-        //user is super senior office need to provide all working palace to check
-        UserDetails userDetails = userDetailsService.findById(user.getUserDetails().getId());
-        Designation designation = userDetails.getDesignation();
 
-        // userService.persist(user);
-        if ( userDetails.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {
-            user.setEnabled(true);
-        } else {
-            user.setEnabled(false);
-        }
         user.setRoles(user.getRoles());
         user.setEnabled(true);
         userService.persist(user);

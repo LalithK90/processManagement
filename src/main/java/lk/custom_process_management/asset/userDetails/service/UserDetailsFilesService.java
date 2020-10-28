@@ -55,7 +55,7 @@ public class UserDetailsFilesService {
 
     @Cacheable
     public List< FileInfo > employeeFileDownloadLinks(UserDetails userDetails) {
-        return userDetailsFilesDao.findByEmployeeOrderByIdDesc(userDetails)
+        return userDetailsFilesDao.findByUserDetails(userDetails)
                 .stream()
                 .map(userDetailsFiles -> {
                     String filename = userDetailsFiles.getName();
