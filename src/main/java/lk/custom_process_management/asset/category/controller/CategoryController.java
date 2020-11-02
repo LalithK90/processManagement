@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -48,7 +49,7 @@ public class CategoryController implements AbstractController< Category, Integer
     }
 
     @PostMapping(value = {"/add", "/update"})
-    public String persist(Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String persist(@Valid @ModelAttribute Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             return commonThings(model, category, true);
         }

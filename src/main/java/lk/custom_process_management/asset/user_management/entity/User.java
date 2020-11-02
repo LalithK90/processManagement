@@ -24,7 +24,6 @@ import java.util.List;
 public class User extends AuditEntity {
 
     @OneToOne
-    @NotNull
     private UserDetails userDetails;
 
     @Column(nullable = false,unique = true)

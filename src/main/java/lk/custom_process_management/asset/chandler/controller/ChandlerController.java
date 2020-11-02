@@ -62,12 +62,11 @@ public  class ChandlerController implements AbstractController< Chandler, Intege
 
             if ( DBChandler == null) {
                 //need to generate new one
-                chandler.setCode("JNS"+makeAutoGenerateNumberService.numberAutoGen(null).toString());
+                chandler.setCode("SLCC"+makeAutoGenerateNumberService.numberAutoGen(null).toString());
             } else {
-                System.out.println("last chandler not null");
                 //if there is chandler in db need to get that chandler's code and increase its value
-                String previousCode = DBChandler.getCode().substring(3);
-                chandler.setCode("JNS"+makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
+                String previousCode = DBChandler.getCode().substring(4);
+                chandler.setCode("SLCC"+makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
             }
             //send welcome message and email
             if ( chandler.getEmail() != null) {
