@@ -1,6 +1,6 @@
 package lk.custom_process_management.configuration;
 
-import lk.custom_process_management.asset.userManagement.service.UserDetailsServiceImpl;
+import lk.custom_process_management.asset.user_management.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

@@ -5,7 +5,7 @@ package lk.custom_process_management.asset.item.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.category.entity.Category;
 import lk.custom_process_management.asset.item.entity.Enum.ItemStatus;
-import lk.custom_process_management.asset.vezzalOrderItem.entity.VezzalOrderItem;
+import lk.custom_process_management.asset.vezzal_order_item.entity.VezzalOrderItem;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

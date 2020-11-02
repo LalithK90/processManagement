@@ -2,14 +2,15 @@ package lk.custom_process_management;
 
 
 
-import lk.custom_process_management.asset.commonAsset.model.Enum.Gender;
-import lk.custom_process_management.asset.commonAsset.model.Enum.Title;
-import lk.custom_process_management.asset.userDetails.entity.UserDetails;
-import lk.custom_process_management.asset.userDetails.service.UsersDetailsService;
-import lk.custom_process_management.asset.userManagement.entity.Role;
-import lk.custom_process_management.asset.userManagement.entity.User;
-import lk.custom_process_management.asset.userManagement.service.RoleService;
-import lk.custom_process_management.asset.userManagement.service.UserService;
+import lk.custom_process_management.asset.common_asset.model.Enum.Gender;
+import lk.custom_process_management.asset.common_asset.model.Enum.Title;
+import lk.custom_process_management.asset.user_details.entity.Enum.RelevantParty;
+import lk.custom_process_management.asset.user_details.entity.UserDetails;
+import lk.custom_process_management.asset.user_details.service.UsersDetailsService;
+import lk.custom_process_management.asset.user_management.entity.Role;
+import lk.custom_process_management.asset.user_management.entity.User;
+import lk.custom_process_management.asset.user_management.service.RoleService;
+import lk.custom_process_management.asset.user_management.service.UserService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,6 +53,7 @@ public class ApplicationCreateRestController {
     userDetails.setMobileOne("0750000000");
     userDetails.setTitle(Title.DR);
     userDetails.setGender(Gender.MALE);
+    userDetails.setRelevantParty(RelevantParty.SLC);
     userDetails.setDateOfBirth(LocalDate.now().minusYears(18));
     UserDetails userDetailsDb = usersDetailsService.persist(userDetails);
 

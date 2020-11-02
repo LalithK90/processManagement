@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.vezzal.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.custom_process_management.asset.vezzalArrivalHistory.entity.VezzalArrivalHistory;
+import lk.custom_process_management.asset.vezzal_arrival_history.entity.VezzalArrivalHistory;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

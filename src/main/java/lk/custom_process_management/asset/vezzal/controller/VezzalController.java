@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.vezzal.controller;
 
 
 
-import lk.custom_process_management.asset.commonAsset.model.Enum.Title;
+import lk.custom_process_management.asset.common_asset.model.Enum.Title;
 import lk.custom_process_management.asset.vezzal.entity.Vezzal;
 import lk.custom_process_management.asset.vezzal.service.VezzalService;
 import lk.custom_process_management.util.interfaces.AbstractController;

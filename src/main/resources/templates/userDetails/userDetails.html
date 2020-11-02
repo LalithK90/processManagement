@@ -6,93 +6,94 @@
 </head>
 <body>
 <nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<div class="wrapper"><!-- wrapper start -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4>First sud Header</h4>
-                                    <form role="form">
-                                        <a class="btn btn-success" id="newBriefing" data-th-href="${'/userDetails/add'}">
-                                            <i class="fa fa-briefing-plus"></i> Add Employee </a>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4>Secondary Header </h4>
-                                    <div class="card-body">
-                                        <table id="example2" class="table table-hover table-dark">
-                                            <thead>
-                                            <tr>
-                                                <th> Index</th>
-                                                <th> Pay Role Number</th>
-                                                <th> Name</th>
-                                                <th> Mobile</th>
-                                                <th> Designation</th>
-                                                <th> Status</th>
-                                                <th> Modify</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr data-th-each="userDetail, rowCount : ${userDetails}">
-                                                <td data-th-text="${rowCount.count}"></td>
-                                                <td data-th-text="${userDetail.payRoleNumber}"></td>
-                                                <td data-th-text="${userDetail.callingName}"></td>
-                                                <td data-th-text="${userDetail.mobileOne}"></td>
-                                                <td data-th-if="${userDetail.designation.name != null}"
-                                                    data-th-text="${userDetail.designation.name}"></td>
-                                                <td data-th-text="${userDetail.employeeStatus.employeeStatus}"></td>
-                                                <td>
-                                                    <a id="employeeView" data-th-href="${'/userDetails/' + userDetail.id}"
-                                                       class="btn btn-success btn-sm"><i
-                                                            class="fa fa-folder-open"></i>&nbsp;View</a>
-                                                    <a id="employeeEdit"
-                                                       data-th-href="${'/userDetails/edit/' + userDetail.id}"
-                                                       class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                                                    <a id="employeeRemove"
-                                                       data-th-href="${'/userDetails/remove/' + userDetail.id}"
-                                                       data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-                                                       class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
-                                                        Delete</a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="row" data-th-if="${ #lists.isEmpty(userDetails)}">
-                                        <!-- <div class="col-sm-12">-->
-                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <h3 class="text-center text-danger">
-                                                <strong>There is no user Details upto now please add userDetails to the system
-                                                        using add user button.
-                                                </strong>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--heading Area-->
+<div class="container-fluid">
+    <div class="row text-center">
+        <!--New Vezzal Button-->
+        <div class="col">
+            <a class="btn btn-success" href="/userDetails/add" tabindex="1">
+                <i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New
+            </a>
+        </div>
+        <!--List Name-->
+        <div class="col">
+            <h2 class="text-center">
+                <strong>
+                    [[${contendHeader}]]
+                </strong>
+            </h2>
+        </div>
+        <!--Home Button-->
+        <div class="col">
+            <a href="/home" id="searchShow" class="btn btn-primary" tabindex="2">
+                <!--<i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;-->
+                <i class="fas fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;Home
+            </a>
         </div>
     </div>
-
-</div><!-- content-wrapper end -->
-      <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+</div>
+<!--Customers List-->
+<div class="container-fluid text-center">
+    <!--Table view-->
+    <div class="col">
+        <div class="col" id="customerListPresent" data-th-if="${not #lists.isEmpty(userDetailses)}">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> Reg Number</th>
+                    <th> Name</th>
+                    <th> Mobile</th>
+                    <th> Land</th>
+                    <th> Relevant Party</th>
+                    <th> Status</th>
+                    <th> Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="userDetails, rowCount : ${userDetailses}">
+                    <th data-th-text="${rowCount.count}"></th>
+                    <th data-th-text="${userDetails.number}"></th>
+                    <th data-th-text="${userDetails.name}"></th>
+                    <th data-th-text="${userDetails.mobileOne}"></th>
+                    <th data-th-text="${userDetails.land}"></th>
+                    <th data-th-text="${userDetails.relevantParty}"></th>
+                    <th>
+                        <a data-th-href="${'/userDetails/view/' + userDetails.id}"
+                           class="btn btn-primary btn-sm"><i
+                              class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
+                        <a data-th-href="${'/userDetails/edit/' + userDetails.id}"
+                           class="btn btn-success btn-sm"><i class="fa fa-edit"
+                                                             style="font-size: 15px"></i>&nbsp;Edit</a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--Error-->
+    <div class="row" data-th-if="${ #lists.isEmpty(userDetailses)}">
+        <div class="col-sm-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center text-danger">
+                    <strong>There is no userDetails upto now please add userDetails to the system
+                            using "New" button.
+                    </strong>
+                </h3>
+            </div>
+        </div>
+        <script>
+            /*active boostrap alert - start*/
+            $(".alert").alert();
+            /*active boostrap alert - end*/
+        </script>
+    </div>
+</div>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
       <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>
