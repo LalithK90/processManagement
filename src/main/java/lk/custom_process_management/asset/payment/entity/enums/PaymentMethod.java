@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.payment.entity.Enum;
+package lk.custom_process_management.asset.payment.entity.enums;
 
 
 import lombok.AllArgsConstructor;

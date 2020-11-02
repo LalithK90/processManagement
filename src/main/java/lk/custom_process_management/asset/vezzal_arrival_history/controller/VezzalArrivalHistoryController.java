@@ -3,7 +3,7 @@ package lk.custom_process_management.asset.vezzal_arrival_history.controller;
 import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.asset.vezzal.entity.Vezzal;
 import lk.custom_process_management.asset.vezzal.service.VezzalService;
-import lk.custom_process_management.asset.vezzal_arrival_history.entity.Enum.VezzalDepartureArrivalStatus;
+import lk.custom_process_management.asset.vezzal_arrival_history.entity.enums.VezzalDepartureArrivalStatus;
 import lk.custom_process_management.asset.vezzal_arrival_history.entity.VezzalArrivalHistory;
 import lk.custom_process_management.asset.vezzal_arrival_history.service.VezzalArrivalHistoryService;
 import org.springframework.stereotype.Controller;

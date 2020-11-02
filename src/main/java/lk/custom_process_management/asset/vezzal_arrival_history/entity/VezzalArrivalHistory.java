@@ -3,7 +3,7 @@ package lk.custom_process_management.asset.vezzal_arrival_history.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
 import lk.custom_process_management.asset.vezzal.entity.Vezzal;
-import lk.custom_process_management.asset.vezzal_arrival_history.entity.Enum.VezzalDepartureArrivalStatus;
+import lk.custom_process_management.asset.vezzal_arrival_history.entity.enums.VezzalDepartureArrivalStatus;
 import lk.custom_process_management.asset.vezzal_order.entity.VezzalOrder;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;

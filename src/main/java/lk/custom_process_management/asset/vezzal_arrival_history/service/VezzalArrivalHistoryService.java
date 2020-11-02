@@ -1,7 +1,7 @@
 package lk.custom_process_management.asset.vezzal_arrival_history.service;
 
 import lk.custom_process_management.asset.vezzal_arrival_history.dao.VezzalArrivalHistoryDao;
-import lk.custom_process_management.asset.vezzal_arrival_history.entity.Enum.VezzalDepartureArrivalStatus;
+import lk.custom_process_management.asset.vezzal_arrival_history.entity.enums.VezzalDepartureArrivalStatus;
 import lk.custom_process_management.asset.vezzal_arrival_history.entity.VezzalArrivalHistory;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.data.domain.Example;

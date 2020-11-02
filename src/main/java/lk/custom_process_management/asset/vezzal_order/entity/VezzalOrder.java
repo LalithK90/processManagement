@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.vezzal_order.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.vezzal_arrival_history.entity.VezzalArrivalHistory;
-import lk.custom_process_management.asset.vezzal_order.entity.Enum.VezzalOrderStatus;
+import lk.custom_process_management.asset.vezzal_order.entity.enums.VezzalOrderStatus;
 import lk.custom_process_management.asset.vezzal_order_item.entity.VezzalOrderItem;
 import lk.custom_process_management.asset.warehouse_block.entity.WarehouseBlock;
 import lk.custom_process_management.util.audit.AuditEntity;

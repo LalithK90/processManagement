@@ -3,7 +3,7 @@ package lk.custom_process_management.asset.vezzal_order_item_bit.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.vezzal_order_item.entity.VezzalOrderItem;
-import lk.custom_process_management.asset.vezzal_order_item_bit.entity.Enum.BitValidOrNot;
+import lk.custom_process_management.asset.vezzal_order_item_bit.entity.enums.BitValidOrNot;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package lk.custom_process_management.asset.user_management.entity;
 
-import lk.custom_process_management.asset.user_management.entity.Enum.UserSessionLogStatus;
+import lk.custom_process_management.asset.user_management.entity.enums.UserSessionLogStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

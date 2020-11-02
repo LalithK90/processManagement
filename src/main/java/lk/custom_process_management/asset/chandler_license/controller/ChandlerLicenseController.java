@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.chandler_license.controller;
 
 import lk.custom_process_management.asset.chandler.service.ChandlerService;
 import lk.custom_process_management.asset.chandler_license.entity.ChandlerLicense;
-import lk.custom_process_management.asset.chandler_license.entity.Enum.LicenseStatus;
+import lk.custom_process_management.asset.chandler_license.entity.enums.LicenseStatus;
 import lk.custom_process_management.asset.chandler_license.service.ChandlerLicenseService;
 import lk.custom_process_management.util.interfaces.AbstractController;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;

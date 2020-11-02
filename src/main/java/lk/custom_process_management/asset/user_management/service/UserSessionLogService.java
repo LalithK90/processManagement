@@ -1,7 +1,7 @@
 package lk.custom_process_management.asset.user_management.service;
 
 import lk.custom_process_management.asset.user_management.dao.UserSessionLogDao;
-import lk.custom_process_management.asset.user_management.entity.Enum.UserSessionLogStatus;
+import lk.custom_process_management.asset.user_management.entity.enums.UserSessionLogStatus;
 import lk.custom_process_management.asset.user_management.entity.User;
 import lk.custom_process_management.asset.user_management.entity.UserSessionLog;
 import lk.custom_process_management.util.interfaces.AbstractService;

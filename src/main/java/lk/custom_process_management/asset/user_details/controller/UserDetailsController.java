@@ -1,10 +1,10 @@
 package lk.custom_process_management.asset.user_details.controller;
 
 
-import lk.custom_process_management.asset.common_asset.model.Enum.Gender;
-import lk.custom_process_management.asset.common_asset.model.Enum.Title;
+import lk.custom_process_management.asset.common_asset.model.enums.Gender;
+import lk.custom_process_management.asset.common_asset.model.enums.Title;
 import lk.custom_process_management.asset.common_asset.service.CommonService;
-import lk.custom_process_management.asset.user_details.entity.Enum.RelevantParty;
+import lk.custom_process_management.asset.user_details.entity.enums.RelevantParty;
 import lk.custom_process_management.asset.user_details.entity.UserDetails;
 import lk.custom_process_management.asset.user_details.entity.UserDetailsFiles;
 import lk.custom_process_management.asset.user_details.service.UserDetailsFilesService;

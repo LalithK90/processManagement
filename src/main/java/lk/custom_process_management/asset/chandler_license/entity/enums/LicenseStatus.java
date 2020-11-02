@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.chandler_license.entity.Enum;
+package lk.custom_process_management.asset.chandler_license.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

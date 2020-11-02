@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.common_asset.model.Enum;
+package lk.custom_process_management.asset.common_asset.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

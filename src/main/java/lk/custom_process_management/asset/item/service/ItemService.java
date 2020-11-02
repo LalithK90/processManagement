@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.item.service;
 
 
 import lk.custom_process_management.asset.item.dao.ItemDao;
-import lk.custom_process_management.asset.item.entity.Enum.ItemStatus;
+import lk.custom_process_management.asset.item.entity.enums.ItemStatus;
 import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;

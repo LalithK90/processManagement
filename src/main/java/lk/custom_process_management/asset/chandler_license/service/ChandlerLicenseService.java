@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.chandler_license.service;
 
 import lk.custom_process_management.asset.chandler_license.dao.ChandlerLicenseDao;
 import lk.custom_process_management.asset.chandler_license.entity.ChandlerLicense;
-import lk.custom_process_management.asset.chandler_license.entity.Enum.LicenseStatus;
+import lk.custom_process_management.asset.chandler_license.entity.enums.LicenseStatus;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;

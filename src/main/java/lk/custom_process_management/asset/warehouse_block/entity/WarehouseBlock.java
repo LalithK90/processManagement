@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.warehouse_block.entity;
 
 
 import lk.custom_process_management.asset.vezzal_order.entity.VezzalOrder;
-import lk.custom_process_management.asset.warehouse_block.entity.Enum.WarehouseBlockStatus;
+import lk.custom_process_management.asset.warehouse_block.entity.enums.WarehouseBlockStatus;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

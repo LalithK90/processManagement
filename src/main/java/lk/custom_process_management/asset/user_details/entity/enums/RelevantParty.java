@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.user_details.entity.Enum;
+package lk.custom_process_management.asset.user_details.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

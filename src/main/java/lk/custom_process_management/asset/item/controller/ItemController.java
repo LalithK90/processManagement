@@ -2,8 +2,8 @@ package lk.custom_process_management.asset.item.controller;
 
 
 import lk.custom_process_management.asset.category.controller.CategoryController;
-import lk.custom_process_management.asset.item.entity.Enum.ItemStatus;
-import lk.custom_process_management.asset.item.entity.Enum.MainCategory;
+import lk.custom_process_management.asset.item.entity.enums.ItemStatus;
+import lk.custom_process_management.asset.item.entity.enums.MainCategory;
 import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.asset.item.service.ItemService;
 import lk.custom_process_management.util.interfaces.AbstractController;

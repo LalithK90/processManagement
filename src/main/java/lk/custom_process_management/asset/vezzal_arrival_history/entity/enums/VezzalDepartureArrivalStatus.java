@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.vezzal_arrival_history.entity.Enum;
+package lk.custom_process_management.asset.vezzal_arrival_history.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

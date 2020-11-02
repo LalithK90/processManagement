@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.custom_process_management.asset.category.entity.Category;
 import lk.custom_process_management.asset.category.service.CategoryService;
-import lk.custom_process_management.asset.item.entity.Enum.MainCategory;
+import lk.custom_process_management.asset.item.entity.enums.MainCategory;
 import lk.custom_process_management.util.interfaces.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;

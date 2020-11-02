@@ -5,7 +5,7 @@ import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
 import lk.custom_process_management.asset.vezzal_order.entity.VezzalOrder;
-import lk.custom_process_management.asset.vezzal_order_item_approved.entity.Enum.PaymentStatus;
+import lk.custom_process_management.asset.vezzal_order_item_approved.entity.enums.PaymentStatus;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

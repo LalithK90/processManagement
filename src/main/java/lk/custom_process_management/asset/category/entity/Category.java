@@ -3,7 +3,7 @@ package lk.custom_process_management.asset.category.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.custom_process_management.asset.item.entity.Enum.MainCategory;
+import lk.custom_process_management.asset.item.entity.enums.MainCategory;
 import lk.custom_process_management.asset.item.entity.Item;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

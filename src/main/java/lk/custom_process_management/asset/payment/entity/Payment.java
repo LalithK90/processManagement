@@ -1,7 +1,7 @@
 package lk.custom_process_management.asset.payment.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.custom_process_management.asset.payment.entity.Enum.PaymentMethod;
+import lk.custom_process_management.asset.payment.entity.enums.PaymentMethod;
 import lk.custom_process_management.asset.vezzal_order_item_approved.entity.VezzalOrderItemApproved;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;

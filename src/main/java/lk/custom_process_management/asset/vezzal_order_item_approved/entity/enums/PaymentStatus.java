@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.vezzal_order_item_approved.entity.Enum;
+package lk.custom_process_management.asset.vezzal_order_item_approved.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.chandler_license.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.chandler.entity.Chandler;
-import lk.custom_process_management.asset.chandler_license.entity.Enum.LicenseStatus;
+import lk.custom_process_management.asset.chandler_license.entity.enums.LicenseStatus;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
