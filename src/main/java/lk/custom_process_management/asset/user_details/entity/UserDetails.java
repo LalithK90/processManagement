@@ -40,6 +40,7 @@ public class UserDetails extends AuditEntity {
   private String mobileOne;
 
   private String mobileTwo;
+
   private String land;
 
   @Column( unique = true )

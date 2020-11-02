@@ -46,7 +46,6 @@
                     <th> Mobile</th>
                     <th> Land</th>
                     <th> Relevant Party</th>
-                    <th> Status</th>
                     <th> Modify</th>
                 </tr>
                 </thead>
@@ -57,9 +56,9 @@
                     <th data-th-text="${userDetails.name}"></th>
                     <th data-th-text="${userDetails.mobileOne}"></th>
                     <th data-th-text="${userDetails.land}"></th>
-                    <th data-th-text="${userDetails.relevantParty}"></th>
+                    <th data-th-text="${userDetails.relevantParty.relevantParty}"></th>
                     <th>
-                        <a data-th-href="${'/userDetails/view/' + userDetails.id}"
+                        <a data-th-href="${'/userDetails/' + userDetails.id}"
                            class="btn btn-primary btn-sm"><i
                               class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
                         <a data-th-href="${'/userDetails/edit/' + userDetails.id}"

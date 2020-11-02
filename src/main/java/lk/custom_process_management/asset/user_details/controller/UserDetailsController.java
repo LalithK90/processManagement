@@ -66,7 +66,7 @@ public class UserDetailsController {
 
   //Send all userDetails data
   @RequestMapping
-  public String employeePage(Model model) {
+  public String findAll(Model model) {
     model.addAttribute("userDetailses", usersDetailsService.findAll());
     model.addAttribute("contendHeader", "User Details Registration");
     return "userDetails/userDetails";
@@ -74,17 +74,16 @@ public class UserDetailsController {
 
   //Send on userDetails details
   @GetMapping( value = "/{id}" )
-  public String employeeView(@PathVariable( "id" ) Integer id, Model model) {
+  public String view(@PathVariable( "id" ) Integer id, Model model) {
     UserDetails userDetails = usersDetailsService.findById(id);
     model.addAttribute("userDetail", userDetails);
-    model.addAttribute("addStatus", false);
     model.addAttribute("file", userDetailsFilesService.userDetailsFileDownloadLinks(userDetails));
     return "userDetails/userDetails-detail";
   }
 
   //Send userDetails data edit
   @GetMapping( value = "/edit/{id}" )
-  public String editEmployeeForm(@PathVariable( "id" ) Integer id, Model model) {
+  public String editForm(@PathVariable( "id" ) Integer id, Model model) {
     UserDetails userDetails = usersDetailsService.findById(id);
     model.addAttribute("userDetails", userDetails);
     model.addAttribute("addStatus", false);
@@ -94,7 +93,7 @@ public class UserDetailsController {
 
   //Send an userDetails add form
   @GetMapping( value = {"/add"} )
-  public String employeeAddForm(Model model) {
+  public String addForm(Model model) {
     model.addAttribute("addStatus", true);
     model.addAttribute("userDetails", new UserDetails());
     return commonThings(model);
@@ -102,7 +101,7 @@ public class UserDetailsController {
 
   //Employee add and update
   @PostMapping( value = {"/save", "/update"} )
-  public String addEmployee(@Valid @ModelAttribute UserDetails userDetails, BindingResult result, Model model
+  public String add(@Valid @ModelAttribute UserDetails userDetails, BindingResult result, Model model
                            ) {
     if ( result.hasErrors() ) {
       model.addAttribute("addStatus", true);
@@ -157,7 +156,7 @@ public class UserDetailsController {
   }
 
   @GetMapping( value = "/remove/{id}" )
-  public String removeEmployee(@PathVariable Integer id) {
+  public String remove(@PathVariable Integer id) {
     usersDetailsService.delete(id);
     return "redirect:/userDetails";
   }

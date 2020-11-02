@@ -1,219 +1,238 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
-</head>
-<body>
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<div class="container" >
+  <div class="row text-center" >
+    <div class="col" >
+      <a class="btn btn-outline-info" href="/home" >
+        Back To Home
+      </a >
+    </div >
 
-<div class="content-header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div data-th-fragment="employeeDetailsFragment"
-                                             class="container-fluid ">
-                                            <h4>First sud Header</h4>
-                                            <form role="form">
-                                                <p data-th-text="${userDetail.title.title} +${' '} +${userDetail.name}"></p>
-                                                <a href="/userDetails" class="btn btn-primary">
-                                                    <i class="fa fa-list"></i>&nbsp; View List
-                                                </a>
-                                                <a href="/userDetails">
-                                                    <button class="btn btn-success" type="button" tabindex="10">
-                                                        <i class="fa fa-backward " style="font-size: 20px"></i>&nbsp;
-                                                        &nbsp;Back
-                                                    </button>
-                                                </a>
+    <div class="col" >
+      <a href="/userDetails" class="btn btn-primary" >
+        View User Details
+      </a >
+    </div >
+  </div >
+  <div class="row text-center" >
+    <div class="col" >
+      <h4 class="text-info text-center" >
+        <strong >
+          <span data-th-text="${userDetail.number+' User Details'}" ></span >
+        </strong >
+      </h4 >
+    </div >
+  </div >
+</div >
+<!--Form Content - start -->
+<div class="container-fluid " >
+  <div class="row" >
+    <!--Left Side-->
+    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+      <!--number-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="number" >User Number :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="number" data-th-value="${userDetail.number}" class="form-control" tabindex="4"
+                 type="text" readonly required />
 
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4>Secondary Header </h4>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="id">ID :</label>
-                                            <p id="id" data-th-text="${userDetail.id}" class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="payRoleNumber">Pay Role No :</label>
-                                            <p id="payRoleNumber" data-th-text="${userDetail.payRoleNumber}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="departmentIdNumber">Depart Id No :</label>
-                                            <p id="departmentIdNumber" data-th-text="${userDetail.departmentIdNumber}"
-                                               class="display_detail"></p></div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="name">Name :</label>
-                                            <p id="name"
-                                               data-th-text="${userDetail.title.title} +${' '} +${userDetail.name}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="callingName">Calling Name :</label>
-                                            <p id="callingName" data-th-text="${userDetail.callingName}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="nic">NIC No :</label>
-                                            <p id="nic" data-th-text="${userDetail.nic}" class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="gender">Gender :</label>
-                                            <p id="gender" data-th-text="${userDetail.gender.gender}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="dateOfBirth">Birth date :</label>
-                                            <p id="dateOfBirth" data-th-text="${userDetail.dateOfBirth}"
-                                               class="display_detail">Error Birthday</p>
-                                        </div>
-                                        <div class="form-row text-right">
+        </div >
+      </div >
+      <!--Tittle -->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="title" >Title :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="title" type="text" data-th-value="${userDetail.title}" class="form-control" tabindex="3"
+                 required />
 
-                                            <label class="control-label" for="bloodGroup">Blood Group :</label>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <p id="bloodGroup" data-th-text="${userDetail.bloodGroup.bloodGroup}"
-                                               class="display_detail">
-                                            </p>
+        </div >
+      </div >
+      <!--Name-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="name" >Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="name" data-th-value="${userDetail.name}" class="form-control" tabindex="4" type="text" required />
+        </div >
+      </div >
+      <!--Calling Name-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="callingName" >Calling Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="callingName" data-th-value="${userDetail.callingName}" class="form-control" tabindex="5"
+                 type="text" minlength="5" />
+        </div >
+      </div >
+      <!--Nic-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="nic" >NIC No :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="nic" data-th-value="${userDetail.nic}" class="form-control" tabindex="6" type="text"
+                 maxlength="12"
+                 minlength="10" required />
+        </div >
+      </div >
+      <!--Gender-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="gender" >Gender :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="gender" data-th-value="${userDetail.gender}" class="form-control" tabindex="7" readonly=""
+                 required type="text" />
 
-                                        </div>
-                                        <div class="form-row text-right">
+        </div >
+      </div >
+      <!--Date of birth-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="dateOfBirth" >Birth date :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="dateOfBirth" data-th-value="${userDetail.dateOfBirth}" class="form-control" tabindex="8"
+                 placeholder="Ex: 1990 - 01 - 20"
+                 required type="date" readonly />
+        </div >
+      </div >
+      <!--Image-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" >Image :</label >
+        </div >
+        <div class="col-md-4" >
+          <!--photo details-->
+          <img class="text-right" data-th-src="${file != null ? file.url :''}"
+               id="image" alt=""
+               style="height: 100px; width: 100%;" />
+        </div >
+      </div >
+    </div >
+    <!--Right Side-->
+    <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+      <!--Address-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="address" >Address :</label >
+        </div >
+        <div class="col-md-8" >
+                            <textarea id="address" data-th-value="${userDetail.address}" class="form-control"
+                                      tabindex="12"
+                                      required >
 
-                                            <label class="control-label" for="designation">Designation :</label>
+                            </textarea >
+        </div >
+      </div >
+      <!--Mobile Number One-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="mobileOne" >Mobile One No :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="mobileOne" data-th-value="${userDetail.mobileOne}" class="form-control mobile" tabindex="13"
+                 type="text"
+                 maxlength="10" min="9"
+                 required />
+        </div >
+      </div >
+      <!--Mobile Number Two-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="mobileTwo" >Mobile Two No :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="mobileTwo" data-th-value="${userDetail.mobileTwo}" class="form-control mobile" tabindex="14"
+                 type="text"
+                 maxlength="10" min="9" />
+        </div >
+      </div >
+      <!--Land Number-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="land" >Land No :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="land" data-th-value="${userDetail.land}" class="form-control land" type="text" tabindex="15"
+                 maxlength="10"
+                 min="9" />
+        </div >
+      </div >
+      <!--Email-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="email" >Email :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="email" data-th-value="${userDetail.email}" class="form-control" tabindex="16" type="email"
+                 required />
+        </div >
+      </div >
+      <!--Office email-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="officeEmail" >Office Email :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="officeEmail" data-th-value="${userDetail.officeEmail}" class="form-control" tabindex="17"
+                 type="email" required />
+        </div >
+      </div >
+      <!--Relevant Party-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="relevantParty" >Relevant Party :</label >
+        </div >
+        <div class="col-md-8" >
+          <input type="text" id="relevantParty" data-th-value="${userDetail.relevantParty}" class="form-control"
+                 tabindex="3" />
 
-                                            <p id="designation" data-th-text="${userDetail.designation.name}"
-                                               class="display_detail">
-                                            </p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="civilStatus">Civil State :</label>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <p id="civilStatus" data-th-text="${userDetail.civilStatus.civilStatus}"
-                                               class="display_detail"></p>
-
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="employeeStatus">Employee Status :</label>
-                                            <p id="employeeStatus"
-                                               data-th-text="${userDetail.employeeStatus.employeeStatus}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="address">Address :</label>
-                                            <p id="address" class="display_detail "
-                                               data-th-utext="${userDetail.address}"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="mobileOne">Mobile One No :</label>
-                                            <p id="mobileOne" data-th-text="${userDetail.mobileOne}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="mobileTwo">Mobile Two No :</label>
-                                            <p id="mobileTwo" data-th-text="${userDetail.mobileTwo}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="land">Land No :</label>
-                                            <p id="land" data-th-text="${userDetail.land}" class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="email">Email :</label>
-                                            <p id="email" data-th-text="${userDetail.email}" class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="officeEmail">Office Email :</label>
-                                            <p id="officeEmail" data-th-text="${userDetail.officeEmail}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <!--<div class="form-row text-right">
-                                            <label class="control-label" for="workingPlace">Working Place :</label>
-                                            <p id="workingPlace" data-th-text="${userDetail.workingPlace.name}" class="display_detail"></p>
-                                        </div>-->
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="dateOfAssignment">Date Of Assignment
-                                                :</label>
-                                            <p id="dateOfAssignment" data-th-text="${{userDetail.dateOfAssignment}}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="createdBy">Created By :</label>
-                                            <p id="createdBy" data-th-text="${userDetail.createdBy}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="createdAt">Created At :</label>
-                                            <p id="createdAt"
-                                               data-th-text="${#temporals.format(userDetail.createdAt, 'dd-MM-yyyy HH:mm')}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-                                            <label class="control-label" for="updatedBy">Updated By :</label>
-                                            <p id="updatedBy" data-th-text="${userDetail.updatedBy}"
-                                               class="display_detail"></p>
-                                        </div>
-                                        <div class="form-row text-right">
-
-                                            <label class="control-label" for="updatedAt">Updated At :</label>
-
-                                            <p id="updatedAt" data-th-text="${{userDetail.updatedAt}}"
-                                               class="display_detail"></p>
-
-                                        </div>
-                                        <!--images-->
-                                        <div class="form-group text-left flex-column ">
-                                            <div class="col" id="photoDetails">
-                                                <div>
-                                                    <label class="control-label ">Photo Details : </label>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col" id="filesList" data-th-each="file, rowStat: ${files}">
-                                                        <div class="col">
-                                                            <div class="alert alert-warning alert-dismissible fade show"
-                                                                 role="alert">
-                                                                <div class="card text-center">
-                                                                    <div class="card-body">
-                                                                        <img id="img" class="rounded"
-                                                                             style="height: 150px; widdata-th- 150px; border-radius: 10px"
-                                                                             alt="Employee images"
-                                                                             data-th-src="${file.url}"/>
-                                                                    </div>
-                                                                    <div class="card-footer bg-secondary text-light text-center">
-                                                                        <p id="imgName" data-th-text="${file.filename}"></p>
-                                                                        <span> Uploaded Date :
-                                            <p id="imgCreateAt" data-th-text="${{file.createAt}}"></p>
-                                            </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+        </div >
+      </div >
+      <!--Created by and created at-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="createdBy" >Created By :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="createdBy" data-th-value="${userDetail.createdBy}" class="form-control" type="text"
+                 readonly />
+        </div >
+      </div >
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="createdAt" >Created At :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="createdAt" data-th-value="${{userDetail.createdAt}}" class="form-control" type="text"
+                 readonly />
+        </div >
+      </div >
+    </div >
+    <!--Button-->
+    <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+      <!--Back Button-->
+      <a class="btn btn-dark" tabindex="10" href="/userDetails" >
+        <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+      </a >
+    </div >
+  </div >
+</div >
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
-</body>
-</html>
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >
