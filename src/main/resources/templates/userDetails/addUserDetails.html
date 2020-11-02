@@ -41,7 +41,7 @@
         <!--Left Side-->
         <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
           <!--Id-->
-          <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right" >
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
             <div class="col-md-4" >
               <label class="control-label" for="id" >ID :</label >
             </div >
@@ -149,9 +149,9 @@
             <div class="col-md-4" >
               <!--photo details-->
               <div class="ml-5" >
-                <img class="text-right" data-th-if="${addStatus==false}" data-th-src="${file.url}"
-                                      id="image" alt=""
-                                      style="height: 100px; width: 100%;" />
+                <img class="text-right" data-th-if="${addStatus==false}" data-th-src="${file != null ? file.url :''}"
+                     id="image" alt=""
+                     style="height: 100px; width: 100%;" />
                 <img class="text-right" data-th-if="${addStatus==true}" src="" id="image" alt=""
                      style="height: 100px; width: 100%" /></div >
             </div >
@@ -237,25 +237,37 @@
                     id="officeEmailError" >Error Office Email</span >
             </div >
           </div >
-          <!--Created by and created at-->
-          <div id="updateStatus" data-th-if="${addStatus==false}" >
-            <div class="form-row text-right" >
-              <div class="col-md-4" >
-                <label class="control-label" for="createdBy" >Created By :</label >
-              </div >
-              <div class="col-md-8" >
-                <input id="createdBy" data-th-field="*{createdBy}" class="form-control" type="text"
-                       readonly />
-              </div >
+          <!--Relevant Party-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="relevantParty" >Relevant Party :</label >
             </div >
-            <div class="form-row text-right" >
-              <div class="col-md-4" >
-                <label class="control-label" for="createdAt" >Created At :</label >
-              </div >
-              <div class="col-md-8" >
-                <input id="createdAt" data-th-text="${{createdAt}}" class="form-control" type="text"
-                       readonly />
-              </div >
+            <div class="col-md-8" >
+              <select id="relevantParty" data-th-field="*{relevantParty}" class="form-control" tabindex="3" required >
+                <option value="" >Please select</option >
+                <option data-th-each="relevantParty : ${relevantParties}"
+                        data-th-text="${relevantParty.relevantParty}"
+                        data-th-value="${relevantParty}" ></option >
+              </select >
+            </div >
+          </div >
+          <!--Created by and created at-->
+          <div class="form-row text-right" data-th-if="${addStatus==false}" >
+            <div class="col-md-4" >
+              <label class="control-label" for="createdBy" >Created By :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="createdBy" data-th-field="*{createdBy}" class="form-control" type="text"
+                     readonly />
+            </div >
+          </div >
+          <div class="form-row text-right" data-th-if="${addStatus==false}" >
+            <div class="col-md-4" >
+              <label class="control-label" for="createdAt" >Created At :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="createdAt" data-th-field="*{createdAt}" class="form-control" type="text"
+                     readonly />
             </div >
           </div >
         </div >

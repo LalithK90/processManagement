@@ -78,7 +78,7 @@ public class UserDetailsController {
     UserDetails userDetails = usersDetailsService.findById(id);
     model.addAttribute("userDetail", userDetails);
     model.addAttribute("addStatus", false);
-    model.addAttribute("files", userDetailsFilesService.employeeFileDownloadLinks(userDetails));
+    model.addAttribute("file", userDetailsFilesService.userDetailsFileDownloadLinks(userDetails));
     return "userDetails/userDetails-detail";
   }
 
@@ -88,7 +88,7 @@ public class UserDetailsController {
     UserDetails userDetails = usersDetailsService.findById(id);
     model.addAttribute("userDetails", userDetails);
     model.addAttribute("addStatus", false);
-    model.addAttribute("files", userDetailsFilesService.employeeFileDownloadLinks(userDetails));
+    model.addAttribute("file", userDetailsFilesService.userDetailsFileDownloadLinks(userDetails));
     return commonThings(model);
   }
 
@@ -109,29 +109,27 @@ public class UserDetailsController {
       model.addAttribute("userDetails", userDetails);
       return commonThings(model);
     }
-    try {
-      if ( userDetails.getId() == null ) {
-        //if there is not item in db
-        if ( usersDetailsService.findLastUserDetails() == null ) {
-          //need to generate new one
-          userDetails.setNumber("SLCU" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
-        } else {
-          //if there is item in db need to get that item's code and increase its value
-          String previousCode = usersDetailsService.findLastUserDetails().getNumber().substring(4);
-          userDetails.setNumber("SLCU" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
-        }
+    if ( userDetails.getId() == null ) {
+      //if there is not item in db
+      if ( usersDetailsService.findLastUserDetails() == null ) {
+        //need to generate new one
+        userDetails.setNumber("SLCU" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+      } else {
+        //if there is item in db need to get that item's code and increase its value
+        String previousCode = usersDetailsService.findLastUserDetails().getNumber().substring(4);
+        userDetails.setNumber("SLCU" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
       }
-      userDetails.setMobileOne(commonService.commonMobileNumberLengthValidator(userDetails.getMobileOne()));
-      userDetails.setMobileTwo(commonService.commonMobileNumberLengthValidator(userDetails.getMobileTwo()));
-      userDetails.setLand(commonService.commonMobileNumberLengthValidator(userDetails.getLand()));
-      //after save userDetails files and save userDetails
-      usersDetailsService.persist(userDetails);
-
-
+    }
+    userDetails.setMobileOne(commonService.commonMobileNumberLengthValidator(userDetails.getMobileOne()));
+    userDetails.setMobileTwo(commonService.commonMobileNumberLengthValidator(userDetails.getMobileTwo()));
+    userDetails.setLand(commonService.commonMobileNumberLengthValidator(userDetails.getLand()));
+    //after save userDetails files and save userDetails
+    UserDetails userDetailsDb = usersDetailsService.persist(userDetails);
+    try {
       //save userDetails images file
-      if ( userDetails.getFile().getOriginalFilename() != null ) {
+      if ( userDetails.getFile() != null ) {
         UserDetailsFiles userDetailsFiles =
-            userDetailsFilesService.findByName(userDetails.getFile().getOriginalFilename());
+            userDetailsFilesService.findByUserDetails(userDetailsDb);
         if ( userDetailsFiles != null ) {
           // update new contents
           userDetailsFiles.setPic(userDetails.getFile().getBytes());
@@ -150,7 +148,7 @@ public class UserDetailsController {
 
     } catch ( Exception e ) {
       ObjectError error = new ObjectError("userDetails",
-                                          "There is already in the system. <br>System message -->" + e.toString());
+                                          "There is already in the system. \n Error happened because of Image. \n System message -->" + e.toString());
       result.addError(error);
       model.addAttribute("addStatus", true);
       model.addAttribute("userDetails", userDetails);

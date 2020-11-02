@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface UserDetailsFilesDao extends JpaRepository< UserDetailsFiles, Integer > {
-    List< UserDetailsFiles > findByUserDetails(UserDetails userDetails);
+  UserDetailsFiles findByUserDetails(UserDetails userDetails);
 
     UserDetailsFiles findByName(String filename);
 

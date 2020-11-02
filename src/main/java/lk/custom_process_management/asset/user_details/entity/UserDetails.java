@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.common_asset.model.enums.Gender;
 import lk.custom_process_management.asset.common_asset.model.enums.Title;
 import lk.custom_process_management.asset.user_details.entity.enums.RelevantParty;
-import lk.custom_process_management.asset.user_management.entity.User;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
