@@ -83,11 +83,7 @@
                 </h3>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
+
     </div>
     <!--Save Message-->
     <div class="row" data-th-if="${warehouseBlockDetail != null}">
@@ -99,17 +95,17 @@
                 <div data-th-replace="~{warehouseBlock/warehouseBlocks-detail :: warehouseDetailsFragment}"></div>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
+
     </div>
 </div>
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
-
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
+<script>
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script>
 </body>
 </html>
