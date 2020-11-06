@@ -40,20 +40,23 @@
         <!--Left Side-->
         <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
           <!--Id-->
-          <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right" >
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
             <div class="col-md-4" >
               <label class="control-label" for="id" >ID :</label >
             </div >
             <div class="col-md-8" >
               <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly />
             </div >
+          </div >
+          <!--code-->
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
             <div class="col-md-4" >
               <label class="control-label" for="code" >Vezzal Code :</label >
             </div >
             <div class="col-md-8" >
               <input id="code" data-th-field="*{code}" class="form-control" type="text" readonly />
             </div >
-          </div >
+          </div>
           <!--Name-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
