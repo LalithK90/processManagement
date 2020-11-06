@@ -87,11 +87,6 @@
                 </h3>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
     </div>
     <!--Save vezzal-->
     <div class="row" data-th-if="${vezzalDetail != null}">
@@ -116,5 +111,10 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
+<script>
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script>
 </body>
 </html>
