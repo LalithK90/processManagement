@@ -12,7 +12,7 @@
   <div id="accordianId" role="tablist" aria-multiselectable="true" >
     <div class="card" >
       <div class="card-header" role="tab" id="section1HeaderId" >
-        <h5 class="mb-0" >
+        <h5 class="mb-0 text-center" >
           <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
              aria-controls="section1ContentId" >
             Chandler Details
@@ -28,7 +28,7 @@
     </div >
     <div class="card" >
       <div class="card-header" role="tab" id="section2HeaderId" >
-        <h5 class="mb-0" >
+        <h5 class="mb-0 text-center" >
           <a data-toggle="collapse" data-parent="#accordianId" href="#section2ContentId" aria-expanded="true"
              aria-controls="section2ContentId" >
             Chandler License History
@@ -50,7 +50,6 @@
                   <th > License Start date</th >
                   <th > License Expired date</th >
                   <th > License Status</th >
-                  <th > Modify</th >
                 </tr >
                 </thead >
                 <tbody >
@@ -61,14 +60,6 @@
                   <th data-th-text="${chandlerLicense.startDate}" ></th >
                   <th data-th-text="${chandlerLicense.endDate}" ></th >
                   <th data-th-text="${chandlerLicense.licenseStatus.licenseStatus}" ></th >
-                  <th >
-                    <a class="btn btn-primary btn-sm"
-                       data-th-href="${'/chandlerLicense/' + chandlerLicense.id}" ><i
-                          class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
-                    <a class="btn btn-success btn-sm"
-                       data-th-href="${'/chandlerLicense/edit/' + chandlerLicense.id}" ><i
-                          class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Edit</a >
-                  </th >
                 </tr >
                 </tbody >
               </table >
@@ -95,7 +86,7 @@
   </div >
 </div >
 <!--Back Button-->
-<div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+<div class="form-group col-md-12 col-sm-12 text-center flex-column mt-3" >
   <a href="/chandlerLicense" >
     <button class="btn btn-dark" type="button" tabindex="10" >
       <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
