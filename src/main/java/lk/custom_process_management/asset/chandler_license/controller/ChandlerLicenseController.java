@@ -118,7 +118,7 @@ public class ChandlerLicenseController implements AbstractController< ChandlerLi
     @GetMapping( "/view/{id}" )
     public String view(@PathVariable Integer id, Model model) {
         ChandlerLicense chandlerLicense = chandlerLicenseService.findById(id);
-        model.addAttribute("chandlerLicenseDetail", chandlerLicense);
+        model.addAttribute("chandlerLicenses", chandlerLicenseService.findByChandler(chandlerLicense.getChandler()));
         model.addAttribute("chandlerDetail", chandlerLicense.getChandler());
         return "chandlerLicense/chandlerLicense-detail";
     }
