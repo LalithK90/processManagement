@@ -3,6 +3,7 @@ package lk.custom_process_management.asset.warehouse_block.service;
 
 import lk.custom_process_management.asset.warehouse_block.dao.WarehouseBlockDao;
 import lk.custom_process_management.asset.warehouse_block.entity.WarehouseBlock;
+import lk.custom_process_management.asset.warehouse_block.entity.enums.WarehouseBlockStatus;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -14,38 +15,42 @@ import java.util.List;
 
 @Service
 @CacheConfig( cacheNames = "warehouseBlock" )
-public class WarehouseBlockService implements AbstractService< WarehouseBlock, Integer> {
-    private final WarehouseBlockDao warehouseBlockDao;
+public class WarehouseBlockService implements AbstractService< WarehouseBlock, Integer > {
+  private final WarehouseBlockDao warehouseBlockDao;
 
-    @Autowired
-    public WarehouseBlockService(WarehouseBlockDao warehouseBlockDao) {
-        this.warehouseBlockDao = warehouseBlockDao;
-    }
+  @Autowired
+  public WarehouseBlockService(WarehouseBlockDao warehouseBlockDao) {
+    this.warehouseBlockDao = warehouseBlockDao;
+  }
 
-    public List< WarehouseBlock > findAll() {
-        return warehouseBlockDao.findAll();
-    }
+  public List< WarehouseBlock > findAll() {
+    return warehouseBlockDao.findAll();
+  }
 
-    public WarehouseBlock findById(Integer id) {
-        return warehouseBlockDao.getOne(id);
-    }
+  public WarehouseBlock findById(Integer id) {
+    return warehouseBlockDao.getOne(id);
+  }
 
-    public WarehouseBlock persist(WarehouseBlock warehouseBlock) {
-        return warehouseBlockDao.save(warehouseBlock);
-    }
+  public WarehouseBlock persist(WarehouseBlock warehouseBlock) {
+    return warehouseBlockDao.save(warehouseBlock);
+  }
 
-    public boolean delete(Integer id) {
-        warehouseBlockDao.deleteById(id);
-        return false;
-    }
+  public boolean delete(Integer id) {
+    warehouseBlockDao.deleteById(id);
+    return false;
+  }
 
-    public List< WarehouseBlock > search(WarehouseBlock warehouseBlock) {
-        ExampleMatcher matcher = ExampleMatcher
-                .matching()
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example< WarehouseBlock > warehouseBlockExample = Example.of(warehouseBlock, matcher);
-        return warehouseBlockDao.findAll(warehouseBlockExample);
-    }
+  public List< WarehouseBlock > search(WarehouseBlock warehouseBlock) {
+    ExampleMatcher matcher = ExampleMatcher
+        .matching()
+        .withIgnoreCase()
+        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+    Example< WarehouseBlock > warehouseBlockExample = Example.of(warehouseBlock, matcher);
+    return warehouseBlockDao.findAll(warehouseBlockExample);
+  }
+
+  public List< WarehouseBlock > findByWarehouseBlockStatus(WarehouseBlockStatus warehouseBlockStatus) {
+    return warehouseBlockDao.findByWarehouseBlockStatus(warehouseBlockStatus);
+  }
 }
 

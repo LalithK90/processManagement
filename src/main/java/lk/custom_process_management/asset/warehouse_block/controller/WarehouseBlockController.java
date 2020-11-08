@@ -2,6 +2,7 @@ package lk.custom_process_management.asset.warehouse_block.controller;
 
 
 import lk.custom_process_management.asset.warehouse_block.entity.WarehouseBlock;
+import lk.custom_process_management.asset.warehouse_block.entity.enums.WarehouseBlockStatus;
 import lk.custom_process_management.asset.warehouse_block.service.WarehouseBlockService;
 import lk.custom_process_management.util.interfaces.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,11 @@ import javax.validation.Valid;
         if ( bindingResult.hasErrors() ) {
             return commonThings(model, warehouseBlock, true);
         }
+        if(warehouseBlock.getId()!=null){
+          warehouseBlock.setWarehouseBlockStatus(WarehouseBlockStatus.AVAILABLE);
+        }
+
         redirectAttributes.addFlashAttribute("warehouseDetail", warehouseBlockService.persist(warehouseBlock));
-        // branchService.persist(warehouseBlock);
         return "redirect:/warehouseBlock";
     }
 

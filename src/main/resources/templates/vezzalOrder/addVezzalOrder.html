@@ -19,7 +19,7 @@
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          <span data-th-text="${addStatus==true?'Add New/vezzalOrder':'Update/vezzalOrder Details'}" ></span >
+          <span data-th-text="${addStatus==true?'Add new vezzal order':'Update vezzal order Details'}" ></span >
         </strong >
       </h2 >
     </div >
@@ -109,7 +109,7 @@
               <label class="control-label" for="closingDate" >Closing Date At :</label >
             </div >
             <div class="col-md-8" >
-              <input id="closingDate" data-th-field="*{closingDate}" class="form-control" type="date"
+              <input id="closingDate" data-th-field="*{closingDate}" class="form-control" type="date" required
               />
             </div >
           </div >
@@ -119,7 +119,7 @@
               <label class="control-label" for="warehouseBlock" >Warehouse Block :</label >
             </div >
             <div class="col-md-8" >
-              <select id="warehouseBlock" data-th-field="*{warehouseBlock}" class="form-control" >
+              <select id="warehouseBlock" data-th-field="*{warehouseBlock}" class="form-control" required>
                 <option value="" disabled selected >Please Select</option >
                 <option data-th-each="warehouseBlock : ${warehouseBlocks}"
                         data-th-value="${warehouseBlock.id}"

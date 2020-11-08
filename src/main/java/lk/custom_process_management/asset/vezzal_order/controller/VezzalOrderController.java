@@ -3,11 +3,12 @@ package lk.custom_process_management.asset.vezzal_order.controller;
 import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.asset.item.service.ItemService;
 import lk.custom_process_management.asset.vezzal_arrival_history.service.VezzalArrivalHistoryService;
-import lk.custom_process_management.asset.vezzal_order.entity.enums.VezzalOrderStatus;
 import lk.custom_process_management.asset.vezzal_order.entity.VezzalOrder;
+import lk.custom_process_management.asset.vezzal_order.entity.enums.VezzalOrderStatus;
 import lk.custom_process_management.asset.vezzal_order.service.VezzalOrderService;
-import lk.custom_process_management.asset.vezzal_order_item.entity.enums.VezzalOrderItemStatus;
 import lk.custom_process_management.asset.vezzal_order_item.entity.VezzalOrderItem;
+import lk.custom_process_management.asset.vezzal_order_item.entity.enums.VezzalOrderItemStatus;
+import lk.custom_process_management.asset.warehouse_block.entity.enums.WarehouseBlockStatus;
 import lk.custom_process_management.asset.warehouse_block.service.WarehouseBlockService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
@@ -50,8 +51,8 @@ public class VezzalOrderController {
     model.addAttribute("addStatus", addStatus);
     //TODO -> need to filter login user if user has privilege to manage relevant vezzal that will be pop up
     model.addAttribute("vezzalOderHistories", vezzalArrivalHistoryService.findAll());
-    //TODO -> warehouse blocks which is currently available
-    model.addAttribute("warehouseBlocks", warehouseBlockService.findAll());
+    model.addAttribute("warehouseBlocks",
+                       warehouseBlockService.findByWarehouseBlockStatus(WarehouseBlockStatus.AVAILABLE));
     List< Item > itemList;
     itemList = itemService.findAll();
     if ( vezzalOrder.getVezzalOrderItems() != null ) {
@@ -70,7 +71,7 @@ public class VezzalOrderController {
 
   @PostMapping( value = {"/save", "/update"} )
   public String persist(@Valid @ModelAttribute VezzalOrder vezzalOrder, BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes,Model model) {
+                        RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() || vezzalOrder.getVezzalOrderItems().isEmpty() ) {
       return commonAdd(model, vezzalOrder, true);
     }
@@ -91,11 +92,10 @@ public class VezzalOrderController {
           vezzalOrderItem.setVezzalOrder(vezzalOrder);
           vezzalOrderItem.setVezzalOrderItemStatus(VezzalOrderItemStatus.PROCESSING);
         });
-    VezzalOrder vezzalOrderDb=   vezzalOrderService.persist(vezzalOrder);
-    redirectAttributes.addFlashAttribute("vezzalOrderDetail",vezzalOrderDb );
+    VezzalOrder vezzalOrderDb = vezzalOrderService.persist(vezzalOrder);
+    redirectAttributes.addFlashAttribute("vezzalOrderDetail", vezzalOrderDb);
     redirectAttributes.addFlashAttribute("vezzalArrivalHistoryDetail", vezzalOrderDb.getVezzalArrivalHistory());
     redirectAttributes.addFlashAttribute("vezzalDetail", vezzalOrderDb.getVezzalArrivalHistory().getVezzal());
-
 
     return "redirect:/vezzalOrder";
   }
@@ -119,7 +119,7 @@ public class VezzalOrderController {
   @GetMapping( "/view/{id}" )
   public String view(@PathVariable Integer id, Model model) {
     VezzalOrder vezzalOrder = vezzalOrderService.findById(id);
-    model.addAttribute("vezzalOrderDetail",vezzalOrder );
+    model.addAttribute("vezzalOrderDetail", vezzalOrder);
     model.addAttribute("vezzalArrivalHistoryDetail", vezzalOrder.getVezzalArrivalHistory());
     model.addAttribute("vezzalDetail", vezzalOrder.getVezzalArrivalHistory().getVezzal());
     return "vezzalOrder/vezzalOrder-detail";

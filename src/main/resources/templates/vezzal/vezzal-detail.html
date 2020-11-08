@@ -79,10 +79,13 @@
           <div class="col-md-4" >
             <label class="control-label" for="address" >MMSI Number :</label >
           </div >
-          <div class="col-md-8 text-left" >
+          <div class="col-md-8" >
             <p id="address" class="display_detail " data-th-text="${vezzalDetail.mmsiNumber}" ></p >
           </div >
         </div >
+      </div >
+      <!--Right Side-->
+      <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
         <!--Country-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
@@ -92,9 +95,6 @@
             <p id="mobile" data-th-text="${vezzalDetail.country}" class="display_detail" ></p >
           </div >
         </div >
-      </div >
-      <!--Right Side-->
-      <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
         <!--Created By-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
@@ -130,12 +130,17 @@
             <label class="control-label" for="updatedAt" >Updated At :</label >
           </div >
           <div class="col-md-8" >
-            <p id="updatedAt" data-th-text="${{vezzalDetail.updatedAt}}" class="display_detail" ></p >
+            <p id="updatedAt" data-th-text="${#temporals.format(vezzalDetail.updatedAt, 'dd-MM-yyyy HH:mm')}" class="display_detail" ></p >
           </div >
         </div >
       </div >
     </div >
     <div class="form-row" >
+      <div class="card-header container-fluid text-center" >
+        <h5 >
+          Vezzal Arriaval History
+        </h5 >
+      </div >
       <div id="accordianId" role="tablist" aria-multiselectable="true" class="container-fluid" >
         <div class="card" data-th-each="vezzalArrivalHistoryDetail, index : ${vezzalDetail.vezzalArrivalHistories}" >
           <div class="card-header" role="tab" data-th-id="${'#header'+index.count}" >
