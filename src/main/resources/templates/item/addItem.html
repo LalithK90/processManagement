@@ -12,7 +12,7 @@
     <div class="row text-center border-info">
         <!--View list Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/item" tabindex="1">
+            <a class="btn btn-outline-primary" href="/item" tabindex="1">
                 <i class="fa fa-list" style="font-size: 20px"></i>&nbsp; View List
             </a>
         </div>
@@ -26,14 +26,14 @@
         </div>
         <!--Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
+            <a class="btn btn-outline-primary" href="/home" tabindex="2">
                 <i class="fa fa-home" style="font-size: 20px"></i>&nbsp;Home
             </a>
         </div>
     </div>
 </div>
 <!--Form Content-->
-<div class="container-fluid bg-info formBorder">
+<div class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <form class="form-horizontal" data-th-action="${addStatus==true?'/item/save':'/item/update'}" data-th-object="${item}"
               enctype="multipart/form-data" id="form" method="POST">
@@ -142,16 +142,16 @@
                 <!--Button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
                     <!--Back Button-->
-                    <a class="btn btn-dark" href="/item" tabindex="14">
+                    <a class="btn btn-outline-dark" href="/item" tabindex="14">
                         <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
                     </a>
                     <!--Save Button-->
-                    <button class="btn btn-success ml-5" tabindex="12" type="submit">
+                    <button class="btn btn-outline-success ml-5" tabindex="12" type="submit">
                         <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;<span data-th-text="${addStatus==true?'Save': 'Update'}"
                                                                                              id="submit"></span>
                     </button>
                     <!--Cancel Button-->
-                    <button class="btn btn-warning ml-5" tabindex="13" type="reset">
+                    <button class="btn btn-outline-warning ml-5" tabindex="13" type="reset">
                         <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
                     </button>
                 </div>

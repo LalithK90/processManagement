@@ -174,7 +174,7 @@ let addRow = function (data, id) {
     row.insertCell(2).innerHTML = data.name;
     row.insertCell(3).innerHTML = data.payRoleNumber;
     row.insertCell(4).innerHTML = data.designation;
-    row.insertCell(5).innerHTML = `<button type="button" class="btn btn-primary btn-sm " onclick="showSelect(this)"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>`;
+    row.insertCell(5).innerHTML = `<button type="button" class="btn btn-outline-primary btn-sm " onclick="showSelect(this)"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>`;
 
 };
 
@@ -291,9 +291,9 @@ let addRowToSelectedTable = function (employee) {
                                             </div>
                                                          
     `;
-        row.insertCell(5).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelect(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
+        row.insertCell(5).innerHTML = `<button type="button" class="btn btn-outline-danger btn-sm " onclick="deletedSelect(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
     } else {
-        row.insertCell(4).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelect(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
+        row.insertCell(4).innerHTML = `<button type="button" class="btn btn-outline-danger btn-sm " onclick="deletedSelect(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
     }
 
 };

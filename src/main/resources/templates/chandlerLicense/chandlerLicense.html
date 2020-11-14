@@ -12,7 +12,7 @@
 <div class="container-fluid">
     <div class="row text-center">
         <div class="col">
-            <a class="btn btn-success" href="/chandlerLicense" tabindex="1">
+            <a class="btn btn-outline-success" href="/chandlerLicense" tabindex="1">
                 <i class="fa fa-plus"></i>&nbsp;&nbsp;New</a>&nbsp;
         </div>
         <!--List Name-->
@@ -25,7 +25,7 @@
         </div>
         <!--Home Button-->
         <div class="col" >
-            <a href="/home" id="searchShow" class="btn btn-primary" tabindex="2" >
+            <a href="/home" id="searchShow" class="btn btn-outline-primary" tabindex="2" >
                 <i class="fas fa-home" style="font-size: 20px" ></i >&nbsp;&nbsp;Home&nbsp;
             </a >
         </div >
@@ -34,11 +34,11 @@
     <div class="row">
         <div class="col text-center">
             <div class="btn-group" data-toggle="buttons">
-                <a href="/chandler" class="btn btn-info btn-lg m-2 pr-5 pl-5"> Chandlers </a>
-                 <a href="/chandlerLicense" class="btn btn-primary btn-lg m-2 pr-5 pl-5"> All </a>
-                <a href="/chandlerLicense/process" class="btn btn-warning btn-lg m-2 pr-5 pl-5"> Process </a>
-                <a href="/chandlerLicense/valid" class="btn btn-success btn-lg m-2 pr-5 pl-5"> Valid </a>
-                <a href="/chandlerLicense/invalid" class="btn btn-danger btn-lg m-2 pr-5 pl-5"> Invalid </a>
+                <a href="/chandler" class="btn btn-outline-info btn-lg m-2 pr-5 pl-5"> Chandlers </a>
+                 <a href="/chandlerLicense" class="btn btn-outline-primary btn-lg m-2 pr-5 pl-5"> All </a>
+                <a href="/chandlerLicense/process" class="btn btn-outline-warning btn-lg m-2 pr-5 pl-5"> Process </a>
+                <a href="/chandlerLicense/valid" class="btn btn-outline-success btn-lg m-2 pr-5 pl-5"> Valid </a>
+                <a href="/chandlerLicense/invalid" class="btn btn-outline-danger btn-lg m-2 pr-5 pl-5"> Invalid </a>
             </div>
         </div>
     </div>
@@ -67,10 +67,10 @@
                     <th data-th-text="${chandlerLicense.endDate}"></th>
                     <th data-th-text="${chandlerLicense.licenseStatus.licenseStatus}"></th>
                     <th>
-                        <a class="btn btn-primary btn-sm"
+                        <a class="btn btn-outline-primary btn-sm"
                            data-th-href="${'/chandlerLicense/view/' + chandlerLicense.id}"><i
                                 class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                        <a class="btn btn-success btn-sm"
+                        <a class="btn btn-outline-success btn-sm"
                            data-th-href="${'/chandlerLicense/edit/' + chandlerLicense.id}"><i
                                 class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit</a>
                     </th>

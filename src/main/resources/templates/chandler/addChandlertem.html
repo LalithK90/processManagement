@@ -14,7 +14,7 @@
     <div class="row text-center">
         <!--View List Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/supplier">
+            <a class="btn btn-outline-primary" href="/supplier">
                 <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
             </a>
         </div>
@@ -28,7 +28,7 @@
         </div>
         <!--Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home">
+            <a class="btn btn-outline-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
             </a>
         </div>
@@ -36,7 +36,7 @@
 </div>
 
 <!--Form Content - start -->
-<div class="container-fluid bg-info">
+<div class="container-fluid">
     <!--Supplier Search - Start-->
     <div class="offset-1 flex-column" data-th-if="${searchAreaShow==true}">
         <form class="form-inline" data-th-action="${'/supplierItem/find'}" data-th-object="${supplier}"
@@ -52,7 +52,7 @@
                 <label class="mr-5 ml-5" for="searchValue">Search Value</label>
                 <input class="form-control mr-5 ml-5" id="searchValue" minlength="5" required tabindex="2" type="text">
                 <!--Search Button-->
-                <button class="btn btn-success mr-5 ml-5" id="searchButton" tabindex="3" type="submit">
+                <button class="btn btn-outline-success mr-5 ml-5" id="searchButton" tabindex="3" type="submit">
                     <i class="fa fa-search " style="font-size: 20px"></i>&nbsp;&nbsp; Search
                 </button>
             </div>
@@ -66,7 +66,7 @@
     <!--Supplier List Show - end-->
     <!--Supplier Item add- start-->
     <div class="col-12 flex-column" data-th-if="${supplierDetailShow==false}">
-        <a aria-controls="hrefCollapse" aria-expanded="false" class="btn btn-primary col-12" data-toggle="collapse"
+        <a aria-controls="hrefCollapse" aria-expanded="false" class="btn btn-outline-primary col-12" data-toggle="collapse"
            href="#hrefCollapse">Show Supplier Details</a>
         <div class="collapse" id="hrefCollapse">
             <section data-th-replace="~{supplier/supplier-detail :: supplierDetailsFragment}"></section>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="container-fluid col-md-4">
                     <a data-th-href="${'/supplierItem/edit/'+ supplierDetail.id}">
-                        <button class=" btn btn-warning" type="button">Edit Item</button>
+                        <button class=" btn btn-outline-warning" type="button">Edit Item</button>
                     </a>
                 </div>
             </div>
@@ -192,15 +192,15 @@
             <!--Button-->
             <div class="form-group col-md-12 col-sm-12 mt-4 text-center flex-column ">
                 <!--Back Button-->
-                <a class="btn btn-dark" href="/supplier" tabindex="11">
+                <a class="btn btn-outline-dark" href="/supplier" tabindex="11">
                     <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
                 </a>
                 <!--Save Button-->
-                <button class="btn btn-success ml-5" tabindex="9" type="submit">
+                <button class="btn btn-outline-success ml-5" tabindex="9" type="submit">
                     <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;Save
                 </button>
                 <!--Cancel Button-->
-                <button class="btn btn-warning ml-5" tabindex="10" type="reset">
+                <button class="btn btn-outline-warning ml-5" tabindex="10" type="reset">
                     <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
                 </button>
             </div>

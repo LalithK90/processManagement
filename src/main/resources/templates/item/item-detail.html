@@ -12,7 +12,7 @@
     <div class="row text-center border-info">
         <!--View List Button-->
         <div class="col">
-            <a href="/item" class="btn btn-primary" tabindex="2">
+            <a href="/item" class="btn btn-outline-primary" tabindex="2">
                 <i class="fa fa-list" style="font-size: 20px"></i>&nbsp; View List
             </a>
         </div>
@@ -26,14 +26,14 @@
         </div>
         <!--Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="1">
+            <a class="btn btn-outline-primary" href="/home" tabindex="1">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
             </a>
         </div>
     </div>
 </div>
 <!--details-->
-<div th:fragment="itemDetailsFragment" class="container-fluid bg-info formBorder">
+<div th:fragment="itemDetailsFragment" class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <div class="row">
             <!--Left Side-->
@@ -140,7 +140,7 @@
             <!--Back Button-->
             <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
                 <a href="/item">
-                    <button class="btn btn-dark" type="button" tabindex="3">
+                    <button class="btn btn-outline-dark" type="button" tabindex="3">
                         <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp; &nbsp;Back
                     </button>
                 </a>

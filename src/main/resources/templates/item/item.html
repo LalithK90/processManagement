@@ -12,7 +12,7 @@
     <div class="row text-center">
         <!-- New Item Button-->
         <div class="col">
-            <a class="btn btn-success" href="/item/add" tabindex="1"><i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New</a>&nbsp;
+            <a class="btn btn-outline-success" href="/item/add" tabindex="1"><i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New</a>&nbsp;
         </div>
         <!-- List Name-->
         <div class="col">
@@ -24,7 +24,7 @@
         </div>
         <!-- Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home" id="searchShow" tabindex="2">
+            <a class="btn btn-outline-primary" href="/home" id="searchShow" tabindex="2">
                 <!--<i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;-->
                 <i class="fas fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;Home
                 &nbsp;
@@ -53,11 +53,11 @@
                     <th data-th-text="${item.category.name}"></th>
                     <th data-th-text="${item.name}"></th>
                     <th>
-                        <a class="btn btn-primary btn-sm" data-th-href="${'/item/' + item.id}"><i class="fa fa-folder-open"
+                        <a class="btn btn-outline-primary btn-sm" data-th-href="${'/item/' + item.id}"><i class="fa fa-folder-open"
                                                                                              style="font-size: 15px"></i>&nbsp;View</a>
-                        <a class="btn btn-success btn-sm" data-th-href="${'/item/edit/' + item.id}"><i class="fa fa-edit"
+                        <a class="btn btn-outline-success btn-sm" data-th-href="${'/item/edit/' + item.id}"><i class="fa fa-edit"
                                                                                                   style="font-size: 15px"></i>&nbsp;Edit</a>
-                        <a class="btn btn-danger btn-sm" data-th-href="${'/item/deactivate/' + item.id}"
+                        <a class="btn btn-outline-danger btn-sm" data-th-href="${'/item/deactivate/' + item.id}"
                            data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                             <i class="fa fa-trash" style="font-size: 15px"></i> Delete</a>
                     </th>

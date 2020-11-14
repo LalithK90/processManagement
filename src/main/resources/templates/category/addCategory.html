@@ -12,7 +12,7 @@
     <div class="row text-center">
         <!--View list Button-->
         <div class="col">
-            <a href="/category" class="btn btn-primary">
+            <a href="/category" class="btn btn-outline-primary">
                 <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
             </a>
         </div>
@@ -26,14 +26,14 @@
         </div>
         <!--Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home">
+            <a class="btn btn-outline-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
             </a>
         </div>
     </div>
 </div>
 <!--Form Content-->
-<div class="container-fluid bg-info formBorder">
+<div class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal" th:action="${addStatus==true?'/category/add':'/category/update'}"
               th:object="${category}" method="POST" enctype="multipart/form-data">
@@ -77,13 +77,13 @@
                 </div>
                 <!--Button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                    <button class="btn btn-primary"  >
+                    <button class="btn btn-outline-primary"  >
                         <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
                     </button>
-                    <button class="btn btn-success ml-5" type="submit" tabindex="21">
+                    <button class="btn btn-outline-success ml-5" type="submit" tabindex="21">
                         <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;<span id="submit" th:text="${addStatus==true?'Save': 'Update'}"></span>
                     </button>
-                    <button class="btn btn-warning ml-5" type="reset" tabindex="21">
+                    <button class="btn btn-outline-warning ml-5" type="reset" tabindex="21">
                         <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
                     </button>
                 </div>
