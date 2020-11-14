@@ -7,17 +7,18 @@
     --error-color: #fa370d;
 }
 
-/*#loginBack {*/
-/*    background-image: url('../img/loginBackground.jpg');*/
-/*}*/
+#sideLogin {
+    background-image: url('../img/port.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
 
 /*html Background - start*/
-/*body {*/
-/*    background-image: url('../img/loginBackground.jpg');*/
-/*    background-size: cover;*/
-/*    background-repeat: no-repeat;*/
-/*}*/
+#login {
+    background: linear-gradient(200deg, #FDC182, #FBBF5E, #171E28, #04c2ec, #f2e053);
+    background-size: 150% 150%;
+}
 
 
 /*error pages - properties end */
@@ -75,13 +76,14 @@
 /*Error Message Colour - end*/
 
 /*<hr/> tag style - start */
-hr{
+hr {
     height: 30px;
     border-style: solid;
     border-color: black;
     border-width: 1px 0 0 0;
     border-radius: 20px;
 }
+
 hr:before {
     display: block;
     content: "";
@@ -92,9 +94,5 @@ hr:before {
     border-width: 0 0 1px 0;
     border-radius: 20px;
 }
-/*<hr/> tag style - end */
 
-/*Form-row margin add*/
-.form-row{
-    margin-top: 5px;
-}
+/*<hr/> tag style - end */
