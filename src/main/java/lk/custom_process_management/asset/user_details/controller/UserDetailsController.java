@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,8 +68,12 @@ public class UserDetailsController {
   //Send all userDetails data
   @RequestMapping
   public String findAll(Model model) {
-    List<UserDetails> userDetailsList = usersDetailsService.findAll();
-    model.addAttribute("userDetailses", userDetailsList.remove(0));
+    List< UserDetails > userDetailsList = new ArrayList<>();
+    for ( int i = 0; i < usersDetailsService.findAll().size(); i++ ) {
+      if ( i == 0 ) usersDetailsService.findAll().remove(0);
+      else userDetailsList.add(usersDetailsService.findAll().get(i));
+    }
+    model.addAttribute("userDetailses", userDetailsList);
     model.addAttribute("contendHeader", "User Details Registration");
     return "userDetails/userDetails";
   }
@@ -103,7 +108,7 @@ public class UserDetailsController {
   //Employee add and update
   @PostMapping( value = {"/save", "/update"} )
   public String add(@Valid @ModelAttribute UserDetails userDetails, BindingResult result, Model model
-                           ) {
+                   ) {
     if ( result.hasErrors() ) {
       model.addAttribute("addStatus", true);
       model.addAttribute("userDetails", userDetails);
@@ -148,7 +153,8 @@ public class UserDetailsController {
 
     } catch ( Exception e ) {
       ObjectError error = new ObjectError("userDetails",
-                                          "There is already in the system. \n Error happened because of Image. \n System message -->" + e.toString());
+                                          "There is already in the system. \n Error happened because of Image. \n " +
+                                              "System message -->" + e.toString());
       result.addError(error);
       model.addAttribute("addStatus", true);
       model.addAttribute("userDetails", userDetails);

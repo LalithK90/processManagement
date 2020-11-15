@@ -41,9 +41,7 @@
           <label class="control-label" for="number" >User Number :</label >
         </div >
         <div class="col-md-8" >
-          <input id="number" data-th-value="${userDetail.number}" class="form-control" tabindex="4"
-                 type="text" readonly required />
-
+          <p id="number" data-th-text="${userDetail.number}" ></p >
         </div >
       </div >
       <!--Tittle -->
@@ -52,9 +50,7 @@
           <label class="control-label" for="title" >Title :</label >
         </div >
         <div class="col-md-8" >
-          <input id="title" type="text" data-th-value="${userDetail.title}" class="form-control" tabindex="3"
-                 required />
-
+          <p id="title" data-th-text="${userDetail.title.title}" ></p >
         </div >
       </div >
       <!--Name-->
@@ -63,7 +59,7 @@
           <label class="control-label" for="name" >Name :</label >
         </div >
         <div class="col-md-8" >
-          <input id="name" data-th-value="${userDetail.name}" class="form-control" tabindex="4" type="text" required />
+          <p id="name" data-th-text="${userDetail.name}" ></p >
         </div >
       </div >
       <!--Calling Name-->
@@ -72,8 +68,7 @@
           <label class="control-label" for="callingName" >Calling Name :</label >
         </div >
         <div class="col-md-8" >
-          <input id="callingName" data-th-value="${userDetail.callingName}" class="form-control" tabindex="5"
-                 type="text" minlength="5" />
+          <p id="callingName" data-th-text="${userDetail.callingName}" ></p >
         </div >
       </div >
       <!--Nic-->
@@ -82,9 +77,7 @@
           <label class="control-label" for="nic" >NIC No :</label >
         </div >
         <div class="col-md-8" >
-          <input id="nic" data-th-value="${userDetail.nic}" class="form-control" tabindex="6" type="text"
-                 maxlength="12"
-                 minlength="10" required />
+          <p id="nic" data-th-text="${userDetail.nic}" ></p >
         </div >
       </div >
       <!--Gender-->
@@ -93,9 +86,7 @@
           <label class="control-label" for="gender" >Gender :</label >
         </div >
         <div class="col-md-8" >
-          <input id="gender" data-th-value="${userDetail.gender}" class="form-control" tabindex="7" readonly=""
-                 required type="text" />
-
+          <p id="gender" data-th-text="${userDetail.gender}" ></p >
         </div >
       </div >
       <!--Date of birth-->
@@ -104,9 +95,7 @@
           <label class="control-label" for="dateOfBirth" >Birth date :</label >
         </div >
         <div class="col-md-8" >
-          <input id="dateOfBirth" data-th-value="${userDetail.dateOfBirth}" class="form-control" tabindex="8"
-                 placeholder="Ex: 1990 - 01 - 20"
-                 required type="date" readonly />
+          <p id="dateOfBirth" data-th-text="${userDetail.dateOfBirth}" ></p >
         </div >
       </div >
       <!--Image-->
@@ -130,11 +119,7 @@
           <label class="control-label" for="address" >Address :</label >
         </div >
         <div class="col-md-8" >
-                            <textarea id="address" data-th-value="${userDetail.address}" class="form-control"
-                                      tabindex="12"
-                                      required >
-
-                            </textarea >
+          <span id="address" data-th-text="${userDetail.address}" >                            </span >
         </div >
       </div >
       <!--Mobile Number One-->
@@ -143,10 +128,7 @@
           <label class="control-label" for="mobileOne" >Mobile One No :</label >
         </div >
         <div class="col-md-8" >
-          <input id="mobileOne" data-th-value="${userDetail.mobileOne}" class="form-control mobile" tabindex="13"
-                 type="text"
-                 maxlength="10" min="9"
-                 required />
+          <p id="mobileOne" data-th-text="${userDetail.mobileOne}" ></p >
         </div >
       </div >
       <!--Mobile Number Two-->
@@ -155,9 +137,7 @@
           <label class="control-label" for="mobileTwo" >Mobile Two No :</label >
         </div >
         <div class="col-md-8" >
-          <input id="mobileTwo" data-th-value="${userDetail.mobileTwo}" class="form-control mobile" tabindex="14"
-                 type="text"
-                 maxlength="10" min="9" />
+          <p id="mobileTwo" data-th-text="${userDetail.mobileTwo}" ></p >
         </div >
       </div >
       <!--Land Number-->
@@ -166,9 +146,7 @@
           <label class="control-label" for="land" >Land No :</label >
         </div >
         <div class="col-md-8" >
-          <input id="land" data-th-value="${userDetail.land}" class="form-control land" type="text" tabindex="15"
-                 maxlength="10"
-                 min="9" />
+          <p id="land" data-th-text="${userDetail.land}" ></p >
         </div >
       </div >
       <!--Email-->
@@ -177,8 +155,7 @@
           <label class="control-label" for="email" >Email :</label >
         </div >
         <div class="col-md-8" >
-          <input id="email" data-th-value="${userDetail.email}" class="form-control" tabindex="16" type="email"
-                 required />
+          <p id="email" data-th-text="${userDetail.email}" ></p >
         </div >
       </div >
       <!--Office email-->
@@ -187,8 +164,7 @@
           <label class="control-label" for="officeEmail" >Office Email :</label >
         </div >
         <div class="col-md-8" >
-          <input id="officeEmail" data-th-value="${userDetail.officeEmail}" class="form-control" tabindex="17"
-                 type="email" required />
+          <p id="officeEmail" data-th-text="${userDetail.officeEmail}" ></p >
         </div >
       </div >
       <!--Relevant Party-->
@@ -197,9 +173,7 @@
           <label class="control-label" for="relevantParty" >Relevant Party :</label >
         </div >
         <div class="col-md-8" >
-          <input type="text" id="relevantParty" data-th-value="${userDetail.relevantParty}" class="form-control"
-                 tabindex="3" />
-
+          <p type="text" id="relevantParty" data-th-text="${userDetail.relevantParty}" ></p >
         </div >
       </div >
       <!--Created by and created at-->
@@ -208,8 +182,7 @@
           <label class="control-label" for="createdBy" >Created By :</label >
         </div >
         <div class="col-md-8" >
-          <input id="createdBy" data-th-value="${userDetail.createdBy}" class="form-control" type="text"
-                 readonly />
+          <p id="createdBy" data-th-text="${userDetail.createdBy}" ></p >
         </div >
       </div >
       <div class="form-row text-right" >
@@ -217,8 +190,7 @@
           <label class="control-label" for="createdAt" >Created At :</label >
         </div >
         <div class="col-md-8" >
-          <input id="createdAt" data-th-value="${{userDetail.createdAt}}" class="form-control" type="text"
-                 readonly />
+          <p id="createdAt" data-th-text="${{userDetail.createdAt}}" ></p >
         </div >
       </div >
     </div >
