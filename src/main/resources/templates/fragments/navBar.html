@@ -3,7 +3,7 @@
 <body >
 
 
-<nav class="navbar navbar-expand-sm navbar-light font-weight-bolder bg-secondary mb-3" th:fragment="navBarFragment" >
+<nav class="navbar navbar-expand-sm navbar-light font-weight-bolder bg-data-sec-ndary mb-3" data-th-fragment="navBarFragment" >
   <a class="navbar-brand text-center" href="/home" >
     <img data-th-src="${'/img/logo.png'}" class=" rounded" style="height: 2.5%; width: 12.5%" alt="Company Logo" >
     <span class="h3" >Sri Lanka Custom</span >
@@ -16,23 +16,57 @@
       <li class="nav-item active" >
         <a class="nav-link" href="/" >Home <span class="sr-only" >(current)</span ></a >
       </li >
-      <li class="nav-item" >
-        <a class="nav-link" href="#" >Link</a >
+      <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" href="#" id="general" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false" >General</a >
+        <div class="dropdown-menu" aria-labelledby="general" >
+          <a class="dropdown-item" href="#" >Action 1</a >
+          <a class="dropdown-item" href="#" >Action 2</a >
+        </div >
       </li >
       <li class="nav-item dropdown" >
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
-           aria-expanded="false" >Dropdown</a >
-        <div class="dropdown-menu" aria-labelledby="dropdownId" >
+        <a class="nav-link dropdown-toggle" href="#" id="transaction" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false" >Transaction</a >
+        <div class="dropdown-menu" aria-labelledby="transaction" >
+          <a class="dropdown-item" href="#" >Action 1</a >
+          <a class="dropdown-item" href="#" >Action 2</a >
+        </div >
+      </li >
+      <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" href="#" id="report" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false" >Report</a >
+        <div class="dropdown-menu" aria-labelledby="report" >
           <a class="dropdown-item" href="#" >Action 1</a >
           <a class="dropdown-item" href="#" >Action 2</a >
         </div >
       </li >
     </ul >
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" >
-      <li class="nav-item active" >
+  </div >
+  <div >
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-end" >
+      <li class="nav-item dropdown" data-sec-authorize="isAuthenticated()" >
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false" >
+          <i class="fas fa-user-tie fa-lg" ></i >&nbsp;&nbsp;
+          <span data-th-text="${#authentication.name}" ></span >
+          <span class="caret" ></span >
+        </a >
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown1" >
+          <a class="dropdown-item dropdown-item btn btn-group-sm" href="/profile" >
+            <i class="fas fa-user-cog" ></i > &nbsp;Profile
+          </a >
+          <a class="dropdown-item dropdown-item btn btn-group-sm" href="/passwordChange" >
+            <i class="fas fa-key " ></i >&nbsp;Change Password</a >
+        </div >
       </li >
-      <li class="nav-item active" >
-        <a data-th-href="@{'/userDetails'}" class="nav-link" > Employee</a >
+      <li class="nav-item dropdown " data-sec-authorize="isAuthenticated()" >
+        <a href="/logout" class="nav-link" > <i class="fas fa-sign-out-alt" ></i >&nbsp;&nbsp; Log
+                                                                                        out</a >
+      </li >
+      <li class="nav-item dropdown " data-sec-authorize="!isAuthenticated()" >
+        <a href="/login" class="nav-link" ><i class="fas fa-sign-in-alt" ></i >&nbsp;&nbsp;Login</a >
+      </li >
     </ul >
   </div >
 </nav >
