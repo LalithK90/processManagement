@@ -1,5 +1,6 @@
 package lk.custom_process_management.asset.vezzal_arrival_history.service;
 
+import lk.custom_process_management.asset.vezzal.entity.Vezzal;
 import lk.custom_process_management.asset.vezzal_arrival_history.dao.VezzalArrivalHistoryDao;
 import lk.custom_process_management.asset.vezzal_arrival_history.entity.enums.VezzalDepartureArrivalStatus;
 import lk.custom_process_management.asset.vezzal_arrival_history.entity.VezzalArrivalHistory;
@@ -46,5 +47,9 @@ return vezzalArrivalHistoryDao.findAll(vezzalArrivalHistoryExample);
 
   public List< VezzalArrivalHistory> findByVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus vezzalDepartureArrivalStatus) {
   return vezzalArrivalHistoryDao.findByVezzalDepartureArrivalStatus(vezzalDepartureArrivalStatus);
+  }
+
+  public VezzalArrivalHistory lastVezzalHistoryByVezzal(Vezzal vezzal) {
+  return vezzalArrivalHistoryDao.findFirstByVezzalOrderByIdDesc(vezzal);
   }
 }

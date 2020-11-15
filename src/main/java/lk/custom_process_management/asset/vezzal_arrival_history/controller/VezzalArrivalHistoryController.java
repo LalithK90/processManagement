@@ -3,12 +3,13 @@ package lk.custom_process_management.asset.vezzal_arrival_history.controller;
 import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.asset.vezzal.entity.Vezzal;
 import lk.custom_process_management.asset.vezzal.service.VezzalService;
-import lk.custom_process_management.asset.vezzal_arrival_history.entity.enums.VezzalDepartureArrivalStatus;
 import lk.custom_process_management.asset.vezzal_arrival_history.entity.VezzalArrivalHistory;
+import lk.custom_process_management.asset.vezzal_arrival_history.entity.enums.VezzalDepartureArrivalStatus;
 import lk.custom_process_management.asset.vezzal_arrival_history.service.VezzalArrivalHistoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -86,13 +87,27 @@ public class VezzalArrivalHistoryController {
   public String persist(@Valid @ModelAttribute VezzalArrivalHistory vezzalArrivalHistory, BindingResult bindingResult,
                         Model model) {
     if ( bindingResult.hasErrors() ) {
-      bindingResult.getAllErrors().forEach(x -> System.out.println(x.toString()));
       return commonAddMethod(model, vezzalService.findById(vezzalArrivalHistory.getVezzal().getId()), true,
                              vezzalArrivalHistory);
     }
+    //new vezzal arrival save
     if ( vezzalArrivalHistory.getId() == null ) {
       vezzalArrivalHistory.setVezzalDepartureArrivalStatus(VezzalDepartureArrivalStatus.NOAR);
+
+      VezzalArrivalHistory lastVezzalArrivalHistory =
+          vezzalArrivalHistoryService.lastVezzalHistoryByVezzal(vezzalArrivalHistory.getVezzal());
+
+      if ( !lastVezzalArrivalHistory.getVezzalDepartureArrivalStatus().equals(VezzalDepartureArrivalStatus.DP) ) {
+
+        ObjectError error = new ObjectError("vezzalArrivalHistory",
+                                            "There is already this vezzal on harbor");
+        bindingResult.addError(error);
+        return commonAddMethod(model, vezzalService.findById(vezzalArrivalHistory.getVezzal().getId()), true,
+                               vezzalArrivalHistory);
+      }
+
     }
+
     vezzalArrivalHistoryService.persist(vezzalArrivalHistory);
     return "redirect:/vezzalArrivalHistory";
   }
