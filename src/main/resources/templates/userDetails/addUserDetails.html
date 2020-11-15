@@ -80,7 +80,8 @@
               <label class="control-label" for="name" >Name :</label >
             </div >
             <div class="col-md-8" >
-              <input id="name" data-th-field="*{name}" class="form-control" tabindex="4" type="text" required />
+              <input id="name" data-th-field="*{name}" class="form-control" minlength="3" tabindex="4" type="text"
+                     required />
               <span id="nameError" data-th-errors="*{name}"
                     data-th-if="${#fields.hasErrors('name')}" class="error" >Error Name</span >
             </div >
@@ -303,6 +304,11 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
+    $(document).ready(function () {
+        imageSrcAttributeCheck();
+    });
+
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             let reader = new FileReader();
@@ -317,8 +323,17 @@
 
     //display selected image
     $("#imgUpload").change(function () {
+        $("#image").toggle('show');
         readURL(this);
+
     });
+
+    function imageSrcAttributeCheck() {
+        let attribute = $("#image").attr("src");
+        if (attribute === '') {
+            $("#image").toggle('hide');
+        }
+    }
 </script >
 </body >
 </html >

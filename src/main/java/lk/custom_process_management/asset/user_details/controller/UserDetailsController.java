@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -28,7 +29,6 @@ import java.util.UUID;
 public class UserDetailsController {
   private final UsersDetailsService usersDetailsService;
   private final UserDetailsFilesService userDetailsFilesService;
-
   private final CommonService commonService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
@@ -67,7 +67,8 @@ public class UserDetailsController {
   //Send all userDetails data
   @RequestMapping
   public String findAll(Model model) {
-    model.addAttribute("userDetailses", usersDetailsService.findAll());
+    List<UserDetails> userDetailsList = usersDetailsService.findAll();
+    model.addAttribute("userDetailses", userDetailsList.remove(0));
     model.addAttribute("contendHeader", "User Details Registration");
     return "userDetails/userDetails";
   }

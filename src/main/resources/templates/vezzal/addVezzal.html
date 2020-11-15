@@ -72,10 +72,10 @@
           <!--IMO Number-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
-              <label class="control-label" for="nic" >IMO Number :</label >
+              <label class="control-label" for="imoNumber" >IMO Number :</label >
             </div >
             <div class="col-md-8" >
-              <input data-th-field="*{imoNumber}" class="form-control" tabindex="5" type="text"
+              <input id="imoNumber" data-th-field="*{imoNumber}" class="form-control" tabindex="5" type="text" minlength="3" required
               />
               <span class="error" id="nicError" data-th-errors="*{imoNumber}"
                     data-th-if="${#fields.hasErrors('imoNumber')}" >Error
@@ -85,10 +85,10 @@
           <!--MMSI Number-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
-              <label class="control-label" for="mobile" >MMSI Number :</label >
+              <label class="control-label" for="mmsiNumber" >MMSI Number :</label >
             </div >
             <div class="col-md-8" >
-              <input id="mobile" data-th-field="*{mmsiNumber}" class="form-control mobile" tabindex="6"
+              <input id="mmsiNumber" data-th-field="*{mmsiNumber}" class="form-control" tabindex="6" minlength="3"
                      type="text" required />
               <span class="error" data-th-errors="*{mmsiNumber}"
                     data-th-if="${#fields.hasErrors('mmsiNumber')}" id="mobileError" >Error Mobile
@@ -104,7 +104,7 @@
               <label class="control-label" for="country" >Country :</label >
             </div >
             <div class="col-md-8" >
-              <select data-th-field="*{country}" id="country" class="form-control" >
+              <select data-th-field="*{country}" id="country" class="form-control" required>
 
               </select >
             </div >

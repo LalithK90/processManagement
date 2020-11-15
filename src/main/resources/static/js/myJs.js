@@ -540,21 +540,6 @@ let deleteAllTableRow = function (tableName) {
     }
 };
 
-/*jquery - ui function*/
-//$( "input" ).checkboxradio;
-
-// $(function () {
-//     $("#").resizable({
-//         autoHide: true,
-//         aspectRatio: true,
-//         ghost: true,
-//     });
-// });
-
-//$( ".login" ).draggable();
-//$( "#dateOfBirth" ).datepicker;
-//$( document ).tooltip();
-
 
 //password validator user add
 $('#password').keyup(function () {

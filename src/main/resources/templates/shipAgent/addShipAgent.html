@@ -90,7 +90,7 @@
               <label class="control-label" for="mobile" >CHA Number :</label >
             </div >
             <div class="col-md-8" >
-              <input id="mobile" data-th-field="*{chaNumber}" class="form-control mobile" tabindex="6"
+              <input id="mobile" data-th-field="*{chaNumber}" class="form-control" minlength="3" tabindex="6"
                      type="text" required />
               <span class="error" data-th-errors="*{chaNumber}"
                     data-th-if="${#fields.hasErrors('chaNumber')}" id="mobileError" >Error Mobile
