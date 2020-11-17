@@ -2,6 +2,7 @@ package lk.custom_process_management.asset.vezzal_order.controller;
 
 import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.asset.item.service.ItemService;
+import lk.custom_process_management.asset.vezzal_arrival_history.entity.VezzalArrivalHistory;
 import lk.custom_process_management.asset.vezzal_arrival_history.service.VezzalArrivalHistoryService;
 import lk.custom_process_management.asset.vezzal_order.entity.VezzalOrder;
 import lk.custom_process_management.asset.vezzal_order.entity.enums.VezzalOrderStatus;

@@ -125,7 +125,7 @@
             </div >
           </div >
           <!--Created by and created at-->
-          <div id="updateStatus" data-th-if="${addStatus==false}" >
+          <div data-th-if="${addStatus==false}" >
             <!--Created By-->
             <div class="form-row text-right" >
               <div class="col-md-4" >
@@ -257,18 +257,18 @@
 
         selectedItemCount();
     };
-
     //option tag remove
     let optionElementRemove = function (id) {
         let selectedValue = $(id).val();
         let selectedItemId = `${id} option[value='${selectedValue}']`;
         $(selectedItemId).remove();
     };
-
     //selected item count display
     let selectedItemCount = function () {
         $('#selectedItemCount').html($('#myTable tr').length - 1);
     };
+
+
 </script >
 </body >
 </html >
