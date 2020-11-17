@@ -46,7 +46,7 @@ import javax.validation.Valid;
         if ( bindingResult.hasErrors() ) {
             return commonThings(model, warehouseBlock, true);
         }
-        if(warehouseBlock.getId()!=null){
+        if(warehouseBlock.getId()==null){
           warehouseBlock.setWarehouseBlockStatus(WarehouseBlockStatus.AVAILABLE);
         }
 

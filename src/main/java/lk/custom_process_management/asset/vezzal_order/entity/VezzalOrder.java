@@ -25,12 +25,12 @@ import java.util.List;
 public class VezzalOrder extends AuditEntity {
 
 
-  @Column(unique = true, nullable = false)
+  @Column( unique = true, nullable = false )
   private String number;
 
 
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
-  @Column(nullable = false)
+  @DateTimeFormat( pattern = "yyyy-MM-dd" )
+  @Column( nullable = false )
   private LocalDate closingDate;
 
   @Enumerated( EnumType.STRING )
@@ -45,7 +45,7 @@ public class VezzalOrder extends AuditEntity {
   @ManyToOne
   private WarehouseBlock warehouseBlock;
 
-  @OneToMany(mappedBy = "vezzalOrder",cascade = CascadeType.MERGE)
+  @OneToMany( mappedBy = "vezzalOrder", cascade = {CascadeType.MERGE, CascadeType.PERSIST} )
   private List< VezzalOrderItem > vezzalOrderItems;
 
 }
