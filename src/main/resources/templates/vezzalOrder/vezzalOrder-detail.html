@@ -126,7 +126,7 @@
                   <th >Vezzal Order Item Status</th >
                 </tr >
                 <tr data-th-each="vezzalOrderItem, index : ${vezzalOrderDetail.vezzalOrderItems}" >
-                  <td data-th-text="${index.index}" ></td >
+                  <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${vezzalOrderItem.item.name}" ></td >
                   <td data-th-text="${vezzalOrderItem.quantity}" ></td >
                   <td data-th-text="${vezzalOrderItem.vezzalOrderItemStatus.vezzalOrderItemStatus}" ></td >

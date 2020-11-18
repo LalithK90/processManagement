@@ -2,6 +2,7 @@ package lk.custom_process_management.asset.vezzal_order.service;
 
 import lk.custom_process_management.asset.vezzal_order.dao.VezzalOrderDao;
 import lk.custom_process_management.asset.vezzal_order.entity.VezzalOrder;
+import lk.custom_process_management.asset.vezzal_order.entity.enums.VezzalOrderStatus;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -45,5 +46,9 @@ public class VezzalOrderService implements AbstractService< VezzalOrder, Integer
 
   public VezzalOrder findLastVezzalOrder(){
     return vezzalOrderDao.findFirstByOrderByIdDesc();
+  }
+
+  public List<VezzalOrder> findByVezzalOrderStatus(VezzalOrderStatus vezzalOrderStatus) {
+  return vezzalOrderDao.findByVezzalOrderStatus(vezzalOrderStatus);
   }
 }

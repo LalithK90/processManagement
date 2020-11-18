@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonFilter( "VezzalOrderItemBit" )
-
 public class VezzalOrderItemBit extends AuditEntity {
 
   @Column( nullable = false, precision = 10, scale = 2 )

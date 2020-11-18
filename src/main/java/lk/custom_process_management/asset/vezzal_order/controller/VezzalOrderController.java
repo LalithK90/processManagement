@@ -44,6 +44,7 @@ public class VezzalOrderController {
   @GetMapping
   public String findAll(Model model) {
     model.addAttribute("vezzalOrders", vezzalOrderService.findAll());
+    model.addAttribute("addStatus", false);
     return "vezzalOrder/vezzalOrder";
   }
 
