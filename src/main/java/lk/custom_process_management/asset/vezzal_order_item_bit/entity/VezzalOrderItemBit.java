@@ -24,6 +24,9 @@ public class VezzalOrderItemBit extends AuditEntity {
   @Column( nullable = false, precision = 10, scale = 2 )
   private BigDecimal amount;
 
+  @Column( nullable = false, precision = 10, scale = 2 )
+  private BigDecimal unitPrice;
+
   @Enumerated( EnumType.STRING )
   private BitValidOrNot bitValidOrNot;
 
@@ -32,5 +35,8 @@ public class VezzalOrderItemBit extends AuditEntity {
 
   @ManyToOne
   private Chandler chandler;
+
+  @Transient
+  private Integer vezzalOrderId;
 
 }
