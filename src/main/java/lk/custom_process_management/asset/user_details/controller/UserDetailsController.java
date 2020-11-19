@@ -1,10 +1,12 @@
 package lk.custom_process_management.asset.user_details.controller;
 
 
+import lk.custom_process_management.asset.chandler.controller.ChandlerController;
 import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.common_asset.model.enums.Gender;
 import lk.custom_process_management.asset.common_asset.model.enums.Title;
 import lk.custom_process_management.asset.common_asset.service.CommonService;
+import lk.custom_process_management.asset.ship_agent.controller.ShipAgentController;
 import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
 import lk.custom_process_management.asset.user_details.entity.UserDetails;
 import lk.custom_process_management.asset.user_details.entity.UserDetailsFiles;
@@ -24,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -65,6 +68,14 @@ public class UserDetailsController {
     model.addAttribute("title", Title.values());
     model.addAttribute("gender", Gender.values());
     model.addAttribute("relevantParties", RelevantParty.values());
+    model.addAttribute("findAllShipAgentUri", MvcUriComponentsBuilder
+        .fromMethodName(ShipAgentController.class, "findAll", "")
+        .build()
+        .toString());
+    model.addAttribute("findAllChandlerUri", MvcUriComponentsBuilder
+        .fromMethodName(ChandlerController.class, "findAll", "")
+        .build()
+        .toString());
     return "userDetails/addUserDetails";
   }
 

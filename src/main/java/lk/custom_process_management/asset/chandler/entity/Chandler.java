@@ -3,6 +3,7 @@ package lk.custom_process_management.asset.chandler.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.chandler_license.entity.ChandlerLicense;
+import lk.custom_process_management.asset.user_details_chandler.entity.UserDetailsChandler;
 import lk.custom_process_management.asset.user_details_ship_agent.entity.UserDetailsShipAgent;
 import lk.custom_process_management.asset.vezzal_order_item_bit.entity.VezzalOrderItemBit;
 import lk.custom_process_management.util.audit.AuditEntity;
@@ -50,7 +51,7 @@ public class Chandler extends AuditEntity {
     private List< VezzalOrderItemBit > vezzalOrderItemBits;
 
     @OneToMany(mappedBy = "chandler")
-    private List< UserDetailsShipAgent > userDetailsShipAgents;
+    private List< UserDetailsChandler > userDetailsChandlers;
 
 
 }

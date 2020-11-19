@@ -252,6 +252,17 @@
               </select >
             </div >
           </div >
+          <!--Relevant Party id-->
+          <div class="form-row text-right" id="relevantPartyIdToggle" >
+            <div class="col-md-4" >
+              <label class="control-label" for="relevantPartyId" ><span id="labelName" ></span > :</label >
+            </div >
+            <div class="col-md-8" >
+              <select id="relevantPartyId" data-th-name="${relevantPartyId}" class="form-control" tabindex="3"
+                      required >
+              </select >
+            </div >
+          </div >
           <!--Created by and created at-->
           <div class="form-row text-right" data-th-if="${addStatus==false}" >
             <div class="col-md-4" >
@@ -299,6 +310,8 @@
     </form >
   </div >
 </div >
+<input type="hidden" data-th-value="${findAllShipAgentUri}" id="findAllShipAgentUri" hidden />
+<input type="hidden" data-th-value="${findAllChandlerUri}" id="findAllChandlerUri" hidden />
 <!--footer include-->
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
@@ -306,8 +319,8 @@
 <script >
     $(document).ready(function () {
         imageSrcAttributeCheck();
+        $("#relevantPartyIdToggle").hide();
     });
-
 
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -328,12 +341,49 @@
 
     });
 
+    //image is not -> showing area hide
     function imageSrcAttributeCheck() {
         let attribute = $("#image").attr("src");
         if (attribute === '') {
             $("#image").toggle('hide');
         }
     }
+
+    //according to relevant party should be display relevant content
+    $("#relevantParty").bind("change", function () {
+        let findAllShipAgentUri = $("#findAllShipAgentUri").val();
+        let findAllChandlerUri = $("#findAllChandlerUri").val();
+        if (findAllChandlerUri !== null && findAllShipAgentUri !== null) {
+            if ($(this).val() === "SLCC") {
+                $("#relevantPartyIdToggle").hide();
+            }
+            if ($(this).val() === "SLCC") {
+                optionTagCreate("Chandler name ", findAllChandlerUri);
+            }
+            if ($(this).val() === "SLCS") {
+                optionTagCreate("Ship agent name ", findAllShipAgentUri);
+            }
+        }
+    });
+
+    function optionTagCreate(labelName, url) {
+        $('#relevantPartyId')
+            .find('option')            .remove()
+            .end()
+            .append('<option value="">Please Select</option>').val('');
+        $("#relevantPartyIdToggle").show();
+        $("#labelName").html(labelName);
+        $.getJSON(url + 'findAll', function (data) {
+            let options = "";
+            $.each(data, function (i, item) {
+                options += `<option value="${item.id}">${item.name}</option>`;
+            });
+            $('#relevantPartyId')
+                .append(options);
+        })
+    }
+
+
 </script >
 </body >
 </html >

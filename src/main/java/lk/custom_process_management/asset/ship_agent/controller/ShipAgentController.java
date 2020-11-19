@@ -1,9 +1,16 @@
 package lk.custom_process_management.asset.ship_agent.controller;
 
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import lk.custom_process_management.asset.category.entity.Category;
+import lk.custom_process_management.asset.item.entity.enums.MainCategory;
 import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
 import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.util.interfaces.AbstractController;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -85,10 +92,24 @@ public class ShipAgentController implements AbstractController< ShipAgent, Integ
     return "shipAgent/shipAgent-detail";
   }
 
-  @GetMapping( "/findAll" )
-  public List< ShipAgent > findAll() {
-    return shipAgentService.findAll();
-  }
+  @GetMapping( value = "/findAll" )
+  @ResponseBody
+  public MappingJacksonValue findAll() {
 
+    //MappingJacksonValue
+    List<ShipAgent> shipAgents = shipAgentService.findAll();
+    //Create new mapping jackson value and set it to which was need to filter
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(shipAgents);
+
+    //simpleBeanPropertyFilter :-  need to give any id to addFilter method and created filter which was mentioned
+    // what parameter's necessary to provide
+    SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter
+        .filterOutAllExcept("id", "name");
+
+    FilterProvider filters = new SimpleFilterProvider()
+        .addFilter("ShipAgent", simpleBeanPropertyFilter);
+    mappingJacksonValue.setFilters(filters);
+    return mappingJacksonValue;
+  }
 
 }
