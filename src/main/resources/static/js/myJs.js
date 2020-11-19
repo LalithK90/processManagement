@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 
     /*//--------------- data table short using - data table plugin ------- start //*/
-    $("#myTable").DataTable({
+    $("#myTable,#allItemTable,#bitItemTable").DataTable({
         "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
         "ordering": false,
         stateSave: true,

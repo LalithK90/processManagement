@@ -36,7 +36,5 @@ public class VezzalOrderItemBit extends AuditEntity {
   @ManyToOne
   private Chandler chandler;
 
-  @Transient
-  private Integer vezzalOrderId;
 
 }
