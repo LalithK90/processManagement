@@ -41,4 +41,8 @@ public class VezzalOrderItemBitService {
     Example< VezzalOrderItemBit > vezzalOrderItemApprovedExample = Example.of(vezzalOrderItemBit, matcher);
     return vezzalOrderItemBitDao.findAll(vezzalOrderItemApprovedExample);
   }
+
+  public void saveAll(List< VezzalOrderItemBit > vezzalOrderItemBits) {
+    vezzalOrderItemBitDao.saveAll(vezzalOrderItemBits);
+  }
 }

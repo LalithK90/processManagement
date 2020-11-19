@@ -1,14 +1,20 @@
 package lk.custom_process_management.asset.user_details.controller;
 
 
+import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.common_asset.model.enums.Gender;
 import lk.custom_process_management.asset.common_asset.model.enums.Title;
 import lk.custom_process_management.asset.common_asset.service.CommonService;
+import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
 import lk.custom_process_management.asset.user_details.entity.UserDetails;
 import lk.custom_process_management.asset.user_details.entity.UserDetailsFiles;
 import lk.custom_process_management.asset.user_details.entity.enums.RelevantParty;
 import lk.custom_process_management.asset.user_details.service.UserDetailsFilesService;
 import lk.custom_process_management.asset.user_details.service.UsersDetailsService;
+import lk.custom_process_management.asset.user_details_chandler.entity.UserDetailsChandler;
+import lk.custom_process_management.asset.user_details_chandler.service.UserDetailsChandlerService;
+import lk.custom_process_management.asset.user_details_ship_agent.entity.UserDetailsShipAgent;
+import lk.custom_process_management.asset.user_details_ship_agent.service.UserDetailsShipAgentService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -33,11 +39,15 @@ public class UserDetailsController {
   private final CommonService commonService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
+  private final UserDetailsChandlerService userDetailsChadlerService;
+  private final UserDetailsShipAgentService userDetailsShipAgentService;
 
   @Autowired
   public UserDetailsController(UsersDetailsService usersDetailsService, UserDetailsFilesService userDetailsFilesService,
                                CommonService commonService,
-                               MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                               UserDetailsChandlerService userDetailsChadlerService,
+                               UserDetailsShipAgentService userDetailsShipAgentService) {
     this.usersDetailsService = usersDetailsService;
     this.userDetailsFilesService = userDetailsFilesService;
 
@@ -46,6 +56,8 @@ public class UserDetailsController {
 
 
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+    this.userDetailsChadlerService = userDetailsChadlerService;
+    this.userDetailsShipAgentService = userDetailsShipAgentService;
   }
 
   // Common things for an userDetails add and update
@@ -128,8 +140,37 @@ public class UserDetailsController {
     userDetails.setMobileOne(commonService.commonMobileNumberLengthValidator(userDetails.getMobileOne()));
     userDetails.setMobileTwo(commonService.commonMobileNumberLengthValidator(userDetails.getMobileTwo()));
     userDetails.setLand(commonService.commonMobileNumberLengthValidator(userDetails.getLand()));
+
     //after save userDetails files and save userDetails
     UserDetails userDetailsDb = usersDetailsService.persist(userDetails);
+
+    //if user belongs to chandler
+    if ( userDetails.getRelevantParty().equals(RelevantParty.SLCC) ) {
+      UserDetailsChandler userDetailsChandler = userDetailsChadlerService.findByUserDetails(userDetailsDb);
+      Chandler chandler = new Chandler();
+      if ( userDetailsChandler == null ) {
+        userDetailsChandler = new UserDetailsChandler();
+      }
+      userDetailsChandler.setUserDetails(userDetailsDb);
+      chandler.setId(userDetails.getRelevantPartyId());
+      userDetailsChandler.setChandler(chandler);
+      userDetailsChadlerService.persist(userDetailsChandler);
+    }
+
+    //if user belongs to shipAgent
+    if ( userDetails.getRelevantParty().equals(RelevantParty.SLCS) ) {
+      UserDetailsShipAgent userDetailsShipAgent = userDetailsShipAgentService.findByUserDetails(userDetailsDb);
+      ShipAgent shipAgent = new ShipAgent();
+      if ( userDetailsShipAgent == null ) {
+        userDetailsShipAgent = new UserDetailsShipAgent();
+      }
+      userDetailsShipAgent.setUserDetails(userDetailsDb);
+      shipAgent.setId(userDetails.getRelevantPartyId());
+      userDetailsShipAgent.setShipAgent(shipAgent);
+      userDetailsShipAgentService.persist(userDetailsShipAgent);
+    }
+
+
     try {
       //save userDetails images file
       if ( userDetails.getFile() != null ) {

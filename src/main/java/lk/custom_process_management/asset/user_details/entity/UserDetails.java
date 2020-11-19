@@ -67,5 +67,7 @@ public class UserDetails extends AuditEntity {
   @Transient
   private MultipartFile file;
 
+  @Transient
+  private int relevantPartyId;
 
 }
