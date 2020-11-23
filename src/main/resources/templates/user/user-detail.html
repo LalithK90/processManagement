@@ -8,29 +8,29 @@
 <nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <!--Page header -->
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid">
+    <div class="row text-center">
         <div class="col">
-            <a class="btn btn-primary" href="/home">
+            <a class="btn btn-outline-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
             </a>
         </div>
         <div class="col">
-            <h4 class="text-light text-center">
+            <h4 class="text-center">
                 <strong>
                     <span id="formHeader"
-                          th:text="${userDetail.employee.title.title}+${' '}+${userDetail.employee.name}"></span>
+                          th:text="${userDetail.userDetails.title.title}+${' '}+${userDetail.userDetails.name}"></span>
                 </strong>
             </h4>
         </div>
         <div class="col">
-            <a href="/user" class="btn btn-primary">
+            <a href="/user" class="btn btn-outline-primary">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
     </div>
 </div>
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid">
     <div class="row">
         <!--Left Side-->
         <div class="form-group col-md-6 col-sm-6 text-left flex-column">
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-md-8">
                     <strong><span id="employeeName"
-                                  th:text="${userDetail.employee.name}+ ${' - '}+${userDetail.employee.nic}"></span></strong>
+                                  th:text="${userDetail.userDetails.name}+ ${' - '}+${userDetail.userDetails.nic}"></span></strong>
                 </div>
             </div>
             <!--Created date-->
@@ -100,8 +100,8 @@
 </div>
 
 <!--footer include-->
-<footer id="footer" class="page-footer"></footer>
+<div id="footer" class="page-footer"></div>
 <!--script include-->
-<script id="script"></script>
+<div id="script"></div>
 </body>
 </html>

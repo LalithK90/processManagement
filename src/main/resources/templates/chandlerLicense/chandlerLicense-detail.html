@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--/* Styles, meta data, and title are included */-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<!--/* Nav bar is included */-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<div class="container-fluid" >
+  <div id="accordianId" role="tablist" aria-multiselectable="true" >
+    <div class="card" >
+      <div class="card-header" role="tab" id="section1HeaderId" >
+        <h5 class="mb-0 text-center" >
+          <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+             aria-controls="section1ContentId" >
+            Chandler Details
+          </a >
+        </h5 >
+      </div >
+      <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
+        <div class="card-body" >
+          <!--/* Chandler Details */-->
+          <div data-th-replace="~{chandler/chandler-detail :: chandlerDetailsFragment}" ></div >
+        </div >
+      </div >
+    </div >
+    <div class="card" >
+      <div class="card-header" role="tab" id="section2HeaderId" >
+        <h5 class="mb-0 text-center" >
+          <a data-toggle="collapse" data-parent="#accordianId" href="#section2ContentId" aria-expanded="true"
+             aria-controls="section2ContentId" >
+            Chandler License History
+          </a >
+        </h5 >
+      </div >
+      <div id="section2ContentId" class="collapse in" role="tabpanel" aria-labelledby="section2HeaderId" >
+        <div class="card-body" >
+          <!--Chandler License List-->
+          <div class="row" >
+            <div class="col"
+                 data-th-if="${not #lists.isEmpty(chandlerLicenses)}" >
+              <table class="table table-hover table-striped" id="myTable" >
+                <thead >
+                <tr >
+                  <th > Index</th >
+                  <th > License Number</th >
+                  <th > Chandler Name</th >
+                  <th > License Start date</th >
+                  <th > License Expired date</th >
+                  <th > License Status</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="chandlerLicense, rowCount : ${chandlerLicenses}" >
+                  <th data-th-text="${rowCount.count}" ></th >
+                  <th data-th-text="${chandlerLicense.number}" ></th >
+                  <th data-th-text="${chandlerLicense.chandler.name}" ></th >
+                  <th data-th-text="${chandlerLicense.startDate}" ></th >
+                  <th data-th-text="${chandlerLicense.endDate}" ></th >
+                  <th data-th-text="${chandlerLicense.licenseStatus.licenseStatus}" ></th >
+                </tr >
+                </tbody >
+              </table >
+            </div >
+          </div >
+          <!--Error-->
+          <div class="row" data-th-if="${ #lists.isEmpty(chandlerLicenses)}" >
+            <div class="col-sm-12" >
+              <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+                <button aria-label="Close" class="close" data-dismiss="alert" type="button" >
+                  <span aria-hidden="true" >&times;</span >
+                </button >
+                <h3 class="text-center text-danger" >
+                  <strong >There is no chandler License upto now please add chandlerLicense to the system using add
+                           user
+                           button.</strong >
+                </h3 >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+<!--Back Button-->
+<div class="form-group col-md-12 col-sm-12 text-center flex-column mt-3" >
+  <a href="/chandlerLicense" >
+    <button class="btn btn-outline-dark" type="button" tabindex="10" >
+      <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
+    </button >
+  </a >
+</div >
+<!--/* footer is */-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--/* script is included */-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >

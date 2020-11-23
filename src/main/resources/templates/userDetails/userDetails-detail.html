@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<div class="container" >
+  <div class="row text-center" >
+    <div class="col" >
+      <a class="btn btn-outline-info" href="/home" >
+        Back To Home
+      </a >
+    </div >
+
+    <div class="col" >
+      <a href="/userDetails" class="btn btn-outline-primary" >
+        View User Details
+      </a >
+    </div >
+  </div >
+  <div class="row text-center" >
+    <div class="col" >
+      <h4 class="text-info text-center" >
+        <strong >
+          <span data-th-text="${userDetail.number+' User Details'}" ></span >
+        </strong >
+      </h4 >
+    </div >
+  </div >
+</div >
+<!--Form Content - start -->
+<div class="container-fluid " >
+  <div class="row" >
+    <!--Left Side-->
+    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+      <!--number-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="number" >User Number :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="number" data-th-text="${userDetail.number}" ></p >
+        </div >
+      </div >
+      <!--Tittle -->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="title" >Title :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="title" data-th-text="${userDetail.title.title}" ></p >
+        </div >
+      </div >
+      <!--Name-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="name" >Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="name" data-th-text="${userDetail.name}" ></p >
+        </div >
+      </div >
+      <!--Calling Name-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="callingName" >Calling Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="callingName" data-th-text="${userDetail.callingName}" ></p >
+        </div >
+      </div >
+      <!--Nic-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="nic" >NIC No :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="nic" data-th-text="${userDetail.nic}" ></p >
+        </div >
+      </div >
+      <!--Gender-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="gender" >Gender :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="gender" data-th-text="${userDetail.gender}" ></p >
+        </div >
+      </div >
+      <!--Date of birth-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="dateOfBirth" >Birth date :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="dateOfBirth" data-th-text="${userDetail.dateOfBirth}" ></p >
+        </div >
+      </div >
+      <!--Image-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" >Image :</label >
+        </div >
+        <div class="col-md-4" >
+          <!--photo details-->
+          <img class="text-right" data-th-src="${file != null ? file.url :''}"
+               id="image" alt=""
+               style="height: 100px; width: 100%;" />
+        </div >
+      </div >
+    </div >
+    <!--Right Side-->
+    <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+      <!--Address-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="address" >Address :</label >
+        </div >
+        <div class="col-md-8" >
+          <span id="address" data-th-text="${userDetail.address}" >                            </span >
+        </div >
+      </div >
+      <!--Mobile Number One-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="mobileOne" >Mobile One No :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="mobileOne" data-th-text="${userDetail.mobileOne}" ></p >
+        </div >
+      </div >
+      <!--Mobile Number Two-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="mobileTwo" >Mobile Two No :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="mobileTwo" data-th-text="${userDetail.mobileTwo}" ></p >
+        </div >
+      </div >
+      <!--Land Number-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="land" >Land No :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="land" data-th-text="${userDetail.land}" ></p >
+        </div >
+      </div >
+      <!--Email-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="email" >Email :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="email" data-th-text="${userDetail.email}" ></p >
+        </div >
+      </div >
+      <!--Office email-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="officeEmail" >Office Email :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="officeEmail" data-th-text="${userDetail.officeEmail}" ></p >
+        </div >
+      </div >
+      <!--Relevant Party-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="relevantParty" >Relevant Party :</label >
+        </div >
+        <div class="col-md-8" >
+          <p type="text" id="relevantParty" data-th-text="${userDetail.relevantParty}" ></p >
+        </div >
+      </div >
+      <!--Created by and created at-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="createdBy" >Created By :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="createdBy" data-th-text="${userDetail.createdBy}" ></p >
+        </div >
+      </div >
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="createdAt" >Created At :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="createdAt" data-th-text="${{userDetail.createdAt}}" ></p >
+        </div >
+      </div >
+    </div >
+    <!--Button-->
+    <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+      <!--Back Button-->
+      <a class="btn btn-outline-dark" tabindex="10" href="/userDetails" >
+        <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+      </a >
+    </div >
+  </div >
+</div >
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >

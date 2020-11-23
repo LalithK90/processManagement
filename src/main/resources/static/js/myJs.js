@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 
     /*//--------------- data table short using - data table plugin ------- start //*/
-    $("#myTable").DataTable({
+    $("#myTable,#allItemTable,#bitItemTable").DataTable({
         "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
         "ordering": false,
         stateSave: true,
@@ -29,9 +29,9 @@ $(document).ready(function () {
     });
     /* Patient and employee Nic Validation - end*/
     //input type date can not be selected future date
-    $('[type="date"]').prop('max', function () {
-        return new Date().toJSON().split('T')[0];
-    });
+    // $('[type="date"]').prop('max', function () {
+    //     return new Date().toJSON().split('T')[0];
+    // });
 
 });
 
@@ -262,6 +262,7 @@ $("#nic").bind("keyup", function () {
 
 //Name validation
 $("#name").bind("keyup", function () {
+    console.log("sfsdfsd")
     let name = $(this).val();
     if (nameRegex.test(name)) {
         backgroundColourChangeGood($(this));
@@ -538,21 +539,6 @@ let deleteAllTableRow = function (tableName) {
         }
     }
 };
-
-/*jquery - ui function*/
-//$( "input" ).checkboxradio;
-
-$(function () {
-    $("#").resizable({
-        autoHide: true,
-        aspectRatio: true,
-        ghost: true,
-    });
-});
-
-//$( ".login" ).draggable();
-//$( "#dateOfBirth" ).datepicker;
-//$( document ).tooltip();
 
 
 //password validator user add

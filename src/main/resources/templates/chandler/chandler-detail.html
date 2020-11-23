@@ -7,32 +7,32 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid ">
+    <div class="row text-center">
         <!--View List Button-->
         <div class="col">
-            <a href="/supplier" class="btn btn-primary" tabindex="1">
+            <a href="/chandler" class="btn btn-outline-primary" tabindex="1">
                 <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
             </a>
         </div>
         <!--Supplier Name-->
         <div class="col">
-            <h2 class="text-light text-center">
+            <h2 class="text-center">
                 <strong>
-                    <p data-th-text="${chandlerDetail.name}"></p>
+                    <span data-th-text="${chandlerDetail.name}"></span>
                 </strong>
             </h2>
         </div>
         <!--Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
+            <a class="btn btn-outline-primary" href="/home" tabindex="2">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
             </a>
         </div>
     </div>
 </div>
 <!--details-->
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid">
     <div class="col-sm-12 flex-column" data-th-fragment="chandlerDetailsFragment">
         <div class="row">
             <!--Left Side-->
@@ -158,7 +158,7 @@
     <!--Back Button-->
     <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
         <a href="/supplier">
-            <button class="btn btn-dark mb-5" type="button" tabindex="3">
+            <button class="btn btn-outline-dark mb-5" type="button" tabindex="3">
                 <i class="fa fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp; &nbsp;Back
             </button>
         </a>

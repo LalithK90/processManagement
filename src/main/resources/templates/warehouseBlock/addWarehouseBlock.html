@@ -7,17 +7,17 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--Heading Area-->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid ">
+    <div class="row text-center  border-info">
         <!--ViewList Button-->
         <div class="col">
-            <a href="/warehouseBlock" class="btn btn-primary" tabindex="1">
+            <a href="/warehouseBlock" class="btn btn-outline-primary" tabindex="1">
                 <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
             </a>
         </div>
         <!--Form Name-->
         <div class="col">
-            <h2 class="text-light text-center">
+            <h2 class="text-center">
                 <strong>
                     <span
                             data-th-text="${addStatus==true?'Add New Warehouse Block':'Update Warehouse Block Details'}"></span>
@@ -26,21 +26,21 @@
         </div>
         <!--Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
+            <a class="btn btn-outline-primary" href="/home" tabindex="2">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
             </a>
         </div>
     </div>
 </div>
 <!--Form Content-->
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal"
               data-th-action="${addStatus==true?'/warehouseBlock/save':'/warehouseBlock/update'}"
               data-th-object="${warehouseBlock}" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <!--Left Side-->
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                <div class="container text-left flex-column">
                     <!--Id-->
                     <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right">
                         <div class="col-md-4">
@@ -104,16 +104,16 @@
                 <!--Button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
                     <!--Back Button-->
-                    <a class="btn btn-dark"  tabindex="8" href="/warehouseBlock">
+                    <a class="btn btn-outline-dark"  tabindex="8" href="/warehouseBlock">
                         <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
                     </a>
                     <!--Save Button-->
-                    <button class="btn btn-success ml-5" type="submit" tabindex="9">
+                    <button class="btn btn-outline-success ml-5" type="submit" tabindex="9">
                         <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;<span id="submit"
                                                                                              data-th-text="${addStatus==true?'Save': 'Update'}"></span>
                     </button>
                     <!--Cancel Button-->
-                    <button class="btn btn-warning ml-5" type="reset" tabindex="10">
+                    <button class="btn btn-outline-warning ml-5" type="reset" tabindex="10">
                         <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
                     </button>
                 </div>
@@ -131,9 +131,9 @@
     </div>
 </div>
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
 </body>
 </html>

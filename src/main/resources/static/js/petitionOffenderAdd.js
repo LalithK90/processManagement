@@ -152,7 +152,7 @@ $('#btnOffenderSearch').bind('click', function () {
         row.insertCell(4).innerHTML = dbOffender.passportNumber;
         //row.insertCell(6).innerHTML = dbOffender.age;
         row.insertCell(5).innerHTML = `<img src="${dbOffender.fileInfos[1].url}" class="rounded" style="height: 150px; width: 150px; border-radius: 10px" alt="Offender image"/>`;
-        row.insertCell(6).innerHTML = `<button type="button" class="btn btn-primary btn-sm " onclick="showSelectOffender(this)"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>`;
+        row.insertCell(6).innerHTML = `<button type="button" class="btn btn-outline-primary btn-sm " onclick="showSelectOffender(this)"> Select &nbsp;<i class="fa fa-thumbs-up"></i></button>`;
     };
     searchButton();
 });
@@ -232,7 +232,7 @@ let addRowToSelectedOffenderTable = function (offender) {
     row.insertCell(2).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].nameEnglish" value="${offender.nameEnglish}" class="form-control" readonly/>`;
     row.insertCell(3).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].nic" class="form-control" value="${offender.nic}" readonly/>`;
     row.insertCell(4).innerHTML = `<input type="text" name="offenders[${rowCount - 1}].passportNumber" value="${offender.passportNumber}" class="form-control" readonly/>`;
-    row.insertCell(5).innerHTML = `<button type="button" class="btn btn-danger btn-sm " onclick="deletedSelectOffender(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
+    row.insertCell(5).innerHTML = `<button type="button" class="btn btn-outline-danger btn-sm " onclick="deletedSelectOffender(this)"> Remove &nbsp;<i class="fa fa-trash"></i></button>`;
 
 };
 

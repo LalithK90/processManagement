@@ -7,11 +7,11 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid">
+    <div class="row text-center border-info">
         <!--New Branch Button-->
         <div class="col">
-            <a class="btn btn-success" href="/warehouseBlock/add" tabindex="1">
+            <a class="btn btn-outline-success" href="/warehouseBlock/add" tabindex="1">
                 <i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New
             </a>
         </div>
@@ -25,7 +25,7 @@
         </div>
         <!--Home Button-->
         <div class="col">
-            <a href="/home" id="searchShow" class="btn btn-primary" tabindex="2">
+            <a href="/home" id="searchShow" class="btn btn-outline-primary" tabindex="2">
                 <!--<i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;-->
                 <i class="fas fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;Home
             </a>
@@ -33,7 +33,7 @@
     </div>
 </div>
 <!--Branches List-->
-<div class="container-fluid bg-dark formBorder text-center">
+<div class="container-fluid text-center">
     <!--Table view-->
     <div class="col">
         <div class="col" id="branchListPresent" data-th-if="${not #lists.isEmpty(warehouseBlocks)}">
@@ -53,13 +53,13 @@
                     <th data-th-text="${warehouseBlock.area}"></th>
                     <th>
                         <a  data-th-href="${'/warehouseBlock/' + warehouseBlock.id}"
-                           class="btn btn-primary btn-sm"><i
+                           class="btn btn-outline-primary btn-sm"><i
                                 class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
                         <a  data-th-href="${'/warehouseBlock/edit/' + warehouseBlock.id}"
-                           class="btn btn-success btn-sm"><i
+                           class="btn btn-outline-success btn-sm"><i
                                 class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit</a>
                         <a  data-th-href="${'/warehouseBlock/delete/' + warehouseBlock.id}"
-                           class="btn btn-danger btn-sm">
+                           class="btn btn-outline-danger btn-sm">
                             <!--data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" --> <i
                                 class="fa fa-trash" style="font-size: 15px"></i>
                             Delete</a>
@@ -83,11 +83,7 @@
                 </h3>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
+
     </div>
     <!--Save Message-->
     <div class="row" data-th-if="${warehouseBlockDetail != null}">
@@ -99,17 +95,17 @@
                 <div data-th-replace="~{warehouseBlock/warehouseBlocks-detail :: warehouseDetailsFragment}"></div>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
+
     </div>
 </div>
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
-
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
+<script>
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script>
 </body>
 </html>

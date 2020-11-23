@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>addSupplier</title>
@@ -7,11 +7,11 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--Heading Area -->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid">
+    <div class="row text-center">
         <!--View List Button-->
         <div class="col">
-            <a href="/chandler" class="btn btn-primary" tabindex="1">
+            <a href="/chandler" class="btn btn-outline-primary" tabindex="1">
                 <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
             </a>
         </div>
@@ -25,14 +25,14 @@
         </div>
         <!--Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
+            <a class="btn btn-outline-primary" href="/home" tabindex="2">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
             </a>
         </div>
     </div>
 </div>
 <!--Form Content - start -->
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid ">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/chandler/save':'/chandler/update'}"
               data-th-object="${chandler}" method="POST" enctype="multipart/form-data">
@@ -142,15 +142,15 @@
                 <!--Button-->
                 <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
                     <!--Back Button-->
-                    <a class="btn btn-dark"  tabindex="11" href="/chandler">
+                    <a class="btn btn-outline-dark"  tabindex="11" href="/chandler">
                         <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
                     </a>
                     <!--Save Button-->
-                    <button class="btn btn-success ml-5" type="submit" tabindex="9">
+                    <button class="btn btn-outline-success ml-5" type="submit" tabindex="9">
                         <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;<span id="submit" data-th-text="${addStatus==true?'Save': 'Update'}"></span>
                     </button>
                     <!--Cancel Button-->
-                    <button class="btn btn-warning ml-5" type="reset" tabindex="10">
+                    <button class="btn btn-outline-warning ml-5" type="reset" tabindex="10">
                         <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
                     </button>
                 </div>

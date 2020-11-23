@@ -7,10 +7,10 @@
 <body>
 <nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid">
+    <div class="row text-center">
         <div class="col">
-            <a class="btn btn-success" id="newUser" th:href="${'/user/add'}">
+            <a class="btn btn-outline-success" id="newUser" th:href="${'/user/add'}">
                 <i class="fa fa-user-plus" style="font-size: 18px;"></i> &nbsp; Add User </a>
         </div>
         <div class="col">
@@ -23,7 +23,7 @@
         <div class="col"></div>
     </div>
 </div>
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <div class="row" id="userListTable" th:if="${not #lists.isEmpty(users)}">
             <div class="col-sm-12">
@@ -43,11 +43,11 @@
                         <th th:text="${user.username}"></th>
                         <th th:text="${user.enabled==true?'Active':'Blocked'}"></th>
                         <th th:text="${{user.createdAt}}"></th>
-                        <th><a class="btn btn-success btn-sm" id="userView"><i
+                        <th><a class="btn btn-outline-success btn-sm" id="userView"><i
                                 class="fa fa-folder-open" th:href="${'/user/' + user.id}"></i>&nbsp;View</a>
-                            <a class="btn btn-primary btn-sm" id="userEdit" th:href="${'/user/edit/' + user.id}"><i
+                            <a class="btn btn-outline-primary btn-sm" id="userEdit" th:href="${'/user/edit/' + user.id}"><i
                                     class="fa fa-edit"></i>&nbsp;Edit</a>
-                            <a class="btn btn-danger btn-sm" id="userRemove" th:href="${'/user/remove/' + user.id}"
+                            <a class="btn btn-outline-danger btn-sm" id="userRemove" th:href="${'/user/remove/' + user.id}"
                                th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                             ><i
                                     aria-hidden="true" class="fa fa-trash"></i>
@@ -71,19 +71,19 @@
                     </h3>
                 </div>
             </div>
-            <script>
-                /*active boostrap alert - start*/
-                $(".alert").alert();
-                /*active boostrap alert - end*/
-            </script>
         </div>
     </div>
 </div>
 
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<div th:replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<div th:replace="~{fragments/script :: scriptFragment}"></div>
 
+<script>
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script>
 </body>
 </html>

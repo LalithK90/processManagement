@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >addCustomer</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--Heading Area-->
+<div class="container-fluid " >
+  <div class="row text-center  border-info" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/vezzalOrder" class="btn btn-outline-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Form Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          <span data-th-text="${addStatus==true?'Add new vezzal order':'Update vezzal order Details'}" ></span >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-outline-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
+<!--Form Content-->
+<div class="container-fluid" >
+  <!--form start-->
+  <div class="col-sm-12 flex-column " >
+    <form id="form" class="form-horizontal"
+          data-th-action="${addStatus==true?'/vezzalOrder/save':'/vezzalOrder/update'}" data-th-object="${vezzalOrder}"
+          method="POST" >
+      <div class="row" >
+        <!--Left Side-->
+        <div class="form-group container text-left flex-column" >
+          <!--Id-->
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="id" >ID :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly />
+            </div >
+          </div >
+          <!--order number-->
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="number" >Order Number :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="number" data-th-field="*{number}" class="form-control" type="text" readonly />
+            </div >
+          </div >
+          <!--Vezzal Order Status-->
+          <div class="form-row text-right" data-th-if="${addStatus==false}" >
+            <div class="col-md-4" >
+              <label class="control-label" for="vezzalOrderStatus" >Vezzal Order Status :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="vezzalOrderStatus" data-th-field="*{vezzalOrderStatus}" class="form-control" tabindex="4"
+                     type="text"
+                     required />
+              <span data-th-errors="*{vezzalOrderStatus}"
+                    data-th-if="${#fields.hasErrors('vezzalOrderStatus')}" class="error" >Error Name</span >
+            </div >
+          </div >
+          <!--Vezzal Order History-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="vezzalOderHistories" >Vezzal Details :</label >
+            </div >
+            <div class="col-md-8" >
+              <select id="vezzalOderHistories" data-th-field="*{vezzalArrivalHistory}" class="form-control" >
+                <option value="" disabled selected >Please Select</option >
+                <option data-th-each="vezzalArrivalHistory : ${vezzalOderHistories}"
+                        data-th-value="${vezzalArrivalHistory.id}"
+                        data-th-text="${'Name : '+vezzalArrivalHistory.vezzal.name + ' Code : '+vezzalArrivalHistory.vezzal.code+' Sailing Date : '+vezzalArrivalHistory.sailingDate}" ></option >
+              </select >
+            </div >
+          </div >
+          <!--Items-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="item-select" >Items :</label >
+            </div >
+            <div class="col-md-8" >
+              <select id="item-select" class="form-control" >
+                <option value="" selected >Please Select</option >
+                <option data-th-each="item : ${items}"
+                        data-th-value="${item.id}"
+                        data-th-text="${item.name}" ></option >
+              </select >
+            </div >
+          </div >
+          <!--closing Date At-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="closingDate" >Closing Date At :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="closingDate" data-th-field="*{closingDate}" class="form-control" type="date" required
+              />
+            </div >
+          </div >
+          <!--warehouse Block-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="warehouseBlock" >Warehouse Block :</label >
+            </div >
+            <div class="col-md-8" >
+              <select id="warehouseBlock" data-th-field="*{warehouseBlock}" class="form-control" required>
+                <option value="" disabled selected >Please Select</option >
+                <option data-th-each="warehouseBlock : ${warehouseBlocks}"
+                        data-th-value="${warehouseBlock.id}"
+                        data-th-text="${warehouseBlock.name}" ></option >
+              </select >
+            </div >
+          </div >
+          <!--Created by and created at-->
+          <div data-th-if="${addStatus==false}" >
+            <!--Created By-->
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="createdBy" >Created By :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="createdBy" data-th-field="*{createdBy}" class="form-control" type="text"
+                       readonly />
+              </div >
+            </div >
+            <!--Created At-->
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="createdAt" >Created At :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="createdAt" data-th-field="*{createdAt}" class="form-control" type="text"
+                       readonly />
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+      <!--Order Item-->
+      <div class="form-row" >
+        <div class="form-row container-fluid" >
+          <div class="col-6 text-center h6 text-capitalize font-weight-bold" >Selected Item List</div >
+          <div class="col-6 text-left h6 text-capitalize font-weight-bold" >Selected Item Count:
+            <span id="selectedItemCount" class=" h4 text-info" ></span >
+          </div >
+        </div >
+        <div class="text-center table-responsive" >
+          <table id="myTable" class="table table-striped table-inverse align-content-center" >
+            <tr >
+              <th >Item Name</th >
+              <th >Request Amount</th >
+              <th >Modify</th >
+            </tr >
+            <tr data-th-each="vezzalOrderItem, index : ${vezzalOrder.vezzalOrderItems}">
+              <td>
+                <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}"></span>
+                <input data-th-id="${'id'+index.index}" type="hidden" data-th-name="${'vezzalOrderItems[__${index.index}__].item.id'}"
+                       data-th-value="${vezzalOrderItem.item.id}" required>
+                <input type="hidden" data-th-name="${'vezzalOrderItems[__${index.index}__].id'}"
+                       data-th-value="${vezzalOrderItem.id}" required>
+              </td >
+              <td >
+                <input data-th-id="${'id'+index.index}" type="number" data-th-name="${'vezzalOrderItems[__${index.index}__].quantity'}"
+                       data-th-value="${vezzalOrderItem.quantity}" class="form-control" required></td >
+              <td >
+                <button type="button" data-th-id="${'rm'+index.index}" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>
+
+              </td >
+            </tr >
+          </table >
+        </div >
+      </div >
+      <!--Button-->
+      <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+        <!--Back Button-->
+        <a class="btn btn-outline-dark" tabindex="10" href="/vezzalOrder" >
+          <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+        </a >
+        <!--Save Button-->
+        <button class="btn btn-outline-success ml-5" type="submit" tabindex="8" >
+          <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;<span id="submit"
+                                                                                 data-th-text="${addStatus==true?'Save': 'Update'}" ></span >
+        </button >
+        <!--Cancel Button-->
+        <button class="btn btn-outline-warning ml-5" type="reset" tabindex="9" >
+          <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+        </button >
+      </div >
+      <!--Error-->
+      <div class="form-row" >
+        <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors:
+        </label >
+        <ul >
+          <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+              class="error" ></li >
+        </ul >
+      </div >
+    </form >
+  </div >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+
+    $("#item-select").bind("change", function () {
+        let itemSelected = {};
+        itemSelected.itemId = $(this).val();
+        itemSelected.itemName = $("#item-select option:selected").html();
+
+        tableRowAdd(itemSelected);
+        optionElementRemove('#item-select');
+    });
+    //table row add
+    let tableRowAdd = function (value) {
+        let rowCount = $("#myTable tbody tr").length - 1;
+        let html = `<tr>
+                        <td>
+                            <span id='nm${value.itemId}'>${value.itemName}</span>
+                            <input id='id${value.itemId}' type="hidden" name="vezzalOrderItems[${rowCount}].item.id" value="${value.itemId}" required>
+                        </td>
+                        <td>
+                          <input type="number" class="form-control" name="vezzalOrderItems[${rowCount}].quantity"                          required>
+                        </td>
+                        <td>
+                            <button type="button" id="rm${value.itemId}" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>
+                        </td>
+                    </tr>`;
+
+        $("#myTable tr:last").after(html);
+        selectedItemCount();
+    }
+    //table row remove
+    let tableRowRemove = function (obj) {
+        let selectedFiledId = obj.getAttribute('id').slice(2);
+        console.log(selectedFiledId);
+        let removeItemText = $(`#nm${selectedFiledId}`).html();
+        let removeItemValue = $(`#id${selectedFiledId}`).val();
+        $("#item-select").append(new Option(removeItemText, removeItemValue));
+
+        let i = obj.parentNode.parentNode.rowIndex;
+        document.getElementById("myTable").deleteRow(i);
+
+        selectedItemCount();
+    };
+    //option tag remove
+    let optionElementRemove = function (id) {
+        let selectedValue = $(id).val();
+        let selectedItemId = `${id} option[value='${selectedValue}']`;
+        $(selectedItemId).remove();
+    };
+    //selected item count display
+    let selectedItemCount = function () {
+        $('#selectedItemCount').html($('#myTable tr').length - 1);
+    };
+
+
+</script >
+</body >
+</html >

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >addCustomer</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--Heading Area-->
+<div class="container-fluid " >
+  <div class="row text-center  border-info" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/vezzalOrder" class="btn btn-outline-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Form Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          Bit to Vezzal Order
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-outline-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
+<!--Form Content-->
+<div class="container-fluid" >
+  <div id="accordianId" role="tablist" aria-multiselectable="true" >
+    <div class="card" >
+      <div class="card-header" role="tab" id="section1HeaderId" >
+        <h5 class="mb-0" >
+          <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+             aria-controls="section1ContentId" >
+            <div class="container-fluid text-center" >
+              <span data-th-text="${vezzalOrderDetail.number}" ></span > &nbsp;Detail's
+            </div >
+          </a >
+        </h5 >
+      </div >
+      <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
+        <div class="card-body" id="login" >
+          <!--Left Side-->
+          <div class="form-row text-white" >
+            <div class="col-6" >
+              <!--order number-->
+              <div class="form-row" >
+                <div class="col-md-4  text-right" >
+                  <label class="control-label" for="number" >Order Number :</label >
+                </div >
+                <div class="col-md-4" >
+                  <p id="number" data-th-text="${vezzalOrderDetail.number}" ></p >
+                </div >
+              </div >
+              <!--Vezzal Order Status-->
+              <div class="form-row " >
+                <div class="col-md-4 text-right" >
+                  <label class="control-label" for="vezzalOrderStatus" >Vezzal Order Status :</label >
+                </div >
+                <div class="col-md-4" >
+                  <p id="vezzalOrderStatus"
+                     data-th-text="${vezzalOrderDetail.vezzalOrderStatus.vezzalOrderStatus}" ></p ></div >
+              </div >
+              <!--Vezzal Order History-->
+              <div class="form-row " >
+                <div class="col-md-4 text-right" >
+                  <label class="control-label" for="vezzalOderHistories" >Vezzal Details :</label >
+                </div >
+                <div class="col-md-4" >
+                  <p id="vezzalOderHistories" data-th-text="${vezzalOrderDetail.vezzalArrivalHistory.vezzal.name}"
+                  ></p >
+                </div >
+              </div >
+              <!--Vezzal Order Service agent-->
+              <div class="form-row " >
+                <div class="col-md-4 text-right" >
+                  <label class="control-label" for="serviceAgent" >Ship agent :</label >
+                </div >
+                <div class="col-md-4 " >
+                  <p id="serviceAgent" data-th-text="${vezzalOrderDetail.vezzalArrivalHistory.shipAgent.name}"
+                  ></p >
+                </div >
+              </div >
+            </div >
+            <div class="col-6" >
+              <!--closing Date At-->
+              <div class="form-row " >
+                <div class="col-md-4 text-right" >
+                  <label class="control-label" for="closingDate" >Closing Date At :</label >
+                </div >
+                <div class="col-md-4 " >
+                  <p id="closingDate" data-th-text="${vezzalOrderDetail.closingDate}" ></p >
+                </div >
+              </div >
+              <!--warehouse Block-->
+              <div class="form-row " >
+                <div class="col-md-4 text-right" >
+                  <label class="control-label" for="warehouseBlock" >Warehouse Block :</label >
+                </div >
+                <div class="col-md-4 " >
+                  <p id="warehouseBlock" data-th-text="${vezzalOrderDetail.warehouseBlock.name}" >
+                  </p >
+                </div >
+              </div >
+              <!--Created By-->
+              <div class="form-row " >
+                <div class="col-md-4 text-right" >
+                  <label class="control-label" for="createdBy" >Created By :</label >
+                </div >
+                <div class="col-md-4 " >
+                  <p id="createdBy" data-th-text="${vezzalOrderDetail.createdBy}" ></p >
+                </div >
+              </div >
+              <!--Created At-->
+              <div class="form-row " >
+                <div class="col-md-4 text-right" >
+                  <label class="control-label" for="createdAt" >Created At :</label >
+                </div >
+                <div class="col-md-4 " >
+                  <p id="createdAt" data-th-text="${{vezzalOrderDetail.createdAt}}" ></p >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+  <div class="form-row" >
+    <div class="alert alert-danger text-center container-fluid" role="alert" >
+      <strong >When bit this order, please bit item what would be handled.<br > and also before submit bit, check item
+               whether all your selected where correct or not, <br />because of <span
+              class="h5 text-capitalize font-italic font-weight-bolder" >there is no chance to change your
+                                                                                            bit.</span ></strong >
+    </div >
+  </div >
+  <div class="form-row" >
+    <form action="/vezzalOrderItemBit/save" method="post" data-th-object="${vezzalOrderBit}" >
+      <div class="form-row" >
+        <!--Vezzal Order Id-->
+        <input type="hidden" data-th-value="${vezzalOrderDetail.id}" name="id" hidden >
+
+        <!--All item show-->
+        <div class="col-md-6 form-group" >
+          <!--Order Item-->
+          <div class="form-row card" >
+            <div class="container-fluid card-header" >
+              <h4 class=" text-center text-primary" >Item List
+                <span class="ml-5 pl-5 h6 text-success" >Pending to bit : </span >
+                <span id="allItems" class="mr-2 h6 text-success" ></span >
+              </h4 >
+            </div >
+            <div class="table-responsive bg-secondary card-body" >
+              <table class="table table-striped table-inverse text-center" id="allItemTable" >
+                <tr >
+                  <th >Item Name</th >
+                  <th >Request Amount</th >
+                  <th >Unite Price (LKR)</th >
+                  <th >Total (LKR)</th >
+                  <th >Modify</th >
+                </tr >
+                <tr data-th-id="${'tr'+index.index}"
+                    data-th-each="vezzalOrderItem, index : ${vezzalOrderDetail.vezzalOrderItems}" >
+                  <!--name-->
+                  <td >
+                    <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}" ></span >
+                    <!--vezzalOrderItem-->
+                    <input type="hidden" data-th-name="${'VezzalOrderItemBit[__${index.index}__]vezzalOrderItem.id'}"
+                           data-th-value="${vezzalOrderItem.id}" required >
+                  </td >
+                  <!--request amount-->
+                  <td >
+                    <input data-th-id="${'rq'+index.index}" type="number"
+                           data-th-value="${vezzalOrderItem.quantity}" class="form-control" required readonly >
+                  </td >
+                  <!--unit price-->
+                  <td >
+                    <input data-th-id="${'up'+index.index}" type="number"
+                           data-th-name="${'VezzalOrderItemBit[__${index.index}__].unitPrice'}"
+                           class="form-control" onkeyup="unitPriceAdd(this)" required >
+                  </td >
+                  <!--total-->
+                  <td >
+                    <input data-th-id="${'tm'+index.index}" type="number"
+                           data-th-name="${'VezzalOrderItemBit[__${index.index}__].amount'}"
+                           class="form-control" required readonly >
+                  </td >
+                  <td >
+                    <input type="button" data-th-id="${'rm'+index.index}" value="Add" class="btn btn-success"
+                           onclick="addItemToBit(this)" >
+                  </td >
+                </tr >
+              </table >
+            </div >
+          </div >
+        </div >
+        <!--Add bit item show-->
+        <div class="col-md-6 form-group" >
+          <div class="form-row card" >
+            <div class="container-fluid card-header" >
+              <h4 class=" text-center text-primary" > Bit Item List
+                <span class="ml-5 pl-5 h6 text-success" >Bit item : </span >
+                <span id="bitItems" class="mr-2 h6 text-success" ></span >
+              </h4 >
+            </div >
+            <div class="table-responsive bg-dark card-body" >
+              <table class="table table-striped table-inverse text-light text-center" id="bitItemTable" >
+                <tr >
+                  <th >Item Name</th >
+                  <th >Request Amount</th >
+                  <th >Unite Price (LKR)</th >
+                  <th >Total (LKR)</th >
+                  <th >Modify</th >
+                </tr >
+              </table >
+            </div >
+          </div >
+        </div >
+      </div >
+      <!--Button-->
+      <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+        <!--Back Button-->
+        <a class="btn btn-outline-dark" tabindex="10" href="/vezzalOrder" >
+          <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+        </a >
+        <!--Save Button-->
+        <button class="btn btn-outline-success ml-5" type="submit" tabindex="8" >
+          <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;
+          <span id="submit" data-th-text="${'Save'}" ></span >
+        </button >
+        <!--Cancel Button-->
+        <button class="btn btn-outline-warning ml-5" type="reset" tabindex="9" >
+          <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+        </button >
+      </div >
+      <!--Error-->
+      <div class="form-row" >
+        <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors:
+        </label >
+        <ul >
+          <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+              class="error" ></li >
+        </ul >
+      </div >
+    </form >
+  </div >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $(document).ready(function (){
+        pendingBitItem();
+        bitItems();
+    });
+
+    //when unit price add total price need to fill
+    function unitPriceAdd(obj) {
+        let selectedFiledId = obj.getAttribute('id').slice(2);
+        $(`#tm${selectedFiledId}`).val(obj.value * $(`#rq${selectedFiledId}`).val());
+
+    }
+
+    function addItemToBit(obj) {
+        let selectedFiledId = obj.getAttribute('id').slice(2);
+        let unitPrice = $(`#up${selectedFiledId}`).val();
+        let requireAmount = $(`#rq${selectedFiledId}`).val();
+        if (unitPrice ==='' || requireAmount===''){
+            swal({
+                title: `Do not kidding me !`,
+                icon: "warning",
+                text: "You are not enter unit price",
+            });
+            return false
+        }
+
+        let i = obj.parentNode.parentNode.rowIndex;
+        console.log(i+" dsdsa i")
+
+        $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
+            .attr({class: "btn btn-danger", onclick: "removeItemToBit(this)", value: "Remove"});
+
+        let selectedTableRow = document.getElementById("allItemTable").rows[i].innerHTML;
+
+        $("#bitItemTable tr:last").after(selectedTableRow);
+
+        document.getElementById("allItemTable").deleteRow(i);
+
+        bitItemFiledValueAdd(unitPrice,requireAmount,selectedFiledId);
+        pendingBitItem();
+        bitItems();
+    }
+
+    function bitItemFiledValueAdd(unitPrice, requireAmount, selectedFiledId) {
+        $(`#rq${selectedFiledId}`).val(requireAmount);
+        $(`#up${selectedFiledId}`).val(unitPrice).attr('readonly', 'readonly');
+        $(`#tm${selectedFiledId}`).val(unitPrice * requireAmount);
+
+    }
+
+    function removeItemToBit(obj) {
+        removeItem(obj);
+        pendingBitItem();
+        bitItems();
+    }
+
+    function removeItem(obj) {
+        let selectedFiledId = obj.getAttribute('id').slice(2);
+        let i = obj.parentNode.parentNode.rowIndex;
+        console.log(i+"  i")
+        $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
+            .attr({class: "btn btn-success", onclick: "addItemToBit(this)", value: "Add"});
+
+        let selectedTableRow = document.getElementById("bitItemTable").rows[i].innerHTML;
+
+        $("#allItemTable tr:last").after(selectedTableRow);
+
+        document.getElementById("bitItemTable").deleteRow(i);
+    }
+
+    function pendingBitItem() {
+        $("#allItems").text($("#allItemTable tr").length - 1);
+    }
+    
+    function bitItems() {
+        $("#bitItems").text($("#bitItemTable tr").length - 1)
+    }
+</script >
+</body >
+</html >

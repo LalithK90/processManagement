@@ -1,227 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>addCustomer</title>
-</head>
-<body>
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >addCustomer</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 <!--Heading Area-->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
-        <!--ViewList Button-->
-        <div class="col">
-            <a href="/shipAgent" class="btn btn-primary" tabindex="1">
-                <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
-            </a>
-        </div>
-        <!--Form Name-->
-        <div class="col">
-            <h2 class="text-light text-center">
-                <strong>
-                    <span data-th-text="${addStatus==true?'Add New shipAgent':'Update shipAgent Details'}"></span>
-                </strong>
-            </h2>
-        </div>
-        <!--Home Button-->
-        <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
-            </a>
-        </div>
-    </div>
-</div>
+<div class="container-fluid " >
+  <div class="row text-center  border-info" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/shipAgent" class="btn btn-outline-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Form Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          <span data-th-text="${addStatus==true?'Add New shipAgent':'Update shipAgent Details'}" ></span >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-outline-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
 <!--Form Content-->
-<div class="container-fluid bg-dark formBorder">
-    <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal"
-              data-th-action="${addStatus==true?'/shipAgent/save':'/shipAgent/update'}"
-              data-th-object="${shipAgent}" method="POST" enctype="multipart/form-data">
-            <div class="row">
-                <!--Left Side-->
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                    <!--Id-->
-                    <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="id">ID :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly/>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="control-label" for="code">shipAgent Code :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="code" data-th-field="*{code}" class="form-control" type="text" readonly/>
-                        </div>
-                    </div>
-                    <!--Name-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="name">Name :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="name" data-th-field="*{name}" class="form-control" tabindex="4" type="text"
-                                   required/>
-                            <span id="nameError" data-th-errors="*{name}"
-                                  data-th-if="${#fields.hasErrors('name')}" class="error">Error Name</span>
-                        </div>
-                    </div>
-                    <!--Nic-->
-                    <div class="form-group">
-
-                        <label class="control-label" for="nic">NIC No :</label>
-
-                        <input id="nic" data-th-field="*{nic}" class="form-control"
-                               tabindex="6" type="text"
-                               maxlength="12"
-                               minlength="10" required/>
-                        <span class="error" id="nicError" data-th-errors="*{nic}"
-                              data-th-if="${#fields.hasErrors('nic')}">Error
-                                                               NIC Number</span>
-
-                    </div>
-                    <!--cha Number-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="mobile">CHA Number :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="mobile" data-th-field="*{chaNumber}" class="form-control mobile" tabindex="6"
-                                   type="text" required/>
-                            <span class="error" data-th-errors="*{chaNumber}"
-                                  data-th-if="${#fields.hasErrors('chaNumber')}" id="mobileError">Error Mobile
-                                                                                               Number</span>
-                        </div>
-                    </div>
-                </div>
-                <!--Right Side-->
-                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
-                    <!--Address-->
-                    <div class="form-group">
-
-                        <label class="control-label" for="address">Address :</label>
-
-                        <textarea id="address" data-th-field="*{address}"
-                                  class="form-control" tabindex="12"
-                                  required></textarea>
-                        <span class="error" data-th-errors="*{address}"
-                              data-th-if="${#fields.hasErrors('address')}" id="addressError">Error Address</span>
-
-                    </div>
-                    <!--Mobile Number One-->
-                    <div class="form-group">
-
-                        <label class="control-label" for="mobileOne">Mobile One No
-                                                                     :</label>
-
-                        <input id="mobileOne" data-th-field="*{mobileOne}"
-                               class="form-control mobile" tabindex="13"
-                               type="text"
-                               maxlength="10" min="9"
-                               required/>
-                        <span class="error" data-th-errors="*{mobileOne}"
-                              data-th-if="${#fields.hasErrors('mobileOne')}"
-                              id="mobileOneError">Error Mobile Number</span>
-
-                    </div>
-                    <!--Mobile Number Two-->
-                    <div class="form-group">
-
-                        <label class="control-label" for="mobileTwo">Mobile Two No
-                                                                     :</label>
-
-                        <input id="mobileTwo" data-th-field="*{mobileTwo}"
-                               class="form-control mobile" tabindex="14"
-                               type="text"
-                               maxlength="10" min="9"/>
-                        <span class="error" data-th-errors="*{mobileTwo}"
-                              data-th-if="${#fields.hasErrors('mobileTwo')}"
-                              id="mobileTwoError">Error Mobile  Number</span>
-
-                    </div>
-                    <!--Land Number-->
-                    <div class="form-group">
-
-                        <label class="control-label" for="land">Land No :</label>
-
-                        <input id="land" data-th-field="*{land}" class="form-control land"
-                               type="text" tabindex="15"
-                               maxlength="10"
-                               min="9"/>
-                        <span class="error" data-th-errors="*{land}"
-                              data-th-if="${#fields.hasErrors('land')}" id="landError">Error Land Number</span>
-
-                    </div>
-                    <!--Email-->
-                    <div class="form-group">
-
-                        <label class="control-label" for="email">Email :</label>
-
-                        <input id="email" data-th-field="*{email}" class="form-control"
-                               tabindex="16" type="email"
-                               required/>
-                        <span class="error" data-th-errors="*{email}"
-                              data-th-if="${#fields.hasErrors('email')}" id="emailError">Error Email</span>
-
-                    </div>
-                    <!--Created by and created at-->
-                    <div id="updateStatus" data-th-if="${addStatus==false}">
-                        <!--Created By-->
-                        <div class="form-row text-right">
-                            <div class="col-md-4">
-                                <label class="control-label" for="createdBy">Created By :</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input id="createdBy" data-th-field="*{createdBy}" class="form-control" type="text"
-                                       readonly/>
-                            </div>
-                        </div>
-                        <!--Created At-->
-                        <div class="form-row text-right">
-                            <div class="col-md-4">
-                                <label class="control-label" for="createdAt">Created At :</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input id="createdAt" data-th-field="*{createdAt}" class="form-control" type="text"
-                                       readonly/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Button-->
-                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                    <!--Back Button-->
-                    <a class="btn btn-dark" tabindex="10" href="/shipAgent">
-                        <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
-                    </a>
-                    <!--Save Button-->
-                    <button class="btn btn-success ml-5" type="submit" tabindex="8">
-                        <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;<span id="submit"
-                                                                                             data-th-text="${addStatus==true?'Save': 'Update'}"></span>
-                    </button>
-                    <!--Cancel Button-->
-                    <button class="btn btn-warning ml-5" type="reset" tabindex="9">
-                        <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
-                    </button>
-                </div>
-                <!--Error-->
-                <div class="form-row">
-                    <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors:
-                    </label>
-                    <ul>
-                        <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
-                            class="error"></li>
-                    </ul>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<div class="container-fluid" >
+  <div class="col-sm-12 flex-column " >
+    <form id="form" class="form-horizontal"
+          data-th-action="${addStatus==true?'/shipAgent/save':'/shipAgent/update'}"
+          data-th-object="${shipAgent}" method="POST" enctype="multipart/form-data" >
+      <div class="row" >
+        <!--Left Side-->
+        <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+          <!--Id-->
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="id" >ID :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly />
+            </div >
+          </div >
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="code" >shipAgent Code :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="code" data-th-field="*{code}" class="form-control" type="text" readonly />
+            </div >
+          </div >
+          <!--Name-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="name" >Name :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="name" data-th-field="*{name}" class="form-control" tabindex="4" type="text"
+                     required />
+              <span id="nameError" data-th-errors="*{name}"
+                    data-th-if="${#fields.hasErrors('name')}" class="error" >Error Name</span >
+            </div >
+          </div >
+          <!--Nic-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="nic" >NIC No :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="nic" data-th-field="*{nic}" class="form-control"
+                     tabindex="6" type="text"
+                     maxlength="12"
+                     minlength="10" required />
+              <span class="error" id="nicError" data-th-errors="*{nic}"
+                    data-th-if="${#fields.hasErrors('nic')}" >Error
+                                                               NIC Number</span >
+            </div >
+          </div >
+          <!--cha Number-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="mobile" >CHA Number :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="mobile" data-th-field="*{chaNumber}" class="form-control" minlength="3" tabindex="6"
+                     type="text" required />
+              <span class="error" data-th-errors="*{chaNumber}"
+                    data-th-if="${#fields.hasErrors('chaNumber')}" id="mobileError" >Error Mobile
+                                                                                               Number</span >
+            </div >
+          </div >
+        </div >
+        <!--Right Side-->
+        <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+          <!--Address-->
+          <div class="form-row" >
+              <div class="col-md-4" >
+            <label class="control-label" for="address" >Address :</label >
+              </div>
+              <div class="col-md-8" >
+            <textarea id="address" data-th-field="*{address}"
+                      class="form-control" tabindex="12"
+                      required ></textarea >
+            <span class="error" data-th-errors="*{address}"
+                  data-th-if="${#fields.hasErrors('address')}" id="addressError" >Error Address</span >
+              </div>
+          </div >
+          <!--Mobile Number One-->
+          <div class="form-row" >
+              <div class="col-md-4" >
+            <label class="control-label" for="mobileOne" >Mobile One No
+                                                          :</label >
+              </div>
+              <div class="col-md-8" >
+            <input id="mobileOne" data-th-field="*{mobileOne}"
+                   class="form-control mobile" tabindex="13"
+                   type="text"
+                   maxlength="10" min="9"
+                   required />
+            <span class="error" data-th-errors="*{mobileOne}"
+                  data-th-if="${#fields.hasErrors('mobileOne')}"
+                  id="mobileOneError" >Error Mobile Number</span >
+              </div>
+          </div >
+          <!--Mobile Number Two-->
+          <div class="form-row" >
+              <div class="col-md-4" >
+            <label class="control-label" for="mobileTwo" >Mobile Two No
+                                                          :</label >
+              </div>
+              <div class="col-md-8" >
+            <input id="mobileTwo" data-th-field="*{mobileTwo}"
+                   class="form-control mobile" tabindex="14"
+                   type="text"
+                   maxlength="10" min="9" />
+            <span class="error" data-th-errors="*{mobileTwo}"
+                  data-th-if="${#fields.hasErrors('mobileTwo')}"
+                  id="mobileTwoError" >Error Mobile  Number</span >
+              </div>
+          </div >
+          <!--Land Number-->
+          <div class="form-row" >
+              <div class="col-md-4" >
+            <label class="control-label" for="land" >Land No :</label >
+              </div> <div class="col-md-8" >
+            <input id="land" data-th-field="*{land}" class="form-control land"
+                   type="text" tabindex="15"
+                   maxlength="10"
+                   min="9" />
+            <span class="error" data-th-errors="*{land}"
+                  data-th-if="${#fields.hasErrors('land')}" id="landError" >Error Land Number</span >
+          </div>
+          </div >
+          <!--Email-->
+          <div class="form-row" >
+              <div class="col-md-4" >
+            <label class="control-label" for="email" >Email :</label >
+              </div> <div class="col-md-8" >
+            <input id="email" data-th-field="*{email}" class="form-control"
+                   tabindex="16" type="email"
+                   required />
+            <span class="error" data-th-errors="*{email}"
+                  data-th-if="${#fields.hasErrors('email')}" id="emailError" >Error Email</span >
+          </div>
+          </div >
+          <!--Created by and created at-->
+          <div id="updateStatus" data-th-if="${addStatus==false}" >
+            <!--Created By-->
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="createdBy" >Created By :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="createdBy" data-th-field="*{createdBy}" class="form-control" type="text"
+                       readonly />
+              </div >
+            </div >
+            <!--Created At-->
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="createdAt" >Created At :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="createdAt" data-th-field="*{createdAt}" class="form-control" type="text"
+                       readonly />
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+          <!--Back Button-->
+          <a class="btn btn-outline-dark" tabindex="10" href="/shipAgent" >
+            <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+          </a >
+          <!--Save Button-->
+          <button class="btn btn-outline-success ml-5" type="submit" tabindex="8" >
+            <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;<span id="submit"
+                                                                                   data-th-text="${addStatus==true?'Save': 'Update'}" ></span >
+          </button >
+          <!--Cancel Button-->
+          <button class="btn btn-outline-warning ml-5" type="reset" tabindex="9" >
+            <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+          </button >
+        </div >
+        <!--Error-->
+        <div class="form-row" >
+          <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors:
+          </label >
+          <ul >
+            <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+                class="error" ></li >
+          </ul >
+        </div >
+      </div >
+    </form >
+  </div >
+</div >
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<footer data-th-replace="~{fragments/footer :: footerFragment}" ></footer >
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<script data-th-replace="~{fragments/script :: scriptFragment}" ></script >
 <script >
     /*Country -> list
     REST COUNTRIES
@@ -229,16 +235,16 @@ Get information about countries via a RESTful API
 https://restcountries.eu/#api-endpoints-all
     * */
     $(document).ready(function () {
-        let url = "https://restcountries.eu/rest/v2/all?fields=name;cioc";
-        $.getJSON(url, function (val) {
-            $.each(val, function () {
-                $("#country").append(`<option value="${this.cioc}">${this.name}</option>`);
+            let url = "https://restcountries.eu/rest/v2/all?fields=name;cioc";
+            $.getJSON(url, function (val) {
+                $.each(val, function () {
+                    $("#country").append(`<option value="${this.cioc}">${this.name}</option>`);
+                });
             });
-        });
         }
     );
 
-</script>
+</script >
 
-</body>
-</html>
+</body >
+</html >

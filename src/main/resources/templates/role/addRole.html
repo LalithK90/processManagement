@@ -7,28 +7,28 @@
 <body>
 <nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid">
+    <div class="row text-center">
         <div class="col">
-            <a class="btn btn-primary" href="/home">
+            <a class="btn btn-outline-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
             </a>
         </div>
         <div class="col">
-            <h4 class="text-light text-center">
+            <h4 class="text-center">
                 <strong>
                     <span id="formHeader" th:text="${addStatus==true?'New Role ':'Update Role'}"></span>
                 </strong>
             </h4>
         </div>
         <div class="col">
-            <a href="/role" class="btn btn-primary">
+            <a href="/role" class="btn btn-outline-primary">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
     </div>
 </div>
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal" method="POST" th:action="${addStatus==true?'/role/add':'/role/update'}"
               th:object="${role}">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="form-group col-md-12 col-sm-12 text-center flex-column">
-                <button class="btn btn-success" type="submit">
+                <button class="btn btn-outline-success" type="submit">
                     <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; &nbsp;<span
                         id="submit" th:text="${addStatus==true?'Save': 'Update'}">                        </span>
                 </button>
@@ -70,9 +70,9 @@
     </div>
 </div>
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<div th:replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<div th:replace="~{fragments/script :: scriptFragment}"></div>
 
 </body>
 </html>

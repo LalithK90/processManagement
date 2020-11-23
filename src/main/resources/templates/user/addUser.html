@@ -8,31 +8,31 @@
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <!--Page header -->
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid">
+    <div class="row text-center">
         <div class="col">
-            <a class="btn btn-primary" href="/home">
+            <a class="btn btn-outline-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
             </a>
         </div>
         <div class="col">
-            <h4 class="text-light text-center">
+            <h4 class="text-center">
                 <strong>
                     <span id="formHeader" data-th-text="${addStatus==true?'New User':'Update User'}"></span>
                 </strong>
             </h4>
         </div>
         <div class="col">
-            <a href="/user" class="btn btn-primary">
+            <a href="/user" class="btn btn-outline-primary">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
     </div>
 </div>
 <!--Employee find-->
-<div class="container-fluid bg-dark formBorder" id="employeeFindForm" data-th-if="${employeeDetailShow==false}">
+<div class="container-fluid" id="employeeFindForm" data-th-if="${employeeDetailShow==false}">
     <div class="col-sm-12 flex-column ">
-        <form id="form" method="POST" data-th-action="${'/user/workingPlace'}" data-th-object="${employee}"
+        <form id="form" method="POST" data-th-action="${'/user/workingPlace'}" data-th-object="${userDetails}"
               enctype="multipart/form-data">
             <div class="form-row">
                 <div class="col-5 flex-column">
@@ -69,7 +69,7 @@
                                 <label class="control-label"></label>
                             </div>
                             <div class="col-10 text-left" id="btnSearchEmployee">
-                                <button class="btn btn-success" tabindex="3" type="submit">
+                                <button class="btn btn-outline-success" tabindex="3" type="submit">
                                     <i class="fa fa-search " style="font-size: 20px"></i>&nbsp; &nbsp;Search
                                 </button>
                             </div>
@@ -93,7 +93,7 @@
 </div>
 
 <!--User add from-->
-<div class="container-fluid bg-dark formBorder" data-th-if="${employeeDetailShow==true}" id="userFormShow">
+<div class="container-fluid" data-th-if="${employeeDetailShow==true}" id="userFormShow">
     <form id="formUser" data-th-action="${addStatus==true?'/user/add':'/user/update'}" data-th-object="${user}"
           class="form-horizontal" method="POST" autocomplete="false">
         <div class="row">
@@ -110,23 +110,23 @@
                 <!--Employee details Display-->
                 <div class="form-row">
                     <div class="col-md-4">
-                        <label class="control-label" for="employee">Employee :</label>
+                        <label class="control-label" for="userDetails">Employee :</label>
                     </div>
                     <div class="col-md-8">
-                        <select class="form-control" data-th-field="*{employee}" data-th-each="e : ${employee}"
-                                name="employee"
-                                id="employee" required>
+                        <select class="form-control" data-th-field="*{userDetails}" data-th-each="e : ${userDetails}"
+                                name="userDetails"
+                                id="userDetails" required>
                             <option id="employeeList"
                                     data-th-text="${e.title.title} + ${' '} + ${e.name} +${' - '} + ${e.nic}"
                                     data-th-value="${e.id}"
-                                    data-th-field="*{employee}" value="">Please select
+                                    data-th-field="*{userDetails}" value="">Please select
                             </option>
                         </select>
                         <div id="employeeNameBox" data-th-if="${addStatus==false}">
                             <strong>
                                 <span id="employeeName"
-                                      data-th-text="${user.employee.title.title} + ${' '} + ${user.employee.name} +${' - '} + ${user.employee.nic}"></span>
-                                <input type="hidden" id="employeeSelected" data-th-field="*{employee}">
+                                      data-th-text="${user.userDetails.title.title} + ${' '} + ${user.userDetails.name} +${' - '} + ${user.userDetails.nic}"></span>
+                                <input type="hidden" id="employeeSelected" data-th-field="*{userDetails}">
                             </strong>
                         </div>
                     </div>
@@ -176,7 +176,7 @@
 
             <!--Button-->
             <div class="form-group col-md-12 col-sm-12 text-center flex-column">
-                <button class="btn btn-success" type="submit">
+                <button class="btn btn-outline-success" type="submit">
                     <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; &nbsp;<span
                         id="submit" data-th-text="${addStatus==true?'Save': 'Update'}">                        </span>
                 </button>

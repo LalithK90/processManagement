@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >addCustomer</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--Heading Area-->
+<div class="container-fluid " >
+  <div class="row text-center  border-info" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/vezzalArrivalHistory" class="btn btn-outline-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Form Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+                    <span
+                          data-th-text="${addStatus==true?'Add New Vezzal Arrival':'Update Vezzal Arrival Details'}" ></span >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-outline-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
+<!--Form Content-->
+<div class="container-fluid" >
+  <!--vezzal detail-->
+  <div id="accordianId" role="tablist" aria-multiselectable="true" >
+    <div class="card" >
+      <div class="card-header" role="tab" id="section1HeaderId" >
+        <h5 class="mb-0" >
+          <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+             aria-controls="section1ContentId" >
+            <div class="container-fluid text-center" >
+              <span data-th-text="${vezzalDetail.name}" ></span > <span >'s detail</span >
+            </div >
+          </a >
+        </h5 >
+      </div >
+      <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
+        <div class="card-body" >
+          <div data-th-replace="~{vezzal/vezzal-detail :: vezzalDetailsFragment}" >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+<div class="col-sm-12 flex-column " >
+  <form id="form" class="form-horizontal"
+        data-th-action="${addStatus==true?'/vezzalArrivalHistory/save':'/vezzalArrivalHistory/update'}"
+        data-th-object="${vezzalArrivalHistory}" method="POST" >
+    <div class="row" >
+      <!--Id-->
+      <input data-th-if="${addStatus==false}" data-th-field="*{id}" type="hidden" />
+      <input data-th-field="*{vezzal}" type="hidden" />
+      <!--Left Side-->
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <!--ship agent -->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="chandler" >Ship Agent :</label >
+          </div >
+          <div class="col-md-8" >
+            <select id="chandler" class="form-control"
+                    data-th-field="*{shipAgent}" required >
+              <option value="" disabled selected >Please Select</option >
+              <option data-th-each="shipAgent : ${shipAgents}"
+                      data-th-value="${shipAgent.id}"
+                      data-th-text="${shipAgent.name}" ></option >
+            </select >
+          </div >
+        </div >
+        <!--captain name-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="captainName" >Captain name :</label >
+          </div >
+          <div class="col-md-8" >
+            <input id="name" class="form-control" data-th-field="*{captainName}" tabindex=""
+                   type="text"
+                   required />
+          </div >
+        </div >
+        <!--cargoTonnage-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="cargoTonnage" >Cargo Tonnage :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{cargoTonnage}" class="form-control" tabindex=""
+                   type="text"
+                   required />
+          </div >
+        </div >
+        <!--anchorageTerminal-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="anchorageTerminal" >Anchorage Terminal :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{anchorageTerminal}" class="form-control" tabindex=""
+                   type="text"
+                   required />
+          </div >
+        </div >
+        <!--purposeOfVisit-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="purposeOfVisit" >Purpose Of Visit :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{purposeOfVisit}" class="form-control" tabindex=""
+                   type="text"
+                   required />
+          </div >
+        </div >
+        <!--numberOfCrewMembers-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="numberOfCrewMembers" >Number Of Crew Members :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{numberOfCrewMembers}" class="form-control" tabindex=""
+                   type="number"
+                   required />
+          </div >
+        </div >
+        <!--numberOfPassengers-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="numberOfPassengers" >Number Of Passengers :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{numberOfPassengers}" class="form-control" tabindex=""
+                   type="number" />
+          </div >
+        </div >
+        <!--numberOfPassengers-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="onePreviousHarbourName" >Last Harbour Name :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{onePreviousHarbourName}" class="form-control" tabindex=""
+                   type="text"
+                   required />
+          </div >
+        </div >
+      </div >
+      <!--Right Side-->
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <!--twoPreviousHarbourName-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="twoPreviousHarbourName" >Last One Harbour Name :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{twoPreviousHarbourName}" class="form-control" tabindex=""
+                   type="text"
+                   required />
+          </div >
+        </div >
+        <!--threePreviousHarbourName-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="threePreviousHarbourName" >Last Two Harbour Name :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{threePreviousHarbourName}" class="form-control" tabindex=""
+                   type="text"
+                   required />
+          </div >
+        </div >
+        <!--nextHarbour-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="nextHarbour" >Next Harbour :</label >
+          </div >
+          <div class="col-md-8" >
+            <input data-th-field="*{nextHarbour}" class="form-control" tabindex=""
+                   type="text"
+                   required />
+          </div >
+        </div >
+        <!--anchorage Date And Time -->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="startDateE" >Anchorage Date :</label >
+          </div >
+          <div class="col-md-8" >
+            <input id="startDateE" data-th-field="*{{anchorageDateAndTime}}" class="form-control" tabindex="4"
+                   type="datetime-local"
+                   required />
+          </div >
+        </div >
+        <!--sailing Date -->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="endDateE" >Sailing Date :</label >
+          </div >
+          <div class="col-md-8" >
+            <input id="endDateE" data-th-field="*{{sailingDate}}" class="form-control" tabindex="4"
+                   type="date"
+                   required />
+          </div >
+        </div >
+        <!--Created by and created at-->
+        <div id="updateStatus" data-th-if="${addStatus==false}" >
+          <!--vezzal Departure Arrival Status-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="vezzalDepartureArrivalStatus" >Vezzal Departure Arrival Status :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="vezzalDepartureArrivalStatus" data-th-value="${vezzalDepartureArrivalStatus.vezzalDepartureArrivalStatus}" class="form-control" type="text"
+                     readonly />
+            </div >
+          </div >
+          <!--Created By-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="createdBy" >Created By :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="createdBy" data-th-field="*{createdBy}" class="form-control" type="text"
+                     readonly />
+            </div >
+          </div >
+          <!--Created At-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="createdAt" >Created At :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="createdAt" data-th-field="*{createdAt}" class="form-control" type="text"
+                     readonly />
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+    <!--Button-->
+    <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+      <!--Back Button-->
+      <a class="btn btn-outline-dark" tabindex="10" href="/vezzalArrivalHistory" >
+        <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+      </a >
+      <!--Save Button-->
+      <button class="btn btn-outline-success ml-5" type="submit" tabindex="8" >
+        <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;<span id="submit"
+                                                                               data-th-text="${addStatus==true?'Save': 'Update'}" ></span >
+      </button >
+      <!--Cancel Button-->
+      <button class="btn btn-outline-warning ml-5" type="reset" tabindex="9" >
+        <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+      </button >
+    </div >
+    <!--Error-->
+    <div class="form-row" >
+      <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors:
+      </label >
+      <ul >
+        <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+            class="error" ></li >
+      </ul >
+    </div >
+  </form >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+<script >
+    $("#endDateE, #startDateE").bind('change', () => {
+        console.log("sdada");
+        let manufactureDate = $(`#startDateE`).val();
+        let expiredDate = $(`#endDateE`).val();
+
+        if (manufactureDate !== "" && expiredDate !== "") {
+            if (Date.parse(manufactureDate) > Date.parse(expiredDate)) {
+                swal({
+                    title: "Could you accept those days.. !",
+                    icon: "warning",
+                    text: "Please check your date \n Expire Date can not be less than Start Date",
+                })
+                $(`#endDateE`).val($(`#startDateE`).val());
+            }
+        }
+    })
+
+
+</script >
+</body >
+</html >
