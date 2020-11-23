@@ -16,4 +16,10 @@ public class VezzalOrderBit {
   private int id;
 
   private List< VezzalOrderItemBit > vezzalOrderItemBits;
+/*
+amount
+unitPrice
+vezzalOrderItem
+*/
+
 }
