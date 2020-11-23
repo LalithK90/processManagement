@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -44,11 +45,20 @@ public class VezzalOrderService implements AbstractService< VezzalOrder, Integer
     return vezzalOrderDao.findAll(vezzalOrderExample);
   }
 
-  public VezzalOrder findLastVezzalOrder(){
+  public VezzalOrder findLastVezzalOrder() {
     return vezzalOrderDao.findFirstByOrderByIdDesc();
   }
 
-  public List<VezzalOrder> findByVezzalOrderStatus(VezzalOrderStatus vezzalOrderStatus) {
-  return vezzalOrderDao.findByVezzalOrderStatus(vezzalOrderStatus);
+  public List< VezzalOrder > findByVezzalOrderStatus(VezzalOrderStatus vezzalOrderStatus) {
+    return vezzalOrderDao.findByVezzalOrderStatus(vezzalOrderStatus);
+  }
+
+  public List< VezzalOrder > findByVezzalOrderStatusAndClosingDateBefore(VezzalOrderStatus vezzalOrderStatus,
+                                                                         LocalDate date) {
+    return vezzalOrderDao.findByVezzalOrderStatusAndClosingDateBefore(vezzalOrderStatus, date);
+  }
+
+  public void saveAll(List< VezzalOrder > vezzalOrders) {
+    vezzalOrderDao.saveAll(vezzalOrders);
   }
 }

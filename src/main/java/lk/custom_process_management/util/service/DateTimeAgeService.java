@@ -80,5 +80,10 @@ public class DateTimeAgeService {
         return valide;
     }
 
+    public boolean dateIsBeforeToday(LocalDate date){
+        LocalDate toDay = LocalDate.now();
+        return date.isBefore(toDay);
+    }
+
 
 }
