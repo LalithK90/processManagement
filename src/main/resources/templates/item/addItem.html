@@ -90,7 +90,7 @@
                         </div>
                         <div class="col-md-4">
                             <input class="form-control" data-th-field="*{name}" id="iName" required tabindex="6"
-                                   type="text"/>
+                                   type="text" minlength="5"/>
                             <span class="error" data-th-errors="*{name}"
                                   data-th-if="${#fields.hasErrors('name')}" id="nameError">Error Name</span>
                         </div>
