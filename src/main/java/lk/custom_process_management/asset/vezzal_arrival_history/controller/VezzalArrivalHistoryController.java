@@ -97,7 +97,7 @@ public class VezzalArrivalHistoryController {
       VezzalArrivalHistory lastVezzalArrivalHistory =
           vezzalArrivalHistoryService.lastVezzalHistoryByVezzal(vezzalArrivalHistory.getVezzal());
 
-      if ( !lastVezzalArrivalHistory.getVezzalDepartureArrivalStatus().equals(VezzalDepartureArrivalStatus.DP) ) {
+      if ( lastVezzalArrivalHistory.getVezzalDepartureArrivalStatus() != null && !lastVezzalArrivalHistory.getVezzalDepartureArrivalStatus().equals(VezzalDepartureArrivalStatus.DP) ) {
 
         ObjectError error = new ObjectError("vezzalArrivalHistory",
                                             "There is already this vezzal on harbor");
