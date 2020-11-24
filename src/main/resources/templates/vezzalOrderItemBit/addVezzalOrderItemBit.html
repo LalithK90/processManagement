@@ -142,114 +142,94 @@
     </div >
   </div >
   <div class="form-row" >
-    <form action="/vezzalOrderItemBit/save" method="post" data-th-object="${vezzalOrderBit}" >
-      <div class="form-row" >
-        <!--Vezzal Order Id-->
-        <input type="hidden" data-th-value="${vezzalOrderDetail.id}" name="id" hidden >
+    <div class="container-fluid" >
+      <form action="/vezzalOrderItemBit/save" method="post" data-th-object="${vezzalOrderBit}" >
+        <!--Order Item-->
+        <div class="card" >
+          <div class="card-header" >
+            <h4 class=" text-center text-primary" >
+              Item List
+              <span class="ml-5 pl-5 h6 text-primary" >All Item to bit : </span >
+              <span id="allItems" class="mr-2 h6 text-success" ></span >
+              <span class="ml-5 pl-5 h6 text-warning" >Pending to bit : </span >
+              <span id="pendingBit" class="mr-2 h6 text-success" ></span >
+              <span class="ml-5 pl-5 h6 text-success" >Bit items : </span >
+              <span id="bitItem" class="mr-2 h6 text-success" ></span >
+            </h4 >
+          </div >
+          <div class="bg-secondary card-body" >
+            <!--Vezzal Order Id-->
+            <input type="hidden" data-th-value="${vezzalOrderDetail.id}" name="id" hidden >
+            <table class="table table-striped table-inverse text-center" id="myTable" >
+              <tr >
+                <th >Item Name</th >
+                <th >Request Amount</th >
+                <th >Unite Price (LKR)</th >
+                <th >Total (LKR)</th >
+                <th >Modify</th >
+              </tr >
+              <tr data-th-id="${'tr'+index.index}"
+                  data-th-each="vezzalOrderItem, index : ${vezzalOrderDetail.vezzalOrderItems}" >
+                <!--name-->
+                <td >
+                  <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}" ></span >
+                  <!--vezzalOrderItem-->
+                  <input type="hidden" data-th-name="${'VezzalOrderItemBit[__${index.index}__]vezzalOrderItem.id'}"
+                         data-th-value="${vezzalOrderItem.id}" required >
+                </td >
+                <!--request amount-->
+                <td >
+                  <input data-th-id="${'rq'+index.index}" type="number"
+                         data-th-value="${vezzalOrderItem.quantity}" class="form-control" required readonly >
+                </td >
+                <!--unit price-->
+                <td >
+                  <input data-th-id="${'up'+index.index}" type="number"
+                         data-th-name="${'VezzalOrderItemBit[__${index.index}__].unitPrice'}"
+                         class="form-control" onkeyup="unitPriceAdd(this)" required >
+                </td >
+                <!--total-->
+                <td >
+                  <input data-th-id="${'tm'+index.index}" type="number"
+                         data-th-name="${'VezzalOrderItemBit[__${index.index}__].amount'}"
+                         class="form-control" required readonly >
+                </td >
+                <td >
+                  <input type="button" data-th-id="${'rm'+index.index}" value="Remove" class="btn btn-danger notBitList"
+                         onclick="removeItemToBit(this)" >
+                </td >
+              </tr >
+            </table >
+          </div >
+        </div >
 
-        <!--All item show-->
-        <div class="col-md-6 form-group" >
-          <!--Order Item-->
-          <div class="form-row card" >
-            <div class="container-fluid card-header" >
-              <h4 class=" text-center text-primary" >Item List
-                <span class="ml-5 pl-5 h6 text-success" >Pending to bit : </span >
-                <span id="allItems" class="mr-2 h6 text-success" ></span >
-              </h4 >
-            </div >
-            <div class="table-responsive bg-secondary card-body" >
-              <table class="table table-striped table-inverse text-center" id="allItemTable" >
-                <tr >
-                  <th >Item Name</th >
-                  <th >Request Amount</th >
-                  <th >Unite Price (LKR)</th >
-                  <th >Total (LKR)</th >
-                  <th >Modify</th >
-                </tr >
-                <tr data-th-id="${'tr'+index.index}"
-                    data-th-each="vezzalOrderItem, index : ${vezzalOrderDetail.vezzalOrderItems}" >
-                  <!--name-->
-                  <td >
-                    <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}" ></span >
-                    <!--vezzalOrderItem-->
-                    <input type="hidden" data-th-name="${'VezzalOrderItemBit[__${index.index}__]vezzalOrderItem.id'}"
-                           data-th-value="${vezzalOrderItem.id}" required >
-                  </td >
-                  <!--request amount-->
-                  <td >
-                    <input data-th-id="${'rq'+index.index}" type="number"
-                           data-th-value="${vezzalOrderItem.quantity}" class="form-control" required readonly >
-                  </td >
-                  <!--unit price-->
-                  <td >
-                    <input data-th-id="${'up'+index.index}" type="number"
-                           data-th-name="${'VezzalOrderItemBit[__${index.index}__].unitPrice'}"
-                           class="form-control" onkeyup="unitPriceAdd(this)" required >
-                  </td >
-                  <!--total-->
-                  <td >
-                    <input data-th-id="${'tm'+index.index}" type="number"
-                           data-th-name="${'VezzalOrderItemBit[__${index.index}__].amount'}"
-                           class="form-control" required readonly >
-                  </td >
-                  <td >
-                    <input type="button" data-th-id="${'rm'+index.index}" value="Add" class="btn btn-success"
-                           onclick="addItemToBit(this)" >
-                  </td >
-                </tr >
-              </table >
-            </div >
-          </div >
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+          <!--Back Button-->
+          <a class="btn btn-outline-dark" tabindex="10" href="/vezzalOrder" >
+            <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+          </a >
+          <!--Save Button-->
+          <button class="btn btn-outline-success ml-5" type="submit" tabindex="8" >
+            <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;
+            <span id="submit" data-th-text="${'Save'}" ></span >
+          </button >
+          <!--Cancel Button-->
+          <button class="btn btn-outline-warning ml-5" type="reset" tabindex="9" >
+            <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+          </button >
         </div >
-        <!--Add bit item show-->
-        <div class="col-md-6 form-group" >
-          <div class="form-row card" >
-            <div class="container-fluid card-header" >
-              <h4 class=" text-center text-primary" > Bit Item List
-                <span class="ml-5 pl-5 h6 text-success" >Bit item : </span >
-                <span id="bitItems" class="mr-2 h6 text-success" ></span >
-              </h4 >
-            </div >
-            <div class="table-responsive bg-dark card-body" >
-              <table class="table table-striped table-inverse text-light text-center" id="bitItemTable" >
-                <tr >
-                  <th >Item Name</th >
-                  <th >Request Amount</th >
-                  <th >Unite Price (LKR)</th >
-                  <th >Total (LKR)</th >
-                  <th >Modify</th >
-                </tr >
-              </table >
-            </div >
-          </div >
+        <!--Error-->
+        <div class="form-row" >
+          <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors:
+          </label >
+          <ul >
+            <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+                class="error" ></li >
+          </ul >
         </div >
-      </div >
-      <!--Button-->
-      <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
-        <!--Back Button-->
-        <a class="btn btn-outline-dark" tabindex="10" href="/vezzalOrder" >
-          <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
-        </a >
-        <!--Save Button-->
-        <button class="btn btn-outline-success ml-5" type="submit" tabindex="8" >
-          <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;
-          <span id="submit" data-th-text="${'Save'}" ></span >
-        </button >
-        <!--Cancel Button-->
-        <button class="btn btn-outline-warning ml-5" type="reset" tabindex="9" >
-          <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
-        </button >
-      </div >
-      <!--Error-->
-      <div class="form-row" >
-        <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors:
-        </label >
-        <ul >
-          <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
-              class="error" ></li >
-        </ul >
-      </div >
-    </form >
+      </form >
+    </div >
   </div >
 </div >
 <!--footer include-->
@@ -257,9 +237,8 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
-    $(document).ready(function (){
-        pendingBitItem();
-        bitItems();
+    $(document).ready(function () {
+        bitItemOrNotCount();
     });
 
     //when unit price add total price need to fill
@@ -269,70 +248,40 @@
 
     }
 
+    function removeItemToBit(obj) {
+        let selectedFiledId = obj.getAttribute('id').slice(2);
+
+        $(`#up${selectedFiledId}`).removeAttr("readonly required");
+        $(`#rq${selectedFiledId}`).removeAttr("readonly required");
+
+        $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
+            .attr({class: "btn btn-danger bitList", onclick: "addItemToBit(this)", value: "Add"});
+
+    }
+
     function addItemToBit(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
-        let unitPrice = $(`#up${selectedFiledId}`).val();
-        let requireAmount = $(`#rq${selectedFiledId}`).val();
-        if (unitPrice ==='' || requireAmount===''){
-            swal({
-                title: `Do not kidding me !`,
-                icon: "warning",
-                text: "You are not enter unit price",
-            });
-            return false
-        }
 
-        let i = obj.parentNode.parentNode.rowIndex;
-        console.log(i+" dsdsa i")
+        $(`#up${selectedFiledId}`).val(0.00).attr("required");
+        $(`#tm${selectedFiledId}`).val(0.00).attr("required required");
+        $(`#rq${selectedFiledId}`).attr("readonly required");
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
-            .attr({class: "btn btn-danger", onclick: "removeItemToBit(this)", value: "Remove"});
-
-        let selectedTableRow = document.getElementById("allItemTable").rows[i].innerHTML;
-
-        $("#bitItemTable tr:last").after(selectedTableRow);
-
-        document.getElementById("allItemTable").deleteRow(i);
-
-        bitItemFiledValueAdd(unitPrice,requireAmount,selectedFiledId);
-        pendingBitItem();
-        bitItems();
+            .attr({class: "btn btn-success notBitList", onclick: "addItemToBit(this)", value: "Remove"});
     }
 
-    function bitItemFiledValueAdd(unitPrice, requireAmount, selectedFiledId) {
-        $(`#rq${selectedFiledId}`).val(requireAmount);
-        $(`#up${selectedFiledId}`).val(unitPrice).attr('readonly', 'readonly');
-        $(`#tm${selectedFiledId}`).val(unitPrice * requireAmount);
 
+    function bitItemOrNotCount() {
+        let allItemLength = $("#myTable tr").length - 1;
+        $("#allItems").text(allItemLength);
+        let notBitList = $(".notBitList").length;
+        let bitItemCount = $(".bitList").length;
+
+        $("#pendingBit").text(allItemLength-notBitList);
+
+        $("#bitItem").text();
     }
 
-    function removeItemToBit(obj) {
-        removeItem(obj);
-        pendingBitItem();
-        bitItems();
-    }
-
-    function removeItem(obj) {
-        let selectedFiledId = obj.getAttribute('id').slice(2);
-        let i = obj.parentNode.parentNode.rowIndex;
-        console.log(i+"  i")
-        $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
-            .attr({class: "btn btn-success", onclick: "addItemToBit(this)", value: "Add"});
-
-        let selectedTableRow = document.getElementById("bitItemTable").rows[i].innerHTML;
-
-        $("#allItemTable tr:last").after(selectedTableRow);
-
-        document.getElementById("bitItemTable").deleteRow(i);
-    }
-
-    function pendingBitItem() {
-        $("#allItems").text($("#allItemTable tr").length - 1);
-    }
-    
-    function bitItems() {
-        $("#bitItems").text($("#bitItemTable tr").length - 1)
-    }
 </script >
 </body >
 </html >
