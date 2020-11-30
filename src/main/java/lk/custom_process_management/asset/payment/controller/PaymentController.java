@@ -1,9 +1,8 @@
 package lk.custom_process_management.asset.payment.controller;
 
-import lk.lab_management.asset.payment.entity.enums.PaymentStatus;
-import lk.lab_management.asset.payment.entity.Payment;
-import lk.lab_management.asset.payment.service.PaymentService;
-import lk.lab_management.asset.sample_receiving.service.SampleReceivingService;
+
+import lk.custom_process_management.asset.payment.entity.Payment;
+import lk.custom_process_management.asset.payment.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +16,10 @@ import javax.validation.Valid;
 public class PaymentController {
 
     private final PaymentService paymentService;
-    private final SampleReceivingService sampleReceivingService;
 
     @Autowired
-    public PaymentController(PaymentService paymentService, SampleReceivingService sampleReceivingService) {
+    public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
-        this.sampleReceivingService = sampleReceivingService;
     }
 
     @GetMapping
@@ -35,8 +32,6 @@ public class PaymentController {
     public String form(Model model) {
         model.addAttribute("payment", new Payment());
         model.addAttribute("addStatus", true);
-        model.addAttribute("sampleReceivingList", sampleReceivingService.findAll());
-        model.addAttribute("paymentStatuses", PaymentStatus.values());
         return "payment/addPayment";
     }
 

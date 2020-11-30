@@ -1,8 +1,9 @@
 package lk.custom_process_management.asset.payment.service;
 
-import lk.lab_management.asset.payment.entity.Payment;
-import lk.lab_management.asset.payment.dao.PaymentDao;
-import lk.lab_management.util.interfaces.AbstractService;
+
+import lk.custom_process_management.asset.payment.dao.PaymentDao;
+import lk.custom_process_management.asset.payment.entity.Payment;
+import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PaymentService implements AbstractService<Payment, Integer> {
+public class PaymentService implements AbstractService< Payment, Integer> {
 
     private final PaymentDao paymentDao;
 
