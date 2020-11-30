@@ -150,11 +150,11 @@
             <h4 class=" text-center text-primary" >
               Item List
               <span class="ml-5 pl-5 h6 text-primary" >All Item to bit : </span >
-              <span id="allItems" class="mr-2 h6 text-success" ></span >
+              <span id="allItems" class="mr-2 h6 font-weight-bolder text-success" ></span >
               <span class="ml-5 pl-5 h6 text-warning" >Pending to bit : </span >
-              <span id="pendingBit" class="mr-2 h6 text-success" ></span >
+              <span id="pendingBit" class="mr-2 h6 font-weight-bolder text-success" ></span >
               <span class="ml-5 pl-5 h6 text-success" >Bit items : </span >
-              <span id="bitItem" class="mr-2 h6 text-success" ></span >
+              <span id="bitItem" class="mr-2 h6 font-weight-bolder text-success" ></span >
             </h4 >
           </div >
           <div class="bg-secondary card-body" >
@@ -174,7 +174,8 @@
                 <td >
                   <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}" ></span >
                   <!--vezzalOrderItem-->
-                  <input type="hidden" data-th-name="${'VezzalOrderItemBit[__${index.index}__]vezzalOrderItem.id'}"
+                  <input type="hidden" data-th-id="${'voi'+index.index}"
+                         data-th-name="${'VezzalOrderItemBit[__${index.index}__]vezzalOrderItem.id'}"
                          data-th-value="${vezzalOrderItem.id}" required >
                 </td >
                 <!--request amount-->
@@ -186,7 +187,8 @@
                 <td >
                   <input data-th-id="${'up'+index.index}" type="number"
                          data-th-name="${'VezzalOrderItemBit[__${index.index}__].unitPrice'}"
-                         class="form-control" onkeyup="unitPriceAdd(this)" required >
+                         class="form-control" onfocusout="bitItemOrNotCount(this)" onkeyup="unitPriceAdd(this)"
+                         required >
                 </td >
                 <!--total-->
                 <td >
@@ -195,7 +197,7 @@
                          class="form-control" required readonly >
                 </td >
                 <td >
-                  <input type="button" data-th-id="${'rm'+index.index}" value="Remove" class="btn btn-danger notBitList"
+                  <input type="button" data-th-id="${'rm'+index.index}" value="Remove" class="btn btn-danger"
                          onclick="removeItemToBit(this)" >
                 </td >
               </tr >
@@ -238,48 +240,76 @@
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
     $(document).ready(function () {
-        bitItemOrNotCount();
+        let allItemLength = $("#myTable tr").length - 1;
+        $("#allItems").text(allItemLength);
+        $("#pendingBit").text(allItemLength);
+        $("#bitItem").text(0);
     });
 
     //when unit price add total price need to fill
     function unitPriceAdd(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
         $(`#tm${selectedFiledId}`).val(obj.value * $(`#rq${selectedFiledId}`).val());
-
     }
 
     function removeItemToBit(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
+        removeRequired(`#up${selectedFiledId}`);
+        removeRequired(`#voi${selectedFiledId}`);
+        removeRequired(`#tm${selectedFiledId}`);
+        addReadOnly(`#up${selectedFiledId}`);
 
-        $(`#up${selectedFiledId}`).removeAttr("readonly required");
-        $(`#rq${selectedFiledId}`).removeAttr("readonly required");
+        $(`#rq${selectedFiledId}`).removeAttr("required");
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
-            .attr({class: "btn btn-danger bitList", onclick: "addItemToBit(this)", value: "Add"});
+            .attr({class: "btn btn-success", onclick: "addItemToBit(this)", value: "Add"});
 
     }
 
     function addItemToBit(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
+        addRequired(`#up${selectedFiledId}`);
+        addRequired(`#rq${selectedFiledId}`);
+        addRequired(`#voi${selectedFiledId}`);
+        addRequired(`#tm${selectedFiledId}`);
 
-        $(`#up${selectedFiledId}`).val(0.00).attr("required");
-        $(`#tm${selectedFiledId}`).val(0.00).attr("required required");
-        $(`#rq${selectedFiledId}`).attr("readonly required");
+        removeReadOnly(`#up${selectedFiledId}`)
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
-            .attr({class: "btn btn-success notBitList", onclick: "addItemToBit(this)", value: "Remove"});
+            .attr({class: "btn btn-danger", onclick: "removeItemToBit(this)", value: "Remove"});
     }
 
+    function removeRequired(id) {
+        $(id).removeAttr("required").val(0.00);
+    }
 
-    function bitItemOrNotCount() {
+    function addRequired(id) {
+        $(id).attr("required", "required").val(0.00);
+    }
+
+    function removeReadOnly(id) {
+        $(id).removeAttr("readonly");
+    }
+
+    function addReadOnly(id) {
+        $(id).attr("readonly", "readonly");
+    }
+
+    function bitItemOrNotCount(obj) {
+        let selectedFiledId = obj.getAttribute('id').slice(2);
+        alert( typeof obj.value)
+        if (obj.value !== 0 && obj.value !== '') {
+            $(`#up${selectedFiledId}`).addClass('bit');
+        } else {
+            $(`#up${selectedFiledId}`).removeClass('bit');
+        }
         let allItemLength = $("#myTable tr").length - 1;
         $("#allItems").text(allItemLength);
-        let notBitList = $(".notBitList").length;
-        let bitItemCount = $(".bitList").length;
+        let bitCount = $(".bit").length;
 
-        $("#pendingBit").text(allItemLength-notBitList);
+        $("#pendingBit").text(allItemLength - bitCount);
 
-        $("#bitItem").text();
+        $("#bitItem").text(bitCount);
     }
 
 </script >
