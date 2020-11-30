@@ -175,7 +175,7 @@
                   <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}" ></span >
                   <!--vezzalOrderItem-->
                   <input type="hidden" data-th-id="${'voi'+index.index}"
-                         data-th-name="${'VezzalOrderItemBit[__${index.index}__]vezzalOrderItem.id'}"
+                         data-th-name="${'vezzalOrderItemBits[__${index.index}__].vezzalOrderItem.id'}"
                          data-th-value="${vezzalOrderItem.id}" required >
                 </td >
                 <!--request amount-->
@@ -186,14 +186,14 @@
                 <!--unit price-->
                 <td >
                   <input data-th-id="${'up'+index.index}" type="number"
-                         data-th-name="${'VezzalOrderItemBit[__${index.index}__].unitPrice'}"
+                         data-th-name="${'vezzalOrderItemBits[__${index.index}__].unitPrice'}"
                          class="form-control" onfocusout="bitItemOrNotCount(this)" onkeyup="unitPriceAdd(this)"
                          required >
                 </td >
                 <!--total-->
                 <td >
                   <input data-th-id="${'tm'+index.index}" type="number"
-                         data-th-name="${'VezzalOrderItemBit[__${index.index}__].amount'}"
+                         data-th-name="${'vezzalOrderItemBits[__${index.index}__].amount'}"
                          class="form-control" required readonly >
                 </td >
                 <td >
@@ -297,7 +297,6 @@
 
     function bitItemOrNotCount(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
-        alert( typeof obj.value)
         if (obj.value !== 0 && obj.value !== '') {
             $(`#up${selectedFiledId}`).addClass('bit');
         } else {

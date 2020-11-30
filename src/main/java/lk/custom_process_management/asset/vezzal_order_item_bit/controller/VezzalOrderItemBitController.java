@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.vezzal_order_item_bit.controller;
 
 import lk.custom_process_management.asset.chandler.entity.Chandler;
+import lk.custom_process_management.asset.chandler.service.ChandlerService;
 import lk.custom_process_management.asset.user_details_chandler.service.UserDetailsChandlerService;
 import lk.custom_process_management.asset.user_management.entity.User;
 import lk.custom_process_management.asset.user_management.service.UserService;
@@ -27,14 +28,17 @@ public class VezzalOrderItemBitController {
   private final UserService userService;
   private final UserDetailsChandlerService userDetailsChandlerService;
   private final VezzalOrderItemBitService vezzalOrderItemBitService;
+  private final ChandlerService chandlerService;
 
   public VezzalOrderItemBitController(VezzalOrderService vezzalOrderService, UserService userService,
                                       UserDetailsChandlerService userDetailsChandlerService,
-                                      VezzalOrderItemBitService vezzalOrderItemBitService) {
+                                      VezzalOrderItemBitService vezzalOrderItemBitService,
+                                      ChandlerService chandlerService) {
     this.vezzalOrderService = vezzalOrderService;
     this.userService = userService;
     this.userDetailsChandlerService = userDetailsChandlerService;
     this.vezzalOrderItemBitService = vezzalOrderItemBitService;
+    this.chandlerService = chandlerService;
   }
 
   @GetMapping
@@ -57,7 +61,12 @@ public class VezzalOrderItemBitController {
     }
     User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
-    Chandler chandler = userDetailsChandlerService.findByUserDetails(authUser.getUserDetails()).getChandler();
+    Chandler chandler = null;
+    if ( authUser == null ) {
+      chandler = chandlerService.findById(1);
+    } else {
+      userDetailsChandlerService.findByUserDetails(authUser.getUserDetails()).getChandler();
+    }
     List< VezzalOrderItemBit > vezzalOrderItemBits = new ArrayList<>();
 
     for ( VezzalOrderItemBit vezzalOrderItemBit : vezzalOrderBit.getVezzalOrderItemBits() ) {
