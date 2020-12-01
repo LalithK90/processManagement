@@ -175,7 +175,7 @@
                   <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}" ></span >
                   <!--vezzalOrderItem-->
                   <input type="hidden" data-th-id="${'voi'+index.index}"
-                         data-th-name="${'vezzalOrderItemBits[__${index.index}__].vezzalOrderItem.id'}"
+                         data-th-name="${'vezzalOrderItemBits[__${index.index}__].vezzalOrderItem'}"
                          data-th-value="${vezzalOrderItem.id}" required >
                 </td >
                 <!--request amount-->
@@ -254,12 +254,16 @@
 
     function removeItemToBit(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
+        let vezzalOrderItemId = $(`#voi${selectedFiledId}`).val();
+        let vezzalOrderItemQuantity = $(`#rq${selectedFiledId}`).val();
         removeRequired(`#up${selectedFiledId}`);
         removeRequired(`#voi${selectedFiledId}`);
         removeRequired(`#tm${selectedFiledId}`);
+        removeRequired(`#rq${selectedFiledId}`);
         addReadOnly(`#up${selectedFiledId}`);
 
-        $(`#rq${selectedFiledId}`).removeAttr("required");
+        addValue(`#voi${selectedFiledId}`,vezzalOrderItemId);
+        addValue(`#rq${selectedFiledId}`,vezzalOrderItemQuantity);
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
             .attr({class: "btn btn-success", onclick: "addItemToBit(this)", value: "Add"});
@@ -268,12 +272,17 @@
 
     function addItemToBit(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
+        let vezzalOrderItemId = $(`#voi${selectedFiledId}`).val();
+        let vezzalOrderItemQuantity = $(`#rq${selectedFiledId}`).val();
         addRequired(`#up${selectedFiledId}`);
         addRequired(`#rq${selectedFiledId}`);
         addRequired(`#voi${selectedFiledId}`);
         addRequired(`#tm${selectedFiledId}`);
 
-        removeReadOnly(`#up${selectedFiledId}`)
+        removeReadOnly(`#up${selectedFiledId}`);
+
+        addValue(`#voi${selectedFiledId}`,vezzalOrderItemId);
+        addValue(`#rq${selectedFiledId}`,vezzalOrderItemQuantity);
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
             .attr({class: "btn btn-danger", onclick: "removeItemToBit(this)", value: "Remove"});
@@ -293,6 +302,10 @@
 
     function addReadOnly(id) {
         $(id).attr("readonly", "readonly");
+    }
+
+    function addValue(id, val) {
+        $(id).val(val);
     }
 
     function bitItemOrNotCount(obj) {

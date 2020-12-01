@@ -73,10 +73,14 @@ public class VezzalOrderItemBitController {
       //check what is available amount and unite price on vezzal order item bit
       if ( vezzalOrderItemBit.getAmount() != null && vezzalOrderItemBit.getUnitPrice() != null ) {
         VezzalOrderItemBit vezzalOrderItemBitNew = new VezzalOrderItemBit();
+   /*     VezzalOrderItem vezzalOrderItem = new VezzalOrderItem();
+        vezzalOrderItem.setId(vezzalOrderItemBit.getVezzalOrderItem().getId());*/
+
         vezzalOrderItemBitNew.setAmount(vezzalOrderItemBit.getAmount());
         vezzalOrderItemBitNew.setUnitPrice(vezzalOrderItemBit.getUnitPrice());
         vezzalOrderItemBitNew.setBitValidOrNot(BitValidOrNot.PEN);
         vezzalOrderItemBitNew.setChandler(chandler);
+        vezzalOrderItemBitNew.setVezzalOrderItem(vezzalOrderItemBit.getVezzalOrderItem());
         vezzalOrderItemBits.add(vezzalOrderItemBitNew);
       }
     }
