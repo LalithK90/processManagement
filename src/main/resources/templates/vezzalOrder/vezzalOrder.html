@@ -58,10 +58,10 @@
           <th data-th-text="${vezzalOrder.vezzalOrderStatus.vezzalOrderStatus}" ></th >
           <th data-th-text="${vezzalOrder.vezzalArrivalHistory.vezzal.name}" ></th >
           <th >
-            <a data-th-href="${addStatus==false?'/vezzalOrder/view/':'/vezzalOrderItemBit/bit/' + vezzalOrder.id}"
+            <a data-th-href="${addStatus==false?'/vezzalOrder/view/':'/vezzalOrderItemBid/bid/' + vezzalOrder.id}"
                class="btn btn-outline-primary btn-sm" ><i
                   class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp; <span
-                  data-th-text="${addStatus==false?'View':'Bit'}" ></span ></a >
+                  data-th-text="${addStatus==false?'View':'Bid'}" ></span ></a >
             <a data-th-href="${'/vezzalOrder/edit/' + vezzalOrder.id}"
                class="btn btn-outline-success btn-sm"
                data-th-if="${#strings.equals(vezzalOrder.vezzalOrderStatus, 'PROCESSING') && addStatus==false}" ><i

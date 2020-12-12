@@ -19,7 +19,7 @@
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          Bit to Vezzal Order
+          Bid to Vezzal Order
         </strong >
       </h2 >
     </div >
@@ -135,26 +135,26 @@
   </div >
   <div class="form-row" >
     <div class="alert alert-danger text-center container-fluid" role="alert" >
-      <strong >When bit this order, please bit item what would be handled.<br > and also before submit bit, check item
+      <strong >When bid this order, please bid item what would be handled.<br > and also before submit bid, check item
                whether all your selected where correct or not, <br />because of <span
               class="h5 text-capitalize font-italic font-weight-bolder" >there is no chance to change your
-                                                                                            bit.</span ></strong >
+                                                                                            bid.</span ></strong >
     </div >
   </div >
   <div class="form-row" >
     <div class="container-fluid" >
-      <form action="/vezzalOrderItemBit/save" method="post" data-th-object="${vezzalOrderBit}" >
+      <form action="/vezzalOrderItemBid/save" method="post" data-th-object="${vezzalOrderBid}" >
         <!--Order Item-->
         <div class="card" >
           <div class="card-header" >
             <h4 class=" text-center text-primary" >
               Item List
-              <span class="ml-5 pl-5 h6 text-primary" >All Item to bit : </span >
+              <span class="ml-5 pl-5 h6 text-primary" >All Item to bid : </span >
               <span id="allItems" class="mr-2 h6 font-weight-bolder text-success" ></span >
-              <span class="ml-5 pl-5 h6 text-warning" >Pending to bit : </span >
-              <span id="pendingBit" class="mr-2 h6 font-weight-bolder text-success" ></span >
-              <span class="ml-5 pl-5 h6 text-success" >Bit items : </span >
-              <span id="bitItem" class="mr-2 h6 font-weight-bolder text-success" ></span >
+              <span class="ml-5 pl-5 h6 text-warning" >Pending to bid : </span >
+              <span id="pendingBid" class="mr-2 h6 font-weight-bolder text-success" ></span >
+              <span class="ml-5 pl-5 h6 text-success" >Bid items : </span >
+              <span id="bidItem" class="mr-2 h6 font-weight-bolder text-success" ></span >
             </h4 >
           </div >
           <div class="bg-secondary card-body" >
@@ -175,7 +175,7 @@
                   <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}" ></span >
                   <!--vezzalOrderItem-->
                   <input type="hidden" data-th-id="${'voi'+index.index}"
-                         data-th-name="${'vezzalOrderItemBits[__${index.index}__].vezzalOrderItem'}"
+                         data-th-name="${'vezzalOrderItemBids[__${index.index}__].vezzalOrderItem'}"
                          data-th-value="${vezzalOrderItem.id}" required >
                 </td >
                 <!--request amount-->
@@ -186,19 +186,19 @@
                 <!--unit price-->
                 <td >
                   <input data-th-id="${'up'+index.index}" type="number"
-                         data-th-name="${'vezzalOrderItemBits[__${index.index}__].unitPrice'}"
-                         class="form-control" onfocusout="bitItemOrNotCount(this)" onkeyup="unitPriceAdd(this)"
+                         data-th-name="${'vezzalOrderItemBids[__${index.index}__].unitPrice'}"
+                         class="form-control" onfocusout="bidItemOrNotCount(this)" onkeyup="unitPriceAdd(this)"
                          required >
                 </td >
                 <!--total-->
                 <td >
                   <input data-th-id="${'tm'+index.index}" type="number"
-                         data-th-name="${'vezzalOrderItemBits[__${index.index}__].amount'}"
+                         data-th-name="${'vezzalOrderItemBids[__${index.index}__].amount'}"
                          class="form-control" required readonly >
                 </td >
                 <td >
                   <input type="button" data-th-id="${'rm'+index.index}" value="Remove" class="btn btn-danger"
-                         onclick="removeItemToBit(this)" >
+                         onclick="removeItemToBid(this)" >
                 </td >
               </tr >
             </table >
@@ -242,8 +242,8 @@
     $(document).ready(function () {
         let allItemLength = $("#myTable tr").length - 1;
         $("#allItems").text(allItemLength);
-        $("#pendingBit").text(allItemLength);
-        $("#bitItem").text(0);
+        $("#pendingBid").text(allItemLength);
+        $("#bidItem").text(0);
     });
 
     //when unit price add total price need to fill
@@ -252,7 +252,7 @@
         $(`#tm${selectedFiledId}`).val(obj.value * $(`#rq${selectedFiledId}`).val());
     }
 
-    function removeItemToBit(obj) {
+    function removeItemToBid(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
         let vezzalOrderItemId = $(`#voi${selectedFiledId}`).val();
         let vezzalOrderItemQuantity = $(`#rq${selectedFiledId}`).val();
@@ -266,11 +266,11 @@
         addValue(`#rq${selectedFiledId}`,vezzalOrderItemQuantity);
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
-            .attr({class: "btn btn-success", onclick: "addItemToBit(this)", value: "Add"});
+            .attr({class: "btn btn-success", onclick: "addItemToBid(this)", value: "Add"});
 
     }
 
-    function addItemToBit(obj) {
+    function addItemToBid(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
         let vezzalOrderItemId = $(`#voi${selectedFiledId}`).val();
         let vezzalOrderItemQuantity = $(`#rq${selectedFiledId}`).val();
@@ -285,7 +285,7 @@
         addValue(`#rq${selectedFiledId}`,vezzalOrderItemQuantity);
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
-            .attr({class: "btn btn-danger", onclick: "removeItemToBit(this)", value: "Remove"});
+            .attr({class: "btn btn-danger", onclick: "removeItemToBid(this)", value: "Remove"});
     }
 
     function removeRequired(id) {
@@ -308,20 +308,20 @@
         $(id).val(val);
     }
 
-    function bitItemOrNotCount(obj) {
+    function bidItemOrNotCount(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
         if (obj.value !== 0 && obj.value !== '') {
-            $(`#up${selectedFiledId}`).addClass('bit');
+            $(`#up${selectedFiledId}`).addClass('bid');
         } else {
-            $(`#up${selectedFiledId}`).removeClass('bit');
+            $(`#up${selectedFiledId}`).removeClass('bid');
         }
         let allItemLength = $("#myTable tr").length - 1;
         $("#allItems").text(allItemLength);
-        let bitCount = $(".bit").length;
+        let bidCount = $(".bid").length;
 
-        $("#pendingBit").text(allItemLength - bitCount);
+        $("#pendingBid").text(allItemLength - bidCount);
 
-        $("#bitItem").text(bitCount);
+        $("#bidItem").text(bidCount);
     }
 
 </script >

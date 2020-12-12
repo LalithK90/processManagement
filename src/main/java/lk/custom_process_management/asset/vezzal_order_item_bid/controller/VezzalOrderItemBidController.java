@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.vezzal_order_item_bit.controller;
+package lk.custom_process_management.asset.vezzal_order_item_bid.controller;
 
 import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.chandler.service.ChandlerService;
@@ -7,10 +7,10 @@ import lk.custom_process_management.asset.user_management.entity.User;
 import lk.custom_process_management.asset.user_management.service.UserService;
 import lk.custom_process_management.asset.vezzal_order.entity.enums.VezzalOrderStatus;
 import lk.custom_process_management.asset.vezzal_order.service.VezzalOrderService;
-import lk.custom_process_management.asset.vezzal_order_item_bit.entity.VezzalOrderItemBit;
-import lk.custom_process_management.asset.vezzal_order_item_bit.entity.enums.BitValidOrNot;
-import lk.custom_process_management.asset.vezzal_order_item_bit.model.VezzalOrderBit;
-import lk.custom_process_management.asset.vezzal_order_item_bit.service.VezzalOrderItemBitService;
+import lk.custom_process_management.asset.vezzal_order_item_bid.entity.VezzalOrderItemBid;
+import lk.custom_process_management.asset.vezzal_order_item_bid.entity.enums.BidValidOrNot;
+import lk.custom_process_management.asset.vezzal_order_item_bid.model.VezzalOrderBid;
+import lk.custom_process_management.asset.vezzal_order_item_bid.service.VezzalOrderItemBidService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,22 +22,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping( "/vezzalOrderItemBit" )
-public class VezzalOrderItemBitController {
+@RequestMapping( "/vezzalOrderItemBid" )
+public class VezzalOrderItemBidController {
   private final VezzalOrderService vezzalOrderService;
   private final UserService userService;
   private final UserDetailsChandlerService userDetailsChandlerService;
-  private final VezzalOrderItemBitService vezzalOrderItemBitService;
+  private final VezzalOrderItemBidService vezzalOrderItemBidService;
   private final ChandlerService chandlerService;
 
-  public VezzalOrderItemBitController(VezzalOrderService vezzalOrderService, UserService userService,
+  public VezzalOrderItemBidController(VezzalOrderService vezzalOrderService, UserService userService,
                                       UserDetailsChandlerService userDetailsChandlerService,
-                                      VezzalOrderItemBitService vezzalOrderItemBitService,
+                                      VezzalOrderItemBidService vezzalOrderItemBidService,
                                       ChandlerService chandlerService) {
     this.vezzalOrderService = vezzalOrderService;
     this.userService = userService;
     this.userDetailsChandlerService = userDetailsChandlerService;
-    this.vezzalOrderItemBitService = vezzalOrderItemBitService;
+    this.vezzalOrderItemBidService = vezzalOrderItemBidService;
     this.chandlerService = chandlerService;
   }
 
@@ -47,17 +47,17 @@ public class VezzalOrderItemBitController {
     return "vezzalOrder/vezzalOrder";
   }
 
-  @GetMapping( "/bit/{id}" )
+  @GetMapping( "/bid/{id}" )
   public String addForm(@PathVariable Integer id, Model model) {
     model.addAttribute("vezzalOrderDetail", vezzalOrderService.findById(id));
-    model.addAttribute("vezzalOrderBit", new VezzalOrderItemBit());
-    return "vezzalOrderItemBit/addVezzalOrderItemBit";
+    model.addAttribute("vezzalOrderBid", new VezzalOrderItemBid());
+    return "vezzalOrderItemBid/addVezzalOrderItemBid";
   }
 
   @PostMapping( "/save" )
-  public String saveBit(@Valid @ModelAttribute VezzalOrderBit vezzalOrderBit, BindingResult bindingResult) {
+  public String saveBit(@Valid @ModelAttribute VezzalOrderBid vezzalOrderBid, BindingResult bindingResult) {
     if ( bindingResult.hasErrors() ) {
-      return "redirect:/vezzalOrderItemBit/bit/" + vezzalOrderBit.getId();
+      return "redirect:/vezzalOrderItemBit/bid/" + vezzalOrderBid.getId();
     }
     User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
@@ -67,24 +67,24 @@ public class VezzalOrderItemBitController {
     } else {
       userDetailsChandlerService.findByUserDetails(authUser.getUserDetails()).getChandler();
     }
-    List< VezzalOrderItemBit > vezzalOrderItemBits = new ArrayList<>();
+    List< VezzalOrderItemBid > vezzalOrderItemBids = new ArrayList<>();
 
-    for ( VezzalOrderItemBit vezzalOrderItemBit : vezzalOrderBit.getVezzalOrderItemBits() ) {
-      //check what is available amount and unite price on vezzal order item bit
-      if ( vezzalOrderItemBit.getAmount() != null && vezzalOrderItemBit.getUnitPrice() != null ) {
-        VezzalOrderItemBit vezzalOrderItemBitNew = new VezzalOrderItemBit();
+    for ( VezzalOrderItemBid vezzalOrderItemBid : vezzalOrderBid.getVezzalOrderItemBids() ) {
+      //check what is available amount and unite price on vezzal order item bid
+      if ( vezzalOrderItemBid.getAmount() != null && vezzalOrderItemBid.getUnitPrice() != null ) {
+        VezzalOrderItemBid vezzalOrderItemBidNew = new VezzalOrderItemBid();
    /*     VezzalOrderItem vezzalOrderItem = new VezzalOrderItem();
         vezzalOrderItem.setId(vezzalOrderItemBit.getVezzalOrderItem().getId());*/
 
-        vezzalOrderItemBitNew.setAmount(vezzalOrderItemBit.getAmount());
-        vezzalOrderItemBitNew.setUnitPrice(vezzalOrderItemBit.getUnitPrice());
-        vezzalOrderItemBitNew.setBitValidOrNot(BitValidOrNot.PEN);
-        vezzalOrderItemBitNew.setChandler(chandler);
-        vezzalOrderItemBitNew.setVezzalOrderItem(vezzalOrderItemBit.getVezzalOrderItem());
-        vezzalOrderItemBits.add(vezzalOrderItemBitNew);
+        vezzalOrderItemBidNew.setAmount(vezzalOrderItemBid.getAmount());
+        vezzalOrderItemBidNew.setUnitPrice(vezzalOrderItemBid.getUnitPrice());
+        vezzalOrderItemBidNew.setBidValidOrNot(BidValidOrNot.PEN);
+        vezzalOrderItemBidNew.setChandler(chandler);
+        vezzalOrderItemBidNew.setVezzalOrderItem(vezzalOrderItemBid.getVezzalOrderItem());
+        vezzalOrderItemBids.add(vezzalOrderItemBidNew);
       }
     }
-    vezzalOrderItemBitService.saveAll(vezzalOrderItemBits);
+    vezzalOrderItemBidService.saveAll(vezzalOrderItemBids);
     return "redirect:/vezzalOrderItemBit";
   }
 

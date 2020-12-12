@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum VezzalOrderStatus {
   PROCESSING("Processing"),
   VALID("Valid"),
+  BITTED("Bitted"),
   SUSPEND("Suspend"),
   INVALID("Invalid");
 

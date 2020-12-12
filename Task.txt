@@ -13,7 +13,7 @@ Application process order
 * -> Line -> Need to register chandler
 * -> Line -> Need to register chandler License
 * -> Line -> Process vezzal order { log with ship agent -> user}
-* -> Line -> Bit vezzal order by chandlers { log with chandler -> user}
+* -> Line -> Bid vezzal order by chandlers { log with chandler -> user}
 * -> Line -> approved chandlers give item to warehouse { log with internal -> user}
 * -> Line -> mentioned departure of vezzal  { log with internal -> user}
 * -> Line -> Payment process start  { log with ship agent -> user}

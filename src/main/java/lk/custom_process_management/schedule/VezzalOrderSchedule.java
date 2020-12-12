@@ -21,7 +21,7 @@ public class VezzalOrderSchedule {
     List< VezzalOrder > vezzalOrders = new ArrayList<>();
     vezzalOrderService.findByVezzalOrderStatusAndClosingDateBefore(VezzalOrderStatus.PROCESSING, LocalDate.now())
         .forEach(x -> {
-          x.setVezzalOrderStatus(VezzalOrderStatus.INVALID);
+          x.setVezzalOrderStatus(VezzalOrderStatus.BITTED);
           vezzalOrders.add(x);
         });
     vezzalOrderService.saveAll(vezzalOrders);
