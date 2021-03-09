@@ -65,11 +65,11 @@
               <label class="control-label" for="vesselOrderStatus" >Vessel Order Status :</label >
             </div >
             <div class="col-md-8" >
-              <input id="vesselOrderStatus" data-th-field="*{vesselOrderStatus}" class="form-control" tabindex="4"
-                     type="text"
+              <input data-th-field="*{vesselOrderStatus}"  class="form-control" tabindex="4"
+                     type="hidden"
                      required />
-              <span data-th-errors="*{vesselOrderStatus}"
-                    data-th-if="${#fields.hasErrors('vesselOrderStatus')}" class="error" >Error Name</span >
+              <input id="vesselOrderStatus" data-th-value="${vesselOrderStatus.vesselOrderStatus}"  class="form-control" tabindex="4"
+                     type="text" readonly />
             </div >
           </div >
           <!--Vessel Order History-->
