@@ -11,7 +11,7 @@
   <div class="row text-center  border-info" >
     <!--ViewList Button-->
     <div class="col" >
-      <a href="/vezzalOrder" class="btn btn-outline-primary" tabindex="1" >
+      <a href="/vesselOrder" class="btn btn-outline-primary" tabindex="1" >
         <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
       </a >
     </div >
@@ -19,7 +19,7 @@
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          Bid to Vezzal Order
+          Bid to Vessel Order
         </strong >
       </h2 >
     </div >
@@ -40,7 +40,7 @@
           <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
              aria-controls="section1ContentId" >
             <div class="container-fluid text-center" >
-              <span data-th-text="${vezzalOrderDetail.number}" ></span > &nbsp;Detail's
+              <span data-th-text="${vesselOrderDetail.number}" ></span > &nbsp;Detail's
             </div >
           </a >
         </h5 >
@@ -56,35 +56,35 @@
                   <label class="control-label" for="number" >Order Number :</label >
                 </div >
                 <div class="col-md-4" >
-                  <p id="number" data-th-text="${vezzalOrderDetail.number}" ></p >
+                  <p id="number" data-th-text="${vesselOrderDetail.number}" ></p >
                 </div >
               </div >
-              <!--Vezzal Order Status-->
+              <!--Vessel Order Status-->
               <div class="form-row " >
                 <div class="col-md-4 text-right" >
-                  <label class="control-label" for="vezzalOrderStatus" >Vezzal Order Status :</label >
+                  <label class="control-label" for="vesselOrderStatus" >Vessel Order Status :</label >
                 </div >
                 <div class="col-md-4" >
-                  <p id="vezzalOrderStatus"
-                     data-th-text="${vezzalOrderDetail.vezzalOrderStatus.vezzalOrderStatus}" ></p ></div >
+                  <p id="vesselOrderStatus"
+                     data-th-text="${vesselOrderDetail.vesselOrderStatus.vesselOrderStatus}" ></p ></div >
               </div >
-              <!--Vezzal Order History-->
+              <!--Vessel Order History-->
               <div class="form-row " >
                 <div class="col-md-4 text-right" >
-                  <label class="control-label" for="vezzalOderHistories" >Vezzal Details :</label >
+                  <label class="control-label" for="vesselOderHistories" >Vessel Details :</label >
                 </div >
                 <div class="col-md-4" >
-                  <p id="vezzalOderHistories" data-th-text="${vezzalOrderDetail.vezzalArrivalHistory.vezzal.name}"
+                  <p id="vesselOderHistories" data-th-text="${vesselOrderDetail.vesselArrivalHistory.vessel.name}"
                   ></p >
                 </div >
               </div >
-              <!--Vezzal Order Service agent-->
+              <!--Vessel Order Service agent-->
               <div class="form-row " >
                 <div class="col-md-4 text-right" >
                   <label class="control-label" for="serviceAgent" >Ship agent :</label >
                 </div >
                 <div class="col-md-4 " >
-                  <p id="serviceAgent" data-th-text="${vezzalOrderDetail.vezzalArrivalHistory.shipAgent.name}"
+                  <p id="serviceAgent" data-th-text="${vesselOrderDetail.vesselArrivalHistory.shipAgent.name}"
                   ></p >
                 </div >
               </div >
@@ -96,7 +96,7 @@
                   <label class="control-label" for="closingDate" >Closing Date At :</label >
                 </div >
                 <div class="col-md-4 " >
-                  <p id="closingDate" data-th-text="${vezzalOrderDetail.closingDate}" ></p >
+                  <p id="closingDate" data-th-text="${vesselOrderDetail.closingDate}" ></p >
                 </div >
               </div >
               <!--warehouse Block-->
@@ -105,7 +105,7 @@
                   <label class="control-label" for="warehouseBlock" >Warehouse Block :</label >
                 </div >
                 <div class="col-md-4 " >
-                  <p id="warehouseBlock" data-th-text="${vezzalOrderDetail.warehouseBlock.name}" >
+                  <p id="warehouseBlock" data-th-text="${vesselOrderDetail.warehouseBlock.name}" >
                   </p >
                 </div >
               </div >
@@ -115,7 +115,7 @@
                   <label class="control-label" for="createdBy" >Created By :</label >
                 </div >
                 <div class="col-md-4 " >
-                  <p id="createdBy" data-th-text="${vezzalOrderDetail.createdBy}" ></p >
+                  <p id="createdBy" data-th-text="${vesselOrderDetail.createdBy}" ></p >
                 </div >
               </div >
               <!--Created At-->
@@ -124,7 +124,7 @@
                   <label class="control-label" for="createdAt" >Created At :</label >
                 </div >
                 <div class="col-md-4 " >
-                  <p id="createdAt" data-th-text="${{vezzalOrderDetail.createdAt}}" ></p >
+                  <p id="createdAt" data-th-text="${{vesselOrderDetail.createdAt}}" ></p >
                 </div >
               </div >
             </div >
@@ -143,7 +143,7 @@
   </div >
   <div class="form-row" >
     <div class="container-fluid" >
-      <form action="/vezzalOrderItemBid/save" method="post" data-th-object="${vezzalOrderBid}" >
+      <form action="/vesselOrderItemBid/save" method="post" data-th-object="${vesselOrderBid}" >
         <!--Order Item-->
         <div class="card" >
           <div class="card-header" >
@@ -158,8 +158,8 @@
             </h4 >
           </div >
           <div class="bg-secondary card-body" >
-            <!--Vezzal Order Id-->
-            <input type="hidden" data-th-value="${vezzalOrderDetail.id}" name="id" hidden >
+            <!--Vessel Order Id-->
+            <input type="hidden" data-th-value="${vesselOrderDetail.id}" name="id" hidden >
             <table class="table table-striped table-inverse text-center" id="myTable" >
               <tr >
                 <th >Item Name</th >
@@ -169,31 +169,31 @@
                 <th >Modify</th >
               </tr >
               <tr data-th-id="${'tr'+index.index}"
-                  data-th-each="vezzalOrderItem, index : ${vezzalOrderDetail.vezzalOrderItems}" >
+                  data-th-each="vesselOrderItem, index : ${vesselOrderDetail.vesselOrderItems}" >
                 <!--name-->
                 <td >
-                  <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}" ></span >
-                  <!--vezzalOrderItem-->
+                  <span data-th-id="${'nm'+index.index}" data-th-text="${vesselOrderItem.item.name}" ></span >
+                  <!--vesselOrderItem-->
                   <input type="hidden" data-th-id="${'voi'+index.index}"
-                         data-th-name="${'vezzalOrderItemBids[__${index.index}__].vezzalOrderItem'}"
-                         data-th-value="${vezzalOrderItem.id}" required >
+                         data-th-name="${'vesselOrderItemBids[__${index.index}__].vesselOrderItem'}"
+                         data-th-value="${vesselOrderItem.id}" required >
                 </td >
                 <!--request amount-->
                 <td >
                   <input data-th-id="${'rq'+index.index}" type="number"
-                         data-th-value="${vezzalOrderItem.quantity}" class="form-control" required readonly >
+                         data-th-value="${vesselOrderItem.quantity}" class="form-control" required readonly >
                 </td >
                 <!--unit price-->
                 <td >
                   <input data-th-id="${'up'+index.index}" type="number"
-                         data-th-name="${'vezzalOrderItemBids[__${index.index}__].unitPrice'}"
+                         data-th-name="${'vesselOrderItemBids[__${index.index}__].unitPrice'}"
                          class="form-control" onfocusout="bidItemOrNotCount(this)" onkeyup="unitPriceAdd(this)"
                          required >
                 </td >
                 <!--total-->
                 <td >
                   <input data-th-id="${'tm'+index.index}" type="number"
-                         data-th-name="${'vezzalOrderItemBids[__${index.index}__].amount'}"
+                         data-th-name="${'vesselOrderItemBids[__${index.index}__].amount'}"
                          class="form-control" required readonly >
                 </td >
                 <td >
@@ -208,7 +208,7 @@
         <!--Button-->
         <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
           <!--Back Button-->
-          <a class="btn btn-outline-dark" tabindex="10" href="/vezzalOrder" >
+          <a class="btn btn-outline-dark" tabindex="10" href="/vesselOrder" >
             <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
           </a >
           <!--Save Button-->
@@ -254,16 +254,16 @@
 
     function removeItemToBid(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
-        let vezzalOrderItemId = $(`#voi${selectedFiledId}`).val();
-        let vezzalOrderItemQuantity = $(`#rq${selectedFiledId}`).val();
+        let vesselOrderItemId = $(`#voi${selectedFiledId}`).val();
+        let vesselOrderItemQuantity = $(`#rq${selectedFiledId}`).val();
         removeRequired(`#up${selectedFiledId}`);
         removeRequired(`#voi${selectedFiledId}`);
         removeRequired(`#tm${selectedFiledId}`);
         removeRequired(`#rq${selectedFiledId}`);
         addReadOnly(`#up${selectedFiledId}`);
 
-        addValue(`#voi${selectedFiledId}`,vezzalOrderItemId);
-        addValue(`#rq${selectedFiledId}`,vezzalOrderItemQuantity);
+        addValue(`#voi${selectedFiledId}`,vesselOrderItemId);
+        addValue(`#rq${selectedFiledId}`,vesselOrderItemQuantity);
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
             .attr({class: "btn btn-success", onclick: "addItemToBid(this)", value: "Add"});
@@ -272,8 +272,8 @@
 
     function addItemToBid(obj) {
         let selectedFiledId = obj.getAttribute('id').slice(2);
-        let vezzalOrderItemId = $(`#voi${selectedFiledId}`).val();
-        let vezzalOrderItemQuantity = $(`#rq${selectedFiledId}`).val();
+        let vesselOrderItemId = $(`#voi${selectedFiledId}`).val();
+        let vesselOrderItemQuantity = $(`#rq${selectedFiledId}`).val();
         addRequired(`#up${selectedFiledId}`);
         addRequired(`#rq${selectedFiledId}`);
         addRequired(`#voi${selectedFiledId}`);
@@ -281,8 +281,8 @@
 
         removeReadOnly(`#up${selectedFiledId}`);
 
-        addValue(`#voi${selectedFiledId}`,vezzalOrderItemId);
-        addValue(`#rq${selectedFiledId}`,vezzalOrderItemQuantity);
+        addValue(`#voi${selectedFiledId}`,vesselOrderItemId);
+        addValue(`#rq${selectedFiledId}`,vesselOrderItemQuantity);
 
         $(`#rm${selectedFiledId}`).removeAttr("class onclick value")
             .attr({class: "btn btn-danger", onclick: "removeItemToBid(this)", value: "Remove"});

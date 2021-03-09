@@ -8,28 +8,28 @@ Application process order
 * -> Line -> Need to register userDetails {system users}
 * -> Line -> Need to register user
 * -> Line -> Need to register ship agent
-* -> Line -> Need to register vezzal
-* -> Line -> Need to register vezzal arrival
+* -> Line -> Need to register vessel
+* -> Line -> Need to register vessel arrival
 * -> Line -> Need to register chandler
 * -> Line -> Need to register chandler License
-* -> Line -> Process vezzal order { log with ship agent -> user}
-* -> Line -> Bid vezzal order by chandlers { log with chandler -> user}
+* -> Line -> Process vessel order { log with ship agent -> user}
+* -> Line -> Bid vessel order by chandlers { log with chandler -> user}
 * -> Line -> approved chandlers give item to warehouse { log with internal -> user}
-* -> Line -> mentioned departure of vezzal  { log with internal -> user}
+* -> Line -> mentioned departure of vessel  { log with internal -> user}
 * -> Line -> Payment process start  { log with ship agent -> user}
 
 
 Need to do
 ===========
 1. quotation -> in progress
-3. vezzal history -> in progress
+3. vessel history -> in progress
 
 
 Completed
 ==========
 1. Chandler = > chandler
 2. Ship Agent
-3. Ship(vezzal) = > customer
+3. Ship(vessel) = > customer
 4. item
 5. category
 6. warehouse blocks

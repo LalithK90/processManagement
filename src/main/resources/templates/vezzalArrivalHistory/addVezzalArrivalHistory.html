@@ -11,7 +11,7 @@
   <div class="row text-center  border-info" >
     <!--ViewList Button-->
     <div class="col" >
-      <a href="/vezzalArrivalHistory" class="btn btn-outline-primary" tabindex="1" >
+      <a href="/vesselArrivalHistory" class="btn btn-outline-primary" tabindex="1" >
         <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
       </a >
     </div >
@@ -20,7 +20,7 @@
       <h2 class="text-center" >
         <strong >
                     <span
-                          data-th-text="${addStatus==true?'Add New Vezzal Arrival':'Update Vezzal Arrival Details'}" ></span >
+                          data-th-text="${addStatus==true?'Add New Vessel Arrival':'Update Vessel Arrival Details'}" ></span >
         </strong >
       </h2 >
     </div >
@@ -34,7 +34,7 @@
 </div >
 <!--Form Content-->
 <div class="container-fluid" >
-  <!--vezzal detail-->
+  <!--vessel detail-->
   <div id="accordianId" role="tablist" aria-multiselectable="true" >
     <div class="card" >
       <div class="card-header" role="tab" id="section1HeaderId" >
@@ -42,14 +42,14 @@
           <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
              aria-controls="section1ContentId" >
             <div class="container-fluid text-center" >
-              <span data-th-text="${vezzalDetail.name}" ></span > <span >'s detail</span >
+              <span data-th-text="${vesselDetail.name}" ></span > <span >'s detail</span >
             </div >
           </a >
         </h5 >
       </div >
       <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
         <div class="card-body" >
-          <div data-th-replace="~{vezzal/vezzal-detail :: vezzalDetailsFragment}" >
+          <div data-th-replace="~{vessel/vessel-detail :: vesselDetailsFragment}" >
           </div >
         </div >
       </div >
@@ -58,12 +58,12 @@
 </div >
 <div class="col-sm-12 flex-column " >
   <form id="form" class="form-horizontal"
-        data-th-action="${addStatus==true?'/vezzalArrivalHistory/save':'/vezzalArrivalHistory/update'}"
-        data-th-object="${vezzalArrivalHistory}" method="POST" >
+        data-th-action="${addStatus==true?'/vesselArrivalHistory/save':'/vesselArrivalHistory/update'}"
+        data-th-object="${vesselArrivalHistory}" method="POST" >
     <div class="row" >
       <!--Id-->
       <input data-th-if="${addStatus==false}" data-th-field="*{id}" type="hidden" />
-      <input data-th-field="*{vezzal}" type="hidden" />
+      <input data-th-field="*{vessel}" type="hidden" />
       <!--Left Side-->
       <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
         <!--ship agent -->
@@ -217,13 +217,13 @@
         </div >
         <!--Created by and created at-->
         <div id="updateStatus" data-th-if="${addStatus==false}" >
-          <!--vezzal Departure Arrival Status-->
+          <!--vessel Departure Arrival Status-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
-              <label class="control-label" for="vezzalDepartureArrivalStatus" >Vezzal Departure Arrival Status :</label >
+              <label class="control-label" for="vesselDepartureArrivalStatus" >Vessel Departure Arrival Status :</label >
             </div >
             <div class="col-md-8" >
-              <input id="vezzalDepartureArrivalStatus" data-th-value="${vezzalDepartureArrivalStatus.vezzalDepartureArrivalStatus}" class="form-control" type="text"
+              <input id="vesselDepartureArrivalStatus" data-th-value="${vesselDepartureArrivalStatus.vesselDepartureArrivalStatus}" class="form-control" type="text"
                      readonly />
             </div >
           </div >
@@ -253,7 +253,7 @@
     <!--Button-->
     <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
       <!--Back Button-->
-      <a class="btn btn-outline-dark" tabindex="10" href="/vezzalArrivalHistory" >
+      <a class="btn btn-outline-dark" tabindex="10" href="/vesselArrivalHistory" >
         <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
       </a >
       <!--Save Button-->

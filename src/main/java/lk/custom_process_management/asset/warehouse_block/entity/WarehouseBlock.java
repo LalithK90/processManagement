@@ -1,7 +1,7 @@
 package lk.custom_process_management.asset.warehouse_block.entity;
 
 
-import lk.custom_process_management.asset.vezzal_order.entity.VezzalOrder;
+import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.asset.warehouse_block.entity.enums.WarehouseBlockStatus;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
@@ -34,7 +34,7 @@ public class WarehouseBlock extends AuditEntity {
     private WarehouseBlockStatus warehouseBlockStatus;
 
     @OneToMany(mappedBy = "warehouseBlock")
-    private List< VezzalOrder > vezzalOrders;
+    private List< VesselOrder > vesselOrders;
 
 }
 

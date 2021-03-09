@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>vezzal</title>
+    <title>vessel</title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
 <div class="container-fluid">
     <div class="row text-center">
-        <!--New Vezzal Button-->
+        <!--New Vessel Button-->
         <div class="col">
-            <a class="btn btn-outline-success" href="/vezzal/add" tabindex="1">
+            <a class="btn btn-outline-success" href="/vessel/add" tabindex="1">
                 <i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New
             </a>
         </div>
@@ -19,7 +19,7 @@
         <div class="col">
             <h2 class="text-center">
                 <strong>
-                    Vezzal List
+                    Vessel List
                 </strong>
             </h2>
         </div>
@@ -36,7 +36,7 @@
 <div class="container-fluid text-center">
     <!--Table view-->
     <div class="col">
-        <div class="col" id="customerListPresent" data-th-if="${not #lists.isEmpty(vezzals)}">
+        <div class="col" id="customerListPresent" data-th-if="${not #lists.isEmpty(vessels)}">
             <table class="table table-hover table-striped" id="myTable">
                 <thead>
                 <tr>
@@ -50,21 +50,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-th-each="vezzal, rowCount : ${vezzals}">
+                <tr data-th-each="vessel, rowCount : ${vessels}">
                     <th data-th-text="${rowCount.count}"></th>
-                    <th data-th-text="${vezzal.name}"></th>
-                    <th data-th-text="${vezzal.code}"></th>
-                    <th data-th-text="${vezzal.imoNumber}"></th>
-                    <th data-th-text="${vezzal.mmsiNumber}"></th>
-                    <th data-th-text="${vezzal.country}"></th>
+                    <th data-th-text="${vessel.name}"></th>
+                    <th data-th-text="${vessel.code}"></th>
+                    <th data-th-text="${vessel.imoNumber}"></th>
+                    <th data-th-text="${vessel.mmsiNumber}"></th>
+                    <th data-th-text="${vessel.country}"></th>
                     <th>
-                        <a data-th-href="${'/vezzal/view/' + vezzal.id}"
+                        <a data-th-href="${'/vessel/view/' + vessel.id}"
                            class="btn btn-outline-primary btn-sm"><i
                                 class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                        <a data-th-href="${'/vezzal/edit/' + vezzal.id}"
+                        <a data-th-href="${'/vessel/edit/' + vessel.id}"
                            class="btn btn-outline-success btn-sm"><i class="fa fa-edit"
                                                              style="font-size: 15px"></i>&nbsp;Edit</a>
-                        <a data-th-href="${'/vezzalArrivalHistory/add/' + vezzal.id}"
+                        <a data-th-href="${'/vesselArrivalHistory/add/' + vessel.id}"
                            class="btn btn-outline-warning btn-sm"><i class="fa fa-edit"
                                                              style="font-size: 15px"></i>&nbsp;New Arrival</a>
                     </th>
@@ -74,29 +74,29 @@
         </div>
     </div>
     <!--Error-->
-    <div class="row" data-th-if="${ #lists.isEmpty(vezzals)}">
+    <div class="row" data-th-if="${ #lists.isEmpty(vessels)}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h3 class="text-center text-danger">
-                    <strong>There is no vezzal upto now please add vezzal to the system
+                    <strong>There is no vessel upto now please add vessel to the system
                         using "New" button.
                     </strong>
                 </h3>
             </div>
         </div>
     </div>
-    <!--Save vezzal-->
-    <div class="row" data-th-if="${vezzalDetail != null}">
+    <!--Save vessel-->
+    <div class="row" data-th-if="${vesselDetail != null}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <!--save vezzal include-->
-                <div data-th-replace="~{vezzal/vezzal-detail :: vezzalDetailsFragment}"></div>
+                <!--save vessel include-->
+                <div data-th-replace="~{vessel/vessel-detail :: vesselDetailsFragment}"></div>
             </div>
         </div>
         <script>

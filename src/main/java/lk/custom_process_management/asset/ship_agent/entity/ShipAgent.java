@@ -53,5 +53,5 @@ public class ShipAgent extends AuditEntity {
 
 
 //    @OneToMany(mappedBy = "shipAgent")
-//    private List< VezzalOrder > vezzalOrders;
+//    private List< VesselOrder > vesselOrders;
 }

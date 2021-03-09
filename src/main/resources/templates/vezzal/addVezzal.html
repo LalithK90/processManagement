@@ -11,7 +11,7 @@
   <div class="row text-center border-info" >
     <!--ViewList Button-->
     <div class="col" >
-      <a href="/vezzal" class="btn btn-outline-primary" tabindex="1" >
+      <a href="/vessel" class="btn btn-outline-primary" tabindex="1" >
         <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
       </a >
     </div >
@@ -19,7 +19,7 @@
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          <span data-th-text="${addStatus==true?'Add New Vezzal':'Update Vezzal Details'}" ></span >
+          <span data-th-text="${addStatus==true?'Add New Vessel':'Update Vessel Details'}" ></span >
         </strong >
       </h2 >
     </div >
@@ -34,8 +34,8 @@
 <!--Form Content-->
 <div class="container-fluid" >
   <div class="col-sm-12 flex-column " >
-    <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/vezzal/save':'/vezzal/update'}"
-          data-th-object="${vezzal}" method="POST" enctype="multipart/form-data" >
+    <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/vessel/save':'/vessel/update'}"
+          data-th-object="${vessel}" method="POST" enctype="multipart/form-data" >
       <div class="row" >
         <!--Left Side-->
         <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
@@ -51,7 +51,7 @@
           <!--code-->
           <div data-th-if="${addStatus==false}" class="form-row text-right" >
             <div class="col-md-4" >
-              <label class="control-label" for="code" >Vezzal Code :</label >
+              <label class="control-label" for="code" >Vessel Code :</label >
             </div >
             <div class="col-md-8" >
               <input id="code" data-th-field="*{code}" class="form-control" type="text" readonly />
@@ -136,7 +136,7 @@
         <!--Button-->
         <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
           <!--Back Button-->
-          <a class="btn btn-outline-dark" tabindex="10" href="/vezzal" >
+          <a class="btn btn-outline-dark" tabindex="10" href="/vessel" >
             <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
           </a >
           <!--Save Button-->

@@ -2,7 +2,7 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >vezzalOrder-detail</title >
+  <title >vesselOrder-detail</title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
@@ -12,7 +12,7 @@
   <div class="row text-center" >
     <!--ViewList Button-->
     <div class="col" >
-      <a href="/vezzalOrder" class="btn btn-outline-primary" tabindex="1" >
+      <a href="/vesselOrder" class="btn btn-outline-primary" tabindex="1" >
         <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
       </a >
     </div >
@@ -20,7 +20,7 @@
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          <span data-th-text="${vezzalOrderDetail.number + ' Order Details'}" ></span >
+          <span data-th-text="${vesselOrderDetail.number + ' Order Details'}" ></span >
         </strong >
       </h2 >
     </div >
@@ -33,9 +33,9 @@
   </div >
 </div >
 <!--details-->
-<div data-th-fragment="vezzalOrderDetailsFragment" class="container-fluid " >
-  <!--Vezzal Arrival History -->
-  <div data-th-replace="~{vezzalArrivalHistory/vezzalArrivalHistory-detail :: vezzalArrivalHistoryFragment}" ></div >
+<div data-th-fragment="vesselOrderDetailsFragment" class="container-fluid " >
+  <!--Vessel Arrival History -->
+  <div data-th-replace="~{vesselArrivalHistory/vesselArrivalHistory-detail :: vesselArrivalHistoryFragment}" ></div >
   <div id="accordianId1" role="tablist" aria-multiselectable="true" >
     <div class="card mb-3" >
       <div class="card-header" role="tab" id="section2HeaderId1" >
@@ -43,7 +43,7 @@
           <a data-toggle="collapse" data-parent="#accordianId1" href="#section2ContentId1" aria-expanded="true"
              aria-controls="section2ContentId" >
             <div class="container-fluid text-center" >
-              Vezzal Order Details
+              Vessel Order Details
             </div >
           </a >
         </h5 >
@@ -60,17 +60,17 @@
                   <label class="control-label" for="number" >Order Number :</label >
                 </div >
                 <div class="col-md-8" >
-                  <p id="number" data-th-text="${vezzalOrderDetail.number}" ></p >
+                  <p id="number" data-th-text="${vesselOrderDetail.number}" ></p >
                 </div >
               </div >
-              <!--Vezzal Order Status-->
+              <!--Vessel Order Status-->
               <div class="form-row text-right" >
                 <div class="col-md-4" >
-                  <label class="control-label" for="vezzalOrderStatus" >Vezzal Order Status :</label >
+                  <label class="control-label" for="vesselOrderStatus" >Vessel Order Status :</label >
                 </div >
                 <div class="col-md-8" >
-                  <p id="vezzalOrderStatus"
-                     data-th-text="${vezzalOrderDetail.vezzalOrderStatus.vezzalOrderStatus}" ></p >
+                  <p id="vesselOrderStatus"
+                     data-th-text="${vesselOrderDetail.vesselOrderStatus.vesselOrderStatus}" ></p >
                 </div >
               </div >
               <!--Created By-->
@@ -79,7 +79,7 @@
                   <label class="control-label" for="createdBy" >Created By :</label >
                 </div >
                 <div class="col-md-8" >
-                  <p id="createdBy" data-th-text="${vezzalOrderDetail.createdBy}" ></p >
+                  <p id="createdBy" data-th-text="${vesselOrderDetail.createdBy}" ></p >
                 </div >
               </div >
             </div >
@@ -91,7 +91,7 @@
                   <label class="control-label" for="closingDate" >Closing Date At :</label >
                 </div >
                 <div class="col-md-8" >
-                  <p id="closingDate" data-th-text="${vezzalOrderDetail.closingDate}" ></p >
+                  <p id="closingDate" data-th-text="${vesselOrderDetail.closingDate}" ></p >
                 </div >
               </div >
               <!--warehouse Block-->
@@ -100,7 +100,7 @@
                   <label class="control-label" for="warehouseBlock" >Warehouse Block :</label >
                 </div >
                 <div class="col-md-8" >
-                  <p id="warehouseBlock" data-th-text="${vezzalOrderDetail.warehouseBlock.name}" >
+                  <p id="warehouseBlock" data-th-text="${vesselOrderDetail.warehouseBlock.name}" >
                   </p >
                 </div >
               </div >
@@ -110,7 +110,7 @@
                   <label class="control-label" for="createdAt" >Created At :</label >
                 </div >
                 <div class="col-md-8" >
-                  <p id="createdAt" data-th-text="${{vezzalOrderDetail.createdAt}}" ></p >
+                  <p id="createdAt" data-th-text="${{vesselOrderDetail.createdAt}}" ></p >
                 </div >
               </div >
             </div >
@@ -123,13 +123,13 @@
                   <th >Index</th >
                   <th >Item Name</th >
                   <th >Request Amount</th >
-                  <th >Vezzal Order Item Status</th >
+                  <th >Vessel Order Item Status</th >
                 </tr >
-                <tr data-th-each="vezzalOrderItem, index : ${vezzalOrderDetail.vezzalOrderItems}" >
+                <tr data-th-each="vesselOrderItem, index : ${vesselOrderDetail.vesselOrderItems}" >
                   <td data-th-text="${index.count}" ></td >
-                  <td data-th-text="${vezzalOrderItem.item.name}" ></td >
-                  <td data-th-text="${vezzalOrderItem.quantity}" ></td >
-                  <td data-th-text="${vezzalOrderItem.vezzalOrderItemStatus.vezzalOrderItemStatus}" ></td >
+                  <td data-th-text="${vesselOrderItem.item.name}" ></td >
+                  <td data-th-text="${vesselOrderItem.quantity}" ></td >
+                  <td data-th-text="${vesselOrderItem.vesselOrderItemStatus.vesselOrderItemStatus}" ></td >
                 </tr >
               </table >
             </div >
@@ -141,7 +141,7 @@
 </div >
 <!--Back Button-->
 <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
-  <a href="/vezzalOrder" >
+  <a href="/vesselOrder" >
     <button class="btn btn-outline-dark" type="button" tabindex="3" >
       <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
     </button >

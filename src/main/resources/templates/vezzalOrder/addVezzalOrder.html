@@ -11,7 +11,7 @@
   <div class="row text-center  border-info" >
     <!--ViewList Button-->
     <div class="col" >
-      <a href="/vezzalOrder" class="btn btn-outline-primary" tabindex="1" >
+      <a href="/vesselOrder" class="btn btn-outline-primary" tabindex="1" >
         <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
       </a >
     </div >
@@ -19,7 +19,7 @@
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          <span data-th-text="${addStatus==true?'Add new vezzal order':'Update vezzal order Details'}" ></span >
+          <span data-th-text="${addStatus==true?'Add new vessel order':'Update vessel order Details'}" ></span >
         </strong >
       </h2 >
     </div >
@@ -36,7 +36,7 @@
   <!--form start-->
   <div class="col-sm-12 flex-column " >
     <form id="form" class="form-horizontal"
-          data-th-action="${addStatus==true?'/vezzalOrder/save':'/vezzalOrder/update'}" data-th-object="${vezzalOrder}"
+          data-th-action="${addStatus==true?'/vesselOrder/save':'/vesselOrder/update'}" data-th-object="${vesselOrder}"
           method="POST" >
       <div class="row" >
         <!--Left Side-->
@@ -59,30 +59,30 @@
               <input id="number" data-th-field="*{number}" class="form-control" type="text" readonly />
             </div >
           </div >
-          <!--Vezzal Order Status-->
+          <!--Vessel Order Status-->
           <div class="form-row text-right" data-th-if="${addStatus==false}" >
             <div class="col-md-4" >
-              <label class="control-label" for="vezzalOrderStatus" >Vezzal Order Status :</label >
+              <label class="control-label" for="vesselOrderStatus" >Vessel Order Status :</label >
             </div >
             <div class="col-md-8" >
-              <input id="vezzalOrderStatus" data-th-field="*{vezzalOrderStatus}" class="form-control" tabindex="4"
+              <input id="vesselOrderStatus" data-th-field="*{vesselOrderStatus}" class="form-control" tabindex="4"
                      type="text"
                      required />
-              <span data-th-errors="*{vezzalOrderStatus}"
-                    data-th-if="${#fields.hasErrors('vezzalOrderStatus')}" class="error" >Error Name</span >
+              <span data-th-errors="*{vesselOrderStatus}"
+                    data-th-if="${#fields.hasErrors('vesselOrderStatus')}" class="error" >Error Name</span >
             </div >
           </div >
-          <!--Vezzal Order History-->
+          <!--Vessel Order History-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
-              <label class="control-label" for="vezzalOderHistories" >Vezzal Details :</label >
+              <label class="control-label" for="vesselOderHistories" >Vessel Details :</label >
             </div >
             <div class="col-md-8" >
-              <select id="vezzalOderHistories" data-th-field="*{vezzalArrivalHistory}" class="form-control" >
+              <select id="vesselOderHistories" data-th-field="*{vesselArrivalHistory}" class="form-control" >
                 <option value="" disabled selected >Please Select</option >
-                <option data-th-each="vezzalArrivalHistory : ${vezzalOderHistories}"
-                        data-th-value="${vezzalArrivalHistory.id}"
-                        data-th-text="${'Name : '+vezzalArrivalHistory.vezzal.name + ' Code : '+vezzalArrivalHistory.vezzal.code+' Sailing Date : '+vezzalArrivalHistory.sailingDate}" ></option >
+                <option data-th-each="vesselArrivalHistory : ${vesselOderHistories}"
+                        data-th-value="${vesselArrivalHistory.id}"
+                        data-th-text="${'Name : '+vesselArrivalHistory.vessel.name + ' Code : '+vesselArrivalHistory.vessel.code+' Sailing Date : '+vesselArrivalHistory.sailingDate}" ></option >
               </select >
             </div >
           </div >
@@ -164,17 +164,17 @@
               <th >Request Amount</th >
               <th >Modify</th >
             </tr >
-            <tr data-th-each="vezzalOrderItem, index : ${vezzalOrder.vezzalOrderItems}">
+            <tr data-th-each="vesselOrderItem, index : ${vesselOrder.vesselOrderItems}">
               <td>
-                <span data-th-id="${'nm'+index.index}" data-th-text="${vezzalOrderItem.item.name}"></span>
-                <input data-th-id="${'id'+index.index}" type="hidden" data-th-name="${'vezzalOrderItems[__${index.index}__].item.id'}"
-                       data-th-value="${vezzalOrderItem.item.id}" required>
-                <input type="hidden" data-th-name="${'vezzalOrderItems[__${index.index}__].id'}"
-                       data-th-value="${vezzalOrderItem.id}" required>
+                <span data-th-id="${'nm'+index.index}" data-th-text="${vesselOrderItem.item.name}"></span>
+                <input data-th-id="${'id'+index.index}" type="hidden" data-th-name="${'vesselOrderItems[__${index.index}__].item.id'}"
+                       data-th-value="${vesselOrderItem.item.id}" required>
+                <input type="hidden" data-th-name="${'vesselOrderItems[__${index.index}__].id'}"
+                       data-th-value="${vesselOrderItem.id}" required>
               </td >
               <td >
-                <input data-th-id="${'id'+index.index}" type="number" data-th-name="${'vezzalOrderItems[__${index.index}__].quantity'}"
-                       data-th-value="${vezzalOrderItem.quantity}" class="form-control" required></td >
+                <input data-th-id="${'id'+index.index}" type="number" data-th-name="${'vesselOrderItems[__${index.index}__].quantity'}"
+                       data-th-value="${vesselOrderItem.quantity}" class="form-control" required></td >
               <td >
                 <button type="button" data-th-id="${'rm'+index.index}" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>
 
@@ -186,7 +186,7 @@
       <!--Button-->
       <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
         <!--Back Button-->
-        <a class="btn btn-outline-dark" tabindex="10" href="/vezzalOrder" >
+        <a class="btn btn-outline-dark" tabindex="10" href="/vesselOrder" >
           <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
         </a >
         <!--Save Button-->
@@ -231,10 +231,10 @@
         let html = `<tr>
                         <td>
                             <span id='nm${value.itemId}'>${value.itemName}</span>
-                            <input id='id${value.itemId}' type="hidden" name="vezzalOrderItems[${rowCount}].item.id" value="${value.itemId}" required>
+                            <input id='id${value.itemId}' type="hidden" name="vesselOrderItems[${rowCount}].item.id" value="${value.itemId}" required>
                         </td>
                         <td>
-                          <input type="number" class="form-control" name="vezzalOrderItems[${rowCount}].quantity"                          required>
+                          <input type="number" class="form-control" name="vesselOrderItems[${rowCount}].quantity"                          required>
                         </td>
                         <td>
                             <button type="button" id="rm${value.itemId}" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>

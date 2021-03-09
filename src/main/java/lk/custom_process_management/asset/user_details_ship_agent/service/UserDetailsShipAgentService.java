@@ -43,11 +43,11 @@ public class UserDetailsShipAgentService implements AbstractService< UserDetails
         .matching()
         .withIgnoreCase()
         .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-    Example< UserDetailsShipAgent > vezzalExample = Example.of(userDetailsShipAgent, matcher);
-    return userDetailsShipAgentDao.findAll(vezzalExample);
+    Example< UserDetailsShipAgent > vesselExample = Example.of(userDetailsShipAgent, matcher);
+    return userDetailsShipAgentDao.findAll(vesselExample);
   }
 
-  public UserDetailsShipAgent lastVezzal() {
+  public UserDetailsShipAgent lastVessel() {
     return userDetailsShipAgentDao.findFirstByOrderByIdDesc();
   }
 

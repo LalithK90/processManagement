@@ -2,7 +2,7 @@ package lk.custom_process_management.asset.payment.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.payment.entity.enums.PaymentMethod;
-import lk.custom_process_management.asset.vezzal_order_item_approved.entity.VezzalOrderItemApproved;
+import lk.custom_process_management.asset.vessel_order_item_approved.entity.VesselOrderItemApproved;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonFilter( "VezzalOrderItemApproved" )
+@JsonFilter( "VesselOrderItemApproved" )
 public class Payment extends AuditEntity {
 
   @Column( nullable = false, precision = 10, scale = 2 )
@@ -34,5 +34,5 @@ public class Payment extends AuditEntity {
   private PaymentMethod paymentMethod;
 
   @ManyToOne
-  private VezzalOrderItemApproved vezzalOrderItemApproved;
+  private VesselOrderItemApproved vesselOrderItemApproved;
 }

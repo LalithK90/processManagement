@@ -2,16 +2,16 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >vezzalOrder</title >
+  <title >vesselOrder</title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 <!--heading Area-->
 <div class="container-fluid" >
   <div class="row text-center" >
-    <!--New vezzalOrder Button-->
+    <!--New vesselOrder Button-->
     <div class="col" >
-      <a class="btn btn-outline-success" href="/vezzalOrder/add" tabindex="1" >
+      <a class="btn btn-outline-success" href="/vesselOrder/add" tabindex="1" >
         <i class="fas fa-plus" style="font-size: 20px" ></i >&nbsp;&nbsp;New
       </a >
     </div >
@@ -19,7 +19,7 @@
     <div class="col" >
       <h2 class="text-white text-center" >
         <strong >
-          Vezzal Order List
+          Vessel Order List
         </strong >
       </h2 >
     </div >
@@ -36,7 +36,7 @@
 <div class="container-fluid text-center" >
   <!--Table view-->
   <div class="col" >
-    <div class="col" data-th-if="${not #lists.isEmpty(vezzalOrders)}" >
+    <div class="col" data-th-if="${not #lists.isEmpty(vesselOrders)}" >
       <table class="table table-hover table-striped" id="myTable" >
         <thead >
         <tr >
@@ -44,27 +44,27 @@
           <th > Number</th >
           <th > Closing Date</th >
           <th > Warehouse Block</th >
-          <th > Vezzal Order Status</th >
-          <th > Vezzal Name</th >
+          <th > Vessel Order Status</th >
+          <th > Vessel Name</th >
           <th > Modify</th >
         </tr >
         </thead >
         <tbody >
-        <tr data-th-each="vezzalOrder, rowCount : ${vezzalOrders}" >
+        <tr data-th-each="vesselOrder, rowCount : ${vesselOrders}" >
           <th data-th-text="${rowCount.count}" ></th >
-          <th data-th-text="${vezzalOrder.number}" ></th >
-          <th data-th-text="${{vezzalOrder.closingDate}}" ></th >
-          <th data-th-text="${vezzalOrder.warehouseBlock.name}" ></th >
-          <th data-th-text="${vezzalOrder.vezzalOrderStatus.vezzalOrderStatus}" ></th >
-          <th data-th-text="${vezzalOrder.vezzalArrivalHistory.vezzal.name}" ></th >
+          <th data-th-text="${vesselOrder.number}" ></th >
+          <th data-th-text="${{vesselOrder.closingDate}}" ></th >
+          <th data-th-text="${vesselOrder.warehouseBlock.name}" ></th >
+          <th data-th-text="${vesselOrder.vesselOrderStatus.vesselOrderStatus}" ></th >
+          <th data-th-text="${vesselOrder.vesselArrivalHistory.vessel.name}" ></th >
           <th >
-            <a data-th-href="${addStatus==false?'/vezzalOrder/view/':'/vezzalOrderItemBid/bid/' + vezzalOrder.id}"
+            <a data-th-href="${addStatus==false?'/vesselOrder/view/':'/vesselOrderItemBid/bid/' + vesselOrder.id}"
                class="btn btn-outline-primary btn-sm" ><i
                   class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp; <span
                   data-th-text="${addStatus==false?'View':'Bid'}" ></span ></a >
-            <a data-th-href="${'/vezzalOrder/edit/' + vezzalOrder.id}"
+            <a data-th-href="${'/vesselOrder/edit/' + vesselOrder.id}"
                class="btn btn-outline-success btn-sm"
-               data-th-if="${#strings.equals(vezzalOrder.vezzalOrderStatus, 'PROCESSING') && addStatus==false}" ><i
+               data-th-if="${#strings.equals(vesselOrder.vesselOrderStatus, 'PROCESSING') && addStatus==false}" ><i
                   class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;Edit</a >
           </th >
         </tr >
@@ -73,14 +73,14 @@
     </div >
   </div >
   <!--Error-->
-  <div class="row" data-th-if="${ #lists.isEmpty(vezzalOrders)}" >
+  <div class="row" data-th-if="${ #lists.isEmpty(vesselOrders)}" >
     <div class="col-sm-12" >
       <div class="alert alert-warning alert-dismissible fade show" role="alert" >
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
           <span aria-hidden="true" >&times;</span >
         </button >
         <h3 class="text-center text-danger" >
-          <strong >There is no vezzal Order upto now please add vezzalOrder to the system
+          <strong >There is no vessel Order upto now please add vesselOrder to the system
                    using "New" button.
           </strong >
         </h3 >
