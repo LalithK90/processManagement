@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.payment.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.payment.entity.enums.PaymentMethod;
 import lk.custom_process_management.asset.vessel_order_item_approved.entity.VesselOrderItemApproved;
 import lk.custom_process_management.util.audit.AuditEntity;
@@ -32,6 +33,9 @@ public class Payment extends AuditEntity {
 
   @Enumerated( EnumType.STRING)
   private PaymentMethod paymentMethod;
+
+  @Enumerated( EnumType.STRING )
+  private LiveDead liveDead;
 
   @ManyToOne
   private VesselOrderItemApproved vesselOrderItemApproved;

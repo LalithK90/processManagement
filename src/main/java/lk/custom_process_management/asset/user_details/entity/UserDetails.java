@@ -3,6 +3,7 @@ package lk.custom_process_management.asset.user_details.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.common_asset.model.enums.Gender;
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.common_asset.model.enums.Title;
 import lk.custom_process_management.asset.user_details.entity.enums.RelevantParty;
 import lk.custom_process_management.util.audit.AuditEntity;
@@ -60,6 +61,9 @@ public class UserDetails extends AuditEntity {
 
   @Enumerated( EnumType.STRING )
   private RelevantParty relevantParty;
+
+  @Enumerated( EnumType.STRING )
+  private LiveDead liveDead;
 
   @DateTimeFormat( pattern = "yyyy-MM-dd" )
   private LocalDate dateOfBirth;

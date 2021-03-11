@@ -23,7 +23,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonFilter( "VesselOrderItemApproved" )
-
 public class VesselOrderItemApproved extends AuditEntity {
 
   @NotEmpty

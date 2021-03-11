@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.ship_agent.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.user_details_ship_agent.entity.UserDetailsShipAgent;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
@@ -8,9 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -47,6 +46,9 @@ public class ShipAgent extends AuditEntity {
 
     @Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255)
     private String address;
+
+    @Enumerated( EnumType.STRING )
+    private LiveDead liveDead;
 
     @OneToMany(mappedBy = "shipAgent")
     private List< UserDetailsShipAgent > userDetailsShipAgents;

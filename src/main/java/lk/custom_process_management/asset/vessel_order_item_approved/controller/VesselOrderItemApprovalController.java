@@ -60,7 +60,8 @@ public class VesselOrderItemApprovalController {
   }
 
   @PostMapping("/save")
-  private String saveApproved(){
+  public String saveApproved(){
+
     return "redirect:/vesselOrderItemApproval";
   }
 }
