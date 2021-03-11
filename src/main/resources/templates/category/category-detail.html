@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  ">
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>category-detail</title>
@@ -20,7 +20,7 @@
         <div class="col">
             <h2 class="text-center">
                 <strong>
-                    <span th:text="${categoryDetail.name}"></span>
+                    <span data-th-text="${categoryDetail.name}"></span>
                 </strong>
             </h2>
         </div>
@@ -33,7 +33,7 @@
     </div>
 </div>
 <!--details-->
-<div th:fragment="categoryDetailsFragment" class="container-fluid">
+<div data-th-fragment="categoryDetailsFragment" class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <div class="row">
             <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
@@ -43,7 +43,7 @@
                         <label class="control-label" for="id">ID :</label>
                     </div>
                     <div class="col-md-4">
-                        <span id="id" th:text="${categoryDetail.id}" class="display_detail"></span>
+                        <span id="id" data-th-text="${categoryDetail.id}" class="display_detail"></span>
                     </div>
                 </div>
                 <!--Main Category-->
@@ -52,7 +52,7 @@
                         <label class="control-label" for="mainCategory">Main Category :</label>
                     </div>
                     <div class="col-md-4">
-                        <span id="mainCategory" th:text="${categoryDetail.mainCategory.mainCategory}"
+                        <span id="mainCategory" data-th-text="${categoryDetail.mainCategory.mainCategory}"
                            class="display_detail"></span>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         <label class="control-label" for="name">Name :</label>
                     </div>
                     <div class="col-md-4">
-                        <span id="name" th:text="${categoryDetail.name}"
+                        <span id="name" data-th-text="${categoryDetail.name}"
                            class="display_detail"></span>
                     </div>
                 </div>

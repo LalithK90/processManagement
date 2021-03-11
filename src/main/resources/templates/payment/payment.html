@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  ">
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -33,7 +33,7 @@
 
 <div class="container-fluid formBorder text-center">
     <div class="col">
-        <div class="col" id="paymentList" th:if="${not #lists.isEmpty(payments)}">
+        <div class="col" id="paymentList" data-th-if="${not #lists.isEmpty(payments)}">
             <table class="table table-hover table-striped" id="myTable">
                 <thead>
                 <tr>
@@ -46,17 +46,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="payment, rowCount : ${payments}">
-                    <th th:text="${rowCount.count}"></th>
-                    <th th:text="${payment.sampleReceiving.sampleCode}"></th>
-                    <th th:text="${payment.amount}"></th>
-                    <th th:text="${payment.paymentDate}"></th>
-                    <th th:text="${payment.paymentStatus.paymentStatus}"></th>
+                <tr data-th-each="payment, rowCount : ${payments}">
+                    <th data-th-text="${rowCount.count}"></th>
+                    <th data-th-text="${payment.sampleReceiving.sampleCode}"></th>
+                    <th data-th-text="${payment.amount}"></th>
+                    <th data-th-text="${payment.paymentDate}"></th>
+                    <th data-th-text="${payment.paymentStatus.paymentStatus}"></th>
                     <th>
-                        <a id="employeeView" th:href="${'/payment/' + payment.id}" class="btn btn-outline-secondary btn-sm">&nbsp;View</a>
-                        <a id="employeeEdit" th:href="${'/payment/edit/' + payment.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                        <a id="employeeRemove" th:href="${'/payment/remove/' + payment.id}"
-                           th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                        <a id="employeeView" data-th-href="${'/payment/' + payment.id}" class="btn btn-outline-secondary btn-sm">&nbsp;View</a>
+                        <a id="employeeEdit" data-th-href="${'/payment/edit/' + payment.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        <a id="employeeRemove" data-th-href="${'/payment/remove/' + payment.id}"
+                           data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                             Delete</a>
                     </th>
                 </tr>
@@ -64,7 +64,7 @@
             </table>
         </div>
     </div>
-    <div class="row" th:if="${ #lists.isEmpty(payments)}">
+    <div class="row" data-th-if="${ #lists.isEmpty(payments)}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
