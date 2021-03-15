@@ -87,7 +87,7 @@
             <label class="control-label" for="captainName" >Captain name :</label >
           </div >
           <div class="col-md-8" >
-            <input id="name" class="form-control" data-th-field="*{captainName}" tabindex=""
+            <input id="captainName" class="form-control" data-th-field="*{captainName}" tabindex=""
                    type="text"
                    required />
           </div >
@@ -98,7 +98,7 @@
             <label class="control-label" for="cargoTonnage" >Cargo Tonnage :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{cargoTonnage}" class="form-control" tabindex=""
+            <input id="cargoTonnage" data-th-field="*{cargoTonnage}" class="form-control" tabindex=""
                    type="text"
                    required />
           </div >
@@ -109,7 +109,7 @@
             <label class="control-label" for="anchorageTerminal" >Anchorage Terminal :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{anchorageTerminal}" class="form-control" tabindex=""
+            <input id="anchorageTerminal" data-th-field="*{anchorageTerminal}" class="form-control" tabindex=""
                    type="text"
                    required />
           </div >
@@ -120,7 +120,7 @@
             <label class="control-label" for="purposeOfVisit" >Purpose Of Visit :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{purposeOfVisit}" class="form-control" tabindex=""
+            <input id="purposeOfVisit" data-th-field="*{purposeOfVisit}" class="form-control" tabindex=""
                    type="text"
                    required />
           </div >
@@ -131,7 +131,7 @@
             <label class="control-label" for="numberOfCrewMembers" >Number Of Crew Members :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{numberOfCrewMembers}" class="form-control" tabindex=""
+            <input id="numberOfCrewMembers" data-th-field="*{numberOfCrewMembers}" class="form-control" tabindex=""
                    type="number"
                    required />
           </div >
@@ -142,7 +142,7 @@
             <label class="control-label" for="numberOfPassengers" >Number Of Passengers :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{numberOfPassengers}" class="form-control" tabindex=""
+            <input id="numberOfPassengers" data-th-field="*{numberOfPassengers}" class="form-control" tabindex=""
                    type="number" />
           </div >
         </div >
@@ -152,7 +152,8 @@
             <label class="control-label" for="onePreviousHarbourName" >Last Harbour Name :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{onePreviousHarbourName}" class="form-control" tabindex=""
+            <input id="onePreviousHarbourName" data-th-field="*{onePreviousHarbourName}" class="form-control"
+                   tabindex=""
                    type="text"
                    required />
           </div >
@@ -166,7 +167,8 @@
             <label class="control-label" for="twoPreviousHarbourName" >Last One Harbour Name :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{twoPreviousHarbourName}" class="form-control" tabindex=""
+            <input id="twoPreviousHarbourName" data-th-field="*{twoPreviousHarbourName}" class="form-control"
+                   tabindex=""
                    type="text"
                    required />
           </div >
@@ -177,7 +179,8 @@
             <label class="control-label" for="threePreviousHarbourName" >Last Two Harbour Name :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{threePreviousHarbourName}" class="form-control" tabindex=""
+            <input id="threePreviousHarbourName" data-th-field="*{threePreviousHarbourName}" class="form-control"
+                   tabindex=""
                    type="text"
                    required />
           </div >
@@ -188,7 +191,7 @@
             <label class="control-label" for="nextHarbour" >Next Harbour :</label >
           </div >
           <div class="col-md-8" >
-            <input data-th-field="*{nextHarbour}" class="form-control" tabindex=""
+            <input id="nextHarbour" data-th-field="*{nextHarbour}" class="form-control" tabindex=""
                    type="text"
                    required />
           </div >
@@ -223,7 +226,9 @@
               <label class="control-label" for="vesselDepartureArrivalStatus" >Vessel Departure Arrival Status :</label >
             </div >
             <div class="col-md-8" >
-              <input id="vesselDepartureArrivalStatus" data-th-value="${vesselDepartureArrivalStatus.vesselDepartureArrivalStatus}" class="form-control" type="text"
+              <input id="vesselDepartureArrivalStatus"
+                     data-th-value="${vesselArrivalHistory.vesselDepartureArrivalStatus.vesselDepartureArrivalStatus}"
+                     class="form-control" type="text"
                      readonly />
             </div >
           </div >

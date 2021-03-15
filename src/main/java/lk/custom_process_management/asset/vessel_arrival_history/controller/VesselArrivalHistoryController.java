@@ -115,7 +115,6 @@ public class VesselArrivalHistoryController {
   //not arrival vessel -> state change to arrival
   @GetMapping( "/arrival/{id}" )
   public String notArrivalToArrival(@PathVariable Integer id) {
-    System.out.println("asdasda");
     VesselArrivalHistory vesselArrivalHistory = vesselArrivalHistoryService.findById(id);
     vesselArrivalHistory.setVesselDepartureArrivalStatus(VesselDepartureArrivalStatus.AR);
     vesselArrivalHistoryService.persist(vesselArrivalHistory);

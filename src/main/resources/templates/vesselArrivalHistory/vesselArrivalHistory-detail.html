@@ -33,7 +33,7 @@
     </div >
   </div >
 </div >
-<div id="accordianId" role="tablist" aria-multiselectable="true" data-th-fragment="vesselArrivalHistoryFragment">
+<div id="accordianId" role="tablist" aria-multiselectable="true" data-th-fragment="vesselArrivalHistoryFragment" >
   <div class="card" >
     <div class="card-header" role="tab" id="section1HeaderId" >
       <h5 class="mb-0" >
@@ -62,7 +62,7 @@
         </a >
       </h5 >
     </div >
-    <div id="section2ContentId" class="collapse in" role="tabpanel" aria-labelledby="section2HeaderId" >
+    <div id="section2ContentId" class="collapse show" role="tabpanel" aria-labelledby="section2HeaderId" >
       <div class="card-body" >
         <!--details-->
         <div data-th-fragment="vesselArrivalHistoryDetailsFragment" class="container-fluid " >
@@ -148,7 +148,7 @@
                     <label class="control-label" >Created At :</label >
                   </div >
                   <div class="col-md-8" >
-                    <p data-th-text="${{vesselArrivalHistoryDetail.createdAt}}" class="display_detail" ></p >
+                    <p data-th-text="${#temporals.format(vesselArrivalHistoryDetail.createdAt, 'yyyy-MM-dd HH:mm')}" ></p >
                   </div >
                 </div >
               </div >
@@ -208,7 +208,7 @@
                     <label class="control-label" >Anchorage Date :</label >
                   </div >
                   <div class="col-md-8" >
-                    <p data-th-text="${{vesselArrivalHistoryDetail.anchorageDateAndTime}}" class="display_detail" ></p >
+                    <p data-th-text="${#temporals.format(vesselArrivalHistoryDetail.anchorageDateAndTime, 'yyyy-MM-dd HH:mm')}" ></p >
                   </div >
                 </div >
                 <!--sailing Date -->
@@ -235,7 +235,7 @@
                     <label class="control-label" >Updated At :</label >
                   </div >
                   <div class="col-md-8" >
-                    <p data-th-text="${vesselArrivalHistoryDetail.updatedAt}" class="display_detail" ></p >
+                    <p data-th-text="${#temporals.format(vesselArrivalHistoryDetail.updatedAt, 'yyyy-MM-dd HH:mm')}" ></p >
                   </div >
                 </div >
               </div >
@@ -247,7 +247,7 @@
   </div >
 </div >
 <!--Back Button-->
-<div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+<div class="form-group col-md-12 col-sm-12 text-center flex-column mt-2" >
   <a href="/vesselArrivalHistory" >
     <button class="btn btn-outline-dark" type="button" tabindex="3" >
       <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
