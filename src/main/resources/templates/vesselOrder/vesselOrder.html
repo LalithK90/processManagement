@@ -59,9 +59,9 @@
           <th data-th-text="${vesselOrder.vesselArrivalHistory.vessel.name}" ></th >
           <th >
             <a data-th-href="${addStatus==false?'/vesselOrder/view/'+ vesselOrder.id :'/vesselOrderItemBid/bid/' + vesselOrder.id}"
-               class="btn btn-outline-primary btn-sm" ><i
-                  class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp; <span
-                  data-th-text="${addStatus==false?'View':'Bid'}" ></span >
+               data-th-class="${addStatus==false? 'btn btn-outline-primary btn-sm' :'btn btn-outline-info'}" >
+              <i data-th-class="${addStatus==false? 'fa fa-folder-open' : 'fas fa-comment-dollar fa-2x'}" ></i >
+              &nbsp; <span data-th-text="${addStatus==false?'View':'Bid'}" ></span >
             </a >
             <a data-th-href="${'/vesselOrder/edit/' + vesselOrder.id}"
                class="btn btn-outline-success btn-sm"

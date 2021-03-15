@@ -119,9 +119,6 @@ public class VesselOrderController {
           "Hence please contact office who works in Sri Lanka Custom");
       return "redirect:/vesselOrder";
     }
-    //TODO -> first check order is processing or not
-    //second logged user is custom or not and order status is valid
-    //so then we can give permission to edit custom officers
   }
 
   //delete method is not applicable this part
