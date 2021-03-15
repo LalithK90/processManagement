@@ -2,11 +2,13 @@ package lk.custom_process_management.asset.user_details.controller;
 
 
 import lk.custom_process_management.asset.chandler.controller.ChandlerController;
-import lk.custom_process_management.asset.chandler.entity.Chandler;
+import lk.custom_process_management.asset.chandler.service.ChandlerService;
 import lk.custom_process_management.asset.common_asset.model.enums.Gender;
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.common_asset.model.enums.Title;
 import lk.custom_process_management.asset.ship_agent.controller.ShipAgentController;
 import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
+import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.asset.user_details.entity.UserDetails;
 import lk.custom_process_management.asset.user_details.entity.UserDetailsFiles;
 import lk.custom_process_management.asset.user_details.entity.enums.RelevantParty;
@@ -32,6 +34,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/userDetails" )
@@ -39,18 +42,22 @@ public class UserDetailsController {
   private final UsersDetailsService usersDetailsService;
   private final UserDetailsFilesService userDetailsFilesService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
-
+  private final ChandlerService chandlerService;
+  private final ShipAgentService shipAgentService;
   private final UserDetailsChandlerService userDetailsChandlerService;
   private final UserDetailsShipAgentService userDetailsShipAgentService;
 
   @Autowired
   public UserDetailsController(UsersDetailsService usersDetailsService, UserDetailsFilesService userDetailsFilesService,
-                                                           MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                               ChandlerService chandlerService, ShipAgentService shipAgentService,
                                UserDetailsChandlerService userDetailsChandlerService,
                                UserDetailsShipAgentService userDetailsShipAgentService) {
     this.usersDetailsService = usersDetailsService;
     this.userDetailsFilesService = userDetailsFilesService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+    this.chandlerService = chandlerService;
+    this.shipAgentService = shipAgentService;
     this.userDetailsChandlerService = userDetailsChandlerService;
     this.userDetailsShipAgentService = userDetailsShipAgentService;
   }
@@ -84,9 +91,14 @@ public class UserDetailsController {
   @RequestMapping
   public String findAll(Model model) {
     List< UserDetails > userDetailsList = new ArrayList<>();
-    for ( int i = 0; i < usersDetailsService.findAll().size(); i++ ) {
-      if ( i == 0 ) usersDetailsService.findAll().remove(0);
-      else userDetailsList.add(usersDetailsService.findAll().get(i));
+
+    for ( UserDetails userDetails : usersDetailsService.findAll()
+        .stream()
+        .filter(x -> LiveDead.ACTIVE.equals(x.getLiveDead()))
+        .collect(Collectors.toList())
+    ) {
+      userDetails.setFileInfo(userDetailsFilesService.userDetailsFileDownloadLinks(userDetails));
+      userDetailsList.add(userDetails);
     }
     model.addAttribute("userDetailses", userDetailsList);
     model.addAttribute("contendHeader", "User Details Registration");
@@ -146,30 +158,26 @@ public class UserDetailsController {
 
     //after save userDetails files and save userDetails
     UserDetails userDetailsDb = usersDetailsService.persist(userDetails);
-
+    System.out.println("relevant party id " + userDetails.getRelevantPartyId());
     //if user belongs to chandler
     if ( userDetails.getRelevantParty().equals(RelevantParty.SLCC) ) {
       UserDetailsChandler userDetailsChandler = userDetailsChandlerService.findByUserDetails(userDetailsDb);
-      Chandler chandler = new Chandler();
       if ( userDetailsChandler == null ) {
         userDetailsChandler = new UserDetailsChandler();
       }
       userDetailsChandler.setUserDetails(userDetailsDb);
-      chandler.setId(userDetails.getRelevantPartyId());
-      userDetailsChandler.setChandler(chandler);
+      userDetailsChandler.setChandler(chandlerService.findById(userDetails.getRelevantPartyId()));
       userDetailsChandlerService.persist(userDetailsChandler);
     }
 
     //if user belongs to shipAgent
     if ( userDetails.getRelevantParty().equals(RelevantParty.SLCS) ) {
       UserDetailsShipAgent userDetailsShipAgent = userDetailsShipAgentService.findByUserDetails(userDetailsDb);
-      ShipAgent shipAgent = new ShipAgent();
       if ( userDetailsShipAgent == null ) {
         userDetailsShipAgent = new UserDetailsShipAgent();
       }
       userDetailsShipAgent.setUserDetails(userDetailsDb);
-      shipAgent.setId(userDetails.getRelevantPartyId());
-      userDetailsShipAgent.setShipAgent(shipAgent);
+      userDetailsShipAgent.setShipAgent(shipAgentService.findById(userDetails.getRelevantPartyId()));
       userDetailsShipAgentService.persist(userDetailsShipAgent);
     }
 

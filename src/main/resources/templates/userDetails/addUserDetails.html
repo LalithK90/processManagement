@@ -47,6 +47,7 @@
             </div >
             <div class="col-md-8" >
               <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly />
+              <input  data-th-field="*{liveDead}" class="form-control" type="hidden" readonly />
             </div >
           </div >
           <!--number-->
@@ -264,8 +265,7 @@
               <label class="control-label" for="relevantPartyId" ><span id="labelName" ></span > :</label >
             </div >
             <div class="col-md-8" >
-              <select id="relevantPartyId" data-th-name="${relevantPartyId}" class="form-control" tabindex="3"
-                      required >
+              <select id="relevantPartyId" data-th-name="${'relevantPartyId'}" class="form-control" tabindex="3" >
               </select >
             </div >
           </div >

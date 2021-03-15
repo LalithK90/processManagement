@@ -2,6 +2,7 @@ package lk.custom_process_management.asset.user_details.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.custom_process_management.asset.common_asset.model.FileInfo;
 import lk.custom_process_management.asset.common_asset.model.enums.Gender;
 import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.common_asset.model.enums.Title;
@@ -70,6 +71,9 @@ public class UserDetails extends AuditEntity {
 
   @Transient
   private MultipartFile file;
+
+  @Transient
+  private FileInfo fileInfo;
 
   @Transient
   private int relevantPartyId;
