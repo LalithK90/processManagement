@@ -31,7 +31,7 @@ private final VesselDao vesselDao;
 
     public Vessel persist(Vessel vessel) {
         if ( vessel.getId() == null ){
-            vessel.setLiveDead(LiveDead.STOP);
+            vessel.setLiveDead(LiveDead.ACTIVE);
         }
         return vesselDao.save(vessel);
     }
