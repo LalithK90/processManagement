@@ -58,10 +58,11 @@
           <th data-th-text="${vesselOrder.vesselOrderStatus.vesselOrderStatus}" ></th >
           <th data-th-text="${vesselOrder.vesselArrivalHistory.vessel.name}" ></th >
           <th >
-            <a data-th-href="${addStatus==false?'/vesselOrder/view/':'/vesselOrderItemBid/bid/' + vesselOrder.id}"
+            <a data-th-href="${addStatus==false?'/vesselOrder/view/'+ vesselOrder.id :'/vesselOrderItemBid/bid/' + vesselOrder.id}"
                class="btn btn-outline-primary btn-sm" ><i
                   class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp; <span
-                  data-th-text="${addStatus==false?'View':'Bid'}" ></span ></a >
+                  data-th-text="${addStatus==false?'View':'Bid'}" ></span >
+            </a >
             <a data-th-href="${'/vesselOrder/edit/' + vesselOrder.id}"
                class="btn btn-outline-success btn-sm"
                data-th-if="${#strings.equals(vesselOrder.vesselOrderStatus, 'PROCESSING') && addStatus==false}" ><i
