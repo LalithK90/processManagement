@@ -1,11 +1,15 @@
 package lk.custom_process_management.asset.vessel_arrival_history.controller;
 
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.asset.vessel.entity.Vessel;
 import lk.custom_process_management.asset.vessel.service.VesselService;
 import lk.custom_process_management.asset.vessel_arrival_history.entity.VesselArrivalHistory;
 import lk.custom_process_management.asset.vessel_arrival_history.entity.enums.VesselDepartureArrivalStatus;
 import lk.custom_process_management.asset.vessel_arrival_history.service.VesselArrivalHistoryService;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -149,6 +153,20 @@ public class VesselArrivalHistoryController {
     model.addAttribute("vesselDetail", vesselArrivalHistory.getVessel());
     model.addAttribute("historyShow", true);
     return "vesselArrivalHistory/vesselArrivalHistory-detail";
+  }
+
+  @GetMapping("/getDepartureDate/{id}")
+  @ResponseBody
+  public MappingJacksonValue  getDepartureDate(@PathVariable("id") Integer id){
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(vesselArrivalHistoryService.findById(id));
+
+    SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter
+        .filterOutAllExcept("sailingDate");
+
+    FilterProvider filters = new SimpleFilterProvider()
+        .addFilter("VesselArrivalHistory", simpleBeanPropertyFilter);
+    mappingJacksonValue.setFilters(filters);
+    return mappingJacksonValue;
   }
 
 }

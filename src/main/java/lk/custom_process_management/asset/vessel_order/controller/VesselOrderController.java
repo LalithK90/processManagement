@@ -1,7 +1,10 @@
 package lk.custom_process_management.asset.vessel_order.controller;
 
+import lk.custom_process_management.asset.category.controller.CategoryController;
 import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.asset.item.service.ItemService;
+import lk.custom_process_management.asset.vessel_arrival_history.controller.VesselArrivalHistoryController;
+import lk.custom_process_management.asset.vessel_arrival_history.entity.VesselArrivalHistory;
 import lk.custom_process_management.asset.vessel_arrival_history.service.VesselArrivalHistoryService;
 import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.asset.vessel_order.entity.enums.VesselOrderStatus;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -62,6 +66,10 @@ public class VesselOrderController {
       }
     }
     model.addAttribute("items", itemList);
+    model.addAttribute("departureDateUrl", MvcUriComponentsBuilder
+        .fromMethodName(VesselArrivalHistoryController.class, "getDepartureDate", "")
+        .build()
+        .toString());
     return "vesselOrder/addVesselOrder";
   }
 

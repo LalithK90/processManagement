@@ -14,11 +14,30 @@ $(document).ready(function () {
 
 
     /*//--------------- data table short using - data table plugin ------- start //*/
-    $("#myTable,#allItemTable,#bitItemTable").DataTable({
-        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
-        "ordering": false,
-        stateSave: true,
-    });
+
+
+    if ($("#myTable").length !== 0) {
+        $("#myTable").DataTable({
+            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+            "ordering": false,
+            stateSave: true,
+        });
+    }
+    if ($("#allItemTable").length !== 0) {
+        $("#allItemTable").DataTable({
+            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+            "ordering": false,
+            stateSave: true,
+        });
+    }
+    if ($("#bitItemTable").length !== 0) {
+        $("#bitItemTable").DataTable({
+            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+            "ordering": false,
+            stateSave: true,
+        });
+    }
+
     /*//--------------- data table short using - data table plugin ------- start //*/
 
     /* Patient and employee Nic Validation - start*/

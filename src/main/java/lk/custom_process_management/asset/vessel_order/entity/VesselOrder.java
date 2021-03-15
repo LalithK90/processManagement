@@ -24,10 +24,8 @@ import java.util.List;
 @JsonFilter( "VesselOrder" )
 public class VesselOrder extends AuditEntity {
 
-
   @Column( unique = true, nullable = false )
   private String number;
-
 
   @DateTimeFormat( pattern = "yyyy-MM-dd" )
   @Column( nullable = false )
