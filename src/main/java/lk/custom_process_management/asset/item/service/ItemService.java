@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.item.service;
 
 
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.item.dao.ItemDao;
 import lk.custom_process_management.asset.item.entity.enums.ItemStatus;
 import lk.custom_process_management.asset.item.entity.Item;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @CacheConfig( cacheNames = "item" )
@@ -24,7 +26,7 @@ public class ItemService implements AbstractService< Item, Integer > {
   }
 
   public List< Item > findAll() {
-    return itemDao.findAll();
+    return itemDao.findAll().stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList());
   }
 
   public Item findById(Integer id) {
@@ -54,6 +56,7 @@ public class ItemService implements AbstractService< Item, Integer > {
 
   public Item persist(Item item) {
     if ( item.getId() == null ) {
+      item.setLiveDead(LiveDead.ACTIVE);
       //need to create code to item
       String code = item.getCategory().getMainCategory()
           + item.getCategory().getName().trim().substring(0, 2)
@@ -71,7 +74,9 @@ public class ItemService implements AbstractService< Item, Integer > {
   }
 
   public boolean delete(Integer id) {
-    itemDao.deleteById(id);
+  Item item = itemDao.getOne(id);
+  item.setLiveDead(LiveDead.ACTIVE);
+  itemDao.save(item);
     return false;
   }
 

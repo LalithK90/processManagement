@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.payment.service;
 
 
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.payment.dao.PaymentDao;
 import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.util.interfaces.AbstractService;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PaymentService implements AbstractService< Payment, Integer> {
@@ -25,7 +27,7 @@ public class PaymentService implements AbstractService< Payment, Integer> {
 
     @Cacheable
     public List<Payment> findAll() {
-        return paymentDao.findAll();
+        return paymentDao.findAll().stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList());
     }
 
 
@@ -35,12 +37,17 @@ public class PaymentService implements AbstractService< Payment, Integer> {
 
 
     public Payment persist(Payment payment) {
+        if ( payment.getId() ==null ){
+            payment.setLiveDead(LiveDead.ACTIVE);
+        }
         return paymentDao.save(payment);
     }
 
     @CacheEvict( allEntries = true )
     public boolean delete(Integer id) {
-        paymentDao.deleteById(id);
+  Payment payment = paymentDao.getOne(id);
+  payment.setLiveDead(LiveDead.STOP);
+  paymentDao.save(payment);
         return false;
     }
 
