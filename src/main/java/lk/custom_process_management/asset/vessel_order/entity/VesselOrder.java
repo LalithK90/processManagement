@@ -37,13 +37,10 @@ public class VesselOrder extends AuditEntity {
   @ManyToOne
   private VesselArrivalHistory vesselArrivalHistory;
 
-//  @ManyToOne
-//  private ShipAgent shipAgent;
-
   @ManyToOne
   private WarehouseBlock warehouseBlock;
 
-  @OneToMany( mappedBy = "vesselOrder", cascade = {CascadeType.MERGE, CascadeType.PERSIST} )
+  @OneToMany( mappedBy = "vesselOrder", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true )
   private List< VesselOrderItem > vesselOrderItems;
 
 }

@@ -237,7 +237,7 @@
             data: $(this).val()
         }).change(() => {
             let itemSelected = {};
-            itemSelected.itemId = $(this).val();
+            itemSelected.itemId =   $("#item-select").val();
             itemSelected.itemName = $("#item-select option:selected").html();
 
             tableRowAdd(itemSelected);
@@ -248,47 +248,49 @@
     });
 
     $("#closingDate").bind('change', function () {
-
         let closingDate = Date.parse($(this).val());
 
-        if (closingDate) {
+        if ($("#vesselArrivalHistory").val().length ===0) {
             swal({
                 title: "Please check vessel",
                 icon: "warning",
                 text: "Before select the date should be selected vessel ",
             });
-        }
-        let finalUrl = $('#departureDateUrl').val() + $("#vesselArrivalHistory").val();
-        $.ajax({
-            type: 'GET',
-            url: finalUrl,
-            success: function (resp) {
-                let sailingDate = Date.parse(`${resp.sailingDate[0]}-${resp.sailingDate[1]}-${resp.sailingDate[2]}`);
-                if (sailingDate < closingDate) {
-                    swal({
-                        title: "Recheck closing date",
-                        icon: "warning",
-                        text: "This order closing date should be less than sailing date, please check vessel details on above filed",
-                    });
-                    $("#closingDate").val('');
+
+            $("#closingDate").val('');
+        } else {
+            let finalUrl = $('#departureDateUrl').val() + $("#vesselArrivalHistory").val();
+            $.ajax({
+                type: 'GET',
+                url: finalUrl,
+                success: function (resp) {
+                    let sailingDate = Date.parse(`${resp.sailingDate[0]}-${resp.sailingDate[1]}-${resp.sailingDate[2]}`);
+                    if (sailingDate < closingDate) {
+                        swal({
+                            title: "Recheck closing date",
+                            icon: "warning",
+                            text: "This order closing date should be less than sailing date, please check vessel details on above filed",
+                        });
+                        $("#closingDate").val('');
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
                 }
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
+            });
+        }
 
 
     });
 
-/*    $("#item-select").bind("change", function () {
-        let itemSelected = {};
-        itemSelected.itemId = $(this).val();
-        itemSelected.itemName = $("#item-select option:selected").html();
+    /*    $("#item-select").bind("change", function () {
+            let itemSelected = {};
+            itemSelected.itemId = $(this).val();
+            itemSelected.itemName = $("#item-select option:selected").html();
 
-        tableRowAdd(itemSelected);
-        optionElementRemove('#item-select');
-    });*/
+            tableRowAdd(itemSelected);
+            optionElementRemove('#item-select');
+        });*/
     //table row add
     let tableRowAdd = function (value) {
         let rowCount = $("#itemTable tbody tr").length - 1;
