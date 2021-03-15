@@ -98,13 +98,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .formLogin(
             formLogin ->
                 formLogin
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login")
                     //Username and password for validation
                     .usernameParameter("username")
                     .passwordParameter("password")
+                    .loginPage("/login")
+                    .loginProcessingUrl("/login")
+                    .failureUrl("/login?error")
                     .successHandler(customAuthenticationSuccessHandler())
-                    .failureForwardUrl("/login?error")
                   )
         //Logout controlling
         .logout(

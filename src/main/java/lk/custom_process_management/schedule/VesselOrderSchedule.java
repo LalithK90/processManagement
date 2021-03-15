@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VesselOrderSchedule {
   private final VesselOrderService vesselOrderService;
@@ -16,10 +17,14 @@ public class VesselOrderSchedule {
     this.vesselOrderService = vesselOrderService;
   }
 
-  @Scheduled( cron = "0 0 1 * * *" )
+  @Scheduled( cron = "0 0 * * ?" )
   void fourthSchedule() {
+    System.out.println("sdasdjads sadjsads  jsda");
     List< VesselOrder > vesselOrders = new ArrayList<>();
-    vesselOrderService.findByVesselOrderStatusAndClosingDateBefore(VesselOrderStatus.PROCESSING, LocalDate.now())
+    vesselOrderService.findByVesselOrderStatus(VesselOrderStatus.PROCESSING)
+        .stream()
+        .filter(x -> x.getClosingDate().equals(LocalDate.now()))
+        .collect(Collectors.toList())
         .forEach(x -> {
           x.setVesselOrderStatus(VesselOrderStatus.BITTED);
           vesselOrders.add(x);
@@ -73,7 +78,7 @@ public class VesselOrderSchedule {
 //  year(?)}" )
   // above crone execute in every one second
   //@Scheduled(cron ="* * * * * ?")
-  //@Scheduled( cron = "20 08 17 * * ?" )  // every day every month 5.08.20 pm will be execute
+  //@Scheduled( cron = "20 08 17 * * ?" )  // every day every month 8.08.17 pm will be execute
 //  void fourthSchedule() {
 //    System.out.println(new Date().toString());
 //

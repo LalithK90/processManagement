@@ -61,12 +61,13 @@ public class VesselOrderItemBidController {
     }
     User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
-    Chandler chandler = null;
+    Chandler chandler;
     if ( authUser == null ) {
       chandler = chandlerService.findById(1);
     } else {
-      userDetailsChandlerService.findByUserDetails(authUser.getUserDetails()).getChandler();
+      chandler = userDetailsChandlerService.findByUserDetails(authUser.getUserDetails()).getChandler();
     }
+
     List< VesselOrderItemBid > vesselOrderItemBids = new ArrayList<>();
 
     for ( VesselOrderItemBid vesselOrderItemBid : vesselOrderBid.getVesselOrderItemBids() ) {
@@ -85,7 +86,7 @@ public class VesselOrderItemBidController {
       }
     }
     vesselOrderItemBidService.saveAll(vesselOrderItemBids);
-    return "redirect:/vesselOrderItemBit";
+    return "redirect:/vesselOrderItemBid";
   }
 
 }

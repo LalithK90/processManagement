@@ -54,11 +54,11 @@
                 <tr data-th-each="userDetails, rowCount : ${userDetailses}">
                     <th data-th-text="${rowCount.count}"></th>
                     <th>
-                        <div class="image" data-th-if="${employee.fileInfo !=null}" >
+                        <div class="image" data-th-if="${userDetails.fileInfo !=null}" >
                             <img id="img" class="rounded"
                                  style="height:50px; width:50px;border-radius: 1px"
-                                 alt="Employee images"
-                                 data-th-src="${employee.fileInfo.url}" />
+                                 alt="User Details images"
+                                 data-th-src="${userDetails.fileInfo.url}" />
                         </div >
                     </th>
                     <th data-th-text="${userDetails.number}"></th>

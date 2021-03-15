@@ -40,19 +40,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         userSessionLog.setCreatedAt(LocalDateTime.now());
         userSessionLogService.persist(userSessionLog);
 
-             /*
-        //default session is ok ->>>>>
-        HttpSession session = request.getSession();
-        session.setAttribute("username", authUser.getUsername());
-        session.setAttribute("authorities", authentication.getAuthorities());
-
-        */
-
         //set our response to OK status
         response.setStatus(HttpServletResponse.SC_OK);
 
-        //since we have created our custom success handler, its up to us to where we will redirect the user after
-        // successfully login
         response.sendRedirect("/mainWindow");
     }
 }

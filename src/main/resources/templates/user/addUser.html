@@ -87,9 +87,7 @@
     <span aria-hidden="true" >&times;</span >
   </button >
   <strong ><span id="employeeNotFound" data-th-text="${employeeNotFound}" ></span ></strong >
-  <script >
-      $(".alert").alert();
-  </script >
+
 </div >
 
 <!--User add from-->
@@ -113,7 +111,7 @@
             <label class="control-label" for="userDetails" >Employee :</label >
           </div >
           <div class="col-md-8" >
-            <select class="form-control" data-th-field="*{userDetails}" data-th-each="e : ${userDetails}"
+            <select class="form-control" data-th-field="*{userDetails}" data-th-each="e : ${userDetailses}"
                     name="userDetails"
                     id="userDetails" required >
               <option id="employeeList"
@@ -151,34 +149,25 @@
             </div >
           </div >
         </div >
-
-        <div class="form-row" >
-          <div class="form-row alert alert-danger text-center" >
-            <strong >Attention !</strong >
-            If Employee is belong to supper senior category.
-            <strong >Please select one or two work station </strong >.
-          </div >
-        </div >
       </div >
       <!--Right Side-->
       <div class="form-group col-md-5 col-sm-7 text-left flex-column" >
-        <!--Roles Display-->
-        <div class="form-row" >
-          <label class="control-label" for="roles" >Roles :</label >
-          <select id="roles" data-th-field="*{roles}" class="form-control" size="16" multiple required >
-            <option id="roleList" data-th-each="role, rowCount : ${roleList}"
-                    data-th-text="${rowCount.count} +${'. '}+${role.roleName}"
-                    data-th-value="${role.id}"
-                    data-th-field="*{roles}" value="" ></option >
-          </select >
+        <!--  roles-->
+        <div class="form-check" data-th-each="role : ${roleList}" >
+          <label class="form-check-label" >
+            <input type="checkbox" class="form-check-input"
+                   data-th-text="${#strings.toUpperCase(role.roleName.substring(0, 1))+#strings.toLowerCase(role.roleName.substring(1))}"
+                   data-th-value="${role.id}"
+                   data-th-field="*{roles}" >
+          </label >
         </div >
       </div >
 
       <!--Button-->
       <div class="form-group col-md-12 col-sm-12 text-center flex-column" >
         <button class="btn btn-outline-success" type="submit" >
-          <i class="fa fa-save" style="font-size: 20px" ></i >&nbsp; &nbsp;<span
-              id="submit" data-th-text="${addStatus==true?'Save': 'Update'}" >                        </span >
+          <i class="fa fa-save" style="font-size: 20px" ></i >&nbsp; &nbsp;
+          <span data-th-text="${addStatus==true?'Save': 'Update'}" >                        </span >
         </button >
       </div >
     </div >
@@ -196,10 +185,12 @@
 </div >
 
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}" ></footer >
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}" ></script >
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 
-
+<script >
+    $(".alert").alert();
+</script >
 </body >
 </html >

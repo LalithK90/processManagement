@@ -68,7 +68,7 @@ public class UserController {
 
     //Send a searched employee to add working place
     @PostMapping( value = "/workingPlace" )
-    public String addUserEmployeeDetails(@ModelAttribute( "employee" ) UserDetails userDetails, Model model) {
+    public String addUserEmployeeDetails(@ModelAttribute( "userDetails" ) UserDetails userDetails, Model model) {
 
         List< UserDetails > userDetailList = usersDetailsService.search(userDetails)
                 .stream()
@@ -77,12 +77,12 @@ public class UserController {
 
         if ( userDetailList.size() == 1 ) {
             model.addAttribute("user", new User());
-            model.addAttribute("employee", userDetailList.get(0));
+            model.addAttribute("userDetailses", userDetailList.get(0));
             model.addAttribute("addStatus", true);
             return commonCode(model);
         }
         model.addAttribute("addStatus", true);
-        model.addAttribute("employee", new UserDetails());
+        model.addAttribute("userDetailses", new UserDetails());
         model.addAttribute("employeeDetailShow", false);
         model.addAttribute("employeeNotFoundShow", true);
         model.addAttribute("employeeNotFound", "There is not employee in the system according to the provided details" +
