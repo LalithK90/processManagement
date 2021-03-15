@@ -1,7 +1,6 @@
 package lk.custom_process_management.asset.warehouse_block.entity;
 
 
-import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.asset.warehouse_block.entity.enums.WarehouseBlockStatus;
 import lk.custom_process_management.util.audit.AuditEntity;
@@ -14,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -29,9 +27,6 @@ public class WarehouseBlock extends AuditEntity {
   private String name;
 
   private String area;
-
-  @Enumerated( EnumType.STRING )
-  private LiveDead liveDead;
 
   @Enumerated( EnumType.STRING )
   private WarehouseBlockStatus warehouseBlockStatus;
