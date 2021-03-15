@@ -147,6 +147,7 @@ public class VesselArrivalHistoryController {
     VesselArrivalHistory vesselArrivalHistory = vesselArrivalHistoryService.findById(id);
     model.addAttribute("vesselArrivalHistoryDetail", vesselArrivalHistory);
     model.addAttribute("vesselDetail", vesselArrivalHistory.getVessel());
+    model.addAttribute("historyShow", true);
     return "vesselArrivalHistory/vesselArrivalHistory-detail";
   }
 

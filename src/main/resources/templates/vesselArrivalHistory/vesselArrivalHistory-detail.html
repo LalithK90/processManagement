@@ -62,7 +62,8 @@
         </a >
       </h5 >
     </div >
-    <div id="section2ContentId" class="collapse show" role="tabpanel" aria-labelledby="section2HeaderId" >
+    <div data-th-id="${'section2ContentId'}" data-th-class="${historyShow?'collapse show':'collapse'}" role="tabpanel"
+         aria-labelledby="section2HeaderId" data-th-if="${historyShow}" >
       <div class="card-body" >
         <!--details-->
         <div data-th-fragment="vesselArrivalHistoryDetailsFragment" class="container-fluid " >
