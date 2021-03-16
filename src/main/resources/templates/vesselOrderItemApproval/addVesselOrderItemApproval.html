@@ -54,7 +54,8 @@
 
 <!--bid array-->
 <div class="container-fluid" >
-  <form action="/vesselOrderItemApproval/save" method="post" data-th-object="${vesselOrderBid}" ><!--Table view-->
+  <form action="/vesselOrderItemApproval/save" method="post" data-th-object="${vesselOrderBid}" >
+    <!--Table view-->
     <div class="form-row container" >
       <!--items bit-->
       <table class="table table-hover table-striped col-12" >
@@ -152,6 +153,22 @@
         </tbody >
       </table >
     </div >
+    <!--Button-->
+    <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+      <!--Back Button-->
+      <a class="btn btn-outline-dark" tabindex="11" href="/vesselOrderItemApproval" >
+        <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+      </a >
+      <!--Save Button-->
+      <button class="btn btn-outline-success ml-5" type="submit" tabindex="9" >
+        <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;Approved
+      </button >
+      <!--Cancel Button-->
+      <button class="btn btn-outline-warning ml-5" type="reset" tabindex="10" >
+        <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+      </button >
+    </div >
+
   </form >
 
 </div >
