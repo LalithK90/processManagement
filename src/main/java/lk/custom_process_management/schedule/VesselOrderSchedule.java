@@ -29,7 +29,7 @@ public class VesselOrderSchedule {
         .filter(x -> x.getClosingDate().equals(LocalDate.now()))
         .collect(Collectors.toList())
         .forEach(x -> {
-          x.setVesselOrderStatus(VesselOrderStatus.BITTED);
+          x.setVesselOrderStatus(VesselOrderStatus.BIDEN);
           vesselOrders.add(x);
         });
     vesselOrderService.saveAll(vesselOrders);

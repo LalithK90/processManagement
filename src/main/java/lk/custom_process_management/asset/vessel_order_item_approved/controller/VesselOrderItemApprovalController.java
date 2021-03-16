@@ -29,8 +29,8 @@ public class VesselOrderItemApprovalController {
 
   @GetMapping
   public String findAll(Model model) {
-    model.addAttribute("vesselOrders", vesselOrderService.findByVesselOrderStatus(VesselOrderStatus.BITTED));
-    return "vesselOrder/vesselOrder";
+    model.addAttribute("vesselOrders", vesselOrderService.findByVesselOrderStatus(VesselOrderStatus.BIDEN));
+    return "vesselOrderItemApproval/vesselOrderItemApproval";
   }
 
   @GetMapping( "/{id}" )
@@ -56,7 +56,7 @@ public class VesselOrderItemApprovalController {
 
     model.addAttribute("biddenItems", vesselOrderItemBidList);
 
-    return "vesselOrderItemApproval/vesselOrderItemApproval";
+    return "vesselOrderItemApproval/AddVesselOrderItemApproval";
   }
 
   @PostMapping("/save")

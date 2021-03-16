@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum VesselOrderStatus {
   PROCESSING("Processing"),
   VALID("Valid"),
-  BITTED("Bitted"),
+  BIDEN("Biden"),
   SUSPEND("Suspend"),
   INVALID("Invalid");
 
