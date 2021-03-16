@@ -2,6 +2,7 @@ package lk.custom_process_management.asset.vessel_order_item_bid.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.chandler.entity.Chandler;
+import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.asset.vessel_order_item.entity.VesselOrderItem;
 import lk.custom_process_management.asset.vessel_order_item_bid.entity.enums.BidValidOrNot;
 import lk.custom_process_management.asset.vessel_order_item_bid_payment.entity.VesselOrderItemBidPayment;
@@ -38,7 +39,10 @@ public class VesselOrderItemBid extends AuditEntity {
   @ManyToOne
   private Chandler chandler;
 
-  @OneToMany( mappedBy = "vesselOrderItemBit" )
+  @OneToMany( mappedBy = "vesselOrderItemBid" )
   private List< VesselOrderItemBidPayment > vesselOrderItemBidPayments;
+
+  @Transient
+  private Item item;
 
 }
