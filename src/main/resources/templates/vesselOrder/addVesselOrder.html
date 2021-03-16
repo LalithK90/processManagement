@@ -167,19 +167,19 @@
               <th >Request Amount</th >
               <th >Modify</th >
             </tr >
-            <tr data-th-each="vesselOrderItem, index : ${vesselOrder.vesselOrderItems}" >
+            <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrder.vesselOrderItems}" >
               <td >
-                <span data-th-id="${'nm'+index.index}" data-th-text="${vesselOrderItem.item.name}" ></span >
+                <span data-th-id="${'nm'+index.index}" data-th-text="${vesselOrderItemBidPayment.item.name}" ></span >
                 <input data-th-id="${'id'+index.index}" type="hidden"
                        data-th-name="${'vesselOrderItems[__${index.index}__].item.id'}"
-                       data-th-value="${vesselOrderItem.item.id}" required >
+                       data-th-value="${vesselOrderItemBidPayment.item.id}" required >
                 <input type="hidden" data-th-name="${'vesselOrderItems[__${index.index}__].id'}"
-                       data-th-value="${vesselOrderItem.id}" required >
+                       data-th-value="${vesselOrderItemBidPayment.id}" required >
               </td >
               <td >
                 <input data-th-id="${'id'+index.index}" type="number"
                        data-th-name="${'vesselOrderItems[__${index.index}__].quantity'}"
-                       data-th-value="${vesselOrderItem.quantity}" class="form-control" required ></td >
+                       data-th-value="${vesselOrderItemBidPayment.quantity}" class="form-control" required ></td >
               <td >
                 <button type="button" data-th-id="${'rm'+index.index}" class="btn btn-outline-danger"
                         onclick="tableRowRemove(this)" >Remove

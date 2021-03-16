@@ -124,11 +124,11 @@
                   <th >Request Amount</th >
                   <th >Vessel Order Item Status</th >
                 </tr >
-                <tr data-th-each="vesselOrderItem, index : ${vesselOrderDetail.vesselOrderItems}" >
+                <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderDetail.vesselOrderItems}" >
                   <td data-th-text="${index.count}" ></td >
-                  <td data-th-text="${vesselOrderItem.item.name}" ></td >
-                  <td data-th-text="${vesselOrderItem.quantity}" ></td >
-                  <td data-th-text="${vesselOrderItem.vesselOrderItemStatus.vesselOrderItemStatus}" ></td >
+                  <td data-th-text="${vesselOrderItemBidPayment.item.name}" ></td >
+                  <td data-th-text="${vesselOrderItemBidPayment.quantity}" ></td >
+                  <td data-th-text="${vesselOrderItemBidPayment.vesselOrderItemStatus.vesselOrderItemStatus}" ></td >
                 </tr >
               </table >
             </div >
@@ -227,11 +227,11 @@
                   <th >Request Amount</th >
                   <th >Vessel Order Item Status</th >
                 </tr >
-                <tr data-th-each="vesselOrderItem, index : ${vesselOrderDetail.vesselOrderItems}" >
+                <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderDetail.vesselOrderItems}" >
                   <td data-th-text="${index.count}" ></td >
-                  <td data-th-text="${vesselOrderItem.item.name}" ></td >
-                  <td data-th-text="${vesselOrderItem.quantity}" ></td >
-                  <td data-th-text="${vesselOrderItem.vesselOrderItemStatus.vesselOrderItemStatus}" ></td >
+                  <td data-th-text="${vesselOrderItemBidPayment.item.name}" ></td >
+                  <td data-th-text="${vesselOrderItemBidPayment.quantity}" ></td >
+                  <td data-th-text="${vesselOrderItemBidPayment.vesselOrderItemStatus.vesselOrderItemStatus}" ></td >
                 </tr >
               </table >
             </div >

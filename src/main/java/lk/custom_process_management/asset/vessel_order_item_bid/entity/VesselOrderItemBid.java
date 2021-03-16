@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.vessel_order_item.entity.VesselOrderItem;
 import lk.custom_process_management.asset.vessel_order_item_bid.entity.enums.BidValidOrNot;
+import lk.custom_process_management.asset.vessel_order_item_bid_payment.entity.VesselOrderItemBidPayment;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -36,5 +38,7 @@ public class VesselOrderItemBid extends AuditEntity {
   @ManyToOne
   private Chandler chandler;
 
+  @OneToMany( mappedBy = "vesselOrderItemBit" )
+  private List< VesselOrderItemBidPayment > vesselOrderItemBidPayments;
 
 }

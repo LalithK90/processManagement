@@ -2,6 +2,7 @@ package lk.custom_process_management.asset.vessel_order_item_bid.controller;
 
 import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.chandler.service.ChandlerService;
+import lk.custom_process_management.asset.payment.service.PaymentService;
 import lk.custom_process_management.asset.user_details_chandler.service.UserDetailsChandlerService;
 import lk.custom_process_management.asset.user_management.entity.User;
 import lk.custom_process_management.asset.user_management.service.UserService;
@@ -11,6 +12,7 @@ import lk.custom_process_management.asset.vessel_order_item_bid.entity.VesselOrd
 import lk.custom_process_management.asset.vessel_order_item_bid.entity.enums.BidValidOrNot;
 import lk.custom_process_management.asset.vessel_order_item_bid.model.VesselOrderBid;
 import lk.custom_process_management.asset.vessel_order_item_bid.service.VesselOrderItemBidService;
+import lk.custom_process_management.asset.vessel_order_item_bid_payment.service.VesselOrderItemBidPaymentService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,33 +24,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping( "/vesselOrderItemBid" )
-public class VesselOrderItemBidController {
+@RequestMapping( "/vesselOrderItemApproval" )
+public class VesselOrderItemBidApprovalController {
   private final VesselOrderService vesselOrderService;
   private final UserService userService;
   private final UserDetailsChandlerService userDetailsChandlerService;
   private final VesselOrderItemBidService vesselOrderItemBidService;
   private final ChandlerService chandlerService;
+  private final VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService;
+  private final PaymentService paymentService;
 
-  public VesselOrderItemBidController(VesselOrderService vesselOrderService, UserService userService,
-                                      UserDetailsChandlerService userDetailsChandlerService,
-                                      VesselOrderItemBidService vesselOrderItemBidService,
-                                      ChandlerService chandlerService) {
+  public VesselOrderItemBidApprovalController(VesselOrderService vesselOrderService, UserService userService,
+                                              UserDetailsChandlerService userDetailsChandlerService,
+                                              VesselOrderItemBidService vesselOrderItemBidService,
+                                              ChandlerService chandlerService,
+                                              VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService, PaymentService paymentService) {
     this.vesselOrderService = vesselOrderService;
     this.userService = userService;
     this.userDetailsChandlerService = userDetailsChandlerService;
     this.vesselOrderItemBidService = vesselOrderItemBidService;
     this.chandlerService = chandlerService;
+    this.vesselOrderItemBidPaymentService = vesselOrderItemBidPaymentService;
+    this.paymentService = paymentService;
   }
 
   @GetMapping
   public String findAll(Model model) {
-    model.addAttribute("vesselOrders", vesselOrderService.findByVesselOrderStatus(VesselOrderStatus.PROCESSING));
-    return "vesselOrder/vesselOrder";
+    model.addAttribute("vesselOrders", vesselOrderService.findByVesselOrderStatus(VesselOrderStatus.BIDEN));
+    return "vesselOrderItemApproval/vesselOrderItemApproval";
   }
 
-  @GetMapping( "/bid/{id}" )
+  @GetMapping( "/{id}" )
   public String addForm(@PathVariable Integer id, Model model) {
+    //
     model.addAttribute("vesselOrderDetail", vesselOrderService.findById(id));
     model.addAttribute("vesselOrderBid", new VesselOrderItemBid());
     return "vesselOrderItemBid/addVesselOrderItemBid";
