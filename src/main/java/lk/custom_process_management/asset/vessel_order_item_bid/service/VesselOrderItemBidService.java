@@ -43,11 +43,11 @@ public class VesselOrderItemBidService {
     return vesselOrderItemBidDao.findAll(vesselOrderItemApprovedExample);
   }
 
-  public void saveAll(List< VesselOrderItemBid > vesselOrderItemBids) {
-    vesselOrderItemBidDao.saveAll(vesselOrderItemBids);
+  public List< VesselOrderItemBid > saveAll(List< VesselOrderItemBid > vesselOrderItemBids) {
+    return vesselOrderItemBidDao.saveAll(vesselOrderItemBids);
   }
 
   public List< VesselOrderItemBid > findByVesselOrderItem(VesselOrderItem vesselOrderItem) {
-  return vesselOrderItemBidDao.findByVesselOrderItem(vesselOrderItem);
+    return vesselOrderItemBidDao.findByVesselOrderItem(vesselOrderItem);
   }
 }

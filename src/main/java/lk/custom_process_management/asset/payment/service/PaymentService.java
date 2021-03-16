@@ -51,13 +51,18 @@ public class PaymentService implements AbstractService< Payment, Integer> {
         return false;
     }
 
-    @Cacheable
-    public List<Payment> search(Payment payment) {
-        ExampleMatcher matcher = ExampleMatcher
-                .matching()
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<Payment> paymentExample = Example.of(payment,matcher);
-        return paymentDao.findAll(paymentExample);
-    }
+  @Cacheable
+  public List< Payment > search(Payment payment) {
+    ExampleMatcher matcher = ExampleMatcher
+        .matching()
+        .withIgnoreCase()
+        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+    Example< Payment > paymentExample = Example.of(payment, matcher);
+    return paymentDao.findAll(paymentExample);
+  }
+
+  public Payment lastPayment() {
+    return paymentDao.findFirstByOrderByIdDesc();
+  }
+
 }

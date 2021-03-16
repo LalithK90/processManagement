@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.vessel_order.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.vessel_arrival_history.entity.VesselArrivalHistory;
 import lk.custom_process_management.asset.vessel_order.entity.enums.VesselOrderStatus;
 import lk.custom_process_management.asset.vessel_order_item.entity.VesselOrderItem;
@@ -42,5 +43,8 @@ public class VesselOrder extends AuditEntity {
 
   @OneToMany( mappedBy = "vesselOrder", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true )
   private List< VesselOrderItem > vesselOrderItems;
+
+  @OneToMany( mappedBy = "vesselOrder" )
+  private List< Payment > payments;
 
 }

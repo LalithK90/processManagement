@@ -74,8 +74,6 @@ public class VesselOrderItemBidController {
       //check what is available amount and unite price on vessel order item bid
       if ( vesselOrderItemBid.getAmount() != null && vesselOrderItemBid.getUnitPrice() != null ) {
         VesselOrderItemBid vesselOrderItemBidNew = new VesselOrderItemBid();
-   /*     VesselOrderItemBidPayment vesselOrderItem = new VesselOrderItemBidPayment();
-        vesselOrderItem.setId(vesselOrderItemBit.getVesselOrderItem().getId());*/
 
         vesselOrderItemBidNew.setAmount(vesselOrderItemBid.getAmount());
         vesselOrderItemBidNew.setUnitPrice(vesselOrderItemBid.getUnitPrice());

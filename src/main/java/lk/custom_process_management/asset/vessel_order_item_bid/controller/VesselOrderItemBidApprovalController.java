@@ -1,23 +1,26 @@
 package lk.custom_process_management.asset.vessel_order_item_bid.controller;
 
-import lk.custom_process_management.asset.chandler.service.ChandlerService;
+import lk.custom_process_management.asset.chandler.entity.Chandler;
+import lk.custom_process_management.asset.payment.entity.Payment;
+import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
 import lk.custom_process_management.asset.payment.service.PaymentService;
-import lk.custom_process_management.asset.user_details_chandler.service.UserDetailsChandlerService;
-import lk.custom_process_management.asset.user_management.service.UserService;
 import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.asset.vessel_order.entity.enums.VesselOrderStatus;
 import lk.custom_process_management.asset.vessel_order.service.VesselOrderService;
+import lk.custom_process_management.asset.vessel_order_item.service.VesselOrderItemService;
 import lk.custom_process_management.asset.vessel_order_item_bid.entity.VesselOrderItemBid;
 import lk.custom_process_management.asset.vessel_order_item_bid.entity.enums.BidValidOrNot;
 import lk.custom_process_management.asset.vessel_order_item_bid.model.VesselOrderBid;
 import lk.custom_process_management.asset.vessel_order_item_bid.service.VesselOrderItemBidService;
+import lk.custom_process_management.asset.vessel_order_item_bid_payment.entity.VesselOrderItemBidPayment;
 import lk.custom_process_management.asset.vessel_order_item_bid_payment.service.VesselOrderItemBidPaymentService;
+import lk.custom_process_management.util.service.EmailService;
+import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -27,27 +30,29 @@ import java.util.stream.Collectors;
 @RequestMapping( "/vesselOrderItemApproval" )
 public class VesselOrderItemBidApprovalController {
   private final VesselOrderService vesselOrderService;
-  private final UserService userService;
-  private final UserDetailsChandlerService userDetailsChandlerService;
+  private final VesselOrderItemService vesselOrderItemService;
   private final VesselOrderItemBidService vesselOrderItemBidService;
-  private final ChandlerService chandlerService;
   private final VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService;
   private final PaymentService paymentService;
+  private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+  private final EmailService emailService;
 
-  public VesselOrderItemBidApprovalController(VesselOrderService vesselOrderService, UserService userService,
-                                              UserDetailsChandlerService userDetailsChandlerService,
+  public VesselOrderItemBidApprovalController(VesselOrderService vesselOrderService,
+                                              VesselOrderItemService vesselOrderItemService,
                                               VesselOrderItemBidService vesselOrderItemBidService,
-                                              ChandlerService chandlerService,
                                               VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService,
-                                              PaymentService paymentService) {
+                                              PaymentService paymentService,
+                                              MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                                              EmailService emailService) {
     this.vesselOrderService = vesselOrderService;
-    this.userService = userService;
-    this.userDetailsChandlerService = userDetailsChandlerService;
+    this.vesselOrderItemService = vesselOrderItemService;
     this.vesselOrderItemBidService = vesselOrderItemBidService;
-    this.chandlerService = chandlerService;
     this.vesselOrderItemBidPaymentService = vesselOrderItemBidPaymentService;
     this.paymentService = paymentService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+    this.emailService = emailService;
   }
+
 
   @GetMapping
   public String findAll(Model model) {
@@ -87,9 +92,83 @@ public class VesselOrderItemBidApprovalController {
   }
 
   @PostMapping( "/save" )
-  public String saveApprove(@Valid @ModelAttribute VesselOrderBid vesselOrderBid, BindingResult bindingResult) {
-//todo -need to save
-    return "redirect:/vesselOrderItemBid";
+  public String saveApprove(@ModelAttribute VesselOrderBid vesselOrderBid) {
+
+    vesselOrderBid.getVesselOrderItemBids().forEach(x -> System.out.println(x.getId()));
+
+    List< VesselOrderItemBid > vesselOrderItemBids =
+        vesselOrderItemBidService.saveAll(vesselOrderBid.getVesselOrderItemBids());
+
+    for ( VesselOrder vesselOrder : vesselOrders(vesselOrderItemBids) ) {
+      for ( Chandler chandler : chandlers(vesselOrderItemBids) ) {
+        //make payment
+        Payment payment = new Payment();
+        //last payment
+        Payment lastPayment = paymentService.lastPayment();
+        if ( lastPayment == null ) {
+          payment.setCode("SLCP" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+        } else {
+          String previousCode = lastPayment.getCode().substring(4);
+          payment.setCode("SLCP" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
+        }
+
+        List< BigDecimal > totalAmount = new ArrayList<>();
+        List< VesselOrderItemBid > vesselOrderItemBidsFiltered = vesselOrderItemBids
+            .stream()
+            .filter(x -> x.getChandler().equals(chandler) && x.getVesselOrderItem().getVesselOrder().equals(vesselOrder))
+            .collect(Collectors.toList());
+        vesselOrderItemBidsFiltered.forEach(x -> totalAmount.add(x.getAmount()));
+        //amount
+        BigDecimal totalPrice = totalAmount.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+        payment.setAmount(totalPrice);
+        //statusConformation
+        payment.setStatusConformation(StatusConformation.PEN);
+        //chandler
+        payment.setChandler(chandler);
+        //vesselOrder
+        payment.setVesselOrder(vesselOrder);
+
+        Payment paymentDb = paymentService.persist(payment);
+        vesselOrderItemBidsFiltered.forEach(x -> {
+          VesselOrderItemBidPayment vesselOrderItemBidPayment = new VesselOrderItemBidPayment();
+          vesselOrderItemBidPayment.setVesselOrderItemBid(x);
+          vesselOrderItemBidPayment.setPayment(paymentDb);
+          vesselOrderItemBidPaymentService.persist(vesselOrderItemBidPayment);
+        });
+
+        //need to send email
+
+        StringBuilder message =
+            new StringBuilder(" Dear \n" + chandler.getName() + "\n According to this vessel order number  " + vesselOrder.getNumber() + " below item was approved \n\n\n\n" + "\t\t Item Name \t\t\t Quantity \t\t\t Unit Price(Rs.) \t\t\t Total");
+
+        for ( VesselOrderItemBid vesselOrderItemBid : vesselOrderItemBidsFiltered ) {
+          message.append("\t\t").append(vesselOrderItemBid.getVesselOrderItem().getItem().getName()).append("\t\t\t").append(vesselOrderItemBid.getVesselOrderItem().getQuantity()).append("\t\t\t").append(vesselOrderItemBid.getUnitPrice()).append("\t\t\t").append(vesselOrderItemBid.getAmount().toString());
+        }
+        if ( chandler.getEmail() != null ) {
+          emailService.sendEmail(chandler.getEmail(), "Inform Biden Vessel Order Status " + vesselOrder.getNumber(),
+                                 message.toString());
+        }
+
+      }
+    }
+
+
+    return "redirect:/vesselOrderItemApproval";
+  }
+
+  private List< Chandler > chandlers(List< VesselOrderItemBid > vesselOrderItemBids) {
+    List< Chandler > chandlers = new ArrayList<>();
+    vesselOrderItemBids.forEach(x -> chandlers.add(x.getChandler()));
+    return chandlers.stream().distinct().collect(Collectors.toList());
+  }
+
+  private List< VesselOrder > vesselOrders(List< VesselOrderItemBid > vesselOrderItemBids) {
+    List< VesselOrder > vesselOrders = new ArrayList<>();
+
+    for ( VesselOrderItemBid vesselOrderItemBid : vesselOrderItemBids ) {
+      vesselOrders.add(vesselOrderItemService.findById(vesselOrderItemBid.getVesselOrderItem().getId()).getVesselOrder());
+    }
+    return vesselOrders.stream().distinct().collect(Collectors.toList());
   }
 
 }
