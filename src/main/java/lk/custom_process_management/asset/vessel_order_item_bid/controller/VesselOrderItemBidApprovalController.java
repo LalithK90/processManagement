@@ -150,6 +150,9 @@ public class VesselOrderItemBidApprovalController {
         }
 
       }
+//vesselOrder save after changing vesselOrder order status
+      vesselOrder.setVesselOrderStatus(VesselOrderStatus.APPROVE);
+      vesselOrderService.persist(vesselOrder);
     }
 
 

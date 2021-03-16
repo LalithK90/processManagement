@@ -10,7 +10,8 @@ public enum VesselOrderStatus {
   VALID("Valid"),
   BIDEN("Biden"),
   SUSPEND("Suspend"),
-  INVALID("Invalid");
+  INVALID("Invalid"),
+  APPROVE("Approve");
 
   private final String vesselOrderStatus;
 }
