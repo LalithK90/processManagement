@@ -56,9 +56,9 @@
 <div class="container-fluid" >
   <form action="/vesselOrderItemApproval/save" method="post" data-th-object="${vesselOrderBid}" >
     <!--Table view-->
-    <div class="form-row container" >
+    <div class="form-row container col-12" >
       <!--items bit-->
-      <table class="table table-hover table-striped col-12" >
+      <table class="table table-hover text-center table-striped col-12" id="table" >
         <thead >
         <tr >
           <th > Index</th >
@@ -120,13 +120,14 @@
               <div class="col-md-8" >
                 <div class="custom-control custom-checkbox custom-control-inline "
                      data-th-each="genders,index : ${bidValidOrNots}" >
-                  <input class="custom-control-input" required
+                  <input class="custom-control-input bidValidOrNot" required
                          data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].bidValidOrNot'}"
                          data-th-value="${genders}"
-                         data-th-id="${rowCount.index}+${index.index}+${genders}" type="radio"
+                         data-th-id="${index.index}+${'bv'}+${rowCount.index}"
+                         type="radio"
                          data-th-checked="${genders==vesselOrderItemBid.bidValidOrNot}" />
                   <label class="custom-control-label"
-                         data-th-for="${rowCount.index}+${index.index}+${genders}"
+                         data-th-for="${index.index}+${'bv'}+${rowCount.index}"
                          data-th-text="${genders.bidValidOrNot}" >
                   </label >
                 </div >
@@ -143,6 +144,7 @@
                    data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].unitPrice'}" >
             <!--  vesselOrderItem-->
             <input type="hidden" data-th-value="${vesselOrderItemBid.vesselOrderItem.id}"
+                   data-th-id="${'vi'+rowCount.index}"
                    data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].vesselOrderItem.id'}" >
             <!--  chandler-->
             <input type="hidden" data-th-value="${vesselOrderItemBid.chandler.id}"
@@ -168,7 +170,6 @@
         <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
       </button >
     </div >
-
   </form >
 
 </div >
@@ -176,5 +177,20 @@
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $(document).on("change", ".bidValidOrNot", function () {
+        let selectedFieldId = $(this).attr('id').slice(3);
+        let tableLength = $("#table tr").length;
+        // 1bv -> select   0bv ->reject
+        let selectOrderItem = $(`#vi${selectedFieldId}`).val();
+        for (let i = 0; i < tableLength; i++) {
+            if (selectOrderItem === $(`#${i}`).val()) {
+                //$(`#0bv${i}`).prop('checked', true);
+                $(`input[name='vesselOrderItemBids[${i}].bidValidOrNot']`).filter('[value="REJECT"]').attr('checked', true)
+            }
+        }
+
+    });
+</script >
 </body >
 </html >
