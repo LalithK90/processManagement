@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+ <html lang="en" >
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -23,7 +23,7 @@
         <div class="col">
             <h4 class="text-info text-center">
                 <strong>
-                    Payment Management
+                    Order Receiving Confirmation
                 </strong>
             </h4>
         </div>
@@ -41,19 +41,19 @@
         <div class="collapse mx-auto" id="dataTargetCollapse" >
             <div class="container-fluid text-center" >
                 <div class="row" >
-                    <form class="form-inline" data-th-action="@{/payment/search}" data-th-method="POST" >
-                        <div class="form-group mr-2" >
-                            <label for="startDate" >FROM :</label >
-                            <input class="form-control" id="startDate" name="startDate" type="date" />
-                        </div >
-                        <div class="form-group mr-2" >
-                            <label for="endDate" >TO :</label >
-                            <input class="form-control" id="endDate" name="endDate" type="date" />
-                        </div >
-                        <button class="btn btn-success mr-2" id="btnSummaryFind" type="submit" ><span
-                              class="glyphicon glyphicon-search" ></span >&nbsp;Search
-                        </button >
-                    </form >
+                        <form class="form-inline" data-th-action="@{/vesselOrderItemBidReceived/search}" data-th-method="POST" >
+                            <div class="form-group mr-2" >
+                                <label for="startDate" >FROM :</label >
+                                <input class="form-control" id="startDate" name="startDate" type="date" />
+                            </div >
+                            <div class="form-group mr-2" >
+                                <label for="endDate" >TO :</label >
+                                <input class="form-control" id="endDate" name="endDate" type="date" />
+                            </div >
+                            <button class="btn btn-success mr-2" id="btnSummaryFind" type="submit" ><span
+                                  class="glyphicon glyphicon-search" ></span >&nbsp;Search
+                            </button >
+                        </form >
                 </div >
             </div >
         </div >
@@ -80,7 +80,6 @@
                 <tr>
                     <th> Index</th>
                     <th> Number</th>
-                    <th> Amount</th>
                     <th> Date</th>
                     <th> Status</th>
                     <th> Chandler</th>
@@ -91,18 +90,13 @@
                 <tbody>
                 <tr data-th-each="payment, rowCount : ${payments}">
                     <th data-th-text="${rowCount.count}"></th>
-                    <th data-th-text="${payment.code}"></th>
-                    <th data-th-text="${payment.amount}"></th>
+                    <th data-th-text="${payment.vesselOrder.number}"></th>
                     <th data-th-text="${{payment.createdAt}}"></th>
                     <th data-th-text="${payment.statusConformation.statusConformation}"></th>
                     <th data-th-text="${payment.chandler.name}"></th>
                     <th data-th-text="${payment.vesselOrder.vesselArrivalHistory.shipAgent.name}"></th>
                     <th>
-                        <a id="employeeView" data-th-href="${'/payment/' + payment.id}" class="btn btn-outline-secondary btn-sm">&nbsp;View</a>
-                        <a id="employeeEdit" data-th-href="${'/payment/edit/' + payment.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                        <a id="employeeRemove" data-th-href="${'/payment/remove/' + payment.id}"
-                           data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
-                            Delete</a>
+                        so many thing to do
                     </th>
                 </tr>
                 </tbody>
@@ -117,7 +111,7 @@
                 </button>
                 <h3 class="text-center text-danger">
                     <strong>There is no payment upto now please add payment to the system
-                            using add user button.
+                        using add user button.
                     </strong>
                 </h3>
             </div>

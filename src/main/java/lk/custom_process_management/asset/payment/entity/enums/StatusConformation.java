@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum StatusConformation {
+  INR("Item Not Receiving"),
   REC("Receiving"),
   PAID("Paid"),
   PEN("Pending");
