@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+ <html lang="en" >
+<head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
 <div class="container-fluid">
     <div class="row text-center">
-        <!--New Vezzal Button-->
+        <!--New Vessel Button-->
         <div class="col">
             <a class="btn btn-outline-success" href="/userDetails/add" tabindex="1">
                 <i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New
@@ -41,6 +41,7 @@
                 <thead>
                 <tr>
                     <th> Index</th>
+                    <th> Image </th>
                     <th> Reg Number</th>
                     <th> Name</th>
                     <th> Mobile</th>
@@ -52,6 +53,14 @@
                 <tbody>
                 <tr data-th-each="userDetails, rowCount : ${userDetailses}">
                     <th data-th-text="${rowCount.count}"></th>
+                    <th>
+                        <div class="image" data-th-if="${userDetails.fileInfo !=null}" >
+                            <img id="img" class="rounded"
+                                 style="height:50px; width:50px;border-radius: 1px"
+                                 alt="User Details images"
+                                 data-th-src="${userDetails.fileInfo.url}" />
+                        </div >
+                    </th>
                     <th data-th-text="${userDetails.number}"></th>
                     <th data-th-text="${userDetails.name}"></th>
                     <th data-th-text="${userDetails.mobileOne}"></th>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>addBranch</title>
@@ -56,7 +56,7 @@
                             <label class="control-label" for="name">Name :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="name" data-th-field="*{name}" class="form-control" tabindex="4" type="text"
+                            <input id="name" data-th-field="*{name}" class="form-control" tabindex="4" minlength="5" type="text"
                                    required/>
                             <span id="nameError" data-th-errors="*{name}"
                                   data-th-if="${#fields.hasErrors('name')}" class="error">Error Name</span>
@@ -65,7 +65,7 @@
                     <!--Area-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="land">Area (sqft) :</label>
+                            <label class="control-label" for="area">Area (sqft) :</label>
                         </div>
                         <div class="col-md-8">
                             <input data-th-field="*{area}" class="form-control" tabindex="5" type="text"

@@ -1,13 +1,22 @@
 package lk.custom_process_management.util.audit;
 
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class SecurityAuditor implements AuditorAware< String > {
-    @Override
-    public Optional< String > getCurrentAuditor() {
-        return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication().getName());
+  @Override
+  public Optional< String > getCurrentAuditor() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if ( authentication != null ) {
+      return Optional.of(authentication.getName());
+    } else {
+      return Optional.of("admin");
     }
+
+  }
 }

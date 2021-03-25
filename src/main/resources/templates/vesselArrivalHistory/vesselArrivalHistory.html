@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--/* Styles, meta data, and title are included */-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<!--/* Nav bar is included */-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--heading Area-->
+<div class="container-fluid" >
+  <div class="row " >
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          [[${message}]]
+        </strong >
+      </h2 >
+    </div >
+  </div >
+  <!--    Button group for all license according to license type-->
+  <div class="row" >
+    <div class="col text-center" >
+      <div class="btn-group" data-toggle="buttons" >
+        <a href="/vessel" class="btn btn-outline-info btn-lg m-2 pr-5 pl-5" >All Vessel</a >
+        <a href="/vesselArrivalHistory" class="btn btn-outline-primary btn-lg m-2 pr-5 pl-5" > All History </a >
+        <a href="/vesselArrivalHistory/notArrival" class="btn btn-outline-warning btn-lg m-2 pr-5 pl-5" > Not
+                                                                                                          Arrival </a >
+        <a href="/vesselArrivalHistory/arrival" class="btn btn-outline-success btn-lg m-2 pr-5 pl-5" > Arrival </a >
+        <a href="/vesselArrivalHistory/departure" class="btn btn-outline-danger btn-lg m-2 pr-5 pl-5" >
+          Departure </a >
+      </div >
+    </div >
+  </div >
+</div >
+<!--Chandler License List-->
+<div class="container-fluid text-center" >
+  <!--Table view-->
+  <div class="col" >
+    <div class="col" id="supplierListPresent" data-th-fragment="supplierFragment"
+         data-th-if="${not #lists.isEmpty(vesselArrivalHistories)}" >
+      <table class="table table-hover table-striped" id="myTable" >
+        <thead >
+        <tr >
+          <th > Index</th >
+          <th > Vessel Name</th >
+          <th > IMO Number</th >
+          <th > MMSI Number</th >
+          <th > Captain Name</th >
+          <th > Next Harbour</th >
+          <th > Sailing Date</th >
+          <th > Modify</th >
+        </tr >
+        </thead >
+        <tbody >
+        <tr data-th-each="vesselArrivalHistory, rowCount : ${vesselArrivalHistories}" >
+          <th data-th-text="${rowCount.count}" ></th >
+          <th data-th-text="${vesselArrivalHistory.vessel.name}" ></th >
+          <th data-th-text="${vesselArrivalHistory.vessel.imoNumber}" ></th >
+          <th data-th-text="${vesselArrivalHistory.vessel.mmsiNumber}" ></th >
+          <th data-th-text="${vesselArrivalHistory.captainName}" ></th >
+          <th data-th-text="${vesselArrivalHistory.nextHarbour}" ></th >
+          <th data-th-text="${{vesselArrivalHistory.sailingDate}}" ></th >
+          <th >
+            <a class="btn btn-outline-primary btn-sm"
+               data-th-href="${'/vesselArrivalHistory/' + vesselArrivalHistory.id}" ><i
+                  class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
+            <a class="btn btn-outline-success btn-sm"
+               data-th-href="${'/vesselArrivalHistory/edit/' + vesselArrivalHistory.id}" ><i
+                  class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Edit</a >
+            <a class="btn btn-outline-success btn-sm" data-th-if="${notArrival}"
+               data-th-href="${'/vesselArrivalHistory/arrival/' + vesselArrivalHistory.id}" ><i
+                  class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Mark Arrival</a >
+            <a class="btn btn-outline-success btn-sm"
+               data-th-href="${'/vesselArrivalHistory/departure/' + vesselArrivalHistory.id}"
+               data-th-if="${arrival}" ><i
+                  class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Make Departure</a >
+          </th >
+        </tr >
+        </tbody >
+      </table >
+    </div >
+  </div >
+  <!--Error-->
+  <div class="row" data-th-if="${ #lists.isEmpty(vesselArrivalHistories)}" >
+    <div class="col-sm-12" >
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button" >
+          <span aria-hidden="true" >&times;</span >
+        </button >
+        <h3 class="text-center text-danger" >
+          <strong >There is no Vessel History upto now please add vessel arrival history to the system using add
+                   user
+                   button.</strong >
+        </h3 >
+      </div >
+    </div >
+  </div >
+</div >
+
+<!--/* footer is */-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--/* script is included */-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+<script >
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script >
+</body >
+</html >

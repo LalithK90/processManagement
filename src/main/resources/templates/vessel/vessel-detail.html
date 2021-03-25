@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >vessel-detail</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<!--heading Area-->
+<div class="container-fluid " >
+  <div class="row text-center border-info" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/vessel" class="btn btn-outline-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Customer Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          <p data-th-text="${vesselDetail.name}" ></p >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-outline-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
+<!--details-->
+<div data-th-fragment="vesselDetailsFragment" class="container-fluid " >
+  <div class="col-sm-12 flex-column " >
+    <div class="form-row" data-th-fragment="vesselDetailFragment">
+      <!--Left Side-->
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <!--id-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="id" >ID :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="id" data-th-text="${vesselDetail.id}" class="display_detail" ></p >
+          </div >
+        </div >
+        <!--Code-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="departmentIdNumber" >Customer Code :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="departmentIdNumber" data-th-text="${vesselDetail.code}" class="display_detail" ></p ></div >
+        </div >
+        <!--Name-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="name" >Name :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="name" data-th-text="${vesselDetail.name}"
+               class="display_detail" ></p >
+          </div >
+        </div >
+        <!--imoNumber-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="nic" >IMO Number :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="nic" data-th-text="${vesselDetail.imoNumber}" class="display_detail" ></p >
+          </div >
+        </div >
+        <!--mmsiNumber-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="address" >MMSI Number :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="address" class="display_detail " data-th-text="${vesselDetail.mmsiNumber}" ></p >
+          </div >
+        </div >
+      </div >
+      <!--Right Side-->
+      <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+        <!--Country-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="mobile" >Country :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="mobile" data-th-text="${vesselDetail.country}" class="display_detail" ></p >
+          </div >
+        </div >
+        <!--Created By-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="createdBy" >Created By :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="createdBy" data-th-text="${vesselDetail.createdBy}" class="display_detail" ></p >
+          </div >
+        </div >
+        <!--Created at-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="createdAt" >Created At :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="createdAt"
+               data-th-text="${#temporals.format(vesselDetail.createdAt, 'dd-MM-yyyy HH:mm')}"
+               class="display_detail" ></p >
+          </div >
+        </div >
+        <!--Updated by-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="updatedBy" >Updated By :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="updatedBy" data-th-text="${vesselDetail.updatedBy}" class="display_detail" ></p >
+          </div >
+        </div >
+        <!--Updated at-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="updatedAt" >Updated At :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="updatedAt" data-th-text="${#temporals.format(vesselDetail.updatedAt, 'dd-MM-yyyy HH:mm')}" class="display_detail" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+
+    <div class="form-row" >
+      <div class="card-header container-fluid text-center" >
+        <h5 >
+          Vessel Arriaval History
+        </h5 >
+      </div >
+      <div id="accordianId" role="tablist" aria-multiselectable="true" class="container-fluid" >
+        <div class="card" data-th-each="vesselArrivalHistoryDetail, index : ${vesselDetail.vesselArrivalHistories}" >
+          <div class="card-header" role="tab" data-th-id="${'#header'+index.count}" >
+            <h5 class="mb-0" >
+              <a data-toggle="collapse" data-parent="#accordianId" data-th-href="${'#content'+index.count}"
+                 aria-expanded="true"
+                 data-th-aria-controls="${'content'+index.count}" >
+                <div class="container-fluid text-center" >
+                  <span >Anchorage Date And Time :  </span >
+                  <span data-th-text="${#dates.format(new java.util.Date(vesselArrivalHistoryDetail.anchorageDateAndTime), 'yyyy-MM-dd HH:mm')}" ></span >
+                </div >
+              </a >
+            </h5 >
+          </div >
+          <div data-th-id="${'content'+index.count}" class="collapse in" role="tabpanel"
+               data-th-href="${'#header'+index.count}" >
+            <div class="card-body" >
+              <div data-th-replace="~{vesselArrivalHistory/vesselArrivalHistory-detail :: vesselArrivalHistoryDetailsFragment}" ></div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+<!--Back Button-->
+<div class="form-group col-md-12 col-sm-12 text-center flex-column mt-3" >
+  <a href="/vessel" >
+    <button class="btn btn-outline-dark" type="button" tabindex="3" >
+      <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
+    </button >
+  </a >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+</body >
+</html >

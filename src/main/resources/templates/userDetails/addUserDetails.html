@@ -47,6 +47,7 @@
             </div >
             <div class="col-md-8" >
               <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly />
+              <input  data-th-field="*{liveDead}" class="form-control" type="hidden" readonly />
             </div >
           </div >
           <!--number-->
@@ -117,12 +118,18 @@
               <label class="control-label" for="gender" >Gender :</label >
             </div >
             <div class="col-md-8" >
-              <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7" readonly="" required >
-                <option value="" >Please select</option >
-                <option data-th-each="genders : ${gender}"
-                        data-th-text="${genders.gender}"
-                        data-th-value="${genders}" ></option >
-              </select >
+              <div class="custom-control custom-checkbox custom-control-inline "
+                   data-th-each="genders,index : ${gender}" >
+                <input class="custom-control-input gender" required
+                       data-th-name="${'gender'}"
+                       data-th-value="${genders}"
+                       data-th-id="${index.index}+${genders}" type="radio"
+                       data-th-checked="${genders==gender}" />
+                <label class="custom-control-label"
+                       data-th-for="${index.index}+${genders}"
+                       data-th-text="${genders.gender}" > radio
+                </label >
+              </div >
             </div >
           </div >
           <!--Date of birth-->
@@ -258,8 +265,7 @@
               <label class="control-label" for="relevantPartyId" ><span id="labelName" ></span > :</label >
             </div >
             <div class="col-md-8" >
-              <select id="relevantPartyId" data-th-name="${relevantPartyId}" class="form-control" tabindex="3"
-                      required >
+              <select id="relevantPartyId" data-th-name="${'relevantPartyId'}" class="form-control" tabindex="3" >
               </select >
             </div >
           </div >
@@ -354,7 +360,7 @@
         let findAllShipAgentUri = $("#findAllShipAgentUri").val();
         let findAllChandlerUri = $("#findAllChandlerUri").val();
         if (findAllChandlerUri !== null && findAllShipAgentUri !== null) {
-            if ($(this).val() === "SLCC") {
+            if ($(this).val() === "SLC") {
                 $("#relevantPartyIdToggle").hide();
             }
             if ($(this).val() === "SLCC") {
@@ -367,10 +373,7 @@
     });
 
     function optionTagCreate(labelName, url) {
-        $('#relevantPartyId')
-            .find('option')            .remove()
-            .end()
-            .append('<option value="">Please Select</option>').val('');
+        $('#relevantPartyId').find('option').remove().end().append('<option value="">Please Select</option>').val('');
         $("#relevantPartyIdToggle").show();
         $("#labelName").html(labelName);
         $.getJSON(url + 'findAll', function (data) {

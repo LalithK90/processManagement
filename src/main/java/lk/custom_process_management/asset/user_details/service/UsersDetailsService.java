@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.user_details.service;
 
 
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.user_details.dao.UserDetailsDao;
 import lk.custom_process_management.asset.user_details.entity.UserDetails;
 import org.springframework.cache.annotation.*;
@@ -37,12 +38,19 @@ public class UsersDetailsService {
       put = {@CachePut( value = "userDetails", key = "#userDetails.id" )} )
   @Transactional
   public UserDetails persist(UserDetails userDetails) {
+    if ( userDetails.getId() == null ) {
+      if ( userDetailsDao.findFirstByOrderByIdDesc() != null ) {
+        userDetails.setLiveDead(LiveDead.ACTIVE);
+      }
+    }
     return userDetailsDao.save(userDetails);
   }
 
   @CacheEvict( allEntries = true )
   public boolean delete(Integer id) {
-    userDetailsDao.deleteById(id);
+    UserDetails userDetails = userDetailsDao.getOne(id);
+    userDetails.setLiveDead(LiveDead.STOP);
+    userDetailsDao.save(userDetails);
     return false;
   }
 

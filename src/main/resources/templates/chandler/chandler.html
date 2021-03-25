@@ -7,7 +7,7 @@
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 <!--heading Area-->
-<div class="container-fluid">
+<div class="container-fluid" >
   <div class="row text-center" >
     <!--New Chandler Button-->
     <div class="col" >
@@ -63,9 +63,9 @@
                   class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
             <a class="btn btn-outline-success btn-sm" data-th-href="${'/chandler/edit/' + chandler.id}" ><i
                   class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Edit</a >
-            <a class="btn btn-outline-danger btn-sm" data-th-href="${'/chandler/delete/' + chandler.id}" >
-              <!--data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"--> <i
-                  class="fa fa-trash" style="font-size: 15px" ></i > Delete</a >
+            <a data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+               class="btn btn-outline-danger btn-sm" data-th-href="${'/chandler/delete/' + chandler.id}" >
+              <i class="fa fa-trash" style="font-size: 15px" ></i > Delete</a >
           </th >
           <th data-th-if="${chandlerDetailShow==true}" >
             <a class="btn btn-outline-primary btn-sm"
@@ -77,7 +77,6 @@
       </table >
     </div >
   </div >
-  <!--TODO-->
   <!--Save chandler show-->
   <!--Error-->
   <div class="row" data-th-if="${ #lists.isEmpty(chandlers)}" >

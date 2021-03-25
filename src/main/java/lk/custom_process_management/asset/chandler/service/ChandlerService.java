@@ -3,6 +3,7 @@ package lk.custom_process_management.asset.chandler.service;
 
 import lk.custom_process_management.asset.chandler.dao.ChandlerDao;
 import lk.custom_process_management.asset.chandler.entity.Chandler;
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @CacheConfig(cacheNames = "supplier")
@@ -23,7 +25,7 @@ public class ChandlerService implements AbstractService< Chandler, Integer> {
     }
 
     public List< Chandler > findAll() {
-        return chandlerDao.findAll();
+        return chandlerDao.findAll().stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList());
     }
 
     public Chandler findById(Integer id) {
@@ -34,11 +36,16 @@ public class ChandlerService implements AbstractService< Chandler, Integer> {
 /*        if (supplier.getId() == null) {
             supplier.setItemSupplierStatus(ItemSupplierStatus.CURRENTLY_BUYING);
         }*/
+        if ( chandler.getId() ==null){
+            chandler.setLiveDead(LiveDead.ACTIVE);
+        }
         return chandlerDao.save(chandler);
     }
 
     public boolean delete(Integer id) {
-        chandlerDao.deleteById(id);
+        Chandler chandler = chandlerDao.getOne(id);
+        chandler.setLiveDead(LiveDead.STOP);
+        chandlerDao.save(chandler);
         return false;
     }
 

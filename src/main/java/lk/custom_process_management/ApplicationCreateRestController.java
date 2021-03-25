@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -37,7 +38,7 @@ public class ApplicationCreateRestController {
   @GetMapping( "/select/user" )
   public String saveUser() {
     //roles list start
-    String[] roles = {"ADMIN"};
+    String[] roles = {"ADMIN","Ship_agent","Chandler","Inspector", "Superintendent","Assistant_superintendent","Guard"};
     for ( String s : roles ) {
       Role role = new Role();
       role.setRoleName(s);

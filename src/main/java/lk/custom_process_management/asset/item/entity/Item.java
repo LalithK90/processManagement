@@ -4,8 +4,9 @@ package lk.custom_process_management.asset.item.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.category.entity.Category;
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.item.entity.enums.ItemStatus;
-import lk.custom_process_management.asset.vezzal_order_item.entity.VezzalOrderItem;
+import lk.custom_process_management.asset.vessel_order_item.entity.VesselOrderItem;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,15 +34,13 @@ public class Item extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private ItemStatus itemStatus;
 
+    @Enumerated( EnumType.STRING )
+    private LiveDead liveDead;
+
     @ManyToOne
     private Category category;
 
     @OneToMany( mappedBy = "item" )
-    private List< VezzalOrderItem > vezzalOrderItems;
+    private List< VesselOrderItem > vesselOrderItems;
 
- /*   @OneToMany( mappedBy = "item" )
-    private List< Ledger > ledgers;
-
-    @OneToMany( mappedBy = "item" )
-    private List< PurchaseOrderItem > purchaseOrderItems;*/
 }

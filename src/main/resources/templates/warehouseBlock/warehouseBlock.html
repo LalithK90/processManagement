@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>warehouseBlocks</title>
@@ -42,7 +42,7 @@
                 <tr>
                     <th> Index</th>
                     <th> Name</th>
-                    <th> Area</th>
+                    <th> Area (sqft)</th>
                     <th> Modify</th>
                 </tr>
                 </thead>
@@ -58,9 +58,9 @@
                         <a  data-th-href="${'/warehouseBlock/edit/' + warehouseBlock.id}"
                            class="btn btn-outline-success btn-sm"><i
                                 class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit</a>
-                        <a  data-th-href="${'/warehouseBlock/delete/' + warehouseBlock.id}"
+                        <a data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" data-th-href="${'/warehouseBlock/delete/' + warehouseBlock.id}"
                            class="btn btn-outline-danger btn-sm">
-                            <!--data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" --> <i
+                       <i
                                 class="fa fa-trash" style="font-size: 15px"></i>
                             Delete</a>
                     </th>

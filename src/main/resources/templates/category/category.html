@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+ <html lang="en" >
+<head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>category</title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <!--Heading Area-->
 <div class="container-fluid">
@@ -35,26 +35,27 @@
 <div class="container-fluid text-center">
     <!--Table view-->
     <div class="col">
-        <div class="col" id="categoryListPresent" th:if="${not #lists.isEmpty(categorys)}">
+        <div class="col" id="categoryListPresent" data-th-if="${not #lists.isEmpty(categorys)}">
             <table class="table table-hover table-striped" id="myTable">
                 <thead>
                     <tr>
                         <th> Index</th>
-                        <th> Main Category</th>
-                        <th> Name</th>
+                        <th> Category</th>
+                        <th> Brand</th>
                         <th> Modify</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="category, rowCount : ${categorys}">
-                        <th th:text="${rowCount.count}"></th>
-                        <th th:text="${category.mainCategory.mainCategory}"></th>
-                        <th th:text="${category.name}"></th>
+                    <tr data-th-each="category, rowCount : ${categorys}">
+                        <th data-th-text="${rowCount.count}"></th>
+                        <th data-th-text="${category.mainCategory.mainCategory}"></th>
+                        <th data-th-text="${#strings.toUpperCase(category.name.substring(0, 1))+#strings.toLowerCase(category.name.substring(1))}">
+                        </th>
                         <th>
-                            <a id="categoryView" th:href="${'/category/' + category.id}" class="btn btn-outline-primary btn-sm"><i class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                            <a id="categoryEdit" th:href="${'/category/edit/' + category.id}" class="btn btn-outline-success btn-sm"><i class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit</a>
-                            <a id="categoryRemove" th:href="${'/category/remove/' + category.id}" class="btn btn-outline-danger btn-sm">
-                             <!-- th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"--> <i class="fa fa-trash" style="font-size: 15px"></i> Delete</a>
+                            <a  data-th-href="${'/category/' + category.id}" class="btn btn-outline-primary btn-sm"><i class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
+                            <a  data-th-href="${'/category/edit/' + category.id}" class="btn btn-outline-success btn-sm"><i class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit</a>
+                            <a  data-th-href="${'/category/remove/' + category.id}" class="btn btn-outline-danger btn-sm">
+                             <!-- data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"--> <i class="fa fa-trash" style="font-size: 15px"></i> Delete</a>
                         </th>
                     </tr>
                 </tbody>
@@ -62,7 +63,7 @@
         </div>
     </div>
     <!--Error-->
-    <div class="row" th:if="${ #lists.isEmpty(categorys)}">
+    <div class="row" data-th-if="${ #lists.isEmpty(categorys)}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -73,17 +74,17 @@
                 </h3>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
     </div>
 </div>
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<div  data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<div  data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
+<script>
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script>
 </body>
 </html>

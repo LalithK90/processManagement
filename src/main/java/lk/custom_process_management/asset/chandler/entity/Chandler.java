@@ -3,9 +3,10 @@ package lk.custom_process_management.asset.chandler.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.custom_process_management.asset.chandler_license.entity.ChandlerLicense;
+import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
+import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.user_details_chandler.entity.UserDetailsChandler;
-import lk.custom_process_management.asset.user_details_ship_agent.entity.UserDetailsShipAgent;
-import lk.custom_process_management.asset.vezzal_order_item_bit.entity.VezzalOrderItemBit;
+import lk.custom_process_management.asset.vessel_order_item_bid.entity.VesselOrderItemBid;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,14 +45,18 @@ public class Chandler extends AuditEntity {
     @Column( columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255 )
     private String address;
 
-    @OneToMany(mappedBy = "chandler", cascade = CascadeType.PERSIST )
+    @Enumerated( EnumType.STRING )
+    private LiveDead liveDead;
+
+    @OneToMany( mappedBy = "chandler", cascade = CascadeType.PERSIST )
     private List< ChandlerLicense > chandlerLicenses;
 
     @OneToMany( mappedBy = "chandler" )
-    private List< VezzalOrderItemBit > vezzalOrderItemBits;
+    private List< VesselOrderItemBid > vesselOrderItemBids;
 
-    @OneToMany(mappedBy = "chandler")
+    @OneToMany( mappedBy = "chandler" )
     private List< UserDetailsChandler > userDetailsChandlers;
 
-
+    @OneToMany( mappedBy = "chandler" )
+    private List< Payment > payments;
 }

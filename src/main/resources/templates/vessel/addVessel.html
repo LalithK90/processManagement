@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >addCustomer</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--Heading Area-->
+<div class="container-fluid" >
+  <div class="row text-center border-info" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/vessel" class="btn btn-outline-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Form Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          <span data-th-text="${addStatus==true?'Add New Vessel':'Update Vessel Details'}" ></span >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-outline-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
+<!--Form Content-->
+<div class="container-fluid" >
+  <div class="col-sm-12 flex-column " >
+    <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/vessel/save':'/vessel/update'}"
+          data-th-object="${vessel}" method="POST" enctype="multipart/form-data" >
+      <div class="row" >
+        <!--Left Side-->
+        <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+          <!--Id-->
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="id" >ID :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly />
+            </div >
+          </div >
+          <!--code-->
+          <div data-th-if="${addStatus==false}" class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="code" >Vessel Code :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="code" data-th-field="*{code}" class="form-control" type="text" readonly />
+              <input  data-th-field="*{liveDead}" class="form-control" type="hidden" readonly />
+            </div >
+          </div>
+          <!--Name-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="name" >Name :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="name" data-th-field="*{name}" class="form-control" tabindex="4" type="text"
+                     required />
+              <span id="nameError" data-th-errors="*{name}"
+                    data-th-if="${#fields.hasErrors('name')}" class="error" >Error Name</span >
+            </div >
+          </div >
+          <!--IMO Number-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="imoNumber" >IMO Number :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="imoNumber" data-th-field="*{imoNumber}" class="form-control" tabindex="5" type="text" minlength="3" required
+              />
+              <span class="error" id="nicError" data-th-errors="*{imoNumber}"
+                    data-th-if="${#fields.hasErrors('imoNumber')}" >Error
+                                                               NIC Number</span >
+            </div >
+          </div >
+          <!--MMSI Number-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="mmsiNumber" >MMSI Number :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="mmsiNumber" data-th-field="*{mmsiNumber}" class="form-control" tabindex="6" minlength="3"
+                     type="text" required />
+              <span class="error" data-th-errors="*{mmsiNumber}"
+                    data-th-if="${#fields.hasErrors('mmsiNumber')}" id="mobileError" >Error Mobile
+                                                                                               Number</span >
+            </div >
+          </div >
+        </div >
+        <!--Right Side-->
+        <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+          <!--Country-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="country" >Country :</label >
+            </div >
+            <div class="col-md-8" >
+              <select data-th-field="*{country}" id="country" class="form-control" required>
+
+              </select >
+            </div >
+          </div >
+          <!--Created by and created at-->
+          <div id="updateStatus" data-th-if="${addStatus==false}" >
+            <!--Created By-->
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="createdBy" >Created By :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="createdBy" data-th-field="*{createdBy}" class="form-control" type="text"
+                       readonly />
+              </div >
+            </div >
+            <!--Created At-->
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="createdAt" >Created At :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="createdAt" data-th-field="*{createdAt}" class="form-control" type="text"
+                       readonly />
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+          <!--Back Button-->
+          <a class="btn btn-outline-dark" tabindex="10" href="/vessel" >
+            <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+          </a >
+          <!--Save Button-->
+          <button class="btn btn-outline-success ml-5" type="submit" tabindex="8" >
+            <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;<span id="submit"
+                                                                                   data-th-text="${addStatus==true?'Save': 'Update'}" ></span >
+          </button >
+          <!--Cancel Button-->
+          <button class="btn btn-outline-warning ml-5" type="reset" tabindex="9" >
+            <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+          </button >
+        </div >
+        <!--Error-->
+        <div class="form-row" >
+          <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors:
+          </label >
+          <ul >
+            <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+                class="error" ></li >
+          </ul >
+        </div >
+      </div >
+    </form >
+  </div >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div>
+<script >
+    /*Country -> list
+    REST COUNTRIES
+Get information about countries via a RESTful API
+https://restcountries.eu/#api-endpoints-all
+    * */
+    $(document).ready(function () {
+            let url = "https://restcountries.eu/rest/v2/all?fields=name;cioc";
+            $.getJSON(url, function (val) {
+                $.each(val, function () {
+                    $("#country").append(`<option value="${this.cioc}">${this.name}</option>`);
+                });
+            });
+        }
+    );
+
+</script >
+
+</body >
+</html >

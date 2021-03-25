@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDetailsChandler extends AuditEntity {
+
   @OneToOne
   private UserDetails userDetails;
 

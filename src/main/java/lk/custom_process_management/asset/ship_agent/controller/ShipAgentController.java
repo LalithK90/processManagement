@@ -57,14 +57,14 @@ public class ShipAgentController implements AbstractController< ShipAgent, Integ
       return commonThings(model, shipAgent, true);
     }
 
-//if vezzal has id that vezzal is not a new vezzal
+//if vessel has id that vessel is not a new vessel
     if ( shipAgent.getId() == null ) {
-      //if there is not vezzal in db
+      //if there is not vessel in db
       if ( shipAgentService.lastShipAgent() == null ) {
         //need to generate new onecustomer
         shipAgent.setCode("LKCSA" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
       } else {
-        //if there is vezzal in db need to get that vezzal's code and increase its value
+        //if there is vessel in db need to get that vessel's code and increase its value
         String previousCode = shipAgentService.lastShipAgent().getCode().substring(5);
         shipAgent.setCode("LKCSA" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
       }

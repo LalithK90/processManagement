@@ -6,7 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum RelevantParty {
-SLC("Sri Lanka Custom"),SLCC("Chandler"),
-SLCS("Ship Agent");
-private final String relevantParty;
+  SLC("Sri Lanka Custom"),
+  SLCC("Chandler"),
+  SLCS("Ship Agent");
+  private final String relevantParty;
 }

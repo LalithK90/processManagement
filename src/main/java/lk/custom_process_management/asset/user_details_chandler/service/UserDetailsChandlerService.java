@@ -29,8 +29,8 @@ private final UserDetailsChandlerDao userDetailsChandlerDao;
         return userDetailsChandlerDao.getOne(id);
     }
 
-    public UserDetailsChandler persist(UserDetailsChandler vezzal) {
-        return userDetailsChandlerDao.save(vezzal);
+    public UserDetailsChandler persist(UserDetailsChandler vessel) {
+        return userDetailsChandlerDao.save(vessel);
     }
 
     public boolean delete(Integer id) {
@@ -38,16 +38,16 @@ private final UserDetailsChandlerDao userDetailsChandlerDao;
         return false;
     }
 
-    public List<UserDetailsChandler> search(UserDetailsChandler vezzal) {
+    public List<UserDetailsChandler> search(UserDetailsChandler vessel) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<UserDetailsChandler> vezzalExample = Example.of(vezzal, matcher);
-        return userDetailsChandlerDao.findAll(vezzalExample);
+        Example<UserDetailsChandler> vesselExample = Example.of(vessel, matcher);
+        return userDetailsChandlerDao.findAll(vesselExample);
     }
 
-    public UserDetailsChandler lastVezzal(){
+    public UserDetailsChandler lastVessel(){
         return userDetailsChandlerDao.findFirstByOrderByIdDesc();
     }
 

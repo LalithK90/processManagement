@@ -19,7 +19,7 @@
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          <span data-th-text="${addStatus==true?'Add New shipAgent':'Update shipAgent Details'}" ></span >
+          <span data-th-text="${addStatus==true?'Add New Ship Agent':'Update Ship Agent Details'}" ></span >
         </strong >
       </h2 >
     </div >
@@ -47,6 +47,7 @@
             </div >
             <div class="col-md-8" >
               <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly />
+              <input  data-th-field="*{liveDead}" class="form-control" type="hidden" readonly />
             </div >
           </div >
           <div data-th-if="${addStatus==false}" class="form-row text-right" >
@@ -97,79 +98,81 @@
                                                                                                Number</span >
             </div >
           </div >
-        </div >
-        <!--Right Side-->
-        <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
           <!--Address-->
-          <div class="form-row" >
-              <div class="col-md-4" >
-            <label class="control-label" for="address" >Address :</label >
-              </div>
-              <div class="col-md-8" >
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="address" >Address :</label >
+            </div >
+            <div class="col-md-8" >
             <textarea id="address" data-th-field="*{address}"
                       class="form-control" tabindex="12"
                       required ></textarea >
-            <span class="error" data-th-errors="*{address}"
-                  data-th-if="${#fields.hasErrors('address')}" id="addressError" >Error Address</span >
-              </div>
+              <span class="error" data-th-errors="*{address}"
+                    data-th-if="${#fields.hasErrors('address')}" id="addressError" >Error Address</span >
+            </div >
           </div >
+        </div >
+        <!--Right Side-->
+        <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
           <!--Mobile Number One-->
           <div class="form-row" >
-              <div class="col-md-4" >
-            <label class="control-label" for="mobileOne" >Mobile One No
-                                                          :</label >
-              </div>
-              <div class="col-md-8" >
-            <input id="mobileOne" data-th-field="*{mobileOne}"
-                   class="form-control mobile" tabindex="13"
-                   type="text"
-                   maxlength="10" min="9"
-                   required />
-            <span class="error" data-th-errors="*{mobileOne}"
-                  data-th-if="${#fields.hasErrors('mobileOne')}"
-                  id="mobileOneError" >Error Mobile Number</span >
-              </div>
+            <div class="col-md-4" >
+              <label class="control-label" for="mobileOne" >Mobile One No
+                                                            :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="mobileOne" data-th-field="*{mobileOne}"
+                     class="form-control mobile" tabindex="13"
+                     type="text"
+                     maxlength="10" min="9"
+                     required />
+              <span class="error" data-th-errors="*{mobileOne}"
+                    data-th-if="${#fields.hasErrors('mobileOne')}"
+                    id="mobileOneError" >Error Mobile Number</span >
+            </div >
           </div >
           <!--Mobile Number Two-->
           <div class="form-row" >
-              <div class="col-md-4" >
-            <label class="control-label" for="mobileTwo" >Mobile Two No
-                                                          :</label >
-              </div>
-              <div class="col-md-8" >
-            <input id="mobileTwo" data-th-field="*{mobileTwo}"
-                   class="form-control mobile" tabindex="14"
-                   type="text"
-                   maxlength="10" min="9" />
-            <span class="error" data-th-errors="*{mobileTwo}"
-                  data-th-if="${#fields.hasErrors('mobileTwo')}"
-                  id="mobileTwoError" >Error Mobile  Number</span >
-              </div>
+            <div class="col-md-4" >
+              <label class="control-label" for="mobileTwo" >Mobile Two No
+                                                            :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="mobileTwo" data-th-field="*{mobileTwo}"
+                     class="form-control mobile" tabindex="14"
+                     type="text"
+                     maxlength="10" min="9" />
+              <span class="error" data-th-errors="*{mobileTwo}"
+                    data-th-if="${#fields.hasErrors('mobileTwo')}"
+                    id="mobileTwoError" >Error Mobile  Number</span >
+            </div >
           </div >
           <!--Land Number-->
           <div class="form-row" >
-              <div class="col-md-4" >
-            <label class="control-label" for="land" >Land No :</label >
-              </div> <div class="col-md-8" >
-            <input id="land" data-th-field="*{land}" class="form-control land"
-                   type="text" tabindex="15"
-                   maxlength="10"
-                   min="9" />
-            <span class="error" data-th-errors="*{land}"
-                  data-th-if="${#fields.hasErrors('land')}" id="landError" >Error Land Number</span >
-          </div>
+            <div class="col-md-4" >
+              <label class="control-label" for="land" >Land No :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="land" data-th-field="*{land}" class="form-control land"
+                     type="text" tabindex="15"
+                     maxlength="10"
+                     min="9" />
+              <span class="error" data-th-errors="*{land}"
+                    data-th-if="${#fields.hasErrors('land')}" id="landError" >Error Land Number</span >
+            </div >
           </div >
           <!--Email-->
           <div class="form-row" >
-              <div class="col-md-4" >
-            <label class="control-label" for="email" >Email :</label >
-              </div> <div class="col-md-8" >
-            <input id="email" data-th-field="*{email}" class="form-control"
-                   tabindex="16" type="email"
-                   required />
-            <span class="error" data-th-errors="*{email}"
-                  data-th-if="${#fields.hasErrors('email')}" id="emailError" >Error Email</span >
-          </div>
+            <div class="col-md-4" >
+              <label class="control-label" for="email" >Email :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="email" data-th-field="*{email}" class="form-control"
+                     tabindex="16" type="email"
+                     required />
+              <span class="error" data-th-errors="*{email}"
+                    data-th-if="${#fields.hasErrors('email')}" id="emailError" >Error Email</span >
+            </div >
           </div >
           <!--Created by and created at-->
           <div id="updateStatus" data-th-if="${addStatus==false}" >
@@ -225,9 +228,9 @@
   </div >
 </div >
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}" ></footer >
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}" ></script >
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
     /*Country -> list
     REST COUNTRIES
