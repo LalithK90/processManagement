@@ -18,6 +18,6 @@ private final PaymentService paymentService;
   @GetMapping
   public String pendingVesselOrderReceiveList(Model model){
 
-    return "vesselOrderItemReceived/vesselOrderItemReceived";
+    return "vesselOrderItemBidReceived";
   }
 }
