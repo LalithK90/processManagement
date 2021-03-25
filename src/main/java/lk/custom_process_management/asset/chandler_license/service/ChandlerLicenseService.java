@@ -55,4 +55,8 @@ public class ChandlerLicenseService implements AbstractService< ChandlerLicense,
   public List< ChandlerLicense > findByChandler(Chandler chandler) {
     return chandlerLicenseDao.findByChandler(chandler);
   }
+
+  public void saveAll(List< ChandlerLicense> chandlerLicenses) {
+    chandlerLicenseDao.saveAll(chandlerLicenses);
+  }
 }

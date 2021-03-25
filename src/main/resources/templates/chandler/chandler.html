@@ -58,9 +58,8 @@
           <th data-th-if="${chandlerDetailShow !=true}" >
             <a data-th-if="${not #arrays.isEmpty(chandler.chandlerLicenses)}"
                data-th-href="${'/chandlerLicense/add/' + chandler.id}" >
-              <span data-th-each="newsObject, iterStat : ${chandler.chandlerLicenses}" data-th-if="${iterStat.last} ">
-              <button 
-                      class="btn btn-outline-primary btn-sm" type="button" >
+              <span data-th-each="newsObject, iterStat : ${chandler.chandlerLicenses}" data-th-if="${iterStat.last && #strings.equals(newsObject.licenseStatus, 'INVALID')} ">
+              <button                       class="btn btn-outline-primary btn-sm" type="button" >
                 <i class="fa fa-folder-open" style="font-size: 15px" ></i >Add License
               </button >
               </span >
