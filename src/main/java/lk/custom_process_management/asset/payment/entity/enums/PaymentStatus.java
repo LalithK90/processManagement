@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum PaymentStatus {
 
     PAID("Payment Done"),
+    ITEMNR("Item Not Recived"),
     NOTPAID("Not Paid");
 
     private final String paymentStatus;

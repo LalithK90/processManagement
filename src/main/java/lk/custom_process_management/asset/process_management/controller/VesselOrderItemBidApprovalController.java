@@ -1,7 +1,6 @@
-package lk.custom_process_management.asset.vessel_order_item_bid.controller;
+package lk.custom_process_management.asset.process_management.controller;
 
 import lk.custom_process_management.asset.chandler.entity.Chandler;
-import lk.custom_process_management.asset.common_asset.model.TwoDate;
 import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.payment.entity.enums.PaymentStatus;
 import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
@@ -11,11 +10,11 @@ import lk.custom_process_management.asset.vessel_order.entity.enums.VesselOrderS
 import lk.custom_process_management.asset.vessel_order.service.VesselOrderService;
 import lk.custom_process_management.asset.vessel_order_item.service.VesselOrderItemService;
 import lk.custom_process_management.asset.vessel_order_item_bid.entity.VesselOrderItemBid;
+import lk.custom_process_management.asset.vessel_order_item_bid.entity.enums.BidValidOrNot;
 import lk.custom_process_management.asset.vessel_order_item_bid.model.VesselOrderBid;
 import lk.custom_process_management.asset.vessel_order_item_bid.service.VesselOrderItemBidService;
 import lk.custom_process_management.asset.vessel_order_item_bid_payment.entity.VesselOrderItemBidPayment;
 import lk.custom_process_management.asset.vessel_order_item_bid_payment.service.VesselOrderItemBidPaymentService;
-import lk.custom_process_management.util.service.DateTimeAgeService;
 import lk.custom_process_management.util.service.EmailService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
@@ -23,14 +22,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping( "/vesselOrderItemBidReceived" )
-public class VesselOrderItemBidReceivedController {
+@RequestMapping( "/vesselOrderItemApproval" )
+public class VesselOrderItemBidApprovalController {
   private final VesselOrderService vesselOrderService;
   private final VesselOrderItemService vesselOrderItemService;
   private final VesselOrderItemBidService vesselOrderItemBidService;
@@ -39,13 +38,13 @@ public class VesselOrderItemBidReceivedController {
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
   private final EmailService emailService;
 
-  public VesselOrderItemBidReceivedController(VesselOrderService vesselOrderService,
+  public VesselOrderItemBidApprovalController(VesselOrderService vesselOrderService,
                                               VesselOrderItemService vesselOrderItemService,
                                               VesselOrderItemBidService vesselOrderItemBidService,
                                               VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService,
                                               PaymentService paymentService,
                                               MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                                              EmailService emailService, DateTimeAgeService dateTimeAgeService) {
+                                              EmailService emailService) {
     this.vesselOrderService = vesselOrderService;
     this.vesselOrderItemService = vesselOrderItemService;
     this.vesselOrderItemBidService = vesselOrderItemBidService;
@@ -53,37 +52,44 @@ public class VesselOrderItemBidReceivedController {
     this.paymentService = paymentService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     this.emailService = emailService;
-    this.dateTimeAgeService = dateTimeAgeService;
   }
 
-
-  private final DateTimeAgeService dateTimeAgeService;
-
-
-  private String commonFindAll(Model model, LocalDate from, LocalDate to) {
-
-    model.addAttribute("payments",
-                       paymentService.findByCreatedAtIsBetween(dateTimeAgeService.dateTimeToLocalDateStartInDay(from)
-                           , dateTimeAgeService.dateTimeToLocalDateEndInDay(to))
-                           .stream()
-                           .filter(x -> x.getStatusConformation().equals(StatusConformation.INR) && (x.getVesselOrder().getClosingDate().isAfter(LocalDate.now()) || x.getVesselOrder().getClosingDate().equals(LocalDate.now())) && x.getVesselOrder().getVesselOrderStatus().equals(VesselOrderStatus.APPROVE))
-                           .collect(Collectors.toList()));
-
-    model.addAttribute("message",
-                       "Following table show details belongs from " + from.toString() + " to " + to.toString() +
-                           "there month. if you need to more please search using above method");
-    return "vesselOrderItemBidReceived/vesselOrderItemBidReceived";
-  }
 
   @GetMapping
   public String findAll(Model model) {
-    return commonFindAll(model, dateTimeAgeService.getPastDateByMonth(3), LocalDate.now());
-
+    model.addAttribute("vesselOrders", vesselOrderService.findByVesselOrderStatus(VesselOrderStatus.BIDEN));
+    return "vesselOrderItemApproval/vesselOrderItemApproval";
   }
 
-  @PostMapping( "/search" )
-  public String invoiceSearch(@ModelAttribute TwoDate twoDate, Model model) {
-    return commonFindAll(model, twoDate.getStartDate(), twoDate.getEndDate());
+  @GetMapping( "/{id}" )
+  public String addForm(@PathVariable Integer id, Model model) {
+    Comparator< VesselOrderItemBid > compareByBidenPrice =
+        Comparator.comparing(VesselOrderItemBid::getAmount);
+
+    List< VesselOrderItemBid > vesselOrderItemBids = new ArrayList<>();
+
+    VesselOrder vesselOrder = vesselOrderService.findById(id);
+
+    vesselOrder.getVesselOrderItems().forEach(
+        x -> vesselOrderItemBidService.findByVesselOrderItem(x)
+            .stream()
+            .sorted(compareByBidenPrice)
+            .collect(Collectors.toList()).forEach(y -> {
+              y.setItem(x.getItem());
+              y.setBidValidOrNot(BidValidOrNot.REJECT);
+              vesselOrderItemBids.add(y);
+            }));
+
+    model.addAttribute("vesselOrderItemBids", vesselOrderItemBids);
+
+    model.addAttribute("vesselOrderDetail", vesselOrder);
+    model.addAttribute("vesselDetail", vesselOrder.getVesselArrivalHistory().getVessel());
+    List< BidValidOrNot > bidValidOrNots = new ArrayList<>();
+    bidValidOrNots.add(BidValidOrNot.REJECT);
+    bidValidOrNots.add(BidValidOrNot.SELECT);
+    model.addAttribute("bidValidOrNots", bidValidOrNots);
+    model.addAttribute("vesselOrderBid", new VesselOrderBid());
+    return "vesselOrderItemApproval/addVesselOrderItemApproval";
   }
 
   @PostMapping( "/save" )
@@ -117,7 +123,7 @@ public class VesselOrderItemBidReceivedController {
         BigDecimal totalPrice = totalAmount.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
         payment.setAmount(totalPrice);
         //statusConformation
-        payment.setStatusConformation(StatusConformation.PEN);
+        payment.setStatusConformation(StatusConformation.INR);
         //chandler
         payment.setChandler(chandler);
         //vesselOrder
@@ -127,7 +133,7 @@ public class VesselOrderItemBidReceivedController {
         vesselOrderItemBidsFiltered.forEach(x -> {
           VesselOrderItemBidPayment vesselOrderItemBidPayment = new VesselOrderItemBidPayment();
           vesselOrderItemBidPayment.setVesselOrderItemBid(x);
-          vesselOrderItemBidPayment.setPaymentStatus(PaymentStatus.NOTPAID);
+          vesselOrderItemBidPayment.setPaymentStatus(PaymentStatus.ITEMNR);
           vesselOrderItemBidPayment.setPayment(paymentDb);
           vesselOrderItemBidPaymentService.persist(vesselOrderItemBidPayment);
         });
@@ -152,7 +158,7 @@ public class VesselOrderItemBidReceivedController {
     }
 
 
-    return "redirect:/vesselOrderItemBidReceived";
+    return "redirect:/vesselOrderItemApproval";
   }
 
   private List< Chandler > chandlers(List< VesselOrderItemBid > vesselOrderItemBids) {

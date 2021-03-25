@@ -123,7 +123,7 @@
                 <option value="" selected >Please Select</option >
                 <option data-th-each="item : ${items}"
                         data-th-value="${item.id}"
-                        data-th-text="${item.name}" ></option >
+                        data-th-text="${'Category : '+item.category.mainCategory.mainCategory+' Brand : '+item.category.name.substring(0, 1))+#strings.toLowerCase(item.category.name.substring(1))+' Product : '+item.name}" ></option >
               </select >
             </div >
           </div >
