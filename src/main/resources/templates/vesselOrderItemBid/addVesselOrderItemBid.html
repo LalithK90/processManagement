@@ -172,7 +172,7 @@
                   data-th-each="vesselOrderItem, index : ${vesselOrderDetail.vesselOrderItems}" >
                 <!--name-->
                 <td >
-                  <span data-th-id="${'nm'+index.index}" data-th-text="${vesselOrderItem.item.name}" ></span >
+                  <span data-th-id="${'nm'+index.index}" data-th-text="${vesselOrderItem.item.category.mainCategory.mainCategory + ' - ' + #strings.toUpperCase(vesselOrderItem.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItem.item.category.name.substring(1)) + ' - ' +vesselOrderItem.item.name} " ></span >
                   <!--vesselOrderItem-->
                   <input type="hidden" data-th-id="${'voi'+index.index}"
                          data-th-name="${'vesselOrderItemBids[__${index.index}__].vesselOrderItem'}"
