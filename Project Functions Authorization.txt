@@ -1,0 +1,106 @@
+/category                                     guard/inspector    
+/category/add                                 guard/inspector
+/category/delete/{id}                         guard/inspector
+/category/edit/{id}                           guard/inspector
+/category/getCategory/{mainCategory}          guard/inspector
+/category/{id}                                guard/inspector
+  
+/chandler                                    inspector/assistant superintendent  
+/chandler/add                                inspector/assistant superintendent
+/chandler/delete/{id}                        inspector/assistant superintendent
+/chandler/edit/{id}                          inspector/assistant superintendent
+/chandler/findAll                            inspector/assistant superintendent         
+/chandler/{id}                               inspector/assistant superintendent       
+
+/chandlerLicense                             assistant superintendent/ superintendent                             
+/chandlerLicense /add                        assistant superintendent/ superintendent 
+/chandlerLicense/add/{id}                    assistant superintendent/ superintendent  
+/chandlerLicense/delete/{id}                 assistant superintendent/ superintendent
+/chandlerLicense/edit/{id}                   assistant superintendent/ superintendent
+/chandlerLicense/invalid                     assistant superintendent/ superintendent
+/chandlerLicense/process                     assistant superintendent/ superintendent
+/chandlerLicense/valid                       assistant superintendent/ superintendent 
+/chandlerLicense/view/{id}                   guard/inspector/assistant superintendent/superintendent     
+
+/item /add                                   guard/inspector
+/item/deactivate/{id}                        guard/inspector  
+/item/delete/{id}                            guard/inspector
+/item/edit/{id}                              guard/inspector
+/item/{id}                                   guard/inspector 
+
+/payment                                     ship agent
+/payment/delete/{id}                         ship agent 
+/payment/edit/{id}                           ship agent 
+/payment/{id}                                ship agent
+
+
+/role                                        Assistant superintendent / superintendent  
+/role/add                                    Assistant superintendent / superintendent
+/role/edit/{id}                              Assistant superintendent / superintendent
+/role/remove/{id}                            Assistant superintendent / superintendent
+/role/search                                 Assistant superintendent / superintendent
+/role/{id}                                   Assistant superintendent / superintendent
+
+/shipAgent                                   guard/ inspector
+/shipAgent /add                              guard/ inspector
+/shipAgent /delete/{id}                      guard/ inspector
+/shipAgent /edit/{id}                        guard/ inspector
+/shipAgent /findAll                          guard/ inspector
+/shipAgent /view/{id}                        guard/ inspector
+
+
+/user                             Assistant superintendent/ superintendent    
+/user/add                         Assistant superintendent/ superintendent
+/user/edit/{id}                   Assistant superintendent/ superintendent
+/user/remove/{id}                 Assistant superintendent/ superintendent  
+/user/search                      Assistant superintendent/ superintendent
+/user/{id}                        Assistant superintendent/ superintendent
+ 
+
+/userDetails                      Assistant superintendent/ superintendent
+/userDetails/add                  Assistant superintendent/ superintendent         
+/userDetails/edit{id}             Assistant superintendent/ superintendent
+/userDetails/file{filename}       Assistant superintendent/ superintendent
+/userDetails/remove/{id}          Assistant superintendent/ superintendent
+/userDetails/search               Assistant superintendent/ superintendent 
+/userDetails/{id}                 Assistant superintendent/ superintendent
+
+/vesselArrivalHistory/                    -inspector/assistant superintendent
+/vesselArrivalHistory/add/{id}            -inspector/assistant superintendent
+/vesselArrivalHistory/arrival             -inspector/assistant superintendent
+/vesselArrivalHistory/arrival/{id}        -inspector/assistant superintendent 
+/vesselArrivalHistory/depature            -inspector/assistant superintendent
+/vesselArrivalHistory/depature/{id}       -inspector/assistant superintendent
+/vesselArrivalHistory/edit/{id}           -inspector/assistant superintendent
+/vesselArrivalHistory/getDepatureDate/{id}-inspector/assistant superintendent
+/vesselArrivalHistory/notArrival          -inspector/assistant superintendent
+/vesselArrivalHistory/{id}                -inspector/assistant superintendent
+
+
+/vessel                            -ship agent 
+/vessel/add                        -ship agent
+/vessel/delete{id}                 -ship agent
+/vessel/edit{id}                   -ship agent
+/vessel/view/{id}                  -ship agent   
+
+     
+/vesselOrder                        -ship agent
+/vesselOrder/add                    -ship agent
+/vesselOrder/edit/{id}              -ship agent
+/vesselOrder/view/{id}              -ship agent
+             
+vesselOrderItemApproval             -assistant superintendent/superintendent
+vesselOrderItemApproval /{id}       -assistant superintendent/superintendent 
+
+vesselOrderItemBid                  -chandler 
+vesselOrderItemBid /bid/{id}        -chandler 
+
+vesselOrderItemBidRecieved /        -assistant superintendent
+
+vesselOrderItemRecieved /           -inspector
+
+/warehouseBlock                     -inspector                         
+/warehouseBlock/add                 -inspector 
+/warehouseBlock/delete/{id}         -inspector 
+/warehouseBlock/edit/{id}           -inspector
+/warehouseBlock/{id}                -inspector
