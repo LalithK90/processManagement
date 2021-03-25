@@ -70,9 +70,12 @@
                         <a class="btn btn-outline-primary btn-sm"
                            data-th-href="${'/chandlerLicense/view/' + chandlerLicense.id}"><i
                                 class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                        <a class="btn btn-outline-success btn-sm"
-                           data-th-href="${'/chandlerLicense/edit/' + chandlerLicense.id}"><i
-                                class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit</a>
+                        <a data-th-if="${#strings.equals(chandlerLicense.licenseStatus.licenseStatus, 'PROCEED')}"
+                           data-th-href="${'/chandlerLicense/edit/' + chandlerLicense.id}">
+                            <button  type="button" class="btn btn-outline-primary btn-sm" >
+                            <i                                class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit
+                            </button>
+                        </a>
                     </th>
                 </tr>
                 </tbody>
