@@ -56,14 +56,24 @@
           <th data-th-text="${chandler.email}" ></th >
           <th data-th-text="${chandler.address}" ></th >
           <th data-th-if="${chandlerDetailShow !=true}" >
-            <a data-th-if="${#arrays.isEmpty(chandler.chandlerLicenses) || #strings.equals(chandler.chandlerLicense[#lists.size(list) - 1].licenseStatus, 'INVALID')}"
-               class="btn btn-outline-primary btn-sm"
-               data-th-href="${'/chandlerLicense/add/' + chandler.id}" ><i
-                  class="fa fa-folder-open" style="font-size: 15px" ></i >Add License</a >
+            <!-- || -->
+            <a
+               data-th-href="${'/chandlerLicense/add/' + chandler.id}" >
+              <button
+                    data-th-if="${#strings.equals(chandler.chandlerLicense[#lists.size(list) - 1].licenseStatus, 'INVALID')}"
+                    class="btn btn-outline-primary btn-sm" type="button" >
+                <i class="fa fa-folder-open" style="font-size: 15px" ></i >Add License
+              </button >
+            </a >
+
             <a class="btn btn-outline-primary btn-sm" data-th-href="${'/chandler/' + chandler.id}" ><i
                   class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
-            <a data-th-if="${#strings.equals(chandler.chandlerLicense[#lists.size(list) - 1].licenseStatus, 'PROCEED')}" class="btn btn-outline-success btn-sm" data-th-href="${'/chandler/edit/' + chandler.id}" ><i
-                  class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Edit</a >
+
+            <a data-th-if="${#arrays.isEmpty(chandler.chandlerLicenses)}" data-th-href="${'/chandler/edit/' + chandler.id}" >
+              <button data-th-if="${#strings.equals(chandler.chandlerLicense[#lists.size(list) - 1].licenseStatus, 'PROCEED')}" type="button" class="btn btn-outline-primary btn-sm" >
+                <i class="fa fa-edit" style="font-size: 15px" ></i >&nbsp;Edit
+              </button >
+            </a >
 
             <a data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                class="btn btn-outline-danger btn-sm" data-th-href="${'/chandler/delete/' + chandler.id}" >
