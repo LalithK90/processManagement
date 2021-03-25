@@ -67,10 +67,10 @@
                     <th data-th-text="${chandlerLicense.endDate}"></th>
                     <th data-th-text="${chandlerLicense.licenseStatus.licenseStatus}"></th>
                     <th>
-                        <a class="btn btn-outline-primary btn-sm"
+                        <a class="btn btn-outline-success btn-sm"
                            data-th-href="${'/chandlerLicense/view/' + chandlerLicense.id}"><i
                                 class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                        <a data-th-if="${#strings.equals(chandlerLicense.licenseStatus.licenseStatus, 'PROCEED')}"
+                        <a data-th-if="${#strings.equals(chandlerLicense.licenseStatus, 'PROCEED')}"
                            data-th-href="${'/chandlerLicense/edit/' + chandlerLicense.id}">
                             <button  type="button" class="btn btn-outline-primary btn-sm" >
                             <i                                class="fa fa-edit" style="font-size: 15px"></i>&nbsp;Edit
