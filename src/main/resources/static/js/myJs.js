@@ -41,7 +41,7 @@ $(document).ready(function () {
     /*//--------------- data table short using - data table plugin ------- start //*/
 
     /*When edit employee if there is a nic number need to select relevant gender*/
-    if ($("#nic").val()) {
+    if ($("#nic").val().length !==0) {
         $("input:radio[name=gender]").filter(`[value=${calculateGender($("#nic").val())}]`).prop('checked', true);
     }
 
@@ -53,11 +53,6 @@ $(document).ready(function () {
         $("input:radio[name=gender]").filter(`[value=${calculateGender(nic)}]`).prop('checked', true);
 
     });
-    /* Patient and employee Nic Validation - end*/
-    //input type date can not be selected future date
-    // $('[type="date"]').prop('max', function () {
-    //     return new Date().toJSON().split('T')[0];
-    // });
 
 });
 
@@ -334,6 +329,26 @@ let backgroundColourChangeNothingToChange = function (id) {
 
 //colour change function -- end
 
+
+// start date and end date validation
+$("#startDate, #endDate").bind('change',
+    function () {
+        console.log("sdsadasda")
+        let manufactureDate = $(`#startDate`).val();
+        let expiredDate = $(`#endDate`).val();
+
+        if (manufactureDate.length !==0 && expiredDate.length !==0) {
+            if (Date.parse(manufactureDate) > Date.parse(expiredDate)) {
+                swal({
+                    title: "Could you accept those days.. !",
+                    icon: "warning",
+                    text: "Please check your date \n Expire Date can not be less than Manufacture Date",
+                })
+                $(`#endDate`).val($(`#startDate`).val());
+            }
+        }
+    });
+
 /* some content need to print use this method */
 
 // el (id of content)is variable that need to give when function call
@@ -386,48 +401,7 @@ let conformationAndLoginWindow = function () {
 
 //Customer employee Search filed - start any way in project
 
-/*Employee working place - */
-$("#selectParameter").bind("change", function () {
-    btnSearchEmployeeShow();
-    $("#selectParameter").css('background', '');
-    //set what is the parameter will search
-    $("#valueEmployee").attr('name', $(this).val());
-    $("#valueEmployee").val('');
-    backgroundColourChangeNothingToChange($("#valueEmployee"));
-});
 
-/*Employee Find */
-$("#valueEmployee").bind("keyup", function () {
-    let selectedValue = $("#valueEmployee").attr('name');
-    if ($("#valueEmployee").val() !== '' && $("#selectParameter").val() === '') {
-        $("#selectParameter").css('background', '#dc3545');
-        swal({
-            title: "Please enter select parameter value before type here",
-            icon: "warning",
-        });
-    }
-    if (selectedValue === "nic") {
-        let nic = $("#valueEmployee");
-        if (nicRegex.test($("#valueEmployee").val())) {
-            backgroundColourChangeGood(nic);
-        } else if (nic.length === 0) {
-            backgroundColourChangeNothingToChange(nic);
-        } else {
-            backgroundColourChangeBad(nic);
-        }
-    }
-    btnSearchEmployeeShow();
-
-});
-
-let btnSearchEmployeeShow = function () {
-    if ($("#selectParameter").val() !== '' && $("#valueEmployee").val() !== '') {
-        $("#btnSearchEmployee").css('display', '');
-    } else {
-        $("#btnSearchEmployee").css('display', 'none');
-    }
-};
-//Customer employee Search filed - end any way in project
 
 
 //password validator user add

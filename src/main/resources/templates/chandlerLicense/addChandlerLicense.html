@@ -86,16 +86,21 @@
           <!--License Status-->
           <div data-th-if="${addStatus==false}" class="form-row text-right" >
             <div class="col-md-4" >
-              <label class="control-label" for="startDateE" >Licence Status :</label >
+              <label class="control-label" >Licence Status :</label >
             </div >
-            <div class="col-md-8" >
-              <select id="licenseStatus" class="form-control" data-th-field="*{licenseStatus}" required
-                      data-th-readonly="${readonlyStatus}" >
-                <option value="" disabled selected >Please Select</option >
-                <option data-th-each="licenseStatus : ${licenseStatuss}"
-                        data-th-value="${licenseStatus}"
-                        data-th-text="${licenseStatus.licenseStatus}" ></option >
-              </select >
+            <div class="col-md-8 text-left" >
+              <div class="custom-control custom-checkbox custom-control-inline "
+                   data-th-each="licenseStatus,index : ${licenseStatuss}" >
+                <input class="custom-control-input gender" required
+                       data-th-name="${'licenseStatus'}"
+                       data-th-value="${licenseStatus}"
+                       data-th-id="${index.index}+${licenseStatus}" type="radio"
+                       data-th-checked="${licenseStatus==licenseStatus}" />
+                <label class="custom-control-label"
+                       data-th-for="${index.index}+${licenseStatus}"
+                       data-th-text="${licenseStatus.licenseStatus}" > radio
+                </label >
+              </div >
             </div >
           </div >
           <!--Start date-->

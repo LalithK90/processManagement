@@ -123,24 +123,5 @@
 <!--script include-->
 <div  data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
-<script>
-    $("#startDate, #endDate").bind('change',
-          function () {
-              console.log("sdsadasda")
-              let manufactureDate = $(`#startDate`).val();
-              let expiredDate = $(`#endDate`).val();
-
-              if (manufactureDate.length !==0 && expiredDate.length !==0) {
-                  if (Date.parse(manufactureDate) > Date.parse(expiredDate)) {
-                      swal({
-                          title: "Could you accept those days.. !",
-                          icon: "warning",
-                          text: "Please check your date \n Expire Date can not be less than Manufacture Date",
-                      })
-                      $(`#endDate`).val($(`#startDate`).val());
-                  }
-              }
-          });
-</script>
 </body>
 </html>
