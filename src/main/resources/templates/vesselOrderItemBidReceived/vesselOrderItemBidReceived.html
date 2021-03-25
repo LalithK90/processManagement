@@ -1,5 +1,5 @@
 <!DOCTYPE html>
- <html lang="en" >
+<html lang="en" >
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -41,19 +41,19 @@
         <div class="collapse mx-auto" id="dataTargetCollapse" >
             <div class="container-fluid text-center" >
                 <div class="row" >
-                        <form class="form-inline" data-th-action="@{/vesselOrderItemBidReceived/search}" data-th-method="POST" >
-                            <div class="form-group mr-2" >
-                                <label for="startDate" >FROM :</label >
-                                <input class="form-control" id="startDate" name="startDate" type="date" />
-                            </div >
-                            <div class="form-group mr-2" >
-                                <label for="endDate" >TO :</label >
-                                <input class="form-control" id="endDate" name="endDate" type="date" />
-                            </div >
-                            <button class="btn btn-success mr-2" id="btnSummaryFind" type="submit" ><span
-                                  class="glyphicon glyphicon-search" ></span >&nbsp;Search
-                            </button >
-                        </form >
+                    <form class="form-inline" data-th-action="@{/vesselOrderItemBidReceived/search}" data-th-method="POST" >
+                        <div class="form-group mr-2" >
+                            <label for="startDate" >FROM :</label >
+                            <input class="form-control" id="startDate" name="startDate" type="date" />
+                        </div >
+                        <div class="form-group mr-2" >
+                            <label for="endDate" >TO :</label >
+                            <input class="form-control" id="endDate" name="endDate" type="date" />
+                        </div >
+                        <button class="btn btn-success mr-2" id="btnSummaryFind" type="submit" ><span
+                              class="glyphicon glyphicon-search" ></span >&nbsp;Search
+                        </button >
+                    </form >
                 </div >
             </div >
         </div >
@@ -111,7 +111,7 @@
                 </button>
                 <h3 class="text-center text-danger">
                     <strong>There is no payment upto now please add payment to the system
-                        using add user button.
+                            using add user button.
                     </strong>
                 </h3>
             </div>
