@@ -59,7 +59,6 @@ public class VesselOrderItemBidReceivedController {
 
   private final DateTimeAgeService dateTimeAgeService;
 
-
   private String commonFindAll(Model model, LocalDate from, LocalDate to) {
 
     model.addAttribute("payments",
@@ -89,7 +88,6 @@ public class VesselOrderItemBidReceivedController {
   @PostMapping( "/save" )
   public String saveApprove(@ModelAttribute VesselOrderBid vesselOrderBid) {
 
-    vesselOrderBid.getVesselOrderItemBids().forEach(x -> System.out.println(x.getId()));
 
     List< VesselOrderItemBid > vesselOrderItemBids =
         vesselOrderItemBidService.saveAll(vesselOrderBid.getVesselOrderItemBids());

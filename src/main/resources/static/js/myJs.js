@@ -15,44 +15,42 @@ $(document).ready(function () {
 
     /*//--------------- data table short using - data table plugin ------- start //*/
 
-
-    if ($("#myTable").length !== 0) {
-        $("#myTable").DataTable({
-            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
-            "ordering": false,
-            stateSave: true,
-        });
-    }
-    if ($("#allItemTable").length !== 0) {
-        $("#allItemTable").DataTable({
-            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
-            "ordering": false,
-            stateSave: true,
-        });
-    }
-    if ($("#bitItemTable").length !== 0) {
-        $("#bitItemTable").DataTable({
-            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
-            "ordering": false,
-            stateSave: true,
-        });
-    }
-
-    /*//--------------- data table short using - data table plugin ------- start //*/
-
-    /*When edit employee if there is a nic number need to select relevant gender*/
-    if ($("#nic").val().length !==0) {
-        $("input:radio[name=gender]").filter(`[value=${calculateGender($("#nic").val())}]`).prop('checked', true);
-    }
-
-    /* Patient and employee Nic Validation - start*/
-    $("#nic").bind('keyup', function () {
-        let nic = $(this).val();
-        $("#dateOfBirth").val(calculateDateOfBirth(nic));
-//access our front-end gender*/
-        $("input:radio[name=gender]").filter(`[value=${calculateGender(nic)}]`).prop('checked', true);
-
+});
+if ($("#myTable").length !== 0) {
+    $("#myTable").DataTable({
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+        "ordering": false,
+        stateSave: true,
     });
+}
+if ($("#allItemTable").length !== 0) {
+    $("#allItemTable").DataTable({
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+        "ordering": false,
+        stateSave: true,
+    });
+}
+if ($("#bitItemTable").length !== 0) {
+    $("#bitItemTable").DataTable({
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+        "ordering": false,
+        stateSave: true,
+    });
+}
+
+/*//--------------- data table short using - data table plugin ------- start //*/
+
+/*When edit employee if there is a nic number need to select relevant gender*/
+if ($("#nic").val()) {
+    $("input:radio[name=gender]").filter(`[value=${calculateGender($("#nic").val())}]`).prop('checked', true);
+}
+
+/* Patient and employee Nic Validation - start*/
+$("#nic").bind('keyup', function () {
+    let nic = $(this).val();
+    $("#dateOfBirth").val(calculateDateOfBirth(nic));
+//access our front-end gender*/
+    $("input:radio[name=gender]").filter(`[value=${calculateGender(nic)}]`).prop('checked', true);
 
 });
 
@@ -61,7 +59,7 @@ $(document).ready(function () {
 let nicRegex = /^([0-9]{9}[vV|xX])|^([0-9]{12})$/;
 let mobileRegex = /^([0][7][\d]{8}$)|^([7][\d]{8})$/;
 let landRegex = /^0((11)|(2(1|[3-7]))|(3[1-8])|(4(1|5|7))|(5(1|2|4|5|7))|(6(3|[5-7]))|([8-9]1))([2-4]|5|7|9)[0-9]{6}$/;
-let nameRegex = /^[a-zA-Z .-]{5}[ a-zA-Z.-]+$/;
+let nameRegex = /^[a-zA-Z .-]{3}[ a-zA-Z.-]+$/;
 let numberRegex = /^([eE][hH][sS][\d]+)$/;
 let invoiceNumberRegex = /^[0-9]{10}$/;
 
@@ -337,7 +335,7 @@ $("#startDate, #endDate").bind('change',
         let manufactureDate = $(`#startDate`).val();
         let expiredDate = $(`#endDate`).val();
 
-        if (manufactureDate.length !==0 && expiredDate.length !==0) {
+        if (manufactureDate.length !== 0 && expiredDate.length !== 0) {
             if (Date.parse(manufactureDate) > Date.parse(expiredDate)) {
                 swal({
                     title: "Could you accept those days.. !",
@@ -392,16 +390,6 @@ let conformationAndLoginWindow = function () {
         }
     });
 };
-
-
-//custom invoice search page validation - end
-
-
-//Search form date validation — end
-
-//Customer employee Search filed - start any way in project
-
-
 
 
 //password validator user add

@@ -8,7 +8,9 @@ import lombok.Getter;
 public enum StatusConformation {
   INR("Item Not Receiving"),
   REC("Receiving"),
-  PAID("Paid"),
+  PAIDSHIPAGENT("Paid Ship Agent"),
+  RECEVINGPAYMENT("Receiving Payment"),
+  ORDERCOLOSE("Order Close"),
   PEN("Pending");
 
   private final String statusConformation;

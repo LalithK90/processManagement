@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.process_management.controller;
 
 import lk.custom_process_management.asset.chandler.entity.Chandler;
+import lk.custom_process_management.asset.common_asset.model.ItemVesselOrderItemBid;
 import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.payment.entity.enums.PaymentStatus;
 import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
@@ -80,6 +81,32 @@ public class VesselOrderItemBidApprovalController {
               vesselOrderItemBids.add(y);
             }));
 
+
+    List< ItemVesselOrderItemBid > itemVesselOrderItemBids = new ArrayList<>();
+
+    for ( int i = 0; i < vesselOrderItemBids.size(); i++ ) {
+      ItemVesselOrderItemBid itemVesselOrderItemBid = new ItemVesselOrderItemBid();
+
+      if ( i != 0 ) {
+        var item = vesselOrderItemBids.get(i - 1).getItem();
+        List< VesselOrderItemBid > itemVesselOrderItemBidMap = new ArrayList<>();
+        itemVesselOrderItemBid.setItem(vesselOrderItemBids.get(i).getItem());
+        if ( item.equals(vesselOrderItemBids.get(i).getItem()) ) {
+          itemVesselOrderItemBidMap.add(vesselOrderItemBids.get(i));
+        }
+        itemVesselOrderItemBid.setVesselOrderItemBids(itemVesselOrderItemBidMap);
+      } else {
+        itemVesselOrderItemBid.setVesselOrderItemBids(vesselOrderItemBids);
+        itemVesselOrderItemBid.setItem(vesselOrderItemBids.get(i).getItem());
+      }
+      itemVesselOrderItemBids.add(itemVesselOrderItemBid);
+
+    }
+
+    //new way to separate items
+    model.addAttribute("itemVesselOrderItemBids", itemVesselOrderItemBids);
+
+//old methods
     model.addAttribute("vesselOrderItemBids", vesselOrderItemBids);
 
     model.addAttribute("vesselOrderDetail", vesselOrder);
