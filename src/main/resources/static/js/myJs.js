@@ -16,21 +16,21 @@ $(document).ready(function () {
     /*//--------------- data table short using - data table plugin ------- start //*/
 
 });
-if ($("#myTable").length !== 0) {
+if ($("#myTable").val()) {
     $("#myTable").DataTable({
         "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
         "ordering": false,
         stateSave: true,
     });
 }
-if ($("#allItemTable").length !== 0) {
+if ($("#allItemTable").val()) {
     $("#allItemTable").DataTable({
         "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
         "ordering": false,
         stateSave: true,
     });
 }
-if ($("#bitItemTable").length !== 0) {
+if ($("#bitItemTable").val()) {
     $("#bitItemTable").DataTable({
         "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
         "ordering": false,

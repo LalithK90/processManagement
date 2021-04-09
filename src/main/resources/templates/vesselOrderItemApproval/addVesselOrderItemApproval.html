@@ -58,69 +58,37 @@
     <!--Table view-->
     <div class="form-row container col-12" >
       <!--items bit-->
-      <table class="table table-hover text-center table-striped col-12" id="table" >
+      <table class="table table-hover col-12" id="table" >
         <thead >
         <tr >
           <th > Index</th >
           <th > Item Details</th >
           <th > Unit Price</th >
           <th > Total Amount</th >
+          <th ></th >
           <th > Modify</th >
         </tr >
         </thead >
         <tbody >
         <tr data-th-each="vesselOrderItemBid, rowCount : ${vesselOrderItemBids}" >
           <th data-th-text="${rowCount.count}" ></th >
-          <th >
-            <div class="form-row" >
-              <!--Main Category-->
-              <div class="col-5" >
-                <div class="form-row" >
-                  <div class="col-md-4" >
-                    <label class="control-label" for="mainCategory" >Category</label >
-                  </div >
-                  <div class="col-md-8" >
-                    <p id="mainCategory" data-th-text="${vesselOrderItemBid.item.category.mainCategory.mainCategory}"
-                       class="text-dark font-italic" ></p >
-                  </div >
-                </div >
-              </div >
-              <!--Sub Category-->
-              <div class="col" >
-                <div class="form-row" >
-                  <div class="col-md-4" >
-                    <label class="control-label" for="subCategory" >Brand</label >
-                  </div >
-                  <div class="col-md-8" >
-                    <p id="subCategory"
-                       data-th-text="${#strings.toUpperCase(vesselOrderItemBid.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBid.item.category.name.substring(1))}"
-                       class="text-dark font-italic" ></p >
-                  </div >
-                </div >
-              </div >
-              <!--Name-->
-              <div class="col" >
-                <div class="form-row" >
-                  <div class="col-md-4" >
-                    <label class="control-label" for="name" >Name</label >
-                  </div >
-                  <div class="col-md-8" >
-                    <p id="name" data-th-text="${vesselOrderItemBid.item.name}"
-                       class="text-dark font-italic" ></p >
-                  </div >
-                </div >
-              </div >
-            </div >
-          </th >
+          <th data-th-id="${'nm'+rowCount.index}"
+              data-th-text="${vesselOrderItemBid.item.category.mainCategory.mainCategory} +${' '}+ ${#strings.toUpperCase(vesselOrderItemBid.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBid.item.category.name.substring(1))}+${' '}+${vesselOrderItemBid.item.name} " ></th >
           <th data-th-text="${vesselOrderItemBid.unitPrice}" ></th >
           <th data-th-text="${vesselOrderItemBid.amount}" ></th >
+          <th >
+            <!--  vesselOrderItem-->
+            <input type="hidden" data-th-value="${vesselOrderItemBid.vesselOrderItem.id}"
+                   data-th-id="${'vi'+rowCount.index}"
+                   data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].vesselOrderItem.id'}" >
+          </th >
           <th >
             <div class="form-row text-right" >
               <!--  bidValidOrNot-->
               <div class="col-md-8" >
                 <div class="custom-control custom-checkbox custom-control-inline "
                      data-th-each="genders,index : ${bidValidOrNots}" >
-                  <input class="custom-control-input bidValidOrNot" required
+                  <input class="custom-control-input " required onclick="otherReject(this)"
                          data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].bidValidOrNot'}"
                          data-th-value="${genders}"
                          data-th-id="${index.index}+${'bv'}+${rowCount.index}"
@@ -142,10 +110,6 @@
             <!--  unitPrice-->
             <input type="hidden" data-th-value="${vesselOrderItemBid.unitPrice}"
                    data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].unitPrice'}" >
-            <!--  vesselOrderItem-->
-            <input type="hidden" data-th-value="${vesselOrderItemBid.vesselOrderItem.id}"
-                   data-th-id="${'vi'+rowCount.index}"
-                   data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].vesselOrderItem.id'}" >
             <!--  chandler-->
             <input type="hidden" data-th-value="${vesselOrderItemBid.chandler.id}"
                    data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].chandler.id'}" >
@@ -154,170 +118,6 @@
         </tr >
         </tbody >
       </table >
-      <!-- items bit separate with item -->
-      <div class="container-fluid" >
-        <div class="form-row container col-12"
-             data-th-each="itemVesselOrderItemBid, rowCount : ${itemVesselOrderItemBids}" >
-          <!-- main item detail -->
-          <div class="container-fluid" >
-            <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-th-attr="${'data-target="
-                    #collapseExample
-            ' +rowCount.index+'"'}" aria-expanded="false" aria-controls="collapseExample">
-            <span data-th-text="${itemVesselOrderItemBid.item.name}" ></span > Details
-            </button>
-            <div class="collapse" data-th-id="${'collapseExample'+rowCount.index}" >
-              <div class="card card-body" >
-                <!--Left Side-->
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
-                  <!--Main Category-->
-                  <div class="form-row text-right" >
-                    <div class="col-md-4" >
-                      <label class="control-label" for="mainCategory" >Category :</label >
-                    </div >
-                    <div class="col-md-8" >
-                      <p id="mainCategory"
-                         data-th-text="${itemVesselOrderItemBid.item.category.mainCategory.mainCategory}"
-                         class="display_detail" ></p >
-                    </div >
-                  </div >
-                </div >
-                <!--Name-->
-                <div class="form-row text-right" >
-                  <div class="col-md-4" >
-                    <label class="control-label" for="name" >Name :</label >
-                  </div >
-                  <div class="col-md-8" >
-                    <p id="name" data-th-text="${itemVesselOrderItemBid.item.name}"
-                       class="display_detail" ></p >
-                  </div >
-                </div >
-                <!--Right Side-->
-                <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
-                  <!--Sub Category-->
-                  <div class="form-row text-right" >
-                    <div class="col-md-4" >
-                      <label class="control-label" for="subCategory" >Brand :</label >
-                    </div >
-                    <div class="col-md-8" >
-                      <p id="subCategory"
-                         data-th-text="${#strings.toUpperCase(itemVesselOrderItemBid.item.category.name.substring(0, 1))+#strings.toLowerCase(itemVesselOrderItemBid.item.category.name.substring(1))}"
-                         class="display_detail" ></p >
-                    </div >
-                  </div >
-                  <!--Created By-->
-                  <div class="form-row text-right" >
-                    <div class="col-md-4" >
-                      <label class="control-label" for="createdBy" >Created By :</label >
-                    </div >
-                    <div class="col-md-8" >
-                      <p id="createdBy" data-th-text="${itemVesselOrderItemBid.item.createdBy}"
-                         class="display_detail" ></p >
-                    </div >
-                  </div >
-                </div >
-              </div >
-            </div >
-          </div >
-          <!--items bit-->
-          <table class="table table-hover text-center table-striped col-12" id="tableOne" >
-            <thead >
-            <tr >
-              <th > Index</th >
-              <th > Item Details</th >
-              <th > Unit Price</th >
-              <th > Total Amount</th >
-              <th > Modify</th >
-            </tr >
-            </thead >
-            <tbody >
-            <tr data-th-each="vesselOrderItemBid, row : ${itemVesselOrderItemBid.vesselOrderItemBids}" >
-              <th data-th-text="${row.count}" ></th >
-              <th >
-                <div class="form-row" >
-                  <!--Main Category-->
-                  <div class="col-5" >
-                    <div class="form-row" >
-                      <div class="col-md-4" >
-                        <label class="control-label" for="mainCategory" >Category</label >
-                      </div >
-                      <div class="col-md-8" >
-                        <p id="mainCategory"
-                           data-th-text="${vesselOrderItemBid.item.category.mainCategory.mainCategory}"
-                           class="text-dark font-italic" ></p >
-                      </div >
-                    </div >
-                  </div >
-                  <!--Sub Category-->
-                  <div class="col" >
-                    <div class="form-row" >
-                      <div class="col-md-4" >
-                        <label class="control-label" for="subCategory" >Brand</label >
-                      </div >
-                      <div class="col-md-8" >
-                        <p id="subCategory"
-                           data-th-text="${#strings.toUpperCase(vesselOrderItemBid.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBid.item.category.name.substring(1))}"
-                           class="text-dark font-italic" ></p >
-                      </div >
-                    </div >
-                  </div >
-                  <!--Name-->
-                  <div class="col" >
-                    <div class="form-row" >
-                      <div class="col-md-4" >
-                        <label class="control-label" for="name" >Name</label >
-                      </div >
-                      <div class="col-md-8" >
-                        <p id="name" data-th-text="${vesselOrderItemBid.item.name}"
-                           class="text-dark font-italic" ></p >
-                      </div >
-                    </div >
-                  </div >
-                </div >
-              </th >
-              <th data-th-text="${vesselOrderItemBid.unitPrice}" ></th >
-              <th data-th-text="${vesselOrderItemBid.amount}" ></th >
-              <th >
-                <div class="form-row text-right" >
-                  <!--  bidValidOrNot-->
-                  <div class="col-md-8" >
-                    <div class="custom-control custom-checkbox custom-control-inline "
-                         data-th-each="genders,index : ${bidValidOrNots}" >
-                      <input class="custom-control-input bidValidOrNot" required
-                             data-th-name="${'vesselOrderItemBids[__${rowCount.index+row.index}__].bidValidOrNot'}"
-                             data-th-value="${genders}"
-                             data-th-id="${index.index}+${'bv'}+${rowCount.index+row.index}"
-                             type="radio"
-                             data-th-checked="${genders==vesselOrderItemBid.bidValidOrNot}" />
-                      <label class="custom-control-label"
-                             data-th-for="${index.index}+${'bv'}+${rowCount.index+row.index}"
-                             data-th-text="${genders.bidValidOrNot}" >
-                      </label >
-                    </div >
-                  </div >
-                </div >
-                <!-- id-->
-                <input type="hidden" data-th-value="${vesselOrderItemBid.id}"
-                       data-th-name="${'vesselOrderItemBids[__${rowCount.index+row.index}__].id'}" >
-                <!--  amount-->
-                <input type="hidden" data-th-value="${vesselOrderItemBid.amount}"
-                       data-th-name="${'vesselOrderItemBids[__${rowCount.index+row.index}__].amount'}" >
-                <!--  unitPrice-->
-                <input type="hidden" data-th-value="${vesselOrderItemBid.unitPrice}"
-                       data-th-name="${'vesselOrderItemBids[__${rowCount.index+row.index}__].unitPrice'}" >
-                <!--  vesselOrderItem-->
-                <input type="hidden" data-th-value="${vesselOrderItemBid.vesselOrderItem.id}"
-                       data-th-id="${'vi'+rowCount.index+row.index}"
-                       data-th-name="${'vesselOrderItemBids[__${rowCount.index+row.index}__].vesselOrderItem.id'}" >
-                <!--  chandler-->
-                <input type="hidden" data-th-value="${vesselOrderItemBid.chandler.id}"
-                       data-th-name="${'vesselOrderItemBids[__${rowCount.index+row.index}__].chandler.id'}" >
-
-              </th >
-            </tr >
-            </tbody >
-          </table >
-        </div >
-      </div >
     </div >
     <!--Button-->
     <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
@@ -342,19 +142,92 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
-    $(document).on("change", ".bidValidOrNot", function () {
-        let selectedFieldId = $(this).attr('id').slice(3);
-        let tableLength = $("#table tr").length;
-        // 1bv -> select   0bv ->reject
-        let selectOrderItem = $(`#vi${selectedFieldId}`).val();
-        for (let i = 0; i < tableLength; i++) {
-            if (selectOrderItem === $(`#${i}`).val()) {
-                //$(`#0bv${i}`).prop('checked', true);
-                $(`input[name='vesselOrderItemBids[${i}].bidValidOrNot']`).filter('[value="REJECT"]').attr('checked', true)
+
+    $(document).ready(function () {
+        GetCellValues();
+    });
+
+    function GetCellValues() {
+        let table = document.getElementById('table');
+        let rowNumbers = [];
+        for (let r = 0, n = table.rows.length; r < n; r++) {
+            let item = table.rows[r].cells[1].innerHTML.trim();
+            if (r > 0) {
+                if (item === table.rows[r - 1].cells[1].innerHTML.trim()) {
+                    rowNumbers.push(r);
+                }
             }
         }
 
-    });
+        for (let x = 0; x < rowNumbers.length; x++) {
+            let color = colorAutoMate();
+            if (x !== 0) {
+                for (let j = rowNumbers[x - 1]; j < rowNumbers[x]; j++) {
+                    if (j <= rowNumbers[x]) {
+                        table.rows[j + 1].bgColor = color;
+                    }
+                }
+            } else {
+                for (let j = 1; j <= rowNumbers[x]; j++) {
+                    if (j <= rowNumbers[x]) {
+                        table.rows[j].bgColor = color;
+                    }
+                }
+            }
+
+        }
+    }
+
+    function colorAutoMate() {
+        let colors = [];
+        let color;
+        let tableLength = $("#table tr").length + 10;
+        while (colors.length < tableLength) {
+            do {
+                color = Math.floor((Math.random() * 1000000) + 1);
+            } while (colors.indexOf(color) >= 0);
+            colors.push("#" + ("aaaaaa" + color.toString(16)).slice(-6));
+        }
+        let number = Math.ceil(Math.random() * tableLength + 1);
+        return colors[number];
+
+    }
+
+    function otherReject(obj) {
+        let selectedFieldId = obj.getAttribute('id').slice(3);
+        let selectOrderItem = $(`#vi${selectedFieldId}`).val();
+        let tableLength = $("#table tr").length;
+
+        let count = 0;
+        for (let i = 0; i < tableLength; i++) {
+            if (selectOrderItem === $(`#vi${i}`).val() &&
+                $(`input[name='vesselOrderItemBids[${i}].bidValidOrNot']:checked`).val() === obj.getAttribute('value')) {
+                count = count + 1;
+            }
+        }
+        if (count === 2) {
+            let message = $(`#nm${selectedFieldId}`).html() + " \nchoose more than one time ";
+            swal({
+                title: "Could you please check What You Select",
+                icon: "warning",
+                text: message,
+            });
+            for (let i = 0; i < tableLength; i++) {
+                if (selectOrderItem === $(`#vi${i}`).val()) {
+                    $(`input[name='vesselOrderItemBids[${i}].bidValidOrNot']`).prop('checked', false);
+                }
+            }
+
+        } else {
+            for (let i = 0; i < tableLength; i++) {
+                $(`input[name='vesselOrderItemBids[${i}].bidValidOrNot']`).filter('[value="REJECT"]').attr({
+                    'checked': true,
+                    'readonly': true
+                });
+            }
+        }
+    }
+
 </script >
 </body >
 </html >
