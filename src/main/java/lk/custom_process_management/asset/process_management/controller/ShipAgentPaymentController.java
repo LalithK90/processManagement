@@ -54,6 +54,7 @@ public class ShipAgentPaymentController {
   @GetMapping( "/{id}" )
   public String addPayment(@PathVariable( "id" ) Integer id, Model model) {
     Payment payment = paymentService.findById(id);
+    payment.setStatusConformation(StatusConformation.PAIDSHIPAGENT);
     model.addAttribute("chandlerDetail", payment.getChandler());
     model.addAttribute("payment", payment);
     return "payment/addPayment";
