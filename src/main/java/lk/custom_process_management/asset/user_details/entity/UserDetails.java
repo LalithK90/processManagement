@@ -7,6 +7,8 @@ import lk.custom_process_management.asset.common_asset.model.enums.Gender;
 import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.common_asset.model.enums.Title;
 import lk.custom_process_management.asset.user_details.entity.enums.RelevantParty;
+import lk.custom_process_management.asset.user_details_chandler.entity.UserDetailsChandler;
+import lk.custom_process_management.asset.user_details_ship_agent.entity.UserDetailsShipAgent;
 import lk.custom_process_management.util.audit.AuditEntity;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +23,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonFilter( "Employee" )
+@JsonFilter( "UserDetails" )
 @ToString
 public class UserDetails extends AuditEntity {
 
@@ -68,6 +70,15 @@ public class UserDetails extends AuditEntity {
 
   @DateTimeFormat( pattern = "yyyy-MM-dd" )
   private LocalDate dateOfBirth;
+
+  @OneToOne(mappedBy = "userDetails", cascade = CascadeType.ALL)
+  @PrimaryKeyJoinColumn
+  private UserDetailsChandler userDetailsChandler;
+
+
+  @OneToOne(mappedBy = "userDetails", cascade = CascadeType.ALL)
+  @PrimaryKeyJoinColumn
+  private UserDetailsShipAgent userDetailsShipAgent;
 
   @Transient
   private MultipartFile file;

@@ -3,9 +3,13 @@ package lk.custom_process_management.asset.payment.controller;
 
 import lk.custom_process_management.asset.common_asset.model.TwoDate;
 import lk.custom_process_management.asset.payment.entity.Payment;
-import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
 import lk.custom_process_management.asset.payment.service.PaymentService;
+import lk.custom_process_management.asset.user_details.entity.UserDetails;
+import lk.custom_process_management.asset.user_details.entity.enums.RelevantParty;
+import lk.custom_process_management.asset.user_management.service.UserService;
+import lk.custom_process_management.asset.vessel_arrival_history.service.VesselArrivalHistoryService;
 import lk.custom_process_management.util.service.DateTimeAgeService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -22,19 +26,46 @@ public class PaymentController {
 
   private final PaymentService paymentService;
   private final DateTimeAgeService dateTimeAgeService;
+  private final UserService userService;
+  private final VesselArrivalHistoryService vesselArrivalHistoryService;
 
-  public PaymentController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService) {
+  public PaymentController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService,
+                           UserService userService, VesselArrivalHistoryService vesselArrivalHistoryService) {
     this.paymentService = paymentService;
     this.dateTimeAgeService = dateTimeAgeService;
+    this.userService = userService;
+    this.vesselArrivalHistoryService = vesselArrivalHistoryService;
   }
 
   private String commonFindAll(Model model, LocalDate from, LocalDate to) {
 
-    model.addAttribute("payments",
-                       paymentService.findByCreatedAtIsBetween(dateTimeAgeService.dateTimeToLocalDateStartInDay(from), dateTimeAgeService.dateTimeToLocalDateEndInDay(to))
-                           .stream()
-                           .filter(x -> x.getStatusConformation().equals(StatusConformation.PEN))
-                           .collect(Collectors.toList()));
+    List< Payment > payments =
+        paymentService.findByCreatedAtIsBetween(dateTimeAgeService.dateTimeToLocalDateStartInDay(from),
+                                                dateTimeAgeService.dateTimeToLocalDateEndInDay(to));
+
+    UserDetails userDetails =
+        userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName()).getUserDetails();
+
+    if ( userDetails.getRelevantParty().equals(RelevantParty.SLCC) ) {
+      model.addAttribute("payments", payments
+          .stream()
+          .filter(x -> x.getChandler().equals(userDetails.getUserDetailsChandler().getChandler()))
+          .collect(Collectors.toList()));
+    }
+
+    if ( userDetails.getRelevantParty().equals(RelevantParty.SLCS) ) {
+      model.addAttribute("payments", payments
+          .stream()
+          .filter(x ->
+                      vesselArrivalHistoryService.findById(x.getVesselOrder().getVesselArrivalHistory().getId()).getShipAgent()
+                          .equals(userDetails.getUserDetailsShipAgent().getShipAgent()))
+          .collect(Collectors.toList()));
+    }
+
+    if ( userDetails.getRelevantParty().equals(RelevantParty.SLC) ) {
+      model.addAttribute("payments", payments);
+    }
+
 
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
@@ -52,7 +83,7 @@ public class PaymentController {
     return commonFindAll(model, twoDate.getStartDate(), twoDate.getEndDate());
   }
 
-
+//todo: check here
   @GetMapping( "/edit/{id}" )
   public String edit(@PathVariable Integer id, Model model) {
     model.addAttribute("payment", paymentService.findById(id));

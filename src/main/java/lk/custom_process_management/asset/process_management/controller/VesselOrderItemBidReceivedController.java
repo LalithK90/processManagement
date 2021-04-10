@@ -1,6 +1,7 @@
 package lk.custom_process_management.asset.process_management.controller;
 
 import lk.custom_process_management.asset.chandler.service.ChandlerService;
+import lk.custom_process_management.asset.common_asset.model.TwoDate;
 import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.payment.entity.enums.PaymentStatus;
 import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
@@ -17,9 +18,7 @@ import lk.custom_process_management.util.service.EmailService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -75,6 +74,7 @@ public class VesselOrderItemBidReceivedController {
     model.addAttribute("message",
                        "Following table show details belongs from " + from.toString() + " to " + to.toString() +
                            "there month. if you need to more please search using above method");
+    model.addAttribute("searchUrl", "vesselOrderItemBidReceived");
     return "vesselOrderItemBidReceived/vesselOrderItemBidReceived";
   }
 
@@ -84,6 +84,11 @@ public class VesselOrderItemBidReceivedController {
 
   }
 
+  @PostMapping
+  public String findAll(@ModelAttribute TwoDate twoDate, Model model) {
+    return commonFindAll(model, twoDate.getStartDate(), twoDate.getEndDate());
+
+  }
   @GetMapping( "/{id}" )
   public String toReceiveConfirmView(@PathVariable( "id" ) Integer id, Model model) {
     Payment payment = paymentService.findById(id);
