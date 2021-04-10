@@ -57,6 +57,7 @@ public class ShipAgentPaymentController {
     payment.setStatusConformation(StatusConformation.PAIDSHIPAGENT);
     model.addAttribute("chandlerDetail", payment.getChandler());
     model.addAttribute("payment", payment);
+    model.addAttribute("addStatus", false);
     return "payment/addPayment";
   }
 
