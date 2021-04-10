@@ -37,7 +37,7 @@ public class PaymentController {
                            .collect(Collectors.toList()));
 
     model.addAttribute("message",
-                       "Following table show details belongs from " + from.toString() + " to " + to.toString() +
+                       "Following table show details belongs from " + from + " to " + to +
                            "there month. if you need to more please search using above method");
     return "payment/payment";
   }

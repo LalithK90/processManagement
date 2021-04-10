@@ -8,4 +8,5 @@
 .card:hover{
     background: aqua;
     transition: background-color 1000ms linear;
+    cursor: pointer;
 }

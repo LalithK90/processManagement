@@ -64,44 +64,48 @@
         <strong ><span data-th-text="${message}" ></span ></strong >
       </div >
     </div >
-    <script >
-        /*active boostrap alert - start*/
-        $(".alert").alert();
-        /*active boostrap alert - end*/
-    </script >
   </div >
 </div >
 
 <div class="container-fluid text-center" >
-  <div class="col" >
-    <div class="col" id="paymentList" data-th-if="${not #lists.isEmpty(payments)}" >
-      <table class="table table-hover table-striped" id="myTable" >
-        <thead >
-        <tr >
-          <th > Index</th >
-          <th > Number</th >
-          <th > Date</th >
-          <th > Status</th >
-          <th > Chandler</th >
-          <th > Ship Agent</th >
-          <th > Modify</th >
-        </tr >
-        </thead >
-        <tbody >
-        <tr data-th-each="payment, rowCount : ${payments}" >
-          <th data-th-text="${rowCount.count}" ></th >
-          <th data-th-text="${payment.vesselOrder.number}" ></th >
-          <th data-th-text="${{payment.createdAt}}" ></th >
-          <th data-th-text="${payment.statusConformation.statusConformation}" ></th >
-          <th data-th-text="${payment.chandler.name}" ></th >
-          <th data-th-text="${payment.vesselOrder.vesselArrivalHistory.shipAgent.name}" ></th >
-          <th >
-            so many thing to do
-          </th >
-        </tr >
-        </tbody >
-      </table >
-    </div >
+  <div class="col mt-3" >
+    <p data-th-text="${message}" class="text-center bg-secondary text-white p-2" ></p >
+  </div >
+  <div class="col" id="paymentList" data-th-if="${not #lists.isEmpty(payments)}" >
+    <table class="table table-hover table-striped" id="myTable" >
+      <thead >
+      <tr >
+        <th > Index</th >
+        <th > Number</th >
+        <th > Date</th >
+        <th > Status</th >
+        <th > Chandler</th >
+        <th > Ship Agent</th >
+        <th > Modify</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="payment, rowCount : ${payments}" >
+        <th data-th-text="${rowCount.count}" ></th >
+        <th data-th-text="${payment.vesselOrder.number}" ></th >
+        <th data-th-text="${{payment.createdAt}}" ></th >
+        <th data-th-text="${payment.statusConformation.statusConformation}" ></th >
+        <th data-th-text="${payment.chandler.name}" ></th >
+        <th data-th-text="${payment.vesselOrder.vesselArrivalHistory.shipAgent.name}" ></th >
+        <th >
+          <a data-th-href="${'/vesselOrderItemBidReceived/'+payment.id}" >
+            <button type="button" class="btn btn-info" >Print/View/Approve</button >
+          </a >
+          <a data-th-href="${'/shipAgentPayment/'+payment.id}" data-th-if="${#strings.equals(payment.statusConformation, 'REC')}">
+            <button type="button" class="btn btn-success" >To Payment</button >
+          </a >
+          <a data-th-href="${'/chandlerReceiving/'+payment.id}" data-th-if="${#strings.equals(payment.statusConformation, 'PAIDSHIPAGENT')}">
+            <button type="button" class="btn btn-outline-primary" >Confirm Payment</button >
+          </a >
+        </th >
+      </tr >
+      </tbody >
+    </table >
   </div >
   <div class="row" data-th-if="${ #lists.isEmpty(payments)}" >
     <div class="col-sm-12" >
@@ -123,5 +127,10 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 
+<script >
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script >
 </body >
 </html >

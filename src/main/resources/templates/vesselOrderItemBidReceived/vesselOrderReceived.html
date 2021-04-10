@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >vesselOrder-detail</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<!--heading Area-->
+<div class="container-fluid " >
+  <div class="row text-center" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/vesselOrder" class="btn btn-outline-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--Customer Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          <span data-th-text="${vesselOrderDetail.number + ' Order Details'}" ></span >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-outline-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
+
+<div class="container-fluid" >
+  <div data-th-replace="~{vesselOrder/vesselOrder-detail :: vesselOrderDetailsFragment}" ></div >
+</div >
+
+<!--details-->
+<div data-th-fragment="vesselOrderDetailsFragment" class="container" id="printContent" >
+  <!--chandler agent-->
+  <div class="row" >
+    <!--Left Side-->
+    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+      <!--Code-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="code" >Chandler Reg Code :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="code" data-th-text="${chandlerDetail.code}" class="display_detail" ></p ></div >
+      </div >
+      <!--Name-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="name" >Company Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="name" data-th-text="${chandlerDetail.name}"
+             class="display_detail" ></p >
+        </div >
+      </div >
+      <!--BRN-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="brn" >BRN :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="brn" data-th-text="${chandlerDetail.brn}" class="display_detail" ></p >
+        </div >
+      </div >
+    </div >
+    <!--Right Side-->
+    <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+      <!--Contact One-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="contactOne" >Contact One :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="contactOne" data-th-text="${chandlerDetail.contactOne}" class="display_detail" ></p >
+        </div >
+      </div >
+      <!--Email-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="email" >Email :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="email" data-th-text="${chandlerDetail.email}" class="display_detail" ></p >
+        </div >
+      </div >
+      <!--Address-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="address" >Address :</label >
+        </div >
+        <div class="col-md-8 " >
+          <p id="address" class="display_detail " data-th-utext="${chandlerDetail.address}" ></p >
+        </div >
+      </div >
+    </div >
+  </div >
+  <!--Order Item-->
+  <div class="form-row" >
+    <div class="text-center table-responsive" >
+      <table id="myTable" class="table table-striped table-inverse align-content-center" >
+        <tr >
+          <th >Index</th >
+          <th >Item Name</th >
+          <th >Request Amount</th >
+        </tr >
+        <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderDetail.vesselOrderItems}" >
+          <td data-th-text="${index.count}" ></td >
+          <td data-th-text="${vesselOrderItemBidPayment.item.category.mainCategory.mainCategory + ' - ' + #strings.toUpperCase(vesselOrderItemBidPayment.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBidPayment.item.category.name.substring(1)) + ' - ' +vesselOrderItemBidPayment.item.name} " ></td >
+          <td data-th-text="${vesselOrderItemBidPayment.quantity}" ></td >
+        </tr >
+      </table >
+    </div >
+  </div >
+</div >
+<!--Back Button-->
+<div class="form-group col-md-12 col-sm-12 mt-2 text-center flex-column " >
+  <!--back button-->
+  <a href="/vesselOrderItemBidReceived" >
+    <button class="btn btn-outline-dark" type="button" tabindex="3" >
+      <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
+    </button >
+  </a >
+  <!--print button-->
+  <button class="btn btn-success" type="button" id="printButton" >
+    <i class="fa fa-print" style="font-size: 20px" ></i >
+    Print
+  </button >
+  <!--received confirm-->
+  <a data-th-href="${'/vesselOrderItemBidReceived/received/'+payment.id}" >
+    <button type="button" class="btn btn-info" >Confirmed</button >
+  </a >
+  <!--payment-->
+  <a data-th-href="${'/shipAgentPayment/'+payment.id}"
+     data-th-if="${#strings.equals(payment.statusConformation, 'REC')}" >
+    <button type="button" class="btn btn-success" >To Payment</button >
+  </a >
+  <!--confirm Payment-->
+  <a data-th-href="${'/chandlerReceiving/'+payment.id}"
+     data-th-if="${#strings.equals(payment.statusConformation, 'PAIDSHIPAGENT')}" >
+    <button type="button" class="btn btn-outline-primary" >Confirm Payment</button >
+  </a >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+
+    $("#printButton").click(function () {
+        printContent("printContent");
+    });
+
+
+</script >
+</body >
+</html >
