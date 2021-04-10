@@ -126,7 +126,7 @@
             </div >
             <div class="col-md-8" >
               <input data-th-field="*{bankName}" class="form-control" tabindex="4"
-                     type="text" required />
+                     type="text" required data-th-readonly="${#strings.equals(statusConformation,'PAIDSHIPAGENT')}"/>
             </div >
           </div >
         </div >
@@ -149,7 +149,7 @@
             </div >
             <div class="col-md-8" >
               <input id="chequeNumber" data-th-field="*{chequeNumber}" class="form-control" tabindex="4"
-                     type="number" required />
+                     type="number" required data-th-readonly="${#strings.equals(statusConformation,'PAIDSHIPAGENT')}"/>
             </div >
           </div >
         </div >
@@ -159,7 +159,7 @@
           <label class="control-label" for="remarks" >Remark :</label >
         </div >
         <div class="col-md-8" >
-          <textarea id="remarks" data-th-field="*{remarks}" class="form-control" ></textarea >
+          <textarea id="remarks" data-th-field="*{remarks}" class="form-control" data-th-readonly="${#strings.equals(statusConformation,'PAIDSHIPAGENT')}"></textarea >
         </div >
       </div >
       <!--Button-->
@@ -167,10 +167,15 @@
 
         <button class="btn btn-success" type="submit" tabindex="21" >
           <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp; &nbsp;<span id="submit"
-                                                                                  data-th-text="${'Save'}" ></span >
+                                                                                  data-th-text="${!#strings.equals(statusConformation,'PAIDSHIPAGENT')?'Save':'Confirm'}" ></span >
         </button >
+        <a data-th-href="${'payment/reject/'+id}" data-th-if="${#strings.equals(statusConformation,'PAIDSHIPAGENT')}">
+          <button class="btn btn-warning ml-5" type="reset" tabindex="9" >
+            <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Reject
+          </button >
+        </a >
         <button class="btn btn-warning ml-5" type="reset" tabindex="9" >
-          <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+          <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Clear
         </button >
       </div >
 

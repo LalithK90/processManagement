@@ -3,12 +3,19 @@ package lk.custom_process_management.asset.payment.controller;
 
 import lk.custom_process_management.asset.common_asset.model.TwoDate;
 import lk.custom_process_management.asset.payment.entity.Payment;
+import lk.custom_process_management.asset.payment.entity.enums.PaymentStatus;
+import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
 import lk.custom_process_management.asset.payment.service.PaymentService;
+import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
+import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.asset.user_details.entity.UserDetails;
 import lk.custom_process_management.asset.user_details.entity.enums.RelevantParty;
 import lk.custom_process_management.asset.user_management.service.UserService;
 import lk.custom_process_management.asset.vessel_arrival_history.service.VesselArrivalHistoryService;
+import lk.custom_process_management.asset.vessel_order_item_bid_payment.entity.VesselOrderItemBidPayment;
+import lk.custom_process_management.asset.vessel_order_item_bid_payment.service.VesselOrderItemBidPaymentService;
 import lk.custom_process_management.util.service.DateTimeAgeService;
+import lk.custom_process_management.util.service.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,13 +35,21 @@ public class PaymentController {
   private final DateTimeAgeService dateTimeAgeService;
   private final UserService userService;
   private final VesselArrivalHistoryService vesselArrivalHistoryService;
+  private final VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService;
+  private final EmailService emailService;
+  private final ShipAgentService shipAgentService;
 
   public PaymentController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService,
-                           UserService userService, VesselArrivalHistoryService vesselArrivalHistoryService) {
+                           UserService userService, VesselArrivalHistoryService vesselArrivalHistoryService,
+                           VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService,
+                           EmailService emailService, ShipAgentService shipAgentService) {
     this.paymentService = paymentService;
     this.dateTimeAgeService = dateTimeAgeService;
     this.userService = userService;
     this.vesselArrivalHistoryService = vesselArrivalHistoryService;
+    this.vesselOrderItemBidPaymentService = vesselOrderItemBidPaymentService;
+    this.emailService = emailService;
+    this.shipAgentService = shipAgentService;
   }
 
   private String commonFindAll(Model model, LocalDate from, LocalDate to) {
@@ -83,7 +98,7 @@ public class PaymentController {
     return commonFindAll(model, twoDate.getStartDate(), twoDate.getEndDate());
   }
 
-//todo: check here
+  //todo: check here
   @GetMapping( "/edit/{id}" )
   public String edit(@PathVariable Integer id, Model model) {
     model.addAttribute("payment", paymentService.findById(id));
@@ -98,7 +113,32 @@ public class PaymentController {
       model.addAttribute("addStatus", true);
       return "payment/addPayment";
     }
-    paymentService.persist(payment);
+
+    Payment paymentDb = paymentService.persist(payment);
+
+    if ( paymentDb.getStatusConformation().equals(StatusConformation.PAIDSHIPAGENT) ) {
+      paymentDb.getVesselOrderItemBidPayments().forEach(x -> {
+        VesselOrderItemBidPayment vesselOrderItemBidPayment = vesselOrderItemBidPaymentService.findById(x.getId());
+        vesselOrderItemBidPayment.setPaymentStatus(PaymentStatus.PAID);
+        vesselOrderItemBidPaymentService.persist(vesselOrderItemBidPayment);
+      });
+      if ( paymentDb.getChandler().getEmail() != null ) {
+        String message = "According to vessel order number " + paymentDb.getVesselOrder().getNumber() + "\n Amount " +
+            "(Rs). " + paymentDb.getAmount() + " was received. \n Please check and Confirm it \n Thanks\n" + paymentDb.getUpdatedBy();
+        emailService.sendEmail(paymentDb.getChandler().getEmail(), "Payment Has Confirm", message);
+      }
+    }
+    if ( payment.getStatusConformation().equals(StatusConformation.RECEVINGPAYMENT) ) {
+      ShipAgent shipAgent =
+          shipAgentService.findById(paymentDb.getVesselOrder().getVesselArrivalHistory().getShipAgent().getId());
+      if ( shipAgent.getEmail() != null ) {
+
+        String message = "According to vessel order number " + paymentDb.getVesselOrder().getNumber() + "\n Amount " +
+            "(Rs). " + paymentDb.getAmount() + " was confirmed. \n Thanks\n" + paymentDb.getUpdatedBy();
+        emailService.sendEmail(shipAgent.getEmail(), "Payment was Confirmed", message);
+      }
+    }
+
     return "redirect:/payment";
   }
 
