@@ -11,7 +11,8 @@ public enum StatusConformation {
   PAIDSHIPAGENT("Paid Ship Agent"),
   RECEVINGPAYMENT("Receiving Payment"),
   ORDERCOLOSE("Order Close"),
-  PEN("Pending");
+  PEN("Pending"),
+  REJECTCHA("Reject by chandler");
 
   private final String statusConformation;
 
