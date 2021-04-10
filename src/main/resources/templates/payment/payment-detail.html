@@ -1,38 +1,205 @@
 <!DOCTYPE html>
- <html lang="en" >
-<head  data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
-</head>
-<body>
-<nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-<!--<nav  data-th-replace="~{fragments/sideBar :: sideBarFragment}"></nav>-->
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
 
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
-        <!--ViewList Button-->
-        <div class="col">
-            <a href="/payment" class="btn btn-primary" tabindex="1">
-                <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
-            </a>
-        </div>
-        <!--payment Name-->
-        <div class="col">
-            <h2 class="text-light text-center">
-                <strong>
-                    <!--<p data-th-text="${paymentDetails.code} +${' '} +${paymentDetails.name}"></p>-->
-                </strong>
-            </h2>
-        </div>
-        <!--Home Button-->
-        <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
-            </a>
-        </div>
-    </div>
-</div>
+<div class="container-fluid" >
+  <div class="row text-center" >
+    <!--ViewList Button-->
+    <div class="col" >
+      <a href="/payment" class="btn btn-primary" tabindex="1" >
+        <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
+      </a >
+    </div >
+    <!--payment Name-->
+    <div class="col" >
+      <h2 class="text-center" >
+        <strong >
+          <span data-th-text="${paymentDetail.code}" ></span >
+        </strong >
+      </h2 >
+    </div >
+    <!--Home Button-->
+    <div class="col" >
+      <a class="btn btn-primary" href="/home" tabindex="2" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
+      </a >
+    </div >
+  </div >
+</div >
 
-</body>
-</html>
+<!--vessel order details-->
+<div class="container-fluid" >
+  <div data-th-replace="~{vesselOrder/vesselOrder-detail :: vesselOrderDetailsFragment}" ></div >
+</div >
+<!--details-->
+<div data-th-fragment="vesselOrderDetailsFragment" class="container" id="printContent" >
+  <!--chandler agent-->
+  <div class="row" >
+    <!--Left Side-->
+    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+      <!--Code-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="code" >Chandler Reg Code :</label >
+        </div >
+        <div class="col-md-8" >
+          <p class="display_detail" id="code" data-th-text="${chandlerDetail.code}" ></p ></div >
+      </div >
+      <!--Name-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="name" >Company Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="name" data-th-text="${chandlerDetail.name}"
+             class="display_detail" ></p >
+        </div >
+      </div >
+      <!--BRN-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="brn" >BRN :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="brn" data-th-text="${chandlerDetail.brn}" class="display_detail" ></p >
+        </div >
+      </div >
+    </div >
+    <!--Right Side-->
+    <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+      <!--Contact One-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="contactOne" >Contact One :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="contactOne" data-th-text="${chandlerDetail.contactOne}" class="display_detail" ></p >
+        </div >
+      </div >
+      <!--Email-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="email" >Email :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="email" data-th-text="${chandlerDetail.email}" class="display_detail" ></p >
+        </div >
+      </div >
+      <!--Address-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="address" >Address :</label >
+        </div >
+        <div class="col-md-8 " >
+          <p id="address" class="display_detail " data-th-utext="${chandlerDetail.address}" ></p >
+        </div >
+      </div >
+    </div >
+  </div >
+  <!--Order Item-->
+  <div class="form-row" >
+    <div class="text-center table-responsive" >
+      <table id="myTable" class="table table-striped table-inverse align-content-center" >
+        <tr >
+          <th >Index</th >
+          <th >Item Name</th >
+          <th >Request Amount</th >
+        </tr >
+        <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderDetail.vesselOrderItems}" >
+          <td data-th-text="${index.count}" ></td >
+          <td data-th-text="${vesselOrderItemBidPayment.item.category.mainCategory.mainCategory + ' - ' + #strings.toUpperCase(vesselOrderItemBidPayment.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBidPayment.item.category.name.substring(1)) + ' - ' +vesselOrderItemBidPayment.item.name} " ></td >
+          <td data-th-text="${vesselOrderItemBidPayment.quantity}" ></td >
+        </tr >
+      </table >
+    </div >
+  </div >
+</div >
+<!--Payment detail-->
+<div class="container-fluid" >
+  <div class="form-row" >
+    <!--left side-->
+    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+      <!--code-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="code" >Code :</label >
+        </div >
+        <div class="col-md-8" >
+          <p class="display_detail" data-th-text="${paymentDetail.code}" ></p >
+        </div >
+      </div >
+      <!--bankName-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" >Bank Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <p class="display_detail" data-th-text="${paymentDetail.bankName}" ></p >
+        </div >
+      </div >
+    </div >
+    <!--  right side-->
+    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+      <!--Amount-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" >Amount :</label >
+        </div >
+        <div class="col-md-8" >
+          <p class="display_detail" data-th-text="${paymentDetail.amount}" ></p >
+        </div >
+      </div >
+      <!--chequeNumber-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" >Cheque Number :</label >
+        </div >
+        <div class="col-md-8" >
+          <p class="display_detail" data-th-text="${paymentDetail.chequeNumber}" ></p >
+        </div >
+      </div >
+    </div >
+    <!--remarks-->
+    <div class="form-group container-fluid text-right" >
+      <div class="col-md-4" >
+        <label class="control-label" >Remark :</label >
+      </div >
+      <div class="col-md-8" >
+        <p class="display_detail" data-th-utext="${paymentDetail.remarks}" ></p >
+      </div >
+    </div >
+  </div >
+</div >
+
+
+<div class="form-group container-fluid mt-2 text-center flex-column " >
+  <!--back button-->
+  <a href="/payment" >
+    <button class="btn btn-outline-dark" type="button" tabindex="3" >
+      <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
+    </button >
+  </a >
+  <!--print button-->
+  <button class="btn btn-success" type="button" id="printButton" >
+    <i class="fa fa-print" style="font-size: 20px" ></i >
+    Print
+  </button >
+</div >
+
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $("#printButton").click(function () {
+        printContent("printContent");
+    });
+</script >
+</body >
+</html >
