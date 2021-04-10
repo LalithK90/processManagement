@@ -30,6 +30,9 @@ public class Payment extends AuditEntity {
 
   private String bankName;
 
+  @Column( unique = true )
+  private String chequeNumber;
+
   private String remarks;
 
   @Column( nullable = false, unique = true )

@@ -1,10 +1,9 @@
 package lk.custom_process_management.asset.process_management.controller;
 
-import lk.custom_process_management.asset.chandler.service.ChandlerService;
 import lk.custom_process_management.asset.common_asset.model.TwoDate;
+import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
 import lk.custom_process_management.asset.payment.service.PaymentService;
-import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.util.service.DateTimeAgeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +17,10 @@ import java.util.stream.Collectors;
 public class ShipAgentPaymentController {
   private final PaymentService paymentService;
   private final DateTimeAgeService dateTimeAgeService;
-  private final ShipAgentService shipAgentService;
-  private final ChandlerService chandlerService;
 
-  public ShipAgentPaymentController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService,
-                                    ShipAgentService shipAgentService,
-                                    ChandlerService chandlerService) {
+  public ShipAgentPaymentController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService) {
     this.paymentService = paymentService;
     this.dateTimeAgeService = dateTimeAgeService;
-    this.shipAgentService = shipAgentService;
-    this.chandlerService = chandlerService;
   }
 
 
@@ -58,9 +51,11 @@ public class ShipAgentPaymentController {
 
   }
 
-  @GetMapping( "/id" )
+  @GetMapping( "/{id}" )
   public String addPayment(@PathVariable( "id" ) Integer id, Model model) {
-    model.addAttribute("payment", paymentService.findById(id));
+    Payment payment = paymentService.findById(id);
+    model.addAttribute("chandlerDetail", payment.getChandler());
+    model.addAttribute("payment", payment);
     return "payment/addPayment";
   }
 
