@@ -112,7 +112,6 @@ public class PaymentController {
     return commonFindAll(model, twoDate.getStartDate(), twoDate.getEndDate());
   }
 
-  // check here : edit can not be happend
   @GetMapping( "/edit/{id}" )
   public String edit(@PathVariable Integer id, Model model) {
     model.addAttribute("payment", paymentService.findById(id));

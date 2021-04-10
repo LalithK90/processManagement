@@ -62,6 +62,9 @@ public class VesselOrderSchedule {
         x -> {
           x.setStatusConformation(StatusConformation.ORDERCOLOSE);
           paymentService.persist(x);
+          VesselOrder vesselOrder = vesselOrderService.findById(x.getVesselOrder().getId());
+          vesselOrder.setVesselOrderStatus(VesselOrderStatus.COMPLETED);
+          vesselOrderService.persist(vesselOrder);
         });
 
   }
