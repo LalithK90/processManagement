@@ -18,10 +18,7 @@ import lk.custom_process_management.asset.vessel_order_item_bid_payment.service.
 import lk.custom_process_management.util.service.DateTimeAgeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -57,6 +54,27 @@ public class ReportController {
     this.vesselOrderItemBidPaymentService = vesselOrderItemBidPaymentService;
   }
 
+  private ChandlerDetail chandlerDetail(Chandler chandler, List< VesselOrderItemBid > vesselOrderItemBids,
+                                        List< VesselOrderItemBidPayment > vesselOrderItemBidPayments,
+                                        List< Payment > payments) {
+    ChandlerDetail chandlerDetail = new ChandlerDetail();
+    chandlerDetail.setChandler(chandler);
+    chandlerDetail.setBiddenCount(vesselOrderItemBids.stream().filter(x -> x.getChandler().equals(chandler)).count());
+
+    List< VesselOrderItemBidPayment > vesselOrderItemBidPaymentAccordingToC =
+        vesselOrderItemBidPayments.stream().filter(x -> x.getVesselOrderItemBid().getChandler().equals(chandler)).collect(Collectors.toList());
+    chandlerDetail.setApproveCount((long) vesselOrderItemBidPaymentAccordingToC.size());
+    List< Item > items = new ArrayList<>();
+    vesselOrderItemBidPaymentAccordingToC.forEach(x -> items.add(itemService.findById(vesselOrderItemBidService.findById(x.getVesselOrderItemBid().getId()).getVesselOrderItem().getItem().getId())));
+    chandlerDetail.setProvidedItems(items.stream().distinct().collect(Collectors.toList()));
+    //total amounts
+    List< BigDecimal > amounts = new ArrayList<>();
+    payments.stream().filter(x -> x.getChandler().equals(chandler)).collect(Collectors.toList()).forEach(y -> amounts.add(y.getAmount()));
+    chandlerDetail.setTotalAmount(amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
+
+    return chandlerDetail;
+  }
+
   private String commonChandlers(Model model, LocalDate from, LocalDate to) {
     /*chandler;  biddenCount;  approveCount;  providedItems;  totalAmount;*/
     List< ChandlerDetail > chandlerDetails = new ArrayList<>();
@@ -71,20 +89,7 @@ public class ReportController {
     List< Payment > payments = paymentService.findByCreatedAtIsBetween(startAt, endAt);
 
     for ( Chandler chandler : chandlers ) {
-      ChandlerDetail chandlerDetail = new ChandlerDetail();
-      chandlerDetail.setChandler(chandler);
-      chandlerDetail.setBiddenCount(vesselOrderItemBids.stream().filter(x -> x.getChandler().equals(chandler)).count());
-
-      List<VesselOrderItemBidPayment> vesselOrderItemBidPaymentAccordingToC = vesselOrderItemBidPayments.stream().filter(x -> x.getVesselOrderItemBid().getChandler().equals(chandler)).collect(Collectors.toList());
-      chandlerDetail.setApproveCount((long) vesselOrderItemBidPaymentAccordingToC.size());
-      List< Item > items = new ArrayList<>();
-      vesselOrderItemBidPaymentAccordingToC.forEach(x -> items.add(itemService.findById(vesselOrderItemBidService.findById(x.getVesselOrderItemBid().getId()).getVesselOrderItem().getItem().getId())));
-      chandlerDetail.setProvidedItems(items.stream().distinct().collect(Collectors.toList()));
-      //total amounts
-      List< BigDecimal > amounts = new ArrayList<>();
-      payments.stream().filter(x -> x.getChandler().equals(chandler)).collect(Collectors.toList()).forEach(y -> amounts.add(y.getAmount()));
-      chandlerDetail.setTotalAmount(amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
-      chandlerDetails.add(chandlerDetail);
+      chandlerDetails.add(chandlerDetail(chandler, vesselOrderItemBids, vesselOrderItemBidPayments, payments));
     }
     model.addAttribute("chandlerDetails", chandlerDetails);
 
@@ -107,10 +112,40 @@ public class ReportController {
   }
 
 
-  @GetMapping( "/chandler/{id}" )
-  public String chandlerDetails(Model model) {
-    //
+  private String commonChandler(Model model, LocalDate from, LocalDate to, Chandler chandler) {
+    LocalDateTime startAt = dateTimeAgeService.dateTimeToLocalDateStartInDay(from);
+    LocalDateTime endAt = dateTimeAgeService.dateTimeToLocalDateEndInDay(to);
+
+    List< VesselOrderItemBid > vesselOrderItemBids = vesselOrderItemBidService.findByCreatedAtIsBetween(startAt, endAt)
+        .stream().filter(x -> x.getChandler().equals(chandler)).collect(Collectors.toList());
+    List< VesselOrderItemBidPayment > vesselOrderItemBidPayments =
+        vesselOrderItemBidPaymentService.findByCreatedAtIsBetween(startAt, endAt).stream().filter(x -> x.getVesselOrderItemBid().getChandler().equals(chandler)).collect(Collectors.toList());
+    List< Payment > payments =
+        paymentService.findByCreatedAtIsBetween(startAt, endAt).stream().filter(x -> x.getChandler().equals(chandler)).collect(Collectors.toList());
+
+    model.addAttribute("chandlerDetails", chandlerDetail(chandler, vesselOrderItemBids, vesselOrderItemBidPayments,
+                                                         payments));
+    model.addAttribute("vesselOrderItemBidPayments", vesselOrderItemBidPayments);
+    model.addAttribute("payments", payments);
+    model.addAttribute("chandlerDetail", chandler);
+    model.addAttribute("message",
+                       "Following table show details belongs from " + from + " to " + to +
+                           "there month. if you need to more please search using above method");
+    model.addAttribute("searchUrl", "/report/chandler");
+
     return "report/chandler";
+  }
+
+  @GetMapping( "/chandler/{id}" )
+  public String chandlerDetail(@PathVariable( "id" ) Integer id, Model model) {
+    return commonChandler(model, dateTimeAgeService.getPastDateByMonth(3), LocalDate.now(),
+                          chandlerService.findById(id));
+  }
+
+  @PostMapping( "/chandler" )
+  public String chandlerDetail(@ModelAttribute TwoDate twoDate, Model model) {
+    return commonChandler(model, twoDate.getStartDate(), twoDate.getEndDate(),
+                          chandlerService.findById(twoDate.getId()));
   }
 
 }
