@@ -53,7 +53,7 @@ public class ReportController {
     this.vesselOrderItemBidService = vesselOrderItemBidService;
     this.vesselOrderItemBidPaymentService = vesselOrderItemBidPaymentService;
   }
-
+/*all chandler report - start*/
   private ChandlerDetail chandlerDetail(Chandler chandler, List< VesselOrderItemBid > vesselOrderItemBids,
                                         List< VesselOrderItemBidPayment > vesselOrderItemBidPayments,
                                         List< Payment > payments) {
@@ -74,7 +74,6 @@ public class ReportController {
 
     return chandlerDetail;
   }
-
   private String commonChandlers(Model model, LocalDate from, LocalDate to) {
     /*chandler;  biddenCount;  approveCount;  providedItems;  totalAmount;*/
     List< ChandlerDetail > chandlerDetails = new ArrayList<>();
@@ -110,8 +109,6 @@ public class ReportController {
   public String chandlersSearch(@ModelAttribute TwoDate twoDate, Model model) {
     return commonChandlers(model, twoDate.getStartDate(), twoDate.getEndDate());
   }
-
-
   private String commonChandler(Model model, LocalDate from, LocalDate to, Chandler chandler) {
     LocalDateTime startAt = dateTimeAgeService.dateTimeToLocalDateStartInDay(from);
     LocalDateTime endAt = dateTimeAgeService.dateTimeToLocalDateEndInDay(to);
@@ -147,5 +144,8 @@ public class ReportController {
     return commonChandler(model, twoDate.getStartDate(), twoDate.getEndDate(),
                           chandlerService.findById(twoDate.getId()));
   }
+/*all chandler report - finished*/
 
+  /*all ship agent report - start*/
+  //todo: ship agent and vessel
 }
