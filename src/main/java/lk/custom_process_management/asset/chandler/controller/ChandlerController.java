@@ -6,11 +6,10 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.chandler.service.ChandlerService;
-import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
 import lk.custom_process_management.util.interfaces.AbstractController;
+import lk.custom_process_management.util.service.EmailService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +25,14 @@ import java.util.List;
 public class ChandlerController implements AbstractController< Chandler, Integer > {
   private final ChandlerService chandlerService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+  private final EmailService emailService;
 
   @Autowired
   public ChandlerController(ChandlerService chandlerService,
-                            MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+                            MakeAutoGenerateNumberService makeAutoGenerateNumberService, EmailService emailService) {
     this.chandlerService = chandlerService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+    this.emailService = emailService;
   }
 
   private String commonThings(Model model, Chandler chandler, Boolean addState) {
@@ -78,7 +79,7 @@ public class ChandlerController implements AbstractController< Chandler, Integer
       }
       //send welcome message and email
       if ( chandler.getEmail() != null ) {
-        //  emailService.sendEmail(chandler.getEmail(), "Welcome Message", "Welcome to Kmart Super...");
+          emailService.sendEmail(chandler.getEmail(), "Welcome To SLC", "Your have successfully register on our database. \n Thank\n Sri Lanka Customs");
       }
     }
     redirectAttributes.addFlashAttribute("chandlerDetail",
