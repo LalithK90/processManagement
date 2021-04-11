@@ -6,6 +6,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -40,5 +41,9 @@ public class VesselOrderItemBidPaymentService {
         .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
     Example< VesselOrderItemBidPayment > vesselOrderItemExample = Example.of(vesselOrderItemBidPayment, matcher);
     return vesselOrderItemBidPaymentDao.findAll(vesselOrderItemExample);
+  }
+
+  public List< VesselOrderItemBidPayment> findByCreatedAtIsBetween(LocalDateTime startAt, LocalDateTime endAt) {
+  return  vesselOrderItemBidPaymentDao.findByCreatedAtIsBetween(startAt, endAt);
   }
 }

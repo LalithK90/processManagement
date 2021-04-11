@@ -36,7 +36,7 @@
     <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
             data-target="#dataTargetCollapse"
             aria-expanded="false" aria-controls="dataTargetCollapse"
-    > Custom Payment Search
+    > Custom Search
     </button >
     <div class="collapse mx-auto" id="dataTargetCollapse" >
       <div class="container-fluid text-center" >
@@ -58,64 +58,77 @@
       </div >
     </div >
   </div >
-  <div class="row" data-th-if="${firstInvoiceMessage}" >
-    <div class="col-sm-12 mt-4" >
-      <div class="alert alert-warning col-sm-8" role="alert" >
-        <strong ><span data-th-text="${message}" ></span ></strong >
-      </div >
-    </div >
-  </div >
 </div >
 
 <div class="container-fluid text-center" >
   <div class="col mt-3" >
     <p data-th-text="${message}" class="text-center bg-secondary text-white p-2" ></p >
   </div >
-  <div class="col" id="paymentList" data-th-if="${not #lists.isEmpty(payments)}" >
+  <div class="col" id="paymentList" data-th-if="${not #lists.isEmpty(chandlerDetails)}" >
     <table class="table table-hover table-striped" id="myTable" >
       <thead >
       <tr >
         <th > Index</th >
-        <th > Number</th >
-        <th > Date</th >
-        <th > Status</th >
-        <th > Chandler</th >
-        <th > Ship Agent</th >
-        <th > Modify</th >
+        <th > Chandler Name</th >
+        <th > Bidden Count (per Item)</th >
+        <th > Approve Count (per Item)</th >
+        <th > Provided Items</th >
+        <th > Total Amount</th >
+        <th > More Detail</th >
       </tr >
       </thead >
       <tbody >
-      <tr data-th-each="payment, rowCount : ${payments}" >
+      <tr data-th-each="chandlerDetail, rowCount : ${chandlerDetails}" >
         <th data-th-text="${rowCount.count}" ></th >
-        <th data-th-text="${payment.vesselOrder.number}" ></th >
-        <th data-th-text="${{payment.createdAt}}" ></th >
-        <th data-th-text="${payment.statusConformation.statusConformation}" ></th >
-        <th data-th-text="${payment.chandler.name}" ></th >
-        <th data-th-text="${payment.vesselOrder.vesselArrivalHistory.shipAgent.name}" ></th >
+        <th data-th-text="${chandlerDetail.chandler.name}" ></th >
+        <th data-th-text="${chandlerDetail.biddenCount}" ></th >
+        <th data-th-text="${chandlerDetail.approveCount}" ></th >
         <th >
-          <a data-th-href="${'/vesselOrderItemBidReceived/'+payment.id}" >
-            <button type="button" class="btn btn-info" >Print/View/Approve</button >
-          </a >
-          <a data-th-href="${'/shipAgentPayment/'+payment.id}" data-th-if="${#strings.equals(payment.statusConformation, 'REC')}">
-            <button type="button" class="btn btn-success" >To Payment</button >
-          </a >
-          <a data-th-href="${'/chandlerReceiving/'+payment.id}" data-th-if="${#strings.equals(payment.statusConformation, 'PAIDSHIPAGENT')}">
-            <button type="button" class="btn btn-outline-primary" >Confirm Payment</button >
-          </a >
+          <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
+                  data-th-attr="data-target=${'#dataTargetCollapse'+rowCount.index}"
+                  aria-expanded="false" aria-controls="dataTargetCollapse"
+          > See Items (<span data-th-text="${#lists.size(chandlerDetail.providedItems)}" ></span >)
+          </button >
+          <div class="collapse mx-auto" data-th-id="${'dataTargetCollapse'+rowCount.index}" >
+            <div class="container-fluid text-center" >
+              <div class="row" >
+                <table class="table table-striped table-inverse table-responsive" >
+                  <thead class="thead-inverse" >
+                  <tr >
+                    <th >Index</th >
+                    <th >Name</th >
+                  </tr >
+                  </thead >
+                  <tbody >
+                  <tr data-th-each="item, index : ${chandlerDetail.providedItems}" >
+                    <td data-th-text="${index.count}" ></td >
+                    <td data-th-text="${item.category.mainCategory.mainCategory} +${' '}+ ${#strings.toUpperCase(item.category.name.substring(0, 1))+#strings.toLowerCase(item.category.name.substring(1))}+${' '}+${item.name} " ></td >
+                  </tr >
+                  </tbody >
+                </table >
+              </div >
+            </div >
+          </div >
+        </th >
+        <th data-th-text="${chandlerDetail.totalAmount}" ></th >
+        <th >
+          <a data-th-href="${'/report/chandler/' + chandlerDetail.chandler.id}"
+             class="btn btn-outline-secondary btn-sm" >&nbsp;See
+                                                       More</a >
+
         </th >
       </tr >
       </tbody >
     </table >
   </div >
-  <div class="row" data-th-if="${ #lists.isEmpty(payments)}" >
+  <div class="row" data-th-if="${ #lists.isEmpty(chandlerDetails)}" >
     <div class="col-sm-12" >
       <div class="alert alert-warning alert-dismissible fade show" role="alert" >
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
           <span aria-hidden="true" >&times;</span >
         </button >
         <h3 class="text-center text-danger" >
-          <strong >There is no payment upto now please add payment to the system
-                   using add user button.
+          <strong >There is no details about chandlers
           </strong >
         </h3 >
       </div >
