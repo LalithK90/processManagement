@@ -36,6 +36,6 @@ public class Category {
     @Enumerated( EnumType.STRING )
     private LiveDead liveDead;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category")
     private List< Item > items;
 }
