@@ -23,16 +23,16 @@
     <div class="col" >
       <h4 class="text-info text-center" >
         <strong >
-          Chandler Summary
+          All Ship Agent
         </strong >
       </h4 >
     </div >
   </div >
 </div >
-<!--custom search-->
+
 <div class="container-fluid" >
   <div class="row" >
-    <!--Custom Invoice search-->
+    <!--Custom  search-->
     <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
             data-target="#dataTargetCollapse"
             aria-expanded="false" aria-controls="dataTargetCollapse"
@@ -45,7 +45,6 @@
             <div class="form-group mr-2" >
               <label for="startDate" >FROM :</label >
               <input class="form-control" id="startDate" name="startDate" type="date" />
-              <input type="hidden" data-th-value="${chandlerDetail.id}" name="id" >
             </div >
             <div class="form-group mr-2" >
               <label for="endDate" >TO :</label >
@@ -60,34 +59,37 @@
     </div >
   </div >
 </div >
-<!--summary of chandler-->
+
 <div class="container-fluid text-center" >
   <div class="col mt-3" >
     <p data-th-text="${message}" class="text-center bg-secondary text-white p-2" ></p >
   </div >
-  <div class="col" id="paymentList" >
+  <div class="col" id="paymentList" data-th-if="${not #lists.isEmpty(shipAgentDetails)}" >
     <table class="table table-hover table-striped" id="myTable" >
       <thead >
       <tr >
-        <th > Chandler Name</th >
-        <th > Bidden Count (per Item)</th >
-        <th > Approve Count (per Item)</th >
-        <th > Provided Items</th >
+        <th > Index</th >
+        <th > Ship Agent Name</th >
+        <th > Vessel Order Count </th >
+        <th > Vessels</th >
+        <th > Vessel Orders</th >
         <th > Total Amount</th >
+        <th > More Detail</th >
       </tr >
       </thead >
       <tbody >
-      <tr >
-        <th data-th-text="${chandlerDetails.chandler.name}" ></th >
-        <th data-th-text="${chandlerDetails.biddenCount}" ></th >
-        <th data-th-text="${chandlerDetails.approveCount}" ></th >
+      <tr data-th-each="shipAgentDetail, rowCount : ${shipAgentDetails}" >
+        <th data-th-text="${rowCount.count}" ></th >
+        <th data-th-text="${shipAgentDetail.shipAgent.name}" ></th >
+        <th data-th-text="${shipAgentDetail.vesselOrderCount}" ></th >
+        <th data-th-text="${shipAgentDetail.approveCount}" ></th >
         <th >
           <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
-                  data-th-attr="data-target=${'#dataTargetCollapse'}"
+                  data-th-attr="data-target=${'#dataTargetCollapse'+rowCount.index}"
                   aria-expanded="false" aria-controls="dataTargetCollapse"
-          > See Items (<span data-th-text="${#lists.size(chandlerDetails.providedItems)}" ></span >)
+          > See Items (<span data-th-text="${#lists.size(shipAgentDetail.providedItems)}" ></span >)
           </button >
-          <div class="collapse mx-auto" data-th-id="${'dataTargetCollapse'}" >
+          <div class="collapse mx-auto" data-th-id="${'dataTargetCollapse'+rowCount.index}" >
             <div class="container-fluid text-center" >
               <div class="row" >
                 <table class="table table-striped table-inverse table-responsive" >
@@ -98,7 +100,7 @@
                   </tr >
                   </thead >
                   <tbody >
-                  <tr data-th-each="item, index : ${chandlerDetails.providedItems}" >
+                  <tr data-th-each="item, index : ${shipAgentDetail.providedItems}" >
                     <td data-th-text="${index.count}" ></td >
                     <td data-th-text="${item.category.mainCategory.mainCategory} +${' '}+ ${#strings.toUpperCase(item.category.name.substring(0, 1))+#strings.toLowerCase(item.category.name.substring(1))}+${' '}+${item.name} " ></td >
                   </tr >
@@ -108,59 +110,40 @@
             </div >
           </div >
         </th >
-        <th data-th-text="${chandlerDetails.totalAmount}" ></th >
+        <th data-th-text="${shipAgentDetail.totalAmount}" ></th >
+        <th >
+          <a data-th-href="${'/report/chandler/' + shipAgentDetail.chandler.id}"
+             class="btn btn-outline-secondary btn-sm" >&nbsp;See
+                                                       More</a >
 
+        </th >
       </tr >
       </tbody >
     </table >
   </div >
-</div >
-<!--chandler detail-->
-<div class="container-fluid" >
-  <div data-th-replace="~{chandler/chandler-detail :: chandlerDetailsFragment}" ></div >
-</div >
-
-<!--vesselOrderItemBidPayments-->
-<div class="container-fluid" >
-  <div class="form-row" >
-    <div class="text-center table-responsive" >
-      <table class="table table-striped table-inverse align-content-center" >
-        <tr >
-          <th >Index</th >
-          <th >Vessel Order Number</th >
-          <th >Item Name</th >
-          <th >Request Amount</th >
-        </tr >
-        <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderItemBidPayments}" >
-          <td data-th-text="${index.count}" ></td >
-          <td data-th-text="${vesselOrderItemBidPayment.vesselOrderItemBid.vesselOrderItem.vesselOrder.number}" ></td >
-          <td data-th-text="${vesselOrderItemBidPayment.vesselOrderItemBid.vesselOrderItem.item.category.mainCategory.mainCategory + ' - ' + #strings.toUpperCase(vesselOrderItemBidPayment.vesselOrderItemBid.vesselOrderItem.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBidPayment.vesselOrderItemBid.vesselOrderItem.item.category.name.substring(1)) + ' - ' +vesselOrderItemBidPayment.vesselOrderItemBid.vesselOrderItem.item.name} " ></td >
-          <td data-th-text="${vesselOrderItemBidPayment.vesselOrderItemBid.vesselOrderItem.quantity}" ></td >
-        </tr >
-      </table >
-    </div >
-  </div >
-</div >
-<!--payments-->
-<div class="container-fluid" >
-  <div class="form-row " data-th-each="paymentDetail, row : ${payments}" >
-    <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
-            data-th-attr="data-target=${'#dataTargetCollapse'+row.index}"
-            aria-expanded="false" aria-controls="dataTargetCollapse"
-    > See Payment (<span data-th-text="${paymentDetail.code}" ></span >)
-    </button >
-    <div class="collapse mx-auto" data-th-id="${'dataTargetCollapse'+row.index}" >
-      <div class="container text-center" >
-        <div data-th-replace="~{payment/payment-detail :: paymentDetailsFragment}" ></div >
+  <div class="row" data-th-if="${ #lists.isEmpty(shipAgentDetails)}" >
+    <div class="col-sm-12" >
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+          <span aria-hidden="true" >&times;</span >
+        </button >
+        <h3 class="text-center text-danger" >
+          <strong >There is no details about chandlers
+          </strong >
+        </h3 >
       </div >
     </div >
   </div >
 </div >
-
 <!--footer include-->
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 
+<script >
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script >
 </body >
 </html >

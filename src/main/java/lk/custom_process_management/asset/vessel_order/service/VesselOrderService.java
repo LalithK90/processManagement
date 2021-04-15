@@ -1,5 +1,7 @@
 package lk.custom_process_management.asset.vessel_order.service;
 
+import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
+import lk.custom_process_management.asset.vessel_arrival_history.entity.VesselArrivalHistory;
 import lk.custom_process_management.asset.vessel_order.dao.VesselOrderDao;
 import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.asset.vessel_order.entity.enums.VesselOrderStatus;
@@ -9,6 +11,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -60,5 +63,10 @@ public class VesselOrderService implements AbstractService< VesselOrder, Integer
 
   public void saveAll(List< VesselOrder > vesselOrders) {
     vesselOrderDao.saveAll(vesselOrders);
+  }
+
+  public List< VesselOrder > findByVesselArrivalHistory(VesselArrivalHistory vesselArrivalHistory) {
+
+  return vesselOrderDao.findByVesselArrivalHistory(vesselArrivalHistory);
   }
 }

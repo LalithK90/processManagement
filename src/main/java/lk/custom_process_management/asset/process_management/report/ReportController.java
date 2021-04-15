@@ -6,10 +6,12 @@ import lk.custom_process_management.asset.common_asset.model.TwoDate;
 import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.asset.item.service.ItemService;
 import lk.custom_process_management.asset.payment.entity.Payment;
-import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
 import lk.custom_process_management.asset.payment.service.PaymentService;
-import lk.custom_process_management.asset.process_management.report.model.ChandlerDetail;
+import lk.custom_process_management.asset.process_management.report.model.*;
 import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
+import lk.custom_process_management.asset.vessel.entity.Vessel;
+import lk.custom_process_management.asset.vessel_arrival_history.service.VesselArrivalHistoryService;
+import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.asset.vessel_order.service.VesselOrderService;
 import lk.custom_process_management.asset.vessel_order_item_bid.entity.VesselOrderItemBid;
 import lk.custom_process_management.asset.vessel_order_item_bid.service.VesselOrderItemBidService;
@@ -35,13 +37,15 @@ public class ReportController {
   private final ChandlerService chandlerService;
   private final ShipAgentService shipAgentService;
   private final VesselOrderService vesselOrderService;
+  private final VesselArrivalHistoryService vesselArrivalHistoryService;
   private final ItemService itemService;
   private final VesselOrderItemBidService vesselOrderItemBidService;
   private final VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService;
 
   public ReportController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService,
                           ChandlerService chandlerService, ShipAgentService shipAgentService,
-                          VesselOrderService vesselOrderService, ItemService itemService,
+                          VesselOrderService vesselOrderService,
+                          VesselArrivalHistoryService vesselArrivalHistoryService, ItemService itemService,
                           VesselOrderItemBidService vesselOrderItemBidService,
                           VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService) {
     this.paymentService = paymentService;
@@ -49,11 +53,13 @@ public class ReportController {
     this.chandlerService = chandlerService;
     this.shipAgentService = shipAgentService;
     this.vesselOrderService = vesselOrderService;
+    this.vesselArrivalHistoryService = vesselArrivalHistoryService;
     this.itemService = itemService;
     this.vesselOrderItemBidService = vesselOrderItemBidService;
     this.vesselOrderItemBidPaymentService = vesselOrderItemBidPaymentService;
   }
-/*all chandler report - start*/
+
+  /*all chandler report - start*/
   private ChandlerDetail chandlerDetail(Chandler chandler, List< VesselOrderItemBid > vesselOrderItemBids,
                                         List< VesselOrderItemBidPayment > vesselOrderItemBidPayments,
                                         List< Payment > payments) {
@@ -64,16 +70,18 @@ public class ReportController {
     List< VesselOrderItemBidPayment > vesselOrderItemBidPaymentAccordingToC =
         vesselOrderItemBidPayments.stream().filter(x -> x.getVesselOrderItemBid().getChandler().equals(chandler)).collect(Collectors.toList());
     chandlerDetail.setApproveCount((long) vesselOrderItemBidPaymentAccordingToC.size());
+
     List< Item > items = new ArrayList<>();
     vesselOrderItemBidPaymentAccordingToC.forEach(x -> items.add(itemService.findById(vesselOrderItemBidService.findById(x.getVesselOrderItemBid().getId()).getVesselOrderItem().getItem().getId())));
     chandlerDetail.setProvidedItems(items.stream().distinct().collect(Collectors.toList()));
-    //total amounts
+
     List< BigDecimal > amounts = new ArrayList<>();
     payments.stream().filter(x -> x.getChandler().equals(chandler)).collect(Collectors.toList()).forEach(y -> amounts.add(y.getAmount()));
     chandlerDetail.setTotalAmount(amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
 
     return chandlerDetail;
   }
+
   private String commonChandlers(Model model, LocalDate from, LocalDate to) {
     /*chandler;  biddenCount;  approveCount;  providedItems;  totalAmount;*/
     List< ChandlerDetail > chandlerDetails = new ArrayList<>();
@@ -109,6 +117,7 @@ public class ReportController {
   public String chandlersSearch(@ModelAttribute TwoDate twoDate, Model model) {
     return commonChandlers(model, twoDate.getStartDate(), twoDate.getEndDate());
   }
+
   private String commonChandler(Model model, LocalDate from, LocalDate to, Chandler chandler) {
     LocalDateTime startAt = dateTimeAgeService.dateTimeToLocalDateStartInDay(from);
     LocalDateTime endAt = dateTimeAgeService.dateTimeToLocalDateEndInDay(to);
@@ -144,8 +153,60 @@ public class ReportController {
     return commonChandler(model, twoDate.getStartDate(), twoDate.getEndDate(),
                           chandlerService.findById(twoDate.getId()));
   }
-/*all chandler report - finished*/
+  /*all chandler report - finished*/
 
   /*all ship agent report - start*/
-  //todo: ship agent and vessel
+  private String commonShipAgent(Model model, LocalDate from, LocalDate to) {
+    List< ShipAgentDetail > shipAgentDetails = new ArrayList<>();
+    LocalDateTime startAt = dateTimeAgeService.dateTimeToLocalDateStartInDay(from);
+    LocalDateTime endAt = dateTimeAgeService.dateTimeToLocalDateEndInDay(to);
+
+    shipAgentService.findAll().forEach(x -> {
+      ShipAgentDetail shipAgentDetail = new ShipAgentDetail();
+      shipAgentDetail.setShipAgent(x);
+      List< VesselOrder > vesselOrders = new ArrayList<>();
+      List< Vessel > vessels = new ArrayList<>();
+      vesselArrivalHistoryService.findByShipAgentAndCreatedAtIsBetween(x, startAt, endAt).forEach(y -> {
+        vesselOrders.addAll(y.getVesselOrders());
+        vessels.add(y.getVessel());
+      });
+      shipAgentDetail.setVesselOrders(vesselOrders);
+      shipAgentDetail.setVesselOrderCount(vesselOrders.size());
+      vessels.stream().distinct().collect(Collectors.toList());
+      shipAgentDetail.setVessels(vessels);
+
+      List< BigDecimal > totalAmount = new ArrayList<>();
+      List< Payment > payments = paymentService.findByCreatedAtIsBetween(startAt, endAt);
+      payments.forEach(z -> {
+        if ( shipAgentService.findById(z.getVesselOrder().getVesselArrivalHistory().getShipAgent().getId()).equals(x) ) {
+          totalAmount.add(z.getAmount());
+        }
+      });
+
+      shipAgentDetail.setTotalAmount(totalAmount.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
+
+      shipAgentDetails.add(shipAgentDetail);
+
+    });
+    model.addAttribute("shipAgentDetails", shipAgentDetails);
+    model.addAttribute("message",
+                       "Following table show details belongs from " + from + " to " + to +
+                           "there month. if you need to more please search using above method");
+    model.addAttribute("searchUrl", "/report/shipAgent");
+
+    return "report/shipAgents";
+  }
+
+
+  @GetMapping( "/shipAgent" )
+  public String shipAgentDetail(Model model) {
+    return commonShipAgent(model, dateTimeAgeService.getPastDateByMonth(3), LocalDate.now());
+
+  }
+
+  @PostMapping( "/shipAgent" )
+  public String shipAgentSearch(@ModelAttribute TwoDate twoDate, Model model) {
+    return commonShipAgent(model, twoDate.getStartDate(), twoDate.getEndDate());
+  }
+
 }
