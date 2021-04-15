@@ -16,10 +16,12 @@
         <a class="nav-link text-white font-weight-bolder" href="/" >Home <span class="sr-only" >(current)</span ></a >
       </li >
       <li class="nav-item dropdown ml-2" >
-        <a class="nav-link text-white font-weight-bolder  dropdown-toggle" href="#" id="general" data-toggle="dropdown" aria-haspopup="true"
+        <a class="nav-link text-white font-weight-bolder  dropdown-toggle" href="#" id="general" data-toggle="dropdown"
+           aria-haspopup="true"
            aria-expanded="false" >General</a >
         <div class="dropdown-menu" aria-labelledby="general" >
-          <a data-sec-authorize="hasAnyAuthority('ROLE_SQA','ROLE_QA', 'ROLE_TM', 'ROLE_LA')" class="dropdown-item" href="#" >Category Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_SQA','ROLE_QA', 'ROLE_TM', 'ROLE_LA')" class="dropdown-item"
+             href="#" >Category Management</a >
           <a class="dropdown-item" href="#" >Chandler Management</a >
           <a class="dropdown-item" href="#" >Chandler License Management</a >
           <a class="dropdown-item" href="#" >Item Management</a >
@@ -35,7 +37,8 @@
         </div >
       </li >
       <li class="nav-item dropdown ml-2" >
-        <a class="nav-link text-white font-weight-bolder dropdown-toggle" href="#" id="transaction" data-toggle="dropdown" aria-haspopup="true"
+        <a class="nav-link text-white font-weight-bolder dropdown-toggle" href="#" id="transaction"
+           data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false" >Transaction</a >
         <div class="dropdown-menu" aria-labelledby="transaction" >
           <a class="dropdown-item" href="#" >Add Category </a >
@@ -56,11 +59,13 @@
         </div >
       </li >
       <li class="nav-item dropdown ml-2" >
-        <a class="nav-link text-white font-weight-bolder dropdown-toggle" href="#" id="report" data-toggle="dropdown" aria-haspopup="true"
+        <a class="nav-link text-white font-weight-bolder dropdown-toggle" href="#" id="report" data-toggle="dropdown"
+           aria-haspopup="true"
            aria-expanded="false" >Report</a >
         <div class="dropdown-menu" aria-labelledby="report" >
-          <a class="dropdown-item" href="#" >Action 1</a >
-          <a class="dropdown-item" href="#" >Action 2</a >
+          <a class="dropdown-item" href="#" >Chandler </a >
+          <a class="dropdown-item" href="#" >Ship Agent </a >
+          <a class="dropdown-item" href="#" >Vessel </a >
         </div >
       </li >
     </ul >
@@ -85,8 +90,9 @@
         </div >
       </li >
       <li class="nav-item dropdown " data-sec-authorize="isAuthenticated()" >
-        <a href="/logout" class="nav-link text-white font-weight-bolder" > <i class="fas fa-sign-out-alt" ></i >&nbsp;&nbsp; Log
-                                                                                        out</a >
+        <a href="/logout" class="nav-link text-white font-weight-bolder" > <i class="fas fa-sign-out-alt" ></i >&nbsp;&nbsp;
+                                                                                                                Log
+                                                                                                                out</a >
       </li >
       <li class="nav-item dropdown " data-sec-authorize="!isAuthenticated()" >
         <a href="/login" class="nav-link text-white font-weight-bolder" ><i class="fas fa-sign-in-alt" ></i >&nbsp;&nbsp;Login</a >

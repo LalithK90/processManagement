@@ -10,6 +10,7 @@ import lk.custom_process_management.asset.payment.service.PaymentService;
 import lk.custom_process_management.asset.process_management.report.model.*;
 import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.asset.vessel.entity.Vessel;
+import lk.custom_process_management.asset.vessel.service.VesselService;
 import lk.custom_process_management.asset.vessel_arrival_history.service.VesselArrivalHistoryService;
 import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.asset.vessel_order.service.VesselOrderService;
@@ -36,6 +37,7 @@ public class ReportController {
   private final DateTimeAgeService dateTimeAgeService;
   private final ChandlerService chandlerService;
   private final ShipAgentService shipAgentService;
+  private final VesselService vesselService;
   private final VesselOrderService vesselOrderService;
   private final VesselArrivalHistoryService vesselArrivalHistoryService;
   private final ItemService itemService;
@@ -44,7 +46,7 @@ public class ReportController {
 
   public ReportController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService,
                           ChandlerService chandlerService, ShipAgentService shipAgentService,
-                          VesselOrderService vesselOrderService,
+                          VesselService vesselService, VesselOrderService vesselOrderService,
                           VesselArrivalHistoryService vesselArrivalHistoryService, ItemService itemService,
                           VesselOrderItemBidService vesselOrderItemBidService,
                           VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService) {
@@ -52,6 +54,7 @@ public class ReportController {
     this.dateTimeAgeService = dateTimeAgeService;
     this.chandlerService = chandlerService;
     this.shipAgentService = shipAgentService;
+    this.vesselService = vesselService;
     this.vesselOrderService = vesselOrderService;
     this.vesselArrivalHistoryService = vesselArrivalHistoryService;
     this.itemService = itemService;
@@ -208,5 +211,41 @@ public class ReportController {
   public String shipAgentSearch(@ModelAttribute TwoDate twoDate, Model model) {
     return commonShipAgent(model, twoDate.getStartDate(), twoDate.getEndDate());
   }
+
+  /*all ship agent report - finished*/
+
+  /*all vessel report - start*/
+  private String commonVessel(Model model, LocalDate from, LocalDate to) {
+    List< ShipAgentDetail > shipAgentDetails = new ArrayList<>();
+    LocalDateTime startAt = dateTimeAgeService.dateTimeToLocalDateStartInDay(from);
+    LocalDateTime endAt = dateTimeAgeService.dateTimeToLocalDateEndInDay(to);
+    List< VesselDetail > vesselDetails = new ArrayList<>();
+    for ( Vessel vessel : vesselService.findAll() ) {
+      VesselDetail vesselDetail = new VesselDetail();
+      vesselDetail.getVessel(vessel);
+      vesselDetail.setArrivalCount(vesselArrivalHistoryService.findByVesselAndCreatedAtIsBetween(vessel, startAt,
+                                                                                                 endAt).size());
+      vesselDetails.add(vesselDetail);
+    }
+    model.addAttribute("vesselDetails", vesselDetails);
+    model.addAttribute("message",
+                       "Following table show details belongs from " + from + " to " + to +
+                           "there month. if you need to more please search using above method");
+    model.addAttribute("searchUrl", "/report/vessel");
+
+    return "report/vessels";
+  }
+
+  @GetMapping( "/vessel" )
+  public String vesselDetail(Model model) {
+    return commonVessel(model, dateTimeAgeService.getPastDateByMonth(3), LocalDate.now());
+
+  }
+
+  @PostMapping( "/vessel" )
+  public String vesselSearch(@ModelAttribute TwoDate twoDate, Model model) {
+    return commonVessel(model, twoDate.getStartDate(), twoDate.getEndDate());
+  }
+
 
 }

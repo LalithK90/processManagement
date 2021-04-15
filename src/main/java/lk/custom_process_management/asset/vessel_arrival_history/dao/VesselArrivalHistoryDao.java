@@ -19,4 +19,6 @@ public interface VesselArrivalHistoryDao extends JpaRepository< VesselArrivalHis
   List< VesselArrivalHistory> findByShipAgent(ShipAgent shipAgent);
 
   List< VesselArrivalHistory> findByShipAgentAndCreatedAtIsBetween(ShipAgent shipAgent, LocalDateTime startAt, LocalDateTime endAt);
+
+  List< VesselArrivalHistory> findByVesselAndCreatedAtIsBetween(Vessel vessel, LocalDateTime startAt, LocalDateTime endAt);
 }

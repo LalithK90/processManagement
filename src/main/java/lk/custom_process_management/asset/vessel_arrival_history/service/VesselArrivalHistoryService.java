@@ -1,5 +1,6 @@
 package lk.custom_process_management.asset.vessel_arrival_history.service;
 
+import lk.custom_process_management.asset.process_management.report.model.VesselDetail;
 import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
 import lk.custom_process_management.asset.vessel.entity.Vessel;
 import lk.custom_process_management.asset.vessel_arrival_history.dao.VesselArrivalHistoryDao;
@@ -59,4 +60,7 @@ return vesselArrivalHistoryDao.findAll(vesselArrivalHistoryExample);
     return vesselArrivalHistoryDao.findByShipAgentAndCreatedAtIsBetween(shipAgent,startAt,endAt);
   }
 
+  public List< VesselArrivalHistory> findByVesselAndCreatedAtIsBetween(Vessel vessel, LocalDateTime startAt, LocalDateTime endAt) {
+    return vesselArrivalHistoryDao.findByVesselAndCreatedAtIsBetween(vessel,startAt,endAt);
+  }
 }
