@@ -222,7 +222,7 @@ public class ReportController {
     List< VesselDetail > vesselDetails = new ArrayList<>();
     for ( Vessel vessel : vesselService.findAll() ) {
       VesselDetail vesselDetail = new VesselDetail();
-      vesselDetail.getVessel(vessel);
+      vesselDetail.setVessel(vessel);
       vesselDetail.setArrivalCount(vesselArrivalHistoryService.findByVesselAndCreatedAtIsBetween(vessel, startAt,
                                                                                                  endAt).size());
       vesselDetails.add(vesselDetail);
