@@ -70,7 +70,7 @@
       <tr >
         <th > Index</th >
         <th > Ship Agent Name</th >
-        <th > Vessel Order Count </th >
+        <th > Vessel Order Count</th >
         <th > Vessels</th >
         <th > Vessel Orders</th >
         <th > Total Amount</th >
@@ -84,81 +84,80 @@
         <th >
           <!-- vessels -->
           <div class="row" >
-            <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
-                  data-target="#dataTargetCollapseOne"
+            <button type="button" class="btn btn-info mr-2  btn-block text-capitalize" data-toggle="collapse"
+                    data-target="#dataTargetCollapseOne"
                     aria-expanded="false" aria-controls="dataTargetCollapseOne"
             > See Vessel (<span data-th-text="${#lists.size(shipAgentDetail.VesselOrders)}" ></span >)
             </button >
-          </div >
-          <div class="collapse mx-auto" id="dataTargetCollapseOne" >
-            <table class="table table-hover table-striped" >
-              <thead>
-              <tr>
-                <th> Index</th>
-                <th> Vessel</th>
-                <th> Code</th>
-                <th> IMO Number</th>
-                <th> MMSI Number</th>
-                <th> Country</th>
-                <th> Modify</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr data-th-each="vessel, rowCount : ${shipAgentDetail.vessels}">
-                <th data-th-text="${rowCount.count}"></th>
-                <th data-th-text="${vessel.name}"></th>
-                <th data-th-text="${vessel.code}"></th>
-                <th data-th-text="${vessel.imoNumber}"></th>
-                <th data-th-text="${vessel.mmsiNumber}"></th>
-                <th data-th-text="${vessel.country}"></th>
-                <th>
-                  <a data-th-href="${'/vessel/view/' + vessel.id}"
-                     class="btn btn-outline-primary btn-sm"><i
-                        class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                  <a data-th-href="${'/vesselArrivalHistory/add/' + vessel.id}"
-                     class="btn btn-outline-warning btn-sm"><i class="fa fa-edit"
-                                                               style="font-size: 15px"></i>&nbsp;New Arrival</a>
-                </th>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </th >
-        <th >
-          <!--Vessel Orders-->
-          <div class="form-row"  >
-            <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
-                 data-target="#dataTargetCollapseTwo"
-                    aria-expanded="false" aria-controls="dataTargetCollapse"
-            > See Vessel Orders (<span data-th-text="${#lists.size(shipAgentDetail.vesselOrders)}" ></span >)
-            </button >
-          </div>
-            <div class="collapse mx-auto" id="dataTargetCollapseTwo" >
-
-              <table class="table table-hover table-striped"  >
+            <div class="collapse mx-auto" id="dataTargetCollapseOne" >
+              <table class="table table-hover table-striped" >
                 <thead >
                 <tr >
                   <th > Index</th >
-                  <th > Number</th >
-                  <th > Closing Date</th >
-                  <th > Warehouse Block</th >
-                  <th > Vessel Order Status</th >
-                  <th > Vessel Name</th >
+                  <th > Vessel</th >
+                  <th > Code</th >
+                  <th > IMO Number</th >
+                  <th > MMSI Number</th >
+                  <th > Country</th >
+                  <th > Modify</th >
                 </tr >
                 </thead >
                 <tbody >
-                <tr data-th-each="vesselOrder, rowCount : ${shipAgentDetail.vesselOrders}" >
+                <tr data-th-each="vessel, rowCount : ${shipAgentDetail.vessels}" >
                   <th data-th-text="${rowCount.count}" ></th >
-                  <th data-th-text="${vesselOrder.number}" ></th >
-                  <th data-th-text="${{vesselOrder.closingDate}}" ></th >
-                  <th data-th-text="${vesselOrder.warehouseBlock.name}" ></th >
-                  <th data-th-text="${vesselOrder.vesselOrderStatus.vesselOrderStatus}" ></th >
-                  <th data-th-text="${vesselOrder.vesselArrivalHistory.vessel.name}" ></th >
-
+                  <th data-th-text="${vessel.name}" ></th >
+                  <th data-th-text="${vessel.code}" ></th >
+                  <th data-th-text="${vessel.imoNumber}" ></th >
+                  <th data-th-text="${vessel.mmsiNumber}" ></th >
+                  <th data-th-text="${vessel.country}" ></th >
+                  <th >
+                    <a data-th-href="${'/vessel/view/' + vessel.id}"
+                       class="btn btn-outline-primary btn-sm" ><i
+                          class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
+                    <a data-th-href="${'/vesselArrivalHistory/add/' + vessel.id}"
+                       class="btn btn-outline-warning btn-sm" ><i class="fa fa-edit"
+                                                                  style="font-size: 15px" ></i >&nbsp;New Arrival</a >
+                  </th >
                 </tr >
                 </tbody >
               </table >
+            </div >
+          </div >
+        </th >
+        <th >
+          <!--Vessel Orders-->
+          <div class="row" >
+            <button type="button" class="btn btn-success btn-block text-capitalize" data-toggle="collapse"
+                    data-target="#dataTargetCollapseTwo"
+                    aria-expanded="false" aria-controls="dataTargetCollapse"
+            > See Vessel Orders (<span data-th-text="${#lists.size(shipAgentDetail.vesselOrders)}" ></span >)
+            </button >
+          </div >
+          <div class="collapse mx-auto" id="dataTargetCollapseTwo" >
+
+            <table class="table table-hover table-striped" >
+              <thead >
+              <tr >
+                <th > Index</th >
+                <th > Number</th >
+                <th > Closing Date</th >
+                <th > Warehouse Block</th >
+                <th > Vessel Order Status</th >
+                <th > Vessel Name</th >
+              </tr >
+              </thead >
+              <tbody >
+              <tr data-th-each="vesselOrder, rowCount : ${shipAgentDetail.vesselOrders}" >
+                <th data-th-text="${rowCount.count}" ></th >
+                <th data-th-text="${vesselOrder.number}" ></th >
+                <th data-th-text="${{vesselOrder.closingDate}}" ></th >
+                <th data-th-text="${vesselOrder.warehouseBlock.name}" ></th >
+                <th data-th-text="${vesselOrder.vesselOrderStatus.vesselOrderStatus}" ></th >
+                <th data-th-text="${vesselOrder.vesselArrivalHistory.vessel.name}" ></th >
+
+              </tr >
+              </tbody >
+            </table >
           </div >
         </th >
         <th data-th-text="${shipAgentDetail.totalAmount}" ></th >
