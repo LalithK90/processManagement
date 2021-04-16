@@ -4,6 +4,7 @@ package lk.custom_process_management.asset.payment.service;
 import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.payment.dao.PaymentDao;
 import lk.custom_process_management.asset.payment.entity.Payment;
+import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -27,7 +28,7 @@ public class PaymentService implements AbstractService< Payment, Integer > {
     this.paymentDao = paymentDao;
   }
 
-  @Cacheable
+
   public List< Payment > findAll() {
     return paymentDao.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList());
   }
@@ -45,7 +46,7 @@ public class PaymentService implements AbstractService< Payment, Integer > {
     return paymentDao.save(payment);
   }
 
-  @CacheEvict( allEntries = true )
+
   public boolean delete(Integer id) {
     Payment payment = paymentDao.getOne(id);
     payment.setLiveDead(LiveDead.STOP);
@@ -53,7 +54,7 @@ public class PaymentService implements AbstractService< Payment, Integer > {
     return false;
   }
 
-  @Cacheable
+
   public List< Payment > search(Payment payment) {
     ExampleMatcher matcher = ExampleMatcher
         .matching()
@@ -69,7 +70,10 @@ public class PaymentService implements AbstractService< Payment, Integer > {
 
   public List< Payment > findByCreatedAtIsBetween(LocalDateTime from, LocalDateTime to) {
     List< Payment > payments = paymentDao.findByCreatedAtIsBetween(from, to);
-    System.out.println(" sdsdsdsds "+payments.size() + " dfrom   "+ from.toString()+ "  close "+ to.toString());
     return payments;
+  }
+
+  public List< Payment > findByStatusConformation(StatusConformation statusConformation) {
+    return paymentDao.findByStatusConformation(statusConformation);
   }
 }

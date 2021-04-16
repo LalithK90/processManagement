@@ -3,6 +3,8 @@ package lk.custom_process_management.schedule;
 import lk.custom_process_management.asset.chandler_license.entity.ChandlerLicense;
 import lk.custom_process_management.asset.chandler_license.entity.enums.LicenseStatus;
 import lk.custom_process_management.asset.chandler_license.service.ChandlerLicenseService;
+import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
+import lk.custom_process_management.asset.payment.service.PaymentService;
 import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.asset.vessel_order.entity.enums.VesselOrderStatus;
 import lk.custom_process_management.asset.vessel_order.service.VesselOrderService;
@@ -20,10 +22,13 @@ import java.util.stream.Collectors;
 public class VesselOrderSchedule {
   private final VesselOrderService vesselOrderService;
   private final ChandlerLicenseService chandlerLicenseService;
+  private final PaymentService paymentService;
 
-  public VesselOrderSchedule(VesselOrderService vesselOrderService, ChandlerLicenseService chandlerLicenseService) {
+  public VesselOrderSchedule(VesselOrderService vesselOrderService, ChandlerLicenseService chandlerLicenseService,
+                             PaymentService paymentService) {
     this.vesselOrderService = vesselOrderService;
     this.chandlerLicenseService = chandlerLicenseService;
+    this.paymentService = paymentService;
   }
 
   @Scheduled( cron = "0 0 0 * * *" )
@@ -51,6 +56,17 @@ public class VesselOrderSchedule {
         });
 
     chandlerLicenseService.saveAll(chandlerLicenses);
+
+    // chandler accepted payments -> to
+    paymentService.findByStatusConformation(StatusConformation.RECEVINGPAYMENT).forEach(
+        x -> {
+          x.setStatusConformation(StatusConformation.ORDERCOLOSE);
+          paymentService.persist(x);
+          VesselOrder vesselOrder = vesselOrderService.findById(x.getVesselOrder().getId());
+          vesselOrder.setVesselOrderStatus(VesselOrderStatus.COMPLETED);
+          vesselOrderService.persist(vesselOrder);
+        });
+
   }
 
 

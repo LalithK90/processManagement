@@ -76,12 +76,11 @@ public class VesselOrderItemBidApprovalController {
             .sorted(compareByBidenPrice)
             .collect(Collectors.toList()).forEach(y -> {
               y.setItem(x.getItem());
-              y.setBidValidOrNot(BidValidOrNot.REJECT);
               vesselOrderItemBids.add(y);
             }));
 
-    model.addAttribute("vesselOrderItemBids", vesselOrderItemBids);
 
+    model.addAttribute("vesselOrderItemBids", vesselOrderItemBids);
     model.addAttribute("vesselOrderDetail", vesselOrder);
     model.addAttribute("vesselDetail", vesselOrder.getVesselArrivalHistory().getVessel());
     List< BidValidOrNot > bidValidOrNots = new ArrayList<>();
@@ -94,8 +93,6 @@ public class VesselOrderItemBidApprovalController {
 
   @PostMapping( "/save" )
   public String saveApprove(@ModelAttribute VesselOrderBid vesselOrderBid) {
-
-    vesselOrderBid.getVesselOrderItemBids().forEach(x -> System.out.println(x.getId()));
 
     List< VesselOrderItemBid > vesselOrderItemBids =
         vesselOrderItemBidService.saveAll(vesselOrderBid.getVesselOrderItemBids());
@@ -150,14 +147,11 @@ public class VesselOrderItemBidApprovalController {
           emailService.sendEmail(chandler.getEmail(), "Inform Biden Vessel Order Status " + vesselOrder.getNumber(),
                                  message.toString());
         }
-
       }
 //vesselOrder save after changing vesselOrder order status
       vesselOrder.setVesselOrderStatus(VesselOrderStatus.APPROVE);
       vesselOrderService.persist(vesselOrder);
     }
-
-
     return "redirect:/vesselOrderItemApproval";
   }
 

@@ -15,4 +15,6 @@ import java.time.LocalDate;
 public class TwoDate {
   @DateTimeFormat( pattern = "yyyy-MM-dd" )
   private LocalDate startDate, endDate;
+
+  private Integer id;
 }

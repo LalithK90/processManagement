@@ -11,7 +11,8 @@ public enum VesselOrderStatus {
   BIDEN("Biden"),
   SUSPEND("Suspend"),
   INVALID("Invalid"),
-  APPROVE("Approve");
+  APPROVE("Approve"),
+  COMPLETED("Complete");
 
   private final String vesselOrderStatus;
 }

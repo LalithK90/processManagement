@@ -1,120 +1,192 @@
 <!DOCTYPE html>
- <html lang="en" >
-<head  data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
-</head>
-<body>
-<nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 <!--<nav  data-th-replace="~{fragments/sideBar :: sideBarFragment}"></nav>-->
 
 
-<div class="container  form-Border">
-    <div class="row text-center formManagement border-info">
-        <div class="col" >
-            <a class="btn btn-outline-info" href="/home" >
-                Back To Home
-            </a >
+<div class="container" >
+  <div class="row text-center formManagement border-info" >
+    <div class="col" >
+      <a class="btn btn-outline-info" href="/home" >
+        Back To Home
+      </a >
+    </div >
+    <div class="col" >
+      <a href="/payment" class="btn btn-info" >
+        View Payments
+      </a >
+    </div >
+
+  </div >
+  <div class="row text-center" >
+    <div class="col" >
+      <h4 class="text-info text-center" >
+        <strong >
+          Payment Details
+        </strong >
+      </h4 >
+    </div >
+  </div >
+</div >
+
+
+<div class="container-fluid" >
+  <!--chandler agent-->
+  <div class="row" >
+    <!--Left Side-->
+    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+      <!--Code-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="code" >Chandler Reg Code :</label >
         </div >
-        <div class="col">
-            <a href="/payment" class="btn btn-info">
-                 View Payments
-            </a>
-        </div>
+        <div class="col-md-8" >
+          <p id="code" data-th-text="${chandlerDetail.code}" class="display_detail" ></p ></div >
+      </div >
+      <!--Name-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="name" >Company Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="name" data-th-text="${chandlerDetail.name}"
+             class="display_detail" ></p >
+        </div >
+      </div >
+      <!--BRN-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="brn" >BRN :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="brn" data-th-text="${chandlerDetail.brn}" class="display_detail" ></p >
+        </div >
+      </div >
+    </div >
+    <!--Right Side-->
+    <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+      <!--Contact One-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="contactOne" >Contact One :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="contactOne" data-th-text="${chandlerDetail.contactOne}" class="display_detail" ></p >
+        </div >
+      </div >
+      <!--Email-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="email" >Email :</label >
+        </div >
+        <div class="col-md-8" >
+          <p id="email" data-th-text="${chandlerDetail.email}" class="display_detail" ></p >
+        </div >
+      </div >
+      <!--Address-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="address" >Address :</label >
+        </div >
+        <div class="col-md-8 " >
+          <p id="address" class="display_detail " data-th-utext="${chandlerDetail.address}" ></p >
+        </div >
+      </div >
+    </div >
+  </div >
+  <div class="col-sm-12 flex-column " >
+    <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/payment/add':'/payment/update'}"
+          data-th-object="${payment}" method="POST" >
+      <input type="hidden" data-th-filed="*{liveDead}" >
+      <input type="hidden" data-th-filed="*{statusConformation}" >
+      <input type="hidden" data-th-filed="*{chandler}" >
+      <input type="hidden" data-th-filed="*{vesselOrder}" >
+      <div class="row" >
+        <!--left side-->
+        <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+          <!--code-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="code" >Code :</label >
+            </div >
+            <div class="col-md-8" >
+              <input data-th-field="*{code}" class="form-control" tabindex="4"
+                     type="text" required readonly />
+            </div >
+          </div >
+          <!--bankName-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="bankName" >Bank Name :</label >
+            </div >
+            <div class="col-md-8" >
+              <input data-th-field="*{bankName}" class="form-control" tabindex="4"
+                     type="text" required data-th-readonly="${addStatus}" />
+            </div >
+          </div >
+        </div >
+        <!--  right side-->
+        <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+          <!--Amount-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="amount" >Amount :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="amount" data-th-field="*{amount}" class="form-control" tabindex="4"
+                     type="number" required readonly />
+            </div >
+          </div >
+          <!--chequeNumber-->
+          <div class="form-row text-right" >
+            <div class="col-md-4" >
+              <label class="control-label" for="chequeNumber" >Cheque Number :</label >
+            </div >
+            <div class="col-md-8" >
+              <input id="chequeNumber" data-th-field="*{chequeNumber}" class="form-control" tabindex="4"
+                     type="number" required data-th-readonly="${addStatus}" />
+            </div >
+          </div >
+        </div >
+      </div >
+      <div class="form-row container text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="remarks" >Remark :</label >
+        </div >
+        <div class="col-md-8" >
+          <textarea id="remarks" data-th-field="*{remarks}" class="form-control"
+                    data-th-readonly="${addStatus}" ></textarea >
+        </div >
+      </div >
+      <!--Button-->
+      <div class="form-group col-md-12 col-sm-12 text-center flex-column mt-3" >
 
-    </div>
-    <div class="row text-center">
-        <div class="col">
-            <h4 class="text-info text-center">
-                <strong>
-                    <span data-th-text="${addStatus==true?'New Payment ':'Update Payment Details'}"></span>
-                </strong>
-            </h4>
-        </div>
-    </div>
-</div>
+        <button class="btn btn-success" type="submit" tabindex="21" >
+          <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp; &nbsp;<span
+              data-th-text="${addStatus?'Confirm':'Save'}" ></span >
+        </button >
+        <a data-th-href="${'payment/reject/'+id}" data-th-if="${addStatus}" >
+          <button class="btn btn-warning ml-5" type="reset" tabindex="9" >
+            <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Reject
+          </button >
+        </a >
+        <button class="btn btn-warning ml-5" type="reset" tabindex="9" >
+          <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Clear
+        </button >
+      </div >
 
+    </form >
+  </div >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 
-
-<div class="container-fluid bg-light formBorder">
-    <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/payment/add':'/payment/update'}"
-              data-th-object="${payment}" method="POST" enctype="multipart/form-data">
-            <div class="row">
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                    <!--Sample Code-->
-                    <!--Option to select which sample's payment is to be done-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="sampleReceiving">Sample :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="sampleReceiving" data-th-field="*{sampleReceiving}" class="form-control" tabindex="3" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="sampleReceiving : ${sampleReceivingList}"
-                                        data-th-text="${sampleReceiving.sampleCode}"
-                                        data-th-value="${sampleReceiving}"
-                                        data-th-selected="${sampleReceiving==sampleReceiving.sampleCode?'selected':'unselected'}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--Amount-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="amount">Amount :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="amount" data-th-field="*{amount}" class="form-control" tabindex="4"
-                                   type="number" required/>
-                            <span id="amountError" data-th-errors="*{amount}"
-                                  data-th-if="${#fields.hasErrors('amount')}" class="error">Error Amount
-                            </span>
-                        </div>
-                    </div>
-                    <!--Payment Date-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="paymentDate">Payment Date :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="paymentDate" data-th-field="*{paymentDate}" class="form-control" tabindex="4"
-                                   type="date" required/>
-                            <span id="paymentDateError" data-th-errors="*{paymentDate}"
-                                  data-th-if="${#fields.hasErrors('paymentDate')}" class="error">Error payment date
-                            </span>
-                        </div>
-                    </div>
-                    <!--Payment Status-->
-                    <!--Should set the payment status to PAID-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="paymentStatus">Payment Status :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="paymentStatus" data-th-field="*{paymentStatus}" class="form-control" tabindex="3"  readonly>
-
-                                <option data-th-each="paymentStatus : ${paymentStatuses}"
-                                        data-th-text="${paymentStatus.getPaymentStatus()}"
-                                        data-th-value="${paymentStatus.PAID}"></option>
-                            </select>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!--Button-->
-            <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                <button class="btn btn-success" type="submit" tabindex="21">
-                    <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit" data-th-text="${addStatus==true?'Save': 'Update'}"></span>
-                </button>
-                <button class="btn btn-warning ml-5" type="reset" tabindex="9">
-                    <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
-                </button>
-            </div>
-
-        </form>
-    </div>
-</div>
-</body>
-</html>
+</body >
+</html >

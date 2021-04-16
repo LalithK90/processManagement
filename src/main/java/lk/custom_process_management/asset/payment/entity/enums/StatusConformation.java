@@ -7,9 +7,12 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StatusConformation {
   INR("Item Not Receiving"),
-  REC("Receiving"),
-  PAID("Paid"),
-  PEN("Pending");
+  REC("Received"),
+  PAIDSHIPAGENT("Paid Ship Agent"),
+  RECEVINGPAYMENT("Receiving Payment"),
+  ORDERCOLOSE("Order Close"),
+  PEN("Pending"),
+  REJECTCHA("Reject by chandler");
 
   private final String statusConformation;
 

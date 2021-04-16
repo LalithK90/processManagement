@@ -70,7 +70,8 @@
               <input data-th-field="*{vesselOrderStatus}" class="form-control" tabindex="4"
                      type="hidden"
                      required />
-              <input id="vesselOrderStatus" data-th-value="${vesselOrder.vesselOrderStatus.vesselOrderStatus}" class="form-control"
+              <input id="vesselOrderStatus" data-th-value="${vesselOrder.vesselOrderStatus.vesselOrderStatus}"
+                     class="form-control"
                      tabindex="4"
                      type="text" readonly />
             </div >
@@ -237,9 +238,8 @@
             data: $(this).val()
         }).change(() => {
             let itemSelected = {};
-            itemSelected.itemId =   $("#item-select").val();
+            itemSelected.itemId = $("#item-select").val();
             itemSelected.itemName = $("#item-select option:selected").html();
-
             tableRowAdd(itemSelected);
             optionElementRemove('#item-select');
         });
@@ -250,7 +250,7 @@
     $("#closingDate").bind('change', function () {
         let closingDate = Date.parse($(this).val());
 
-        if ($("#vesselArrivalHistory").val().length ===0) {
+        if ($("#vesselArrivalHistory").val().length === 0) {
             swal({
                 title: "Please check vessel",
                 icon: "warning",
@@ -283,14 +283,6 @@
 
     });
 
-    /*    $("#item-select").bind("change", function () {
-            let itemSelected = {};
-            itemSelected.itemId = $(this).val();
-            itemSelected.itemName = $("#item-select option:selected").html();
-
-            tableRowAdd(itemSelected);
-            optionElementRemove('#item-select');
-        });*/
     //table row add
     let tableRowAdd = function (value) {
         let rowCount = $("#itemTable tbody tr").length - 1;

@@ -2,41 +2,41 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Thymeleaf Springboot </title >
+  <title >vesselOrder-detail</title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-
-<div class="container-fluid" >
+<!--heading Area-->
+<div class="container-fluid " >
   <div class="row text-center" >
     <!--ViewList Button-->
     <div class="col" >
-      <a href="/payment" class="btn btn-primary" tabindex="1" >
+      <a href="/vesselOrder" class="btn btn-outline-primary" tabindex="1" >
         <i class="fa fa-list" style="font-size: 20px" ></i >&nbsp;&nbsp;View List
       </a >
     </div >
-    <!--payment Name-->
+    <!--Customer Name-->
     <div class="col" >
       <h2 class="text-center" >
         <strong >
-          <span data-th-text="${paymentDetail.code}" ></span >
+          <span data-th-text="${vesselOrderDetail.number + ' Order Details'}" ></span >
         </strong >
       </h2 >
     </div >
     <!--Home Button-->
     <div class="col" >
-      <a class="btn btn-primary" href="/home" tabindex="2" >
+      <a class="btn btn-outline-primary" href="/home" tabindex="2" >
         <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;&nbsp;Home
       </a >
     </div >
   </div >
 </div >
 
-<!--vessel order details-->
 <div class="container-fluid" >
   <div data-th-replace="~{vesselOrder/vesselOrder-detail :: vesselOrderDetailsFragment}" ></div >
 </div >
+
 <!--details-->
 <div data-th-fragment="vesselOrderDetailsFragment" class="container" id="printContent" >
   <!--chandler agent-->
@@ -49,7 +49,7 @@
           <label class="control-label" for="code" >Chandler Reg Code :</label >
         </div >
         <div class="col-md-8" >
-          <p class="display_detail" id="code" data-th-text="${chandlerDetail.code}" ></p ></div >
+          <p id="code" data-th-text="${chandlerDetail.code}" class="display_detail" ></p ></div >
       </div >
       <!--Name-->
       <div class="form-row text-right" >
@@ -120,67 +120,10 @@
     </div >
   </div >
 </div >
-<!--Payment detail-->
-<div class="container-fluid" data-th-fragment="paymentDetailsFragment" >
-  <div class="form-row" >
-    <!--left side-->
-    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
-      <!--code-->
-      <div class="form-row text-right" >
-        <div class="col-md-4" >
-          <label class="control-label" for="code" >Code :</label >
-        </div >
-        <div class="col-md-8" >
-          <p class="display_detail" data-th-text="${paymentDetail.code}" ></p >
-        </div >
-      </div >
-      <!--bankName-->
-      <div class="form-row text-right" >
-        <div class="col-md-4" >
-          <label class="control-label" >Bank Name :</label >
-        </div >
-        <div class="col-md-8" >
-          <p class="display_detail" data-th-text="${paymentDetail.bankName}" ></p >
-        </div >
-      </div >
-    </div >
-    <!--  right side-->
-    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
-      <!--Amount-->
-      <div class="form-row text-right" >
-        <div class="col-md-4" >
-          <label class="control-label" >Amount :</label >
-        </div >
-        <div class="col-md-8" >
-          <p class="display_detail" data-th-text="${paymentDetail.amount}" ></p >
-        </div >
-      </div >
-      <!--chequeNumber-->
-      <div class="form-row text-right" >
-        <div class="col-md-4" >
-          <label class="control-label" >Cheque Number :</label >
-        </div >
-        <div class="col-md-8" >
-          <p class="display_detail" data-th-text="${paymentDetail.chequeNumber}" ></p >
-        </div >
-      </div >
-    </div >
-    <!--remarks-->
-    <div class="form-group container-fluid text-right" >
-      <div class="col-md-4" >
-        <label class="control-label" >Remark :</label >
-      </div >
-      <div class="col-md-8" >
-        <p class="display_detail" data-th-utext="${paymentDetail.remarks}" ></p >
-      </div >
-    </div >
-  </div >
-</div >
-
-
-<div class="form-group container-fluid mt-2 text-center flex-column " >
+<!--Back Button-->
+<div class="form-group col-md-12 col-sm-12 mt-2 text-center flex-column " >
   <!--back button-->
-  <a href="/payment" >
+  <a href="/vesselOrderItemBidReceived" >
     <button class="btn btn-outline-dark" type="button" tabindex="3" >
       <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
     </button >
@@ -190,16 +133,32 @@
     <i class="fa fa-print" style="font-size: 20px" ></i >
     Print
   </button >
+  <!--received confirm-->
+  <a data-th-href="${'/vesselOrderItemBidReceived/received/'+payment.id}" >
+    <button type="button" class="btn btn-info" >Confirmed</button >
+  </a >
+  <!--payment-->
+  <a data-th-href="${'/shipAgentPayment/'+payment.id}"
+     data-th-if="${#strings.equals(payment.statusConformation, 'REC')}" >
+    <button type="button" class="btn btn-success" >To Payment</button >
+  </a >
+  <!--confirm Payment-->
+  <a data-th-href="${'/chandlerReceiving/'+payment.id}"
+     data-th-if="${#strings.equals(payment.statusConformation, 'PAIDSHIPAGENT')}" >
+    <button type="button" class="btn btn-outline-primary" >Confirm Payment</button >
+  </a >
 </div >
-
 <!--footer include-->
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
+
     $("#printButton").click(function () {
         printContent("printContent");
     });
+
+
 </script >
 </body >
 </html >

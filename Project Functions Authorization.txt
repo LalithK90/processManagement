@@ -97,7 +97,6 @@ vesselOrderItemBid /bid/{id}        -chandler
 
 vesselOrderItemBidRecieved /        -assistant superintendent
 
-vesselOrderItemRecieved /           -inspector
 
 /warehouseBlock                     -inspector
 /warehouseBlock/add                 -inspector

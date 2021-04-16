@@ -53,4 +53,6 @@ public class ShipAgent extends AuditEntity {
     @OneToMany(mappedBy = "shipAgent")
     private List< UserDetailsShipAgent > userDetailsShipAgents;
 
+
+
 }

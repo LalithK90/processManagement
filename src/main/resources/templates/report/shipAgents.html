@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="container-fluid  " >
+  <div class="row text-center formManagement border-info" >
+    <div class="col" >
+      <a href="/home" id="btnHome" class="btn btn-outline-info" >
+        &nbsp;Back To Home&nbsp;
+      </a >
+    </div >
+    <div class="col" >
+      <a class="btn btn-info" href="" ><i class="fa fa-plus" ></i >
+        &nbsp;Add New</a >
+    </div >
+  </div >
+  <div class="row text-center" >
+    <div class="col" >
+      <h4 class="text-info text-center" >
+        <strong >
+          All Ship Agent
+        </strong >
+      </h4 >
+    </div >
+  </div >
+</div >
+
+<div class="container-fluid" >
+  <div class="row" >
+    <!--Custom  search-->
+    <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
+            data-target="#dataTargetCollapse"
+            aria-expanded="false" aria-controls="dataTargetCollapse"
+    > Custom Search
+    </button >
+    <div class="collapse mx-auto" id="dataTargetCollapse" >
+      <div class="container-fluid text-center" >
+        <div class="row" >
+          <form class="form-inline" data-th-action="${searchUrl}" data-th-method="POST" >
+            <div class="form-group mr-2" >
+              <label for="startDate" >FROM :</label >
+              <input class="form-control" id="startDate" name="startDate" type="date" />
+            </div >
+            <div class="form-group mr-2" >
+              <label for="endDate" >TO :</label >
+              <input class="form-control" id="endDate" name="endDate" type="date" />
+            </div >
+            <button class="btn btn-success mr-2" id="btnSummaryFind" type="submit" ><span
+                  class="glyphicon glyphicon-search" ></span >&nbsp;Search
+            </button >
+          </form >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+
+<div class="container-fluid text-center" >
+  <div class="col mt-3" >
+    <p data-th-text="${message}" class="text-center bg-secondary text-white p-2" ></p >
+  </div >
+  <div class="col" id="paymentList" data-th-if="${not #lists.isEmpty(shipAgentDetails)}" >
+    <table class="table table-hover table-striped" id="myTable" >
+      <thead >
+      <tr >
+        <th > Index</th >
+        <th > Ship Agent Name</th >
+        <th > Vessel Order Count</th >
+        <th > Vessels</th >
+        <th > Vessel Orders</th >
+        <th > Total Amount</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="shipAgentDetail, rowCount : ${shipAgentDetails}" >
+        <th data-th-text="${rowCount.count}" ></th >
+        <th data-th-text="${shipAgentDetail.shipAgent.name}" ></th >
+        <th data-th-text="${shipAgentDetail.vesselOrderCount}" ></th >
+        <th >
+          <!-- vessels -->
+          <div class="row" >
+            <button type="button" class="btn btn-info mr-2  btn-block text-capitalize" data-toggle="collapse"
+                    data-target="#dataTargetCollapseOne"
+                    aria-expanded="false" aria-controls="dataTargetCollapseOne"
+            > See Vessel (<span data-th-text="${#lists.size(shipAgentDetail.VesselOrders)}" ></span >)
+            </button >
+            <div class="collapse mx-auto" id="dataTargetCollapseOne" >
+              <table class="table table-hover table-striped" >
+                <thead >
+                <tr >
+                  <th > Index</th >
+                  <th > Vessel</th >
+                  <th > Code</th >
+                  <th > IMO Number</th >
+                  <th > MMSI Number</th >
+                  <th > Country</th >
+                  <th > Modify</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="vessel, rowCount : ${shipAgentDetail.vessels}" >
+                  <th data-th-text="${rowCount.count}" ></th >
+                  <th data-th-text="${vessel.name}" ></th >
+                  <th data-th-text="${vessel.code}" ></th >
+                  <th data-th-text="${vessel.imoNumber}" ></th >
+                  <th data-th-text="${vessel.mmsiNumber}" ></th >
+                  <th data-th-text="${vessel.country}" ></th >
+                  <th >
+                    <a data-th-href="${'/vessel/view/' + vessel.id}"
+                       class="btn btn-outline-primary btn-sm" ><i
+                          class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
+                    <a data-th-href="${'/vesselArrivalHistory/add/' + vessel.id}"
+                       class="btn btn-outline-warning btn-sm" ><i class="fa fa-edit"
+                                                                  style="font-size: 15px" ></i >&nbsp;New Arrival</a >
+                  </th >
+                </tr >
+                </tbody >
+              </table >
+            </div >
+          </div >
+        </th >
+        <th >
+          <!--Vessel Orders-->
+          <div class="row" >
+            <button type="button" class="btn btn-success btn-block text-capitalize" data-toggle="collapse"
+                    data-target="#dataTargetCollapseTwo"
+                    aria-expanded="false" aria-controls="dataTargetCollapse"
+            > See Vessel Orders (<span data-th-text="${#lists.size(shipAgentDetail.vesselOrders)}" ></span >)
+            </button >
+          </div >
+          <div class="collapse mx-auto" id="dataTargetCollapseTwo" >
+
+            <table class="table table-hover table-striped" >
+              <thead >
+              <tr >
+                <th > Index</th >
+                <th > Number</th >
+                <th > Closing Date</th >
+                <th > Warehouse Block</th >
+                <th > Vessel Order Status</th >
+                <th > Vessel Name</th >
+              </tr >
+              </thead >
+              <tbody >
+              <tr data-th-each="vesselOrder, rowCount : ${shipAgentDetail.vesselOrders}" >
+                <th data-th-text="${rowCount.count}" ></th >
+                <th data-th-text="${vesselOrder.number}" ></th >
+                <th data-th-text="${{vesselOrder.closingDate}}" ></th >
+                <th data-th-text="${vesselOrder.warehouseBlock.name}" ></th >
+                <th data-th-text="${vesselOrder.vesselOrderStatus.vesselOrderStatus}" ></th >
+                <th data-th-text="${vesselOrder.vesselArrivalHistory.vessel.name}" ></th >
+
+              </tr >
+              </tbody >
+            </table >
+          </div >
+        </th >
+        <th data-th-text="${shipAgentDetail.totalAmount}" ></th >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+  <div class="row" data-th-if="${ #lists.isEmpty(shipAgentDetails)}" >
+    <div class="col-sm-12" >
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+          <span aria-hidden="true" >&times;</span >
+        </button >
+        <h3 class="text-center text-danger" >
+          <strong >There is no details about chandlers
+          </strong >
+        </h3 >
+      </div >
+    </div >
+  </div >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+<script >
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script >
+</body >
+</html >

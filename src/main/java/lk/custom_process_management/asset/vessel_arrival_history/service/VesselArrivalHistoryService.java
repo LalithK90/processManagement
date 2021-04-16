@@ -1,5 +1,7 @@
 package lk.custom_process_management.asset.vessel_arrival_history.service;
 
+import lk.custom_process_management.asset.process_management.report.model.VesselDetail;
+import lk.custom_process_management.asset.ship_agent.entity.ShipAgent;
 import lk.custom_process_management.asset.vessel.entity.Vessel;
 import lk.custom_process_management.asset.vessel_arrival_history.dao.VesselArrivalHistoryDao;
 import lk.custom_process_management.asset.vessel_arrival_history.entity.enums.VesselDepartureArrivalStatus;
@@ -9,6 +11,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -51,5 +54,13 @@ return vesselArrivalHistoryDao.findAll(vesselArrivalHistoryExample);
 
   public VesselArrivalHistory lastVesselHistoryByVessel(Vessel vessel) {
   return vesselArrivalHistoryDao.findFirstByVesselOrderByIdDesc(vessel);
+  }
+
+  public List< VesselArrivalHistory> findByShipAgentAndCreatedAtIsBetween(ShipAgent shipAgent, LocalDateTime startAt, LocalDateTime endAt) {
+    return vesselArrivalHistoryDao.findByShipAgentAndCreatedAtIsBetween(shipAgent,startAt,endAt);
+  }
+
+  public List< VesselArrivalHistory> findByVesselAndCreatedAtIsBetween(Vessel vessel, LocalDateTime startAt, LocalDateTime endAt) {
+    return vesselArrivalHistoryDao.findByVesselAndCreatedAtIsBetween(vessel,startAt,endAt);
   }
 }
