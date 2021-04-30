@@ -21,19 +21,21 @@
            aria-expanded="false" >General</a >
         <div class="dropdown-menu" aria-labelledby="general" >
           <a data-sec-authorize="hasAnyAuthority('ROLE_SQA','ROLE_QA', 'ROLE_TM', 'ROLE_LA')" class="dropdown-item"
-             href="#" >Category Management</a >
-          <a class="dropdown-item" href="#" >Chandler Management</a >
-          <a class="dropdown-item" href="#" >Chandler License Management</a >
-          <a class="dropdown-item" href="#" >Item Management</a >
-          <a class="dropdown-item" href="#" >Payment Management</a >
-          <a class="dropdown-item" href="#" >Role Management</a >
-          <a class="dropdown-item" href="#" >Ship Agent Management</a >
-          <a class="dropdown-item" href="#" >User Management</a >
-          <a class="dropdown-item" href="#" >User Details Management</a >
-          <a class="dropdown-item" href="#" >Vessel Arrival History Management</a >
-          <a class="dropdown-item" href="#" >Vessel Management</a >
-          <a class="dropdown-item" href="#" >Vessel Order Management</a >
-          <a class="dropdown-item" href="#" >Warehouse Block Management</a >
+             href="http://localhost:8080/category" >Category Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT', 'ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/chandler" >Chandler Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/chandlerLicense" >Chandler License Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_GUARD')" class="dropdown-item" href="http://localhost:8080/item" >Item Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SHIP_AGENT', 'ROLE_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/payment" >Payment Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT	', 'ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/role" >Role Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_ASSISTANT_SUPERINTENDENT', 'ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/shipAgent" >Ship Agent Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT	', 'ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/user" >User Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT', 'ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/userDetails" >User Details Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/vesselArrivalHistory" >Vessel Arrival History Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/vessel" >Vessel Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT', 'ROLE_SHIP_AGENT', 'ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/vesselOrder" >Vessel Order Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/vesselOrderItemBid" >Vessel Order bid Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/vesselOrder" >Vessel Order Approval Management</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/warehouseBlock" >Warehouse Block Management</a >
         </div >
       </li >
       <li class="nav-item dropdown ml-2" >
@@ -41,21 +43,21 @@
            data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false" >Transaction</a >
         <div class="dropdown-menu" aria-labelledby="transaction" >
-          <a class="dropdown-item" href="#" >Add Category </a >
-          <a class="dropdown-item" href="#" >Add Chandler </a >
-          <a class="dropdown-item" href="#" >Add Chandler License </a >
-          <a class="dropdown-item" href="#" >Add Item </a >
-          <a class="dropdown-item" href="#" >Add Payment </a >
-          <a class="dropdown-item" href="#" >Add Role </a >
-          <a class="dropdown-item" href="#" >Add Ship Agent </a >
-          <a class="dropdown-item" href="#" >Add User </a >
-          <a class="dropdown-item" href="#" >Add User Details </a >
-          <a class="dropdown-item" href="#" >Add Vessel Arrival History </a >
-          <a class="dropdown-item" href="#" >Add Vessel </a >
-          <a class="dropdown-item" href="#" >Add Vessel Order </a >
-          <a class="dropdown-item" href="#" >Add Vessel Order Item Approval</a >
-          <a class="dropdown-item" href="#" >Add Vessel Order Item Bid</a >
-          <a class="dropdown-item" href="#" >Add Warehouse Block </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_GUARD')" class="dropdown-item" href="http://localhost:8080/category/add" >Add Category </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/chandler/add" >Add Chandler </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT','ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/chandlerLicense" >Add Chandler License </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_GUARD')" class="dropdown-item" href="http://localhost:8080/item/add" >Add Item </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_SHIP_AGENT')" class="dropdown-item" href="http://localhost:8080/payment" >Add Payment </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/role/add" >Add Role </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_GUARD')" class="dropdown-item" href="http://localhost:8080/shipAgent/add" >Add Ship Agent </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/user/add" >Add User </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/userDetails/add" >Add User Details </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/vesselArrivalHistory/arrival" >Add Vessel Arrival History </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR', 'ROLE_ASSISTANT_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/vessel/add" >Add Vessel </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SHIP_AGENT')" class="dropdown-item" href="http://localhost:8080/vesselOrder/add" >Add Vessel Order </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_SUPERINTENDENT')" class="dropdown-item" href="http://localhost:8080/vesselOrderItemApproval" >Add Vessel Order Item Approval</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_CHANDLER')" class="dropdown-item" href="http://localhost:8080/vesselOrderItemBid" >Add Vessel Order Item Bid</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_INSPECTOR')" class="dropdown-item" href="http://localhost:8080/warehouseBlock/add" >Add Warehouse Block </a >
         </div >
       </li >
       <li class="nav-item dropdown ml-2" >
