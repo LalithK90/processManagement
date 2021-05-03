@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.process_management.report.model;
+package lk.custom_process_management.asset.report_management.model;
 
 import lk.custom_process_management.asset.vessel.entity.Vessel;
 import lombok.AllArgsConstructor;
