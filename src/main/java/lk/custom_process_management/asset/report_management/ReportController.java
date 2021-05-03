@@ -264,9 +264,9 @@ public class ReportController {
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
                            " there month. if you need to more please search using above method");
-    model.addAttribute("searchUrl", "/report/vessel");
+    model.addAttribute("searchUrl", "/report/vesselOrder");
 
-    return "report/vessels";
+    return "report/vesselOrder";
   }
 
   @GetMapping( "/vesselOrder" )

@@ -7,6 +7,7 @@ import lk.custom_process_management.asset.payment.entity.enums.PaymentStatus;
 import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
 import lk.custom_process_management.asset.payment.service.PaymentService;
 import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
+import lk.custom_process_management.asset.vessel_order.entity.enums.VesselOrderStatus;
 import lk.custom_process_management.asset.vessel_order.service.VesselOrderService;
 import lk.custom_process_management.asset.vessel_order_item.entity.VesselOrderItem;
 import lk.custom_process_management.asset.vessel_order_item.service.VesselOrderItemService;
@@ -42,7 +43,8 @@ public class VesselOrderItemBidReceivedController {
                                               VesselOrderItemBidService vesselOrderItemBidService,
                                               VesselOrderItemBidPaymentService vesselOrderItemBidPaymentService,
                                               PaymentService paymentService,
-                                              ChandlerService chandlerService, MakeAutoGenerateNumberService makeAutoGenerateNumberService,
+                                              ChandlerService chandlerService,
+                                              MakeAutoGenerateNumberService makeAutoGenerateNumberService,
                                               EmailService emailService, DateTimeAgeService dateTimeAgeService) {
     this.vesselOrderService = vesselOrderService;
     this.vesselOrderItemService = vesselOrderItemService;
@@ -64,11 +66,11 @@ public class VesselOrderItemBidReceivedController {
                        paymentService.findByCreatedAtIsBetween(dateTimeAgeService.dateTimeToLocalDateStartInDay(from)
                            , dateTimeAgeService.dateTimeToLocalDateEndInDay(to))
                            .stream()
-                           //todo: finaly need to remove this .filter(x -> x.getStatusConformation().equals
-                           // (StatusConformation.INR) && (x.getVesselOrder().getClosingDate().isAfter(LocalDate.now
-                           // ()) || x.getVesselOrder().getClosingDate().equals(LocalDate.now())) && x.getVesselOrder
-                           // ().getVesselOrderStatus().equals(VesselOrderStatus.APPROVE))
-                           .filter(x -> x.getStatusConformation().equals(StatusConformation.INR))
+                           .filter(x -> x.getStatusConformation().equals
+                               (StatusConformation.INR) && (x.getVesselOrder().getClosingDate().isAfter(LocalDate.now
+                               ()) || x.getVesselOrder().getClosingDate().equals(LocalDate.now())) && x.getVesselOrder
+                               ().getVesselOrderStatus().equals(VesselOrderStatus.APPROVE))
+                           // .filter(x -> x.getStatusConformation().equals(StatusConformation.INR))
                            .collect(Collectors.toList()));
 
     model.addAttribute("message",
@@ -89,6 +91,7 @@ public class VesselOrderItemBidReceivedController {
     return commonFindAll(model, twoDate.getStartDate(), twoDate.getEndDate());
 
   }
+
   @GetMapping( "/{id}" )
   public String toReceiveConfirmView(@PathVariable( "id" ) Integer id, Model model) {
     Payment payment = paymentService.findById(id);
