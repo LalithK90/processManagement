@@ -1,4 +1,4 @@
-package lk.custom_process_management.asset.process_management.report;
+package lk.custom_process_management.asset.report_management;
 
 import lk.custom_process_management.asset.chandler.entity.Chandler;
 import lk.custom_process_management.asset.chandler.service.ChandlerService;
@@ -7,7 +7,7 @@ import lk.custom_process_management.asset.item.entity.Item;
 import lk.custom_process_management.asset.item.service.ItemService;
 import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.payment.service.PaymentService;
-import lk.custom_process_management.asset.process_management.report.model.*;
+import lk.custom_process_management.asset.report_management.model.*;
 import lk.custom_process_management.asset.ship_agent.service.ShipAgentService;
 import lk.custom_process_management.asset.vessel.entity.Vessel;
 import lk.custom_process_management.asset.vessel.service.VesselService;
@@ -250,24 +250,23 @@ public class ReportController {
 
   /*all vessel order report - start*/
   private String commonVesselOder(Model model, LocalDate from, LocalDate to) {
-    List< ShipAgentDetail > shipAgentDetails = new ArrayList<>();
+    List< VesselOrderDetail > vesselOrderDetails = new ArrayList<>();
     LocalDateTime startAt = dateTimeAgeService.dateTimeToLocalDateStartInDay(from);
     LocalDateTime endAt = dateTimeAgeService.dateTimeToLocalDateEndInDay(to);
-    List< VesselDetail > vesselDetails = new ArrayList<>();
-    for ( Vessel vessel : vesselService.findAll() ) {
-      VesselDetail vesselDetail = new VesselDetail();
-      vesselDetail.setVessel(vessel);
-      vesselDetail.setArrivalCount(vesselArrivalHistoryService.findByVesselAndCreatedAtIsBetween(vessel, startAt,
-                                                                                                 endAt).size());
-      vesselDetails.add(vesselDetail);
+    List< VesselOrderDetail > vesselDetails = new ArrayList<>();
+    for ( VesselOrder vesselOrder : vesselOrderService.findByCreatedAtIsBetween(startAt, endAt) ) {
+      VesselOrderDetail vesselOrderDetail = new VesselOrderDetail();
+      vesselOrderDetail.setVesselOrder(vesselOrder);
+      vesselOrderDetail.setPayments(paymentService.findByVesselOrder(vesselOrder));
+      vesselOrderDetails.add(vesselOrderDetail);
     }
-    model.addAttribute("vesselDetails", vesselDetails);
+    model.addAttribute("vesselOrderDetails", vesselOrderDetails);
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
                            " there month. if you need to more please search using above method");
-    model.addAttribute("searchUrl", "/report/vessel");
+    model.addAttribute("searchUrl", "/report/vesselOrder");
 
-    return "report/vessels";
+    return "report/vesselOrder";
   }
 
   @GetMapping( "/vesselOrder" )

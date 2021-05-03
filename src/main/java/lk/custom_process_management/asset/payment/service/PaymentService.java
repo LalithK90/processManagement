@@ -5,6 +5,7 @@ import lk.custom_process_management.asset.common_asset.model.enums.LiveDead;
 import lk.custom_process_management.asset.payment.dao.PaymentDao;
 import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
+import lk.custom_process_management.asset.vessel_order.entity.VesselOrder;
 import lk.custom_process_management.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -75,5 +76,9 @@ public class PaymentService implements AbstractService< Payment, Integer > {
 
   public List< Payment > findByStatusConformation(StatusConformation statusConformation) {
     return paymentDao.findByStatusConformation(statusConformation);
+  }
+
+  public List< Payment> findByVesselOrder(VesselOrder vesselOrder) {
+  return paymentDao.findByVesselOrder(vesselOrder);
   }
 }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -68,5 +69,9 @@ public class VesselOrderService implements AbstractService< VesselOrder, Integer
   public List< VesselOrder > findByVesselArrivalHistory(VesselArrivalHistory vesselArrivalHistory) {
 
   return vesselOrderDao.findByVesselArrivalHistory(vesselArrivalHistory);
+  }
+
+  public List< VesselOrder> findByCreatedAtIsBetween(LocalDateTime startAt, LocalDateTime endAt) {
+  return vesselOrderDao.findByCreatedAtIsBetween(startAt,endAt);
   }
 }
