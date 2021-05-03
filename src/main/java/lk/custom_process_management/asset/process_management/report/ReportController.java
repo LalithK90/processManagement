@@ -200,7 +200,6 @@ public class ReportController {
     return "report/shipAgents";
   }
 
-
   @GetMapping( "/shipAgent" )
   public String shipAgentDetail(Model model) {
     return commonShipAgent(model, dateTimeAgeService.getPastDateByMonth(3), LocalDate.now());
@@ -246,6 +245,6 @@ public class ReportController {
   public String vesselSearch(@ModelAttribute TwoDate twoDate, Model model) {
     return commonVessel(model, twoDate.getStartDate(), twoDate.getEndDate());
   }
-
+  /*all vessel report - end*/
 
 }
