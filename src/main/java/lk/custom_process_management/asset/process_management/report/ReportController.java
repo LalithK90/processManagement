@@ -105,7 +105,7 @@ public class ReportController {
 
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
-                           "there month. if you need to more please search using above method");
+                           " there month. if you need to more please search using above method");
     model.addAttribute("searchUrl", "/report/chandlers");
 
     return "report/chandlers";
@@ -139,7 +139,7 @@ public class ReportController {
     model.addAttribute("chandlerDetail", chandler);
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
-                           "there month. if you need to more please search using above method");
+                           " there month. if you need to more please search using above method");
     model.addAttribute("searchUrl", "/report/chandler");
 
     return "report/chandler";
@@ -194,7 +194,7 @@ public class ReportController {
     model.addAttribute("shipAgentDetails", shipAgentDetails);
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
-                           "there month. if you need to more please search using above method");
+                           " there month. if you need to more please search using above method");
     model.addAttribute("searchUrl", "/report/shipAgent");
 
     return "report/shipAgents";
@@ -229,7 +229,7 @@ public class ReportController {
     model.addAttribute("vesselDetails", vesselDetails);
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
-                           "there month. if you need to more please search using above method");
+                           " there month. if you need to more please search using above method");
     model.addAttribute("searchUrl", "/report/vessel");
 
     return "report/vessels";
@@ -246,5 +246,40 @@ public class ReportController {
     return commonVessel(model, twoDate.getStartDate(), twoDate.getEndDate());
   }
   /*all vessel report - end*/
+
+
+  /*all vessel order report - start*/
+  private String commonVesselOder(Model model, LocalDate from, LocalDate to) {
+    List< ShipAgentDetail > shipAgentDetails = new ArrayList<>();
+    LocalDateTime startAt = dateTimeAgeService.dateTimeToLocalDateStartInDay(from);
+    LocalDateTime endAt = dateTimeAgeService.dateTimeToLocalDateEndInDay(to);
+    List< VesselDetail > vesselDetails = new ArrayList<>();
+    for ( Vessel vessel : vesselService.findAll() ) {
+      VesselDetail vesselDetail = new VesselDetail();
+      vesselDetail.setVessel(vessel);
+      vesselDetail.setArrivalCount(vesselArrivalHistoryService.findByVesselAndCreatedAtIsBetween(vessel, startAt,
+                                                                                                 endAt).size());
+      vesselDetails.add(vesselDetail);
+    }
+    model.addAttribute("vesselDetails", vesselDetails);
+    model.addAttribute("message",
+                       "Following table show details belongs from " + from + " to " + to +
+                           " there month. if you need to more please search using above method");
+    model.addAttribute("searchUrl", "/report/vessel");
+
+    return "report/vessels";
+  }
+
+  @GetMapping( "/vesselOrder" )
+  public String vesselOrderDetail(Model model) {
+    return commonVesselOder(model, dateTimeAgeService.getPastDateByMonth(3), LocalDate.now());
+
+  }
+
+  @PostMapping( "/vesselOrder" )
+  public String vesselOrderSearch(@ModelAttribute TwoDate twoDate, Model model) {
+    return commonVesselOder(model, twoDate.getStartDate(), twoDate.getEndDate());
+  }
+  /*all vessel order report - end*/
 
 }

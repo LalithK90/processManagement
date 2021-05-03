@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //to see actuator details
                     .antMatchers(ALL_PERMIT_URL).permitAll()
                     //this is used the normal admin to give access every url mapping
-                    .antMatchers("/employee").hasRole("ADMIN")
+                    .antMatchers("/employee").hasAnyRole("ADMIN")
                     .anyRequest()
                     .authenticated())
         // Login form
