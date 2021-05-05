@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 /*            http.csrf().disable();
             http.authorizeRequests().antMatchers("/").permitAll();*/
     // For developing easy to give permission all lin
-
+//"ADMIN","Ship_agent","Chandler","Inspector", "Superintendent","Assistant_superintendent","Guard"
     http
         .authorizeRequests(
             authorizeRequests ->
@@ -82,9 +82,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //Anytime users can access without login
                     //to see actuator details
                     .antMatchers(ALL_PERMIT_URL).permitAll()
-                    //this is used the normal admin to give access every url mapping
-                    .antMatchers("/employee").hasAnyRole("ADMIN")
-                    .anyRequest()
+                        .antMatchers("/category/**").hasAnyRole("GUARD")
+                        .antMatchers("/chandler/**").hasAnyRole("ASSISTANT_SUPERINTENDENT","SUPERINTENDENT","ADMIN")
+                        .antMatchers("/ChandlerLicense/**").hasAnyRole("ASSISTANT_SUPERINTENDENT","SUPERINTENDENT")
+                        .antMatchers("/item/**").hasAnyRole("GUARD")
+                        .antMatchers("/payment/**").hasAnyRole("SHIP_AGENT","SUPERINTENDENT")
+                        .antMatchers("/role/**").hasAnyRole("ADMIN","ASSISTANT_SUPERINTENDENT","SUPERINTENDENT")
+                        .antMatchers("/shipAgent/**").hasAnyRole("INSPECTOR","ASSISTANT_SUPERINTENDENT","ADMIN")
+                        .antMatchers("/user/**").hasAnyRole("ADMIN","ASSISTANT_SUPERINTENDENT","SUPERINTENDENT")
+                        .antMatchers("/userDetails/**").hasAnyRole("ADMIN","ASSISTANT_SUPERINTENDENT","SUPERINTENDENT")
+                        .antMatchers("/vesselArrivalHistory/**").hasAnyRole("INSPECTOR")
+                        .antMatchers("/vessel/**").hasAnyRole("INSPECTOR")
+                        .antMatchers("/vesselOrder/**").hasAnyRole("SHIP_AGENT","SUPERINTENDENT")
+                        .antMatchers("/vesselOrderItemBid/**").hasAnyRole("CHANDLER")
+                        .antMatchers("/vesselOrderItemApproval/**").hasAnyRole("SUPERINTENDENT")
+                        .antMatchers("/warehouseBlock/**").hasAnyRole("INSPECTOR")
+                        .anyRequest()
                     .authenticated())
         // Login form
         .formLogin(
