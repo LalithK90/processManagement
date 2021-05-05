@@ -6,7 +6,8 @@
 }
 
 .card:hover{
-    background: aqua;
+    background: #00ffff;
     transition: background-color 1000ms linear;
     cursor: pointer;
+    box-shadow: 4px 5px 25px 10px rgba(18, 248, 248, 0.27);
 }
