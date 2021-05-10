@@ -11,6 +11,7 @@ import lk.custom_process_management.asset.vessel_order.entity.enums.VesselOrderS
 import lk.custom_process_management.asset.vessel_order.service.VesselOrderService;
 import lk.custom_process_management.asset.vessel_order_item.entity.VesselOrderItem;
 import lk.custom_process_management.asset.vessel_order_item.entity.enums.VesselOrderItemStatus;
+import lk.custom_process_management.asset.warehouse_block.entity.WarehouseBlock;
 import lk.custom_process_management.asset.warehouse_block.entity.enums.WarehouseBlockStatus;
 import lk.custom_process_management.asset.warehouse_block.service.WarehouseBlockService;
 import lk.custom_process_management.util.service.MakeAutoGenerateNumberService;
@@ -105,7 +106,9 @@ public class VesselOrderController {
     redirectAttributes.addFlashAttribute("vesselOrderDetail", vesselOrderDb);
     redirectAttributes.addFlashAttribute("vesselArrivalHistoryDetail", vesselOrderDb.getVesselArrivalHistory());
     redirectAttributes.addFlashAttribute("vesselDetail", vesselOrderDb.getVesselArrivalHistory().getVessel());
-
+    WarehouseBlock warehouseBlock = warehouseBlockService.findById(vesselOrderDb.getWarehouseBlock().getId());
+    warehouseBlock.setWarehouseBlockStatus(WarehouseBlockStatus.UNAVAILABLE);
+    warehouseBlockService.persist(warehouseBlock);
     return "redirect:/vesselOrder";
   }
 
