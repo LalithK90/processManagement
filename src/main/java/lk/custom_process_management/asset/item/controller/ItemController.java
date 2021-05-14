@@ -59,6 +59,18 @@ public class ItemController implements AbstractController< Item, Integer > {
     if ( bindingResult.hasErrors() ) {
       return commonThings(model, item, true);
     }
+    if ( item.getId() == null ) {
+      //if there is not item in db
+      if ( itemService.lastItem() == null ) {
+        //need to generate new one
+        item.setCode("IT" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+
+      } else {
+        //if there is item in db need to get that item's code and increase its value
+        String previousCode = itemService.lastItem().getCode().substring(2);
+        item.setCode("IT" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
+      }
+    }
 
     itemService.persist(item);
     return "redirect:/item";
