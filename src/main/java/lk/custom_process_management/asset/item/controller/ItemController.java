@@ -71,7 +71,7 @@ public class ItemController implements AbstractController< Item, Integer > {
         item.setCode("IT" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
       }
     }
-
+    item.setItemStatus(ItemStatus.NOT_AVAILABLE);
     itemService.persist(item);
     return "redirect:/item";
   }
