@@ -113,7 +113,7 @@ public class VesselOrderItemBidApprovalController {
         List< BigDecimal > totalAmount = new ArrayList<>();
         List< VesselOrderItemBid > vesselOrderItemBidsFiltered = vesselOrderItemBids
             .stream()
-            .filter(x -> x.getChandler().equals(chandler) && x.getVesselOrderItem().getVesselOrder().equals(vesselOrder))
+            .filter(x -> x.getBidValidOrNot().equals(BidValidOrNot.SELECT) && x.getChandler().equals(chandler) && x.getVesselOrderItem().getVesselOrder().equals(vesselOrder))
             .collect(Collectors.toList());
         vesselOrderItemBidsFiltered.forEach(x -> totalAmount.add(x.getAmount()));
         //amount
