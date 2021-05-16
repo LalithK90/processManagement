@@ -111,7 +111,7 @@
           <th >Item Name</th >
           <th >Request Amount</th >
         </tr >
-        <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderDetail.vesselOrderItems}" >
+        <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderItems}" >
           <td data-th-text="${index.count}" ></td >
           <td data-th-text="${vesselOrderItemBidPayment.item.category.mainCategory.mainCategory + ' - ' + #strings.toUpperCase(vesselOrderItemBidPayment.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBidPayment.item.category.name.substring(1)) + ' - ' +vesselOrderItemBidPayment.item.name} " ></td >
           <td data-th-text="${vesselOrderItemBidPayment.quantity}" ></td >
@@ -134,7 +134,7 @@
     Print
   </button >
   <!--received confirm-->
-  <a data-th-href="${'/vesselOrderItemBidReceived/received/'+payment.id}" >
+  <a data-th-href="${'/vesselOrderItemBidReceived/received/'+payment.id}"  data-sec-authorize="hasAnyAuthority('ROLE_GUARD' )" >
     <button type="button" class="btn btn-info" >Confirmed</button >
   </a >
   <!--payment-->
@@ -145,7 +145,7 @@
   <!--confirm Payment-->
   <a data-th-href="${'/chandlerReceiving/'+payment.id}"
      data-th-if="${#strings.equals(payment.statusConformation, 'PAIDSHIPAGENT')}" >
-    <button type="button" class="btn btn-outline-primary" >Confirm Payment</button >
+    <button type="button" class="btn btn-outline-primary"  data-sec-authorize="hasAnyAuthority('ROLE_SHIP_AGENT')" >Confirm Payment</button >
   </a >
 </div >
 <!--footer include-->
