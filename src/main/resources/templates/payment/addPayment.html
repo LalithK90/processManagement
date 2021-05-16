@@ -102,11 +102,11 @@
   <div class="col-sm-12 flex-column " >
     <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/payment/add':'/payment/update'}"
           data-th-object="${payment}" method="POST" >
-      <input type="hidden" data-th-filed="*{liveDead}" >
-      <input type="hidden" data-th-filed="*{id}" >
-      <input type="hidden" data-th-filed="*{statusConformation}" >
-      <input type="hidden" data-th-filed="*{chandler}" >
-      <input type="hidden" data-th-filed="*{vesselOrder}" >
+      <input type="hidden" data-th-field="*{liveDead}" >
+      <input type="hidden" data-th-field="*{id}" >
+      <input type="hidden" data-th-field="*{statusConformation}" >
+      <input type="hidden" data-th-field="*{chandler}" >
+      <input type="hidden" data-th-field="*{vesselOrder}" >
       <div class="row" >
         <!--left side-->
         <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
