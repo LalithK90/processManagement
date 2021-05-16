@@ -95,7 +95,7 @@
               </div >
               <div class="media-body" >
                 <a data-sec-authorize="hasAnyAuthority('ROLE_SHIP_AGENT', 'ROLE_SUPERINTENDENT', 'ROLE_CHANDLER')"
-                   class="h3" href="/payment" >Payment Management</a >
+                   class="h3" href="/payment" >Payment Details</a >
               </div >
             </div >
           </div >
@@ -177,24 +177,7 @@
         </div >
       </div >
     </div >
-    <div class="col-xl-3 col-sm-6 col-12 mb-1"
-         data-sec-authorize="hasAnyAuthority('ROLE_CHANDLER')" >
-      <div class="card" >
-        <div class="card-content" >
-          <div class="card-body" >
-            <div class="media d-flex" >
-              <div class="align-self-center" >
-                <i class="icon-pointer danger font-large-2 float-left" ></i >
-              </div >
-              <div class="media-body" >
-                <a data-sec-authorize="hasAnyAuthority('ROLE_CHANDLER')"
-                   class="h3" href="/vesselOrderItemBid" >Vessel Order bid Management</a >
-              </div >
-            </div >
-          </div >
-        </div >
-      </div >
-    </div >
+
     <div class="col-xl-3 col-sm-6 col-12 mb-1"
          data-sec-authorize="hasAnyAuthority('ROLE_SUPERINTENDENT')" >
       <div class="card" >
@@ -250,25 +233,7 @@
         </div >
       </div >
     </div >
-    <div class="col-xl-3 col-sm-6 col-12 mb-1"
-         data-sec-authorize="hasAnyAuthority('ROLE_SUPERINTENDENT', 'ROLE_SHIP_AGENT')" >
-      <div class="card" >
-        <div class="card-content" >
-          <div class="card-body" >
-            <div class="media d-flex" >
-              <div class="align-self-center" >
-                <i class="icon-pointer danger font-large-2 float-left" ></i >
-              </div >
-              <div class="media-body" >
-                <a data-sec-authorize="hasAnyAuthority('ROLE_SUPERINTENDENT', 'ROLE_SHIP_AGENT')"
-                   class="h3" href="/payment" >Add
-                  <br >Payment </a >
-              </div >
-            </div >
-          </div >
-        </div >
-      </div >
-    </div >
+
     <div class="col-xl-3 col-sm-6 col-12 mb-1"
          data-sec-authorize="hasAnyAuthority('ROLE_INSPECTOR')" >
       <div class="card" >
@@ -315,7 +280,7 @@
               </div >
               <div class="media-body" >
                 <a data-sec-authorize="hasAnyAuthority('ROLE_CHANDLER')" class="h3"
-                   href="/vesselOrderItemBid" > Vessel Order Items Bid</a >
+                   href="/vesselOrderItemBid" > Bids for Vessel Orders</a >
               </div >
             </div >
           </div >
@@ -335,6 +300,24 @@
             <div class="media-body" >
               <a data-sec-authorize="hasAnyAuthority('ROLE_GUARD', 'ROLE_CHANDLER')"
                  class="h3" href="/vesselOrderItemBidReceived" >Approved Vessel Order Management</a >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+  <div class="col-xl-3 col-sm-6 col-12 mb-1"
+       data-sec-authorize="hasAnyAuthority('ROLE_SHIP_AGENT')" >
+    <div class="card" >
+      <div class="card-content" >
+        <div class="card-body" >
+          <div class="media d-flex" >
+            <div class="align-self-center" >
+              <i class="icon-speech warning font-large-2 float-left" ></i >
+            </div >
+            <div class="media-body" >
+              <a data-sec-authorize="hasAnyAuthority('ROLE_SHIP_AGENT')"
+                 class="h3" href="/shipAgentPayment" >Payments by ShipAgent</a >
             </div >
           </div >
         </div >
