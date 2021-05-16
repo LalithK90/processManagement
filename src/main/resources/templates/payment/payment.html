@@ -99,7 +99,7 @@
                     <th data-th-text="${payment.vesselOrder.vesselArrivalHistory.shipAgent.name}"></th>
                     <th>
                         <a id="employeeView" data-th-href="${'/payment/' + payment.id}" class="btn btn-outline-secondary btn-sm">&nbsp;View</a>
-                        <a id="employeeEdit" data-th-href="${'/payment/edit/' + payment.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        <a id="employeeEdit" data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" data-th-href="${'/payment/edit/' + payment.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
                         <a id="employeeRemove" data-th-href="${'/payment/remove/' + payment.id}"
                            data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                             Delete</a>
