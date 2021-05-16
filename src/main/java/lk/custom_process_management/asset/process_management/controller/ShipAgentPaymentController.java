@@ -35,7 +35,7 @@ public class ShipAgentPaymentController {
 
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
-                           "there month. if you need to more please search using above method");
+                           " there month. if you need to more please search using above method");
     model.addAttribute("searchUrl", "shipAgentPayment");
     return "vesselOrderItemBidReceived/vesselOrderItemBidReceived";
   }
