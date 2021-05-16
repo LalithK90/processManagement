@@ -54,7 +54,7 @@
 
 <!--bid array-->
 <div class="container-fluid" >
-  <form action="/vesselOrderItemApproval/save" method="post" data-th-object="${vesselOrderBid}" >
+  <form action="/vesselOrderItemApproval/save" method="post" data-th-object="${vesselOrderBid}" id="bidApprove" >
     <!--Table view-->
     <div class="form-row container col-12" >
       <!--items bit-->
@@ -148,32 +148,30 @@
     });
 
     function GetCellValues() {
+        let rowIdAndNames = [];
+        let itemNameSet = new Set();
         let table = document.getElementById('table');
-        let rowNumbers = [];
         for (let r = 0, n = table.rows.length; r < n; r++) {
-            let item = table.rows[r].cells[1].innerHTML.trim();
-            if (r > 0) {
-                if (item === table.rows[r - 1].cells[1].innerHTML.trim()) {
-                    rowNumbers.push(r);
-                }
-            }
+            let itemName = table.rows[r].cells[1].innerHTML.trim();
+            let rowIdAndName = {};
+            rowIdAndName.rowNumber = r;
+            rowIdAndName.name = itemName;
+            rowIdAndNames.push(rowIdAndName);
+            itemNameSet.add(itemName);
         }
 
-        for (let x = 0; x < rowNumbers.length; x++) {
+
+        for (let x = 0; x < itemNameSet.length; x++) {
             let color = colorAutoMate();
-            if (x !== 0) {
-                for (let j = rowNumbers[x - 1]; j < rowNumbers[x]; j++) {
-                    if (j <= rowNumbers[x]) {
-                        table.rows[j + 1].bgColor = color;
-                    }
-                }
-            } else {
-                for (let j = 1; j <= rowNumbers[x]; j++) {
-                    if (j <= rowNumbers[x]) {
-                        table.rows[j].bgColor = color;
-                    }
+            for (let j = 0; j < rowIdAndNames.length; j++) {
+                if (x === rowIdAndNames[j].name) {
+                    table.rows[j].bgColor = color;
+                } else {
+                    color = colorAutoMate();
+                    table.rows[j].bgColor = color;
                 }
             }
+
 
         }
     }
@@ -217,6 +215,7 @@
                     $(`input[name='vesselOrderItemBids[${i}].bidValidOrNot']`).prop('checked', false);
                 }
             }
+            document.getElementById("bidApprove").reset();
 
         } else {
             for (let i = 0; i < tableLength; i++) {
