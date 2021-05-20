@@ -111,7 +111,7 @@
           <th >Item Name</th >
           <th >Request Amount</th >
         </tr >
-        <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderDetail.vesselOrderItems}" >
+        <tr data-th-each="vesselOrderItemBidPayment, index : ${vesselOrderItems}" >
           <td data-th-text="${index.count}" ></td >
           <td data-th-text="${vesselOrderItemBidPayment.item.category.mainCategory.mainCategory + ' - ' + #strings.toUpperCase(vesselOrderItemBidPayment.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBidPayment.item.category.name.substring(1)) + ' - ' +vesselOrderItemBidPayment.item.name} " ></td >
           <td data-th-text="${vesselOrderItemBidPayment.quantity}" ></td >
