@@ -1,147 +1,147 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head data-th-replace="~{fragments/header :: headerFragment}" >
-  <meta charset="UTF-8" >
-  <title >warehouseBlocks</title >
-</head >
-<body >
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<html lang="en">
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>warehouseBlocks</title>
+</head>
+<body>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
-<div class="container-fluid" >
-  <div class="row text-center border-info" >
-    <!--New Branch Button-->
-    <div class="col" >
-      <a class="btn btn-outline-success" href="/vesselOrderItemApproval" tabindex="1" >
-        Back To List
-      </a >
-    </div >
-    <!--List Name-->
-    <div class="col" >
-      <h4 class="text-center" >
-        <strong >
-          Items were bidden to approve
-        </strong >
-      </h4 >
-    </div >
-    <!--Home Button-->
-    <div class="col" >
-      <a href="/home" id="searchShow" class="btn btn-outline-primary" tabindex="2" >
-        <!--<i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;-->
-        <i class="fas fa-home" style="font-size: 20px" ></i >&nbsp;&nbsp;Home
-      </a >
-    </div >
-  </div >
-</div >
+<div class="container-fluid">
+    <div class="row text-center border-info">
+        <!--New Branch Button-->
+        <div class="col">
+            <a class="btn btn-outline-success" href="/vesselOrderItemApproval" tabindex="1">
+                Back To List
+            </a>
+        </div>
+        <!--List Name-->
+        <div class="col">
+            <h4 class="text-center">
+                <strong>
+                    Items were bidden to approve
+                </strong>
+            </h4>
+        </div>
+        <!--Home Button-->
+        <div class="col">
+            <a href="/home" id="searchShow" class="btn btn-outline-primary" tabindex="2">
+                <!--<i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;-->
+                <i class="fas fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;Home
+            </a>
+        </div>
+    </div>
+</div>
 <!--vessel order details-->
-<div class="container-fluid mt-1" >
-  <div id="accordianId" role="tablist" aria-multiselectable="true" >
-    <div class="card" >
-      <div class="card-header" role="tab" id="section1HeaderId" >
-        <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
-           aria-controls="section1ContentId" >
-          <div class="col-12 text-center font-weight-bold h5" >Vessel Order Details</div >
-        </a >
-      </div >
-      <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
-        <div class="card-body" >
-          <div data-th-replace="~{vesselOrder/vesselOrder-detail :: vesselOrderDetailsFragment}" ></div >
-        </div >
-      </div >
-    </div >
-  </div >
-</div >
+<div class="container-fluid mt-1">
+    <div id="accordianId" role="tablist" aria-multiselectable="true">
+        <div class="card">
+            <div class="card-header" role="tab" id="section1HeaderId">
+                <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+                   aria-controls="section1ContentId">
+                    <div class="col-12 text-center font-weight-bold h5">Vessel Order Details</div>
+                </a>
+            </div>
+            <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId">
+                <div class="card-body">
+                    <div data-th-replace="~{vesselOrder/vesselOrder-detail :: vesselOrderDetailsFragment}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--bid array-->
-<div class="container-fluid" >
-  <form action="/vesselOrderItemApproval/save" method="post" data-th-object="${vesselOrderBid}" id="bidApprove" >
-    <!--Table view-->
-    <div class="form-row container col-12" >
-      <!--items bit-->
-      <table class="table table-hover col-12" id="table" >
-        <thead >
-        <tr >
-          <th > Index</th >
-          <th > Item Details</th >
-          <th > Unit Price</th >
-          <th > Total Amount</th >
-          <th ></th >
-          <th > Modify</th >
-        </tr >
-        </thead >
-        <tbody >
-        <tr data-th-each="vesselOrderItemBid, rowCount : ${vesselOrderItemBids}" >
-          <th data-th-text="${rowCount.count}" ></th >
-          <th data-th-id="${'nm'+rowCount.index}"
-              data-th-text="${vesselOrderItemBid.item.category.mainCategory.mainCategory} +${' '}+ ${#strings.toUpperCase(vesselOrderItemBid.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBid.item.category.name.substring(1))}+${' '}+${vesselOrderItemBid.item.name} " ></th >
-          <th data-th-text="${vesselOrderItemBid.unitPrice}" ></th >
-          <th data-th-text="${vesselOrderItemBid.amount}" ></th >
-          <th >
-            <!--  vesselOrderItem-->
-            <input type="hidden" data-th-value="${vesselOrderItemBid.vesselOrderItem.id}"
-                   data-th-id="${'vi'+rowCount.index}"
-                   data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].vesselOrderItem.id'}" >
-          </th >
-          <th >
-            <div class="form-row text-right" >
-              <!--  bidValidOrNot-->
-              <div class="col-md-8" >
-                <div class="custom-control custom-checkbox custom-control-inline "
-                     data-th-each="genders,index : ${bidValidOrNots}" >
-                  <input class="custom-control-input " required onclick="otherReject(this)"
-                         data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].bidValidOrNot'}"
-                         data-th-value="${genders}"
-                         data-th-id="${index.index}+${'bv'}+${rowCount.index}"
-                         type="radio"
-                         data-th-checked="${genders==vesselOrderItemBid.bidValidOrNot}" />
-                  <label class="custom-control-label"
-                         data-th-for="${index.index}+${'bv'}+${rowCount.index}"
-                         data-th-text="${genders.bidValidOrNot}" >
-                  </label >
-                </div >
-              </div >
-            </div >
-            <!-- id-->
-            <input type="hidden" data-th-value="${vesselOrderItemBid.id}"
-                   data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].id'}" >
-            <!--  amount-->
-            <input type="hidden" data-th-value="${vesselOrderItemBid.amount}"
-                   data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].amount'}" >
-            <!--  unitPrice-->
-            <input type="hidden" data-th-value="${vesselOrderItemBid.unitPrice}"
-                   data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].unitPrice'}" >
-            <!--  chandler-->
-            <input type="hidden" data-th-value="${vesselOrderItemBid.chandler.id}"
-                   data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].chandler.id'}" >
+<div class="container-fluid">
+    <form action="/vesselOrderItemApproval/save" method="post" data-th-object="${vesselOrderBid}" id="bidApprove">
+        <!--Table view-->
+        <div class="form-row container col-12">
+            <!--items bit-->
+            <table class="table  col-12" id="table">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> Item Details</th>
+                    <th> Unit Price</th>
+                    <th> Total Amount</th>
+                    <th></th>
+                    <th> Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="vesselOrderItemBid, rowCount : ${vesselOrderItemBids}">
+                    <th data-th-text="${rowCount.count}"></th>
+                    <th data-th-id="${'nm'+rowCount.index}"
+                        data-th-text="${vesselOrderItemBid.item.category.mainCategory.mainCategory} +${' '}+ ${#strings.toUpperCase(vesselOrderItemBid.item.category.name.substring(0, 1))+#strings.toLowerCase(vesselOrderItemBid.item.category.name.substring(1))}+${' '}+${vesselOrderItemBid.item.name} "></th>
+                    <th data-th-text="${vesselOrderItemBid.unitPrice}"></th>
+                    <th data-th-text="${vesselOrderItemBid.amount}"></th>
+                    <th>
+                        <!--  vesselOrderItem-->
+                        <input type="hidden" data-th-value="${vesselOrderItemBid.vesselOrderItem.id}"
+                               data-th-id="${'vi'+rowCount.index}"
+                               data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].vesselOrderItem.id'}">
+                    </th>
+                    <th>
+                        <div class="form-row text-right">
+                            <!--  bidValidOrNot-->
+                            <div class="col-md-8">
+                                <div class="custom-control custom-checkbox custom-control-inline "
+                                     data-th-each="genders,index : ${bidValidOrNots}">
+                                    <input class="custom-control-input " required onclick="otherReject(this)"
+                                           data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].bidValidOrNot'}"
+                                           data-th-value="${genders}"
+                                           data-th-id="${index.index}+${'bv'}+${rowCount.index}"
+                                           type="radio"
+                                           data-th-checked="${genders==vesselOrderItemBid.bidValidOrNot}"/>
+                                    <label class="custom-control-label"
+                                           data-th-for="${index.index}+${'bv'}+${rowCount.index}"
+                                           data-th-text="${genders.bidValidOrNot}">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- id-->
+                        <input type="hidden" data-th-value="${vesselOrderItemBid.id}"
+                               data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].id'}">
+                        <!--  amount-->
+                        <input type="hidden" data-th-value="${vesselOrderItemBid.amount}"
+                               data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].amount'}">
+                        <!--  unitPrice-->
+                        <input type="hidden" data-th-value="${vesselOrderItemBid.unitPrice}"
+                               data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].unitPrice'}">
+                        <!--  chandler-->
+                        <input type="hidden" data-th-value="${vesselOrderItemBid.chandler.id}"
+                               data-th-name="${'vesselOrderItemBids[__${rowCount.index}__].chandler.id'}">
 
-          </th >
-        </tr >
-        </tbody >
-      </table >
-    </div >
-    <!--Button-->
-    <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
-      <!--Back Button-->
-      <a class="btn btn-outline-dark" tabindex="11" href="/vesselOrderItemApproval" >
-        <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
-      </a >
-      <!--Save Button-->
-      <button class="btn btn-outline-success ml-5" type="submit" tabindex="9" >
-        <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;&nbsp;Approved
-      </button >
-      <!--Cancel Button-->
-      <button class="btn btn-outline-warning ml-5" type="reset" tabindex="10" >
-        <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
-      </button >
-    </div >
-  </form >
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+            <!--Back Button-->
+            <a class="btn btn-outline-dark" tabindex="11" href="/vesselOrderItemApproval">
+                <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
+            </a>
+            <!--Save Button-->
+            <button class="btn btn-outline-success ml-5" type="submit" tabindex="9">
+                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp;&nbsp;Approved
+            </button>
+            <!--Cancel Button-->
+            <button class="btn btn-outline-warning ml-5" type="reset" tabindex="10">
+                <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
+            </button>
+        </div>
+    </form>
 
-</div >
+</div>
 <!--footer include-->
-<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
-<script >
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
+<script>
 
     $(document).ready(function () {
         GetCellValues();
@@ -151,6 +151,7 @@
         let rowIdAndNames = [];
         let itemNameSet = new Set();
         let table = document.getElementById('table');
+
         for (let r = 0, n = table.rows.length; r < n; r++) {
             let itemName = table.rows[r].cells[1].innerHTML.trim();
             let rowIdAndName = {};
@@ -160,14 +161,11 @@
             itemNameSet.add(itemName);
         }
 
-
-        for (let x = 0; x < itemNameSet.length; x++) {
+        for (let item of itemNameSet.values()){
             let color = colorAutoMate();
-            for (let j = 0; j < rowIdAndNames.length; j++) {
-                if (x === rowIdAndNames[j].name) {
-                    table.rows[j].bgColor = color;
-                } else {
-                    color = colorAutoMate();
+            for (let j = 1; j < rowIdAndNames.length; j++) {
+                if (item === rowIdAndNames[j].name) {
+                    console.log(" name same ")
                     table.rows[j].bgColor = color;
                 }
             }
@@ -227,6 +225,6 @@
         }
     }
 
-</script >
-</body >
-</html >
+</script>
+</body>
+</html>
