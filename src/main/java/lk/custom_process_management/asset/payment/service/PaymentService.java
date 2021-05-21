@@ -71,6 +71,7 @@ public class PaymentService implements AbstractService< Payment, Integer > {
 
   public List< Payment > findByCreatedAtIsBetween(LocalDateTime from, LocalDateTime to) {
     List< Payment > payments = paymentDao.findByCreatedAtIsBetween(from, to);
+    System.out.println("payments setcveice acount "+payments.size());
     return payments;
   }
 

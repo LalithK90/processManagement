@@ -4,34 +4,32 @@ import lk.custom_process_management.asset.common_asset.model.TwoDate;
 import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.payment.entity.enums.StatusConformation;
 import lk.custom_process_management.asset.payment.service.PaymentService;
+import lk.custom_process_management.asset.user_management.service.UserService;
 import lk.custom_process_management.util.service.DateTimeAgeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/shipAgentPayment" )
 public class ShipAgentPaymentController {
   private final PaymentService paymentService;
   private final DateTimeAgeService dateTimeAgeService;
-
-  public ShipAgentPaymentController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService) {
+  private final UserService userService;
+private final ChandlerReceivingController chandlerReceivingController;
+  public ShipAgentPaymentController(PaymentService paymentService, DateTimeAgeService dateTimeAgeService, UserService userService, ChandlerReceivingController chandlerReceivingController) {
     this.paymentService = paymentService;
     this.dateTimeAgeService = dateTimeAgeService;
+    this.userService = userService;
+    this.chandlerReceivingController = chandlerReceivingController;
   }
 
 
   private String commonFindAll(Model model, LocalDate from, LocalDate to) {
+    chandlerReceivingController.commonForPayment(model, from, to, userService, paymentService, dateTimeAgeService);
 
-    model.addAttribute("payments",
-                       paymentService.findByCreatedAtIsBetween(dateTimeAgeService.dateTimeToLocalDateStartInDay(from)
-                           , dateTimeAgeService.dateTimeToLocalDateEndInDay(to))
-                           .stream()
-                           .filter(x -> x.getStatusConformation().equals(StatusConformation.REC))
-                           .collect(Collectors.toList()));
 
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +
