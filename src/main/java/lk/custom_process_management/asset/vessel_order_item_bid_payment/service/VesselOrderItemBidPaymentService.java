@@ -1,5 +1,6 @@
 package lk.custom_process_management.asset.vessel_order_item_bid_payment.service;
 
+import lk.custom_process_management.asset.payment.entity.Payment;
 import lk.custom_process_management.asset.vessel_order_item_bid_payment.dao.VesselOrderItemBidPaymentDao;
 import lk.custom_process_management.asset.vessel_order_item_bid_payment.entity.VesselOrderItemBidPayment;
 import org.springframework.data.domain.Example;
@@ -46,4 +47,8 @@ public class VesselOrderItemBidPaymentService {
   public List< VesselOrderItemBidPayment> findByCreatedAtIsBetween(LocalDateTime startAt, LocalDateTime endAt) {
   return  vesselOrderItemBidPaymentDao.findByCreatedAtIsBetween(startAt, endAt);
   }
+
+    public List<VesselOrderItemBidPayment> findByPayment(Payment paymentDb) {
+   return vesselOrderItemBidPaymentDao.findByPayment(paymentDb);
+    }
 }
